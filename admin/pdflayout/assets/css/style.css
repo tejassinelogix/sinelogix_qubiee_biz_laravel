@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600');
+
+/*
+        Resets
+*/
+
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td { margin:0; padding:0 }
+table { border-collapse:collapse; border-spacing:0 }
+fieldset, img { border:0 }
+address, caption, cite, code, dfn, em, strong, th, var { font-style:normal; font-weight:normal }
+caption, th { text-align:left }
+q:before, q:after { content:'' }
+abbr, acronym { border:0 }
+:focus { outline:0 }
+ins { text-decoration:none }
+del { text-decoration:line-through }
+.clear { clear: both; }
+/*
+        body Structure
+*/
+html,body {
+    height: 100%;
+}
+body {
+    background: #f7f7f7;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    line-height: 22px;
+    font-weight:500;
+    color: #222;
+}
+/*
+        Typography
+*/
+div, p, a, li, td { -webkit-text-size-adjust:none; }
+html, html a {
+    -webkit-font-smoothing: antialiased !important;
+}
+h1,h2,h3,h4,h5,h6 {
+    font-family: 'Poppins', sans-serif;
+    margin:0 0 15px 0;
+    line-height: normal !important;
+}
+h1 {
+    font-size:54px !important;
+    font-weight:600;
+}
+h2 {
+    font-size:40px;
+    font-weight:600;
+}
+h3 {
+    font-size:26px;
+    font-weight:600;
+}
+h4 {
+    font-size:22px;
+    font-weight:500;
+}
+h5 {
+    font-size:18px;
+    font-weight:400;
+}
+h6 {
+    font-size:14px;
+    font-weight:400;
+}
+p {
+    font-family: 'Poppins', sans-serif;
+    font-size:14px;
+    font-weight:500;
+    margin: 0 0 15px 0;
+}
+p span, p strong {
+    font-weight:600;
+}
+img {
+    border:none;
+    max-width:100%;
+}
+a {
+    text-decoration: none;
+    color:#333;
+}
+a:hover,a:focus,a:active {
+	text-decoration: none;
+	outline: none;
+	color: #000;
+}
+/*invoicePage*/
+.invoicePage {
+    display: block;
+}
+.logoinvoicePage {
+    display: block;
+    text-align: center;
+    padding: 30px 0;
+}
+.borderbox {
+    display: block;
+    padding: 15px;
+    background: #fff;
+    border: solid 1px #ccc;
+    border-radius: 5px;
+    margin-bottom: 30px;
+}
+.headingsNoBtmMargin h3,
+.headingsNoBtmMargin h4,
+.headingsNoBtmMargin h5,
+.headingsNoBtmMargin h6,
+.headingsNoBtmMargin p {
+    margin-bottom: 0;
+}
+.borderbox:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+/*inlineBox*/
+.inlineBox {
+    display: block;
+    margin-bottom: 30px;
+    padding: 15px;
+}
+.borderBottomOnly {
+    border-bottom: solid 1px #ccc;
+}
+span.label {
+    font-weight: normal;
+    font-size: 16px;
+    border-radius: 10px;
+}
+.headSimple {
+    display: block;
+}
+.headSimple h5 {
+    font-weight: bold;
+}
+.borderRowTable > .row {
+    border-bottom: solid 1px #ccc;
+    padding-top: 10px;
+}
+.borderRowTable > .row:first-child {
+    padding-top: 0;
+}
+.borderRowTable > .row:last-child {
+    border-bottom: none;
+}
+.paraStrickThru {
+    display: block;
+}
+.paraStrickThru span {
+    display: inline-block;
+    margin-right: 15px;
+    text-decoration: line-through;
+    font-weight: 500;
+}
+.paraStrickThru span:last-child {
+    margin-right: 0;
+}
+.clear {
+    clear: both;
+}
+.borderbox p small {
+    display: block;
+    color: #777;
+}

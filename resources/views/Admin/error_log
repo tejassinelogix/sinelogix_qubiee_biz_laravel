@@ -1,0 +1,4 @@
+[22-Aug-2019 12:45:28 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function url() in /home/qbedemosoftwares/public_html/resources/views/Admin/edit-bannerproduct.blade.php:22
+Stack trace:
+#0 {main}
+  thrown in /home/qbedemosoftwares/public_html/resources/views/Admin/edit-bannerproduct.blade.php on line 22

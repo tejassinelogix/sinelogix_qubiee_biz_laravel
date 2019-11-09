@@ -1,0 +1,42 @@
+/* ---------custom-css-9/3/2018---------- */
+
+.navbar .navbar-brand img {
+    max-width: 160px;
+    height: 48px;
+}
+
+.operationsblok {
+    text-align: center;
+}
+
+.operationsblok a {
+    color: #4700b2;
+    padding: 0px 5px;
+    font-size: 18px;
+}
+
+.operationsblok a:hover {
+    color: #000;
+    padding: 0px 5px;
+}
+
+.srNo {
+    text-align: center;
+}
+.btn-primary{
+    color: #fff;
+    background-color: #F26322;
+    border-color: #F26322;
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary:visited{
+    color: #fff;
+    background-color: #333;
+    border-color: #333;
+}
+.quantity::-webkit-inner-spin-button, 
+.quantity::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+input[type='number'] {
+  -moz-appearance: textfield;/*For FireFox*/}

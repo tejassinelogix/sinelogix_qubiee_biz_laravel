@@ -1,0 +1,106 @@
+
+/* Order page css start*/
+
+.OrderWrapper {
+    margin: 150px 0px;
+}
+
+.OrderWrapper .OrderBox span {
+    font-weight: 600;
+}
+
+.OrderBox {
+    border: solid 1px #ccc;
+    margin-bottom: 20px;
+}
+
+.OrderTop {
+    border-bottom: solid 1px #ccc;
+    padding: 15px;
+}
+
+.OrderTop .right {
+    text-align: right;
+}
+
+.OrderTop .left button {
+    border-radius: 5px;
+    background-attachment: fixed;
+}
+
+.OrderTop .left button:hover {
+    background: #333;
+    color: #fff;
+}
+
+.OrderTop .right a {
+    border: solid 1px #cccc;
+    background: transparent;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+.OrderTop .right a i {
+    font-size: 16px;
+    margin-right: 5px;
+}
+
+.Orderbuttom {}
+
+.Orderleft {
+    width: 120px;
+    padding: 15px;
+    float: left;
+}
+
+.Orderright {
+    float: left;
+    width: 40%;
+    padding: 15px;
+}
+
+.Orderright p {
+    font-weight: 500
+}
+
+.Orderright p span {
+    padding-left: 10px;
+}
+
+.Orderniddle {
+    float: left;
+    padding: 15px;
+    width: 40%;
+}
+
+.OrderBottom p {
+    display: inline;
+}
+
+.OrderBottom {
+    border-top: solid 1px #cccc;
+    float: left;
+    padding: 15px;
+    width: 100%;
+}
+
+.OrderBottom .second {
+    text-align: right;
+}
+
+.OrderBottom .second p {
+    font-weight: 600;
+}
+
+.Orderbuttom .Orderleft img {
+    width: 100px;
+    margin-bottom: 10px;
+}
+
+.Orderniddle a {
+    margin-bottom: 15px;
+    font-size: 18px;
+    font-weight: 600;
+    display: block;
+}
+/* Order page css end */
