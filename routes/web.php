@@ -117,7 +117,7 @@ Route::post('/addAddress','HomeController@add_address')->name('addAddress');
 
 //Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
 //{
-    Route::prefix('admin',['namespace'=>'admin'])->group(function(){
+    Route::prefix('admin_2',['namespace'=>'admin_2'])->group(function(){
       Route::get('/','Auth\AdminLoginController@showLoginForm');
 
       Route::get('/login','Auth\AdminLoginController@showLoginForm')->name('admin.login');
