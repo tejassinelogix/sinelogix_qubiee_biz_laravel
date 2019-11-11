@@ -5025,4 +5025,15 @@ return $pdf->download('Qubieepayabletransaction.pdf');
              }
         return redirect()->back()->with('success', $message);
     }
+
+    public function view_discount_voucher(){
+         if (Session::has('locale')) {
+            $language = $this->language = Session::get('locale');
+        } else {
+            $language = $this->language = app()->getLocale();
+        }
+        $category_parent_id = Category::getMainCategory();
+        $subcategory = Category::getSubCategory();        
+        return view('Admin.view_discount_voucher', ['language' => $this->language, 'category_parent_id' => $category_parent_id, 'subcategory' => $subcategory]);
+    }
 }

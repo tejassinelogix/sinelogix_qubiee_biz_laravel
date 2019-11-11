@@ -177,6 +177,16 @@
                             <?php }?>
                         </ul>
                     </li>
+                     <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i
+                                class="menu-icon fa fa-usd"></i>Discount Voucher</a>
+                        <ul class="sub-menu children dropdown-menu">
+                             <li>
+                                 <!--<i class="fa fa-list-ul"></i>-->
+                                 <i class="fa fa-inr"></i>
+                                 <a href="<?php echo url(Request::segment(1).'/discountvoucher') ?>">All Discount</a></li>  
+                        </ul>
+                    </li>
                      @can('products.users',Auth::user())
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i

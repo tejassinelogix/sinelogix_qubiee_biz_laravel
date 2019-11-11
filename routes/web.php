@@ -279,6 +279,10 @@ Route::post('/addAddress','HomeController@add_address')->name('addAddress');
   Route::post('/add-stock', 'AdminController@addproductstock');
    Route::get('/loginsettings','AdminController@settings')->name('loginsetting');
   Route::post('/updatePassword','AdminController@updatePassword')->name('updatePassword');
+ 
+  // TDS : Discount Voucher
+  Route::get('/discountvoucher', 'AdminController@view_discount_voucher');
+
  });
 //});  
 
