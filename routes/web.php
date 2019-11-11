@@ -282,6 +282,7 @@ Route::post('/addAddress','HomeController@add_address')->name('addAddress');
  
   // TDS : Discount Voucher
   Route::get('/discountvoucher', 'AdminController@view_discount_voucher');
+  Route::get('/discountvoucheradd', 'AdminController@add_discount_voucher');
 
  });
 //});  

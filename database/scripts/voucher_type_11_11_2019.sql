@@ -1,0 +1,1 @@
+INSERT INTO `voucher_type` (`voucher_id`, `voucher_name`, `voucher_alias`, `created_at`, `updated_at`) VALUES (NULL, 'One time use', 'onetime', current_timestamp(), current_timestamp()), (NULL, 'Fixed Code', 'fixed', current_timestamp(), current_timestamp());

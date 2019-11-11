@@ -185,6 +185,10 @@
                                  <!--<i class="fa fa-list-ul"></i>-->
                                  <i class="fa fa-inr"></i>
                                  <a href="<?php echo url(Request::segment(1).'/discountvoucher') ?>">All Discount</a></li>  
+                             <li>
+                             <!--<i class="fa fa-list-ul"></i>-->
+                             <i class="fa fa-inr"></i>
+                             <a href="<?php echo url(Request::segment(1).'/discountvoucheradd') ?>">Add Discount Voucher</a></li>  
                         </ul>
                     </li>
                      @can('products.users',Auth::user())

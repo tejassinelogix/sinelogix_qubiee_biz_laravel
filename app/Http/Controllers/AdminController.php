@@ -32,6 +32,7 @@ use App\Review;
 use App\stock;
 use App\transtions_admins;
 use Illuminate\Support\Facades\Input;
+use App\Models\admin\voucher_type;
 
 
 class AdminController extends Controller {
@@ -5035,5 +5036,19 @@ return $pdf->download('Qubieepayabletransaction.pdf');
         $category_parent_id = Category::getMainCategory();
         $subcategory = Category::getSubCategory();        
         return view('Admin.view_discount_voucher', ['language' => $this->language, 'category_parent_id' => $category_parent_id, 'subcategory' => $subcategory]);
+    }
+
+    public function add_discount_voucher(){  
+
+         if (Session::has('locale')) {
+            $language = $this->language = Session::get('locale');
+        } else {
+            $language = $this->language = app()->getLocale();
+        }
+        $voucher_type_obj      = new voucher_type;
+        $list_voucher = $voucher_type_obj->get_voucher_type();
+        $category_parent_id = Category::getMainCategory();
+        $subcategory = Category::getSubCategory();        
+        return view('Admin.add_discount_voucher', ['language' => $this->language, 'category_parent_id' => $category_parent_id, 'subcategory' => $subcategory, 'list_voucher' => $list_voucher]);
     }
 }
