@@ -1,0 +1,1 @@
+ALTER TABLE `discount_voucher` ADD `is_voucher_used` ENUM('yes','no') NOT NULL DEFAULT 'no' AFTER `product_id`;
