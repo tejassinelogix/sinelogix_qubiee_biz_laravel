@@ -1,9 +1,16 @@
 @extends('Admin.layouts.app')
-
+ <?php
+    if (Session::has('locale')) {
+        $language = $this->language = Session::get('locale');
+    } else {
+        $language = $this->language = app()->getLocale();
+    }
+    ?>
 @section('main-content')
 
-<link rel="stylesheet" type="text/css" href="{{ URL::asset('/public/css/custom_all.css') }}"/>
+<link rel="stylesheet" type="text/css" href="{{ URL::asset('/css/custom_all.css') }}"/>
   <!-- Content Wrapper. Contains page content -->
+  <meta name="csrf-token" content="{{ csrf_token() }}">
     <div class="breadcrumbs">
         <div class="col-sm-4">
             <div class="page-header float-left">
@@ -118,7 +125,7 @@
                                     <br>
                                     <div class="main_category_form">
                                         <select id="main_category_select" name="main_category_select" class="form-control">
-                                          <option value="0">Select Product Category</option>
+                                          <option value="0">Select Category</option>
                                           <?php 
                                           if(isset($category_parent_id) && !empty($category_parent_id)){
                                           foreach($category_parent_id as $key => $main_cat) { 
@@ -134,6 +141,18 @@
                                     </div>
                                     <br>
 
+                                    <div class="sub_category_form">
+                                        <select id="sub_category_select" name="sub_category_select" class="form-control">
+                                          <option value="0">Select Sub-Category</option>
+                                        </select>
+                                    </div>  
+
+                                    <br>
+                                    <div class="form-group">
+                                      <button type="submit" class="btn btn-primary">Submit</button>
+                                      <a href='{{ route('user.index') }}' class="btn btn-warning">Back</a>
+                                    </div>
+
                                     </div> <!-- col-e ends -->
                             </div> 
                             </form>
@@ -147,6 +166,6 @@
 
 </div><!-- /#right-panel -->
 
-<script type="text/javascript" src="{{ URL::asset('/public/js/add_discount_service.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('/js/add_discount_service.js') }}"></script>
 @endsection
 

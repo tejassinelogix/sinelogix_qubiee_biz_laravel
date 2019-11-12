@@ -33,6 +33,7 @@ use App\stock;
 use App\transtions_admins;
 use Illuminate\Support\Facades\Input;
 use App\Models\admin\voucher_type;
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as Middleware;
 
 
 class AdminController extends Controller {
@@ -5052,9 +5053,32 @@ return $pdf->download('Qubieepayabletransaction.pdf');
         return view('Admin.add_discount_voucher', ['language' => $this->language, 'category_parent_id' => $category_parent_id, 'subcategory' => $subcategory, 'list_voucher' => $list_voucher]);
     }
 
-    public function get_sub_category(){  
-            dd('test asda');
+    public function get_sub_category(Request $Request){ 
+
+             if (Session::has('locale')) {
+                 $language = $this->language = Session::get('locale');
+            } else {
+                $language = $this->language = app()->getLocale();
+            }
+
+            $resp['status'] = false;
+            $resp['message'] = "Subcategory not found..!";
+            $resp['data'] = null;
+            $resp['language'] = $language;
+
+           
+
             $post_params = $Request->all();
-            dd('post ',$post_params);
+
+            if(isset($post_params['data'],$post_params['data']['category_id']) && !empty($post_params['data']['category_id'])){
+                $subcategory_list = Category::get_subcat_by_parent_cat_id($post_params['data']['category_id']); 
+
+                if(!empty($subcategory_list)){
+                     $resp['status'] = true;
+                     $resp['message'] = "Subcategory get successfully..!";
+                     $resp['data'] = json_encode($subcategory_list);
+                }
+            }       
+            die(json_encode($resp));
     }   
 }

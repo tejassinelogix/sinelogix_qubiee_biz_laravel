@@ -321,4 +321,10 @@ $users = DB::select("select id,status,class_name,background_image,background_col
 $users = DB::select("select id,status,class_name,background_image,background_color from add_layout");
             return $users;
     }
+
+      public static function get_subcat_by_parent_cat_id($category_id) {
+        $sub_category = DB::table('category')->where('category_parent_id', $category_id)->where('status', 1)->pluck('category_id', 'category_name');
+        return $sub_category;
+    }
+
      }
