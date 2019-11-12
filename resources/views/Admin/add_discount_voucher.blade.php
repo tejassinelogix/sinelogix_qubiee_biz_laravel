@@ -1,6 +1,7 @@
 @extends('Admin.layouts.app')
 
 @section('main-content')
+
 <link rel="stylesheet" type="text/css" href="{{ URL::asset('/public/css/custom_all.css') }}"/>
   <!-- Content Wrapper. Contains page content -->
     <div class="breadcrumbs">
@@ -58,9 +59,14 @@
 
                                     <div class="is_fixed_select_form">
                                         <select id="is_fixed_select" name="is_fixed_select" class="form-control">
-                                          <?php foreach($list_voucher as $key => $voucher) { ?>
+                                          <?php 
+                                          
+                                          if(isset($list_voucher) && !empty($list_voucher)){
+                                          foreach($list_voucher as $key => $voucher) { ?>
                                             <option value="<?php echo $voucher['voucher_id'] ?>"><?php echo $voucher['voucher_name'] ?></option>
-                                            <?php } ?>
+                                            <?php } } else { ?>
+                                              <option value="0">No Voucher Found</option>
+                                          <?php } ?>                                            
                                         </select>
                                     </div>
                                     <br>
@@ -110,8 +116,25 @@
                                           <input type="text" class="form-control" id="discount_type_input" name="discount_type_input" placeholder="Enter Discount" value="{{ old('discount_type_input') }}" required="">
                                         </div>
                                     <br>
+                                    <div class="main_category_form">
+                                        <select id="main_category_select" name="main_category_select" class="form-control">
+                                          <option value="0">Select Product Category</option>
+                                          <?php 
+                                          if(isset($category_parent_id) && !empty($category_parent_id)){
+                                          foreach($category_parent_id as $key => $main_cat) { 
+                                            $cat_name = json_decode($main_cat->category_name, true);
+                                            $cat_name_display = (isset($language) && $language == 'en')?$cat_name['en']:$cat_name['ar'];
+                                            ?>
 
-                                    </div> 
+                                            <option value="<?php echo $main_cat->category_id; ?>"><?php echo $cat_name_display; ?></option>
+                                            <?php } } else { ?>
+                                              <option value="0">No Category Found</option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+                                    <br>
+
+                                    </div> <!-- col-e ends -->
                             </div> 
                             </form>
                             <!-- form ends -->

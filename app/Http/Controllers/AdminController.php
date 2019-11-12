@@ -5051,4 +5051,10 @@ return $pdf->download('Qubieepayabletransaction.pdf');
         $subcategory = Category::getSubCategory();        
         return view('Admin.add_discount_voucher', ['language' => $this->language, 'category_parent_id' => $category_parent_id, 'subcategory' => $subcategory, 'list_voucher' => $list_voucher]);
     }
+
+    public function get_sub_category(){  
+            dd('test asda');
+            $post_params = $Request->all();
+            dd('post ',$post_params);
+    }   
 }

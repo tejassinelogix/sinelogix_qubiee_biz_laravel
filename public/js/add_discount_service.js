@@ -1,8 +1,10 @@
 /* 
- Page Name: block_report
+ Page Name: add discount
  Module Name: admin
 */
-
+var url = document.URL;
+var str = url.substr(url.lastIndexOf('/') + 1) + '$';
+var APP_URL = url.replace( new RegExp(str), '' );
 service = {
 	req_data : {"data": {}},
 	render_db: {'filter_dlr_code':''},	
@@ -40,81 +42,36 @@ service = {
 			$.LoadingOverlay("hide");
 		}); 
 	},
-	list_dlr_details: function(){
+	get_subcategory_details: function(){
 
-		$('#preview_section,#payout_proccess').addClass('ep_hidden');
-		$("#process_invoice").removeClass("ep_hidden");
 		REQ  =  ser_obj.req_data;
-		url =  APP_URL + '/api/admin/list-dlr-detail';
-		REQ.data['status'] = $("#dealer_status").val();
-		REQ.data['dlr_code'] = $("#filter_dlr_code").val();
-
+		var url = APP_URL+'get_subcategory_details';
+		var url_app = '/sinelogix_qubiee_biz_laravel/admin_2/get_subcategory_details';
+		REQ.data['category_id'] = $("#main_category_select").val();
+		// console.log('REQ');
+		// console.log(REQ);
+		// return false;
 		$.ajax({
+			headers: {
+				 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  			},
 			type: 'POST',
-			url: url,
-			headers: {'Authorization': 'Bearer '+getCookie('jwt_token')},
+			url: url_app,
 			data: REQ,
 			dataType: "json",
 			beforeSend: function(){
-        			$.LoadingOverlay("show");        			
-        			$("#dealer_status").attr("disabled", "disabled");
-					$("#filter_dlr_code").attr("disabled", "disabled");
-					$("#search-block-dealer").attr("disabled", "disabled");
+				console.log('Before Ajax')
 			},
 			success: function(resp_data,status,xhr){ 
-
-				if ($.fn.DataTable.isDataTable("#dealer_list")) 
-                $('#dealer_list').DataTable().clear().destroy();
-                
-				var table = $('#dealer_list').DataTable({"bPaginate": false, "searching": true});
-				table.clear();
-
-				if(!resp_data.status && resp_data.set_no_dealer == false){
-					notify_e(resp_data.message['error']); 
-					$.LoadingOverlay("hide");
-					$("#dlr_block_action").addClass("ep_hidden");
-					$("#dlr_block_cancel").addClass("ep_hidden");
-					return 0;
-				}else if(!resp_data.status && resp_data.set_no_dealer == true){
-					swal(resp_data.message.error);
-					return 0;
-				}else{
-					$("#dlr_block_action").removeClass("ep_hidden");
-				
-					var checkbox_status = "unchecked";
-					$.each(resp_data.data,function( index,value) {
-
-						if(value.is_block)
-							checkbox_status = "checked";
-						else
-							checkbox_status = "unchecked";						
-
-						select = '<input type="checkbox" Name="dlr[]" value="'+value.dlr_p_code+'" class="dlr_codes" '+checkbox_status+'>';
-						var row = table.row.add([		
-						
-						value.dlr_p_code,
-						value.dlr_p_name,
-						select,
-						]);
-						row.draw();
-					});
-				
-					$.LoadingOverlay("hide");
-					if(resp_data.set_no_dealer){
-						swal(resp_data.message.error);
-					}else{
-						$("#preview_section").removeClass("ep_hidden");
-						notify_s(resp_data.message.success); 
-					}
-				}				
+				console.log('resp_data')							
+				console.log(resp_data)
+				console.log(status)							
 			},
-			error : function(jqXhr, textStatus, errorMessage){					
+			error : function(jqXhr, textStatus, errorMessage){	
+				console.log('Error Ajax')				
 			}
 		}).done(function(){
-			$("#dealer_status").removeAttr("disabled", "disabled");
-			$("#filter_dlr_code").removeAttr("disabled", "disabled");
-			$("#search-block-dealer").removeAttr("disabled", "disabled");
-			$.LoadingOverlay("hide");
+			console.log('Done Ajax')				
 		});
 	},update_dealer_report: function(){
 
@@ -165,7 +122,7 @@ service = {
 	},init : function(){
 		ser_obj = this;
 		// ser_obj.list_dealer();
-		// $("#search-block-dealer").click(ser_obj.list_dlr_details);
+		$("#main_category_select").change(ser_obj.get_subcategory_details);
 		// $("#dlr_block_action").click(ser_obj.update_dealer_report);
 		// $("#dlr_block_cancel").click(ser_obj.cancel_dealer_report);
 	}
