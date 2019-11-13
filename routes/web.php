@@ -117,7 +117,7 @@ Route::post('/addAddress','HomeController@add_address')->name('addAddress');
 
 //Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
 //{
-    Route::prefix('admin',['namespace'=>'admin'])->group(function(){
+    Route::prefix('admin_2',['namespace'=>'admin_2'])->group(function(){
       Route::get('/','Auth\AdminLoginController@showLoginForm');
 
       Route::get('/login','Auth\AdminLoginController@showLoginForm')->name('admin.login');
@@ -284,6 +284,8 @@ Route::post('/addAddress','HomeController@add_address')->name('addAddress');
   Route::get('/discountvoucher', 'AdminController@view_discount_voucher');
   Route::get('/discountvoucheradd', 'AdminController@add_discount_voucher');
   Route::post('/get_subcategory_details', 'AdminController@get_sub_category');
+  Route::post('/get_products_details', 'AdminController@get_products');
+  Route::post('/add_discount', 'AdminController@create_discount');
  });
 //});  
 

@@ -5080,5 +5080,66 @@ return $pdf->download('Qubieepayabletransaction.pdf');
                 }
             }       
             die(json_encode($resp));
-    }   
+    }  
+
+    public function get_products(Request $Request){ 
+
+             if (Session::has('locale')) {
+                 $language = $this->language = Session::get('locale');
+            } else {
+                $language = $this->language = app()->getLocale();
+            }
+
+            $resp['status'] = false;
+            $resp['message'] = "Products not found..!";
+            $resp['data'] = null;
+            $resp['language'] = $language;          
+
+            $post_params = $Request->all();
+
+            if(isset($post_params['data'],$post_params['data']['category_id'],$post_params['data']['sub_category_id']) && !empty($post_params['data']['category_id']) 
+                && !empty($post_params['data']['sub_category_id'])){
+
+                $products_list = Category::getAllRelatedproduct($post_params['data']['sub_category_id']); 
+
+                if(!empty($products_list)){
+                     $resp['status'] = true;
+                     $resp['message'] = "Products get successfully..!";
+                     $resp['data'] = json_encode($products_list);
+                }
+            }       
+            die(json_encode($resp));
+    } 
+
+
+    public function create_discount(Request $Request){ 
+
+             if (Session::has('locale')) {
+                 $language = $this->language = Session::get('locale');
+            } else {
+                $language = $this->language = app()->getLocale();
+            }
+
+            $resp['status'] = false;
+            $resp['message'] = "Discount Voucher not inserted..!";
+            $resp['data'] = null;
+            $resp['language'] = $language;          
+
+            $post_params = $Request->all();
+
+            dd('post_params',$post_params);
+
+            if(isset($post_params['data'],$post_params['data']['category_id'],$post_params['data']['sub_category_id']) && !empty($post_params['data']['category_id']) 
+                && !empty($post_params['data']['sub_category_id'])){
+
+                $products_list = Category::getAllRelatedproduct($post_params['data']['sub_category_id']); 
+
+                if(!empty($products_list)){
+                     $resp['status'] = true;
+                     $resp['message'] = "Discount Voucher inserted successfully..!";
+                     $resp['data'] = null;
+                }
+            }       
+            die(json_encode($resp));
+    }
 }

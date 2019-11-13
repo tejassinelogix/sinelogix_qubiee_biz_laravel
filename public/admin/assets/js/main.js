@@ -34,16 +34,22 @@ jQuery(document).ready(function ($) {
         if (countryID > 0) {
 //        alert("call now");
             $.ajax({
-                url: '/admin/subcat',
+                url: '/admin_2/subcat',
                 type: 'GET',
                 data: {id: countryID},
                 success: function (response)
-                {
+                {   
+                    // console.log('response');
+                    // console.log(response);
+                    // return false;
                     // $('#something').html(response);
                     if (response) {
                         $("#subcategory").empty();
                         $("#subcategory").append('<option option value="0">Please Select</option>');
                         $.each(response, function (key, value) {
+                            // console.log("key" + key)
+                            // console.log("val")
+                            // console.log(value)
                             $("#subcategory").append('<option value="' + value + '">' + key + '</option>');
                         });
                     } else {

@@ -12,9 +12,9 @@ service = {
 
 		REQ  =  ser_obj.req_data;
 		var url = APP_URL+'get_subcategory_details';
-		var url_app = '/admin/get_subcategory_details';
+		var url_app = '/admin_2/get_subcategory_details';
 		REQ.data['category_id'] = $("#main_category_select").val();
-
+		// Setup X-CSRF-Token
 		$.ajaxSetup({
 			  headers: {
 			    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -29,31 +29,71 @@ service = {
 			beforeSend: function(){
 				console.log('Before Ajax')
 			},
-			success: function(resp_data,status,xhr){ 
-				console.log('resp_data')							
-				console.log(resp_data)
-				console.log(status)	
+			success: function(resp_data,status,xhr){
 
 				if(resp_data.status){
+						var obj = jQuery.parseJSON(resp_data.data);						
+						if (obj) {
+                        $("#sub_category_select").empty();
+                        $("#sub_category_select").append('<option option value="0">Please Select Sub Category</option>');
+                        $.each(obj, function (key, value) {
+                            $("#sub_category_select").append('<option value="' + value + '">' + key + '</option>');
+                        });
+                    } else {
+                        $("#sub_category_select").empty();
+                        $("#sub_category_select").append('<option value="0">Please Select Category</option>');
+                    }
+				}else{ // no records found
+					$("#sub_category_select").empty(); 
+                    $("#sub_category_select").append('<option value="0">No Sub Category found</option>');
+				}
 
-					if(resp_data.language == "en"){
-						console.log(resp_data.data);
-						var obj = jQuery.parseJSON(resp_data.data);
-						console.log('obj');
-						console.log(obj);
-							return false;	
-						// $.each(resp_data.data, function (i, item) {
-					 //    	console.log('i'+i)
-					 //    	console.log('item'+item)
-						// });
+			},
+			error : function(jqXhr, textStatus, errorMessage){	
+				console.log('Error Ajax')				
+			}
+		}).done(function(){
+			console.log('Done Ajax')				
+		});
+	},get_products_details: function(){
 
-					}
-					// $('#sub_category_select').append($('<option>', { 
-					//         value: 1,
-					//         text : 123 
-					//     }));
-				}else{
+		REQ  =  ser_obj.req_data;
+		var url = APP_URL+'get_products_details';
+		var url_app = '/admin_2/get_products_details';
+		REQ.data['category_id'] = $("#main_category_select").val();
+		REQ.data['sub_category_id'] = $("#sub_category_select").val();
+		// Setup X-CSRF-Token
+		$.ajaxSetup({
+			  headers: {
+			    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			  }
+		});
 
+		$.ajax({
+			type: 'POST',
+			url: url_app,
+			data: REQ,
+			dataType: "json",
+			beforeSend: function(){
+				console.log('Before Ajax')
+			},
+			success: function(resp_data,status,xhr){
+				if(resp_data.status){
+						var obj = jQuery.parseJSON(resp_data.data);						
+						if (obj) {
+
+                        $("#products_select").empty();
+                        $("#products_select").append('<option option value="0">Please Select Products</option>');
+                        $.each(obj, function (key, value) {
+                            $("#products_select").append('<option value="' + value.id + '">' + value.product_name + '</option>');
+                        });
+                    } else {
+                        $("#products_select").empty();
+                        $("#products_select").append('<option value="0">Please Select Products</option>');
+                    }
+				}else{ // no records found
+					$("#products_select").empty(); 
+                    $("#products_select").append('<option value="0">No Products found</option>');
 				}
 
 			},
@@ -67,6 +107,8 @@ service = {
 		ser_obj = this;
 		// ser_obj.list_dealer();
 		$("#main_category_select").change(ser_obj.get_subcategory_details);
+		$("#sub_category_select").change(ser_obj.get_products_details);
+		
 		// $("#dlr_block_action").click(ser_obj.update_dealer_report);
 	}
 }

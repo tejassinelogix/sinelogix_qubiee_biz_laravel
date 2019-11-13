@@ -41,7 +41,7 @@
                    @include('Admin.includes.messages')
                             <!-- /.box-header -->
                             <!-- form start -->
-                            <form role="form" action="{{ route('user.store') }}" method="post">
+                            <form role="form" action="admin_2/add_discount" method="post">
                             {{ csrf_field() }}
                             <div class="box-body">
                                 <div class="col-lg-offset-3 col-lg-6">
@@ -61,7 +61,7 @@
 
                                     <div class="form-group manual_coupan_form">
                                         <label for="name">Coupan Code</label>
-                                        <input type="text" class="form-control" id="manual_coupan" name="manual_coupan" placeholder="Enter Coupan Code" value="{{ old('mannual_coupan') }}" maxlength="6" minlength="6" required="">
+                                        <input type="text" class="form-control" id="manual_coupan" name="manual_coupan" placeholder="Enter Coupan Code" value="{{ old('manual_coupan') }}" maxlength="6" minlength="6">
                                     </div>                                
 
                                     <div class="is_fixed_select_form">
@@ -146,6 +146,13 @@
                                           <option value="0">Select Sub-Category</option>
                                         </select>
                                     </div>  
+
+                                    <br>
+                                    <div class="products_form">
+                                        <select id="products_select" name="products_select" class="form-control">
+                                          <option value="0">Select Products</option>
+                                        </select>
+                                    </div>
 
                                     <br>
                                     <div class="form-group">

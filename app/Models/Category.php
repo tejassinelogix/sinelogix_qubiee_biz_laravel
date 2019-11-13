@@ -322,9 +322,14 @@ $users = DB::select("select id,status,class_name,background_image,background_col
             return $users;
     }
 
-      public static function get_subcat_by_parent_cat_id($category_id) {
+    public static function get_subcat_by_parent_cat_id($category_id) {        
         $sub_category = DB::table('category')->where('category_parent_id', $category_id)->where('status', 1)->pluck('category_id', 'category_name');
         return $sub_category;
     }
 
-     }
+    public static function get_products_by_categories($category_id) {        
+        $sub_category = DB::table('category')->where('category_parent_id', $category_id)->where('status', 1)->pluck('category_id', 'category_name');
+        return $sub_category;
+    }
+
+}
