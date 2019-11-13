@@ -34,6 +34,7 @@ use App\transtions_admins;
 use Illuminate\Support\Facades\Input;
 use App\Models\admin\voucher_type;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as Middleware;
+use App\Models\admin\discount_voucher;
 
 
 class AdminController extends Controller {
@@ -5034,9 +5035,13 @@ return $pdf->download('Qubieepayabletransaction.pdf');
         } else {
             $language = $this->language = app()->getLocale();
         }
-        $category_parent_id = Category::getMainCategory();
+
+        $discount = DB::select("select * from discount_voucher");
+        // echo "<pre>";
+        // var_dump($discount);
+        $category_parent_id = Category::getMainCategory();        
         $subcategory = Category::getSubCategory();        
-        return view('Admin.view_discount_voucher', ['language' => $this->language, 'category_parent_id' => $category_parent_id, 'subcategory' => $subcategory]);
+        return view('Admin.view_discount_voucher', ['language' => $this->language, 'category_parent_id' => $category_parent_id, 'subcategory' => $subcategory,'discount_voucher'=>$discount]);
     }
 
     public function add_discount_voucher(){  

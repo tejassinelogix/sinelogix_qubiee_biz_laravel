@@ -70,15 +70,14 @@
 </div><!-- /#right-panel -->
 
 <!-- Right Panel -->
-
 @endsection
 
 @section('footerSection')
 <script src="{{ asset('admin/plugins/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('admin/plugins/datatables/dataTables.bootstrap.min.js') }}"></script>
 <script>
-                                        $(function () {
-                                        $("#example1").DataTable();
-                                        });
+$(function () {
+$("#example1").DataTable();
+});
 </script>
 @endsection
