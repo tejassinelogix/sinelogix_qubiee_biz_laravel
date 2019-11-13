@@ -33,8 +33,8 @@ use App\stock;
 use App\transtions_admins;
 use Illuminate\Support\Facades\Input;
 use App\Models\admin\voucher_type;
-use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as Middleware;
 use App\Models\admin\discount_voucher;
+
 
 
 class AdminController extends Controller {
@@ -65,6 +65,8 @@ class AdminController extends Controller {
         //   // Redirect::to('administration/dashboard')->send();
 //         $countproduct = product::count();
         $usertype = (Auth::user()->job_title);
+		
+		
 
         if (Session::has('locale')) {
             $language = $this->language = Session::get('locale');
@@ -5032,16 +5034,16 @@ return $pdf->download('Qubieepayabletransaction.pdf');
     public function view_discount_voucher(){
          if (Session::has('locale')) {
             $language = $this->language = Session::get('locale');
+
         } else {
             $language = $this->language = app()->getLocale();
         }
 
-        $discount = DB::select("select * from discount_voucher");
-        // echo "<pre>";
-        // var_dump($discount);
+        $discounts = DB::select("select * from discount_voucher");
+
         $category_parent_id = Category::getMainCategory();        
         $subcategory = Category::getSubCategory();        
-        return view('Admin.view_discount_voucher', ['language' => $this->language, 'category_parent_id' => $category_parent_id, 'subcategory' => $subcategory,'discount_voucher'=>$discount]);
+        return view('Admin.view_discount_voucher', ['language' => $this->language, 'category_parent_id' => $category_parent_id, 'subcategory' => $subcategory,'discount_voucher'=>$discounts]);
     }
 
     public function add_discount_voucher(){  
@@ -5058,93 +5060,16 @@ return $pdf->download('Qubieepayabletransaction.pdf');
         return view('Admin.add_discount_voucher', ['language' => $this->language, 'category_parent_id' => $category_parent_id, 'subcategory' => $subcategory, 'list_voucher' => $list_voucher]);
     }
 
-    public function get_sub_category(Request $Request){ 
 
-             if (Session::has('locale')) {
-                 $language = $this->language = Session::get('locale');
-            } else {
-                $language = $this->language = app()->getLocale();
-            }
-
-            $resp['status'] = false;
-            $resp['message'] = "Subcategory not found..!";
-            $resp['data'] = null;
-            $resp['language'] = $language;
-
-           
-
-            $post_params = $Request->all();
-
-            if(isset($post_params['data'],$post_params['data']['category_id']) && !empty($post_params['data']['category_id'])){
-                $subcategory_list = Category::get_subcat_by_parent_cat_id($post_params['data']['category_id']); 
-
-                if(!empty($subcategory_list)){
-                     $resp['status'] = true;
-                     $resp['message'] = "Subcategory get successfully..!";
-                     $resp['data'] = json_encode($subcategory_list);
-                }
-            }       
-            die(json_encode($resp));
-    }  
-
-    public function get_products(Request $Request){ 
-
-             if (Session::has('locale')) {
-                 $language = $this->language = Session::get('locale');
-            } else {
-                $language = $this->language = app()->getLocale();
-            }
-
-            $resp['status'] = false;
-            $resp['message'] = "Products not found..!";
-            $resp['data'] = null;
-            $resp['language'] = $language;          
-
-            $post_params = $Request->all();
-
-            if(isset($post_params['data'],$post_params['data']['category_id'],$post_params['data']['sub_category_id']) && !empty($post_params['data']['category_id']) 
-                && !empty($post_params['data']['sub_category_id'])){
-
-                $products_list = Category::getAllRelatedproduct($post_params['data']['sub_category_id']); 
-
-                if(!empty($products_list)){
-                     $resp['status'] = true;
-                     $resp['message'] = "Products get successfully..!";
-                     $resp['data'] = json_encode($products_list);
-                }
-            }       
-            die(json_encode($resp));
-    } 
-
-
-    public function create_discount(Request $Request){ 
-
-             if (Session::has('locale')) {
-                 $language = $this->language = Session::get('locale');
-            } else {
-                $language = $this->language = app()->getLocale();
-            }
-
-            $resp['status'] = false;
-            $resp['message'] = "Discount Voucher not inserted..!";
-            $resp['data'] = null;
-            $resp['language'] = $language;          
-
-            $post_params = $Request->all();
-
-            dd('post_params',$post_params);
-
-            if(isset($post_params['data'],$post_params['data']['category_id'],$post_params['data']['sub_category_id']) && !empty($post_params['data']['category_id']) 
-                && !empty($post_params['data']['sub_category_id'])){
-
-                $products_list = Category::getAllRelatedproduct($post_params['data']['sub_category_id']); 
-
-                if(!empty($products_list)){
-                     $resp['status'] = true;
-                     $resp['message'] = "Discount Voucher inserted successfully..!";
-                     $resp['data'] = null;
-                }
-            }       
-            die(json_encode($resp));
+     public function edit($id)
+    {
+        if(Session::has('locale') ){
+            $language=$this->language = Session::get('locale');
+        }
+        else{
+            $language=$this->language = app()->getLocale();
+        }
+         $discounts = DB::select("select * from discount_voucher");
+          return view('Admin.view_discount_voucher', ['language' => $this->language, 'category_parent_id' => $category_parent_id, 'subcategory' => $subcategory,'discount_voucher'=>$discounts]);
     }
 }

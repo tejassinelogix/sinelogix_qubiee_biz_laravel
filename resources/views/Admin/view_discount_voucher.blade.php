@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="{{ asset('admin/plugins/datatables/dataTables.bootstrap.css') }}">
 @endsection
 @section('main-content')
+
 <!-- All Product -->
 <div class="breadcrumbs">
     <div class="col-sm-4">
@@ -51,9 +52,19 @@
                                     <th>{{ __('message.Delete') }}</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                              
-                            </tbody>
+                                <tbody>
+                                    <?php //dd($discount_voucher);?>
+                                      @foreach($discount_voucher as $discount)
+                                      <tr>
+                                      <td>{{ $loop->index + 1 }}</td>
+                                      <td>{{ $discount->voucher_name }}</td>
+                                      <td>{{ $discount->voucher_name }}</td>
+                                      <td>{{ $discount->validity_end_date}}</td>
+                                      <td><a href="admin/AdminController/{ $discount_voucher->discount_id }"><span class="glyphicon glyphicon-edit"></span><i class="fa fa-pencil"></i></td>
+                                    <td><a href=""><span class="glyphicon glyphicon-trash"></span><i class="fa  fa-trash-o"></i></a></td>
+                                   </tr>
+                                    @endforeach  
+                                </tbody>
                         </table>
                     </div>
                 </div>
@@ -68,11 +79,13 @@
 
 
 </div><!-- /#right-panel -->
-
+<script type="text/javascript" src="{{ URL::asset('/js/view_discount_service.js') }}"></script> 
 <!-- Right Panel -->
 @endsection
 
+
 @section('footerSection')
+
 <script src="{{ asset('admin/plugins/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('admin/plugins/datatables/dataTables.bootstrap.min.js') }}"></script>
 <script>
@@ -80,4 +93,5 @@ $(function () {
 $("#example1").DataTable();
 });
 </script>
+
 @endsection
