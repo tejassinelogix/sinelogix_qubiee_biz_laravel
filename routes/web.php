@@ -287,7 +287,10 @@ Route::post('/addAddress','HomeController@add_address')->name('addAddress');
   Route::post('/get_products_details', 'AdminController@get_products');
   Route::post('/add_discount', 'AdminController@create_discount');
   Route::get('/get_vouchers_details', 'AdminController@view_discount_voucher');
-  Route::get('/get_vouchers_detailseditid','AdminController@edit');
+  // Route::get('/edit_vouchers', 'AdminController@edit');
+  Route::get('/{discount_id}/edit_vouchers', 'AdminController@edit');  
+  Route::get('/{discount_id}/del_vouchers', 'AdminController@destroy');
+  
  });
 //});  
 

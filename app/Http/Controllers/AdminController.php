@@ -65,6 +65,8 @@ class AdminController extends Controller {
         //   // Redirect::to('administration/dashboard')->send();
 //         $countproduct = product::count();
         $usertype = (Auth::user()->job_title);
+		
+		
 
         if (Session::has('locale')) {
             $language = $this->language = Session::get('locale');
@@ -5050,7 +5052,7 @@ return $pdf->download('Qubieepayabletransaction.pdf');
         } else {
             $language = $this->language = app()->getLocale();
         }
-        $voucher_type_obj      = new voucher_type;
+        $voucher_type_obj  = new voucher_type;
         $list_voucher = $voucher_type_obj->get_voucher_type();
         $category_parent_id = Category::getMainCategory();
         $subcategory = Category::getSubCategory();        
@@ -5184,13 +5186,18 @@ return $pdf->download('Qubieepayabletransaction.pdf');
 
      public function edit($id)
     {
-        if(Session::has('locale') ){
-            $language=$this->language = Session::get('locale');
-        }
-        else{
-            $language=$this->language = app()->getLocale();
-        }
-         $discounts = DB::select("select * from discount_voucher");
-          return view('Admin.view_discount_voucher', ['language' => $this->language, 'category_parent_id' => $category_parent_id, 'subcategory' => $subcategory,'discount_voucher'=>$discounts]);
+        $obj_discounts1 = new discount_voucher();                     
+        $discounts1 = $obj_discounts1->getDiscountVoucher_id($discounts_id);       
+        return view('Admin.edit_discount_voucher', ['discount_voucher' => $discounts1]);
+    
+    }
+
+    public function destroy($discounts_id)
+    {        
+        $del_discounts = new discount_voucher(); 
+        $discountsj = $del_discounts->getDiscountVoucher_id($discounts_id); 
+       
+        return redirect()->back()->with('message','Discount Voucher is Deleted successfully');
+        
     }
 }
