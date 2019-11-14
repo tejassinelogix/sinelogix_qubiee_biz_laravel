@@ -1,0 +1,1 @@
+ALTER TABLE `discount_voucher` CHANGE `discount_type` `discount_type` VARCHAR(100) NULL DEFAULT NULL;

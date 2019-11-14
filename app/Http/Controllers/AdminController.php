@@ -34,7 +34,6 @@ use App\stock;
 use App\transtions_admins;
 use Illuminate\Support\Facades\Input;
 use App\Models\admin\voucher_type;
-use App\Models\admin\discount_voucher;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as Middleware;
 
 
@@ -5136,6 +5135,14 @@ return $pdf->download('Qubieepayabletransaction.pdf');
                 return redirect(route('admin.discountvoucheradd'));
             }
 
+             $this->validate($Request,[
+                    'is_auto_generated' =>'required',
+                    'is_fixed_select' =>'required',
+                    'main_category_select' =>'required',
+                    'sub_category_select' =>'required',
+                    'products_select' =>'required'            
+            ]);
+
             if(isset($post_params['is_auto_generated'],$post_params['is_fixed_select'],$post_params['main_category_select'],$post_params['sub_category_select'],$post_params['products_select']) && $post_params['is_fixed_select'] != 0 && $post_params['main_category_select'] != 0 && $post_params['sub_category_select'] != 0 && $post_params['products_select'] != 0
                 && $post_params['is_auto_generated'] != "0"){
                 
@@ -5143,10 +5150,8 @@ return $pdf->download('Qubieepayabletransaction.pdf');
                 $insertArry['voucher_name'] = ($post_params['is_auto_generated'] == "yes")?$post_params['auto_coupan']:$post_params['manual_coupan'];
                 $insertArry['voucher_type_id'] = $post_params['is_fixed_select'];
                 $insertArry['voucher_validity'] = $post_params['is_validity_select'];
-                $insertArry['validity_start_date'] = null;
-                $insertArry['validity_end_date'] = null;
-                // $insertArry['validity_start_date'] = $post_params['fromdate'];
-                // $insertArry['validity_end_date'] = $post_params['todate'];
+                $insertArry['validity_start_date'] = $post_params['fromdate'];
+                $insertArry['validity_end_date'] = $post_params['todate'];
                 $insertArry['is_minimum_order'] = $post_params['is_minamt_select'];
                 $insertArry['minimum_amount'] = $post_params['minimum_amount'];
                 $insertArry['discount_type'] = $post_params['is_discount_by_select'];
@@ -5157,13 +5162,24 @@ return $pdf->download('Qubieepayabletransaction.pdf');
 
                     $obj_discount = new discount_voucher();                     
                     $add_discount = $obj_discount->get_discount_voucher($insertArry);
-                    dd($add_discount,'dii');
 
+                    if(!empty($add_discount)){                        
+                         $discounts = DB::select("select * from discount_voucher");
+                         $category_parent_id = Category::getMainCategory();        
+                         $subcategory = Category::getSubCategory();        
+                        return view('Admin.view_discount_voucher', ['language' => $this->language, 'category_parent_id' => $category_parent_id, 'subcategory' => $subcategory,'discount_voucher'=>$discounts]);
+                    }
             }else{
-                dd('error');
-                return view('Admin.add_discount_voucher', compact('language', 'users', 'categoryall', 'productlist'));
+                    $voucher_type_obj      = new voucher_type;
+                    $list_voucher = $voucher_type_obj->get_voucher_type();
+                    $category_parent_id = Category::getMainCategory();
+                    $subcategory = Category::getSubCategory(); 
+                    // dd('test');
+                    // return view('Admin.add_discount_voucher', ['language' => $this->language, 'category_parent_id' => $category_parent_id, 'subcategory' => $subcategory, 'list_voucher' => $list_voucher]);
+                    // return redirect(route('permission.index'));
+                    return redirect(route('discountvoucheradd'));
             }
-      return redirect(route('admin.discountvoucheradd'));
+      
         }
 
      public function edit($id)
