@@ -11,7 +11,7 @@ service = {
 	get_subcategory_details: function(){
 
 		REQ  =  ser_obj.req_data;
-		var url = APP_URL+'get_vouchers_details';
+		var url = APP_URL+'get_subcategory_details';
 		var url_app = '/admin_2/get_subcategory_details';
 		REQ.data['category_id'] = $("#main_category_select").val();
 		// Setup X-CSRF-Token

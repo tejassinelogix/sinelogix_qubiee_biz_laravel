@@ -1,0 +1,1 @@
+ALTER TABLE `discount_voucher` ADD `discount_type_amount` INT(11) NULL AFTER `discount_type`;

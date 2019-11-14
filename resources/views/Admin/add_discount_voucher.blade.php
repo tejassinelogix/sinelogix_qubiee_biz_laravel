@@ -41,7 +41,7 @@
                    @include('Admin.includes.messages')
                             <!-- /.box-header -->
                             <!-- form start -->
-                            <form role="form" action="admin_2/add_discount" method="post">
+                            <form role="form" action="{{ action('AdminController@create_discount') }}" method="post">
                             {{ csrf_field() }}
                             <div class="box-body">
                                 <div class="col-lg-offset-3 col-lg-6">
@@ -56,7 +56,7 @@
                                     <?php $auto_code = sprintf("QUB%u%s",rand(10,99),chr(rand(65,90))); ?>
                                     <div class="form-group auto_coupan_form">
                                         <label for="name">Coupan Code</label>
-                                        <input type="text" class="form-control" id="auto_coupan" name="auto_coupan" value="<?php echo $auto_code; ?>" disabled>
+                                        <input type="text" class="form-control" id="auto_coupan" name="auto_coupan" value="<?php echo $auto_code; ?>" readonly>
                                     </div>
 
                                     <div class="form-group manual_coupan_form">
@@ -66,6 +66,7 @@
 
                                     <div class="is_fixed_select_form">
                                         <select id="is_fixed_select" name="is_fixed_select" class="form-control">
+                                          <option value="0">Select Voucher Type</option>
                                           <?php 
                                           
                                           if(isset($list_voucher) && !empty($list_voucher)){
@@ -106,7 +107,7 @@
                                          <br>
                                         <div class="form-group minimum_amount_form">
                                           <label for="name">Minimum Amount</label>
-                                          <input type="text" class="form-control" id="minimum_amount" name="minimum_amount" placeholder="Enter Minimum Amount" value="{{ old('minimum_amount') }}" required="">
+                                          <input type="text" class="form-control" id="minimum_amount" name="minimum_amount" placeholder="Enter Minimum Amount" value="{{ old('minimum_amount') }}">
                                         </div> 
                                         <br>
 
@@ -120,7 +121,7 @@
                                       <br>
                                       <div class="form-group discount_type_input_form">
                                           <label for="name">Discount</label>
-                                          <input type="text" class="form-control" id="discount_type_input" name="discount_type_input" placeholder="Enter Discount" value="{{ old('discount_type_input') }}" required="">
+                                          <input type="text" class="form-control" id="discount_type_input" name="discount_type_input" placeholder="Enter Discount" value="{{ old('discount_type_input') }}">
                                         </div>
                                     <br>
                                     <div class="main_category_form">

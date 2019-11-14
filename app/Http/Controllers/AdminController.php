@@ -16,6 +16,7 @@ use Validator;
 use DB;
 use File;
 use App\Models\admin\role;
+use App\Models\admin\discount_voucher;
 use App\Models\user\product;
 //use App\Models\user\category;
 use App\Models\admin\admin;
@@ -34,7 +35,7 @@ use App\transtions_admins;
 use Illuminate\Support\Facades\Input;
 use App\Models\admin\voucher_type;
 use App\Models\admin\discount_voucher;
-
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as Middleware;
 
 
 class AdminController extends Controller {
@@ -65,8 +66,6 @@ class AdminController extends Controller {
         //   // Redirect::to('administration/dashboard')->send();
 //         $countproduct = product::count();
         $usertype = (Auth::user()->job_title);
-		
-		
 
         if (Session::has('locale')) {
             $language = $this->language = Session::get('locale');
@@ -5034,7 +5033,6 @@ return $pdf->download('Qubieepayabletransaction.pdf');
     public function view_discount_voucher(){
          if (Session::has('locale')) {
             $language = $this->language = Session::get('locale');
-
         } else {
             $language = $this->language = app()->getLocale();
         }
@@ -5060,6 +5058,113 @@ return $pdf->download('Qubieepayabletransaction.pdf');
         return view('Admin.add_discount_voucher', ['language' => $this->language, 'category_parent_id' => $category_parent_id, 'subcategory' => $subcategory, 'list_voucher' => $list_voucher]);
     }
 
+    public function get_sub_category(Request $Request){ 
+
+             if (Session::has('locale')) {
+                 $language = $this->language = Session::get('locale');
+            } else {
+                $language = $this->language = app()->getLocale();
+            }
+
+            $resp['status'] = false;
+            $resp['message'] = "Subcategory not found..!";
+            $resp['data'] = null;
+            $resp['language'] = $language;
+
+           
+
+            $post_params = $Request->all();
+
+            if(isset($post_params['data'],$post_params['data']['category_id']) && !empty($post_params['data']['category_id'])){
+                $subcategory_list = Category::get_subcat_by_parent_cat_id($post_params['data']['category_id']); 
+
+                if(!empty($subcategory_list)){
+                     $resp['status'] = true;
+                     $resp['message'] = "Subcategory get successfully..!";
+                     $resp['data'] = json_encode($subcategory_list);
+                }
+            }       
+            die(json_encode($resp));
+    }  
+
+    public function get_products(Request $Request){ 
+
+             if (Session::has('locale')) {
+                 $language = $this->language = Session::get('locale');
+            } else {
+                $language = $this->language = app()->getLocale();
+            }
+
+            $resp['status'] = false;
+            $resp['message'] = "Products not found..!";
+            $resp['data'] = null;
+            $resp['language'] = $language;          
+
+            $post_params = $Request->all();
+
+            if(isset($post_params['data'],$post_params['data']['category_id'],$post_params['data']['sub_category_id']) && !empty($post_params['data']['category_id']) 
+                && !empty($post_params['data']['sub_category_id'])){
+
+                $products_list = Category::getAllRelatedproduct($post_params['data']['sub_category_id']); 
+
+                if(!empty($products_list)){
+                     $resp['status'] = true;
+                     $resp['message'] = "Products get successfully..!";
+                     $resp['data'] = json_encode($products_list);
+                }
+            }       
+            die(json_encode($resp));
+    } 
+
+
+    public function create_discount(Request $Request){ 
+
+            if (Session::has('locale')) {
+                 $language = $this->language = Session::get('locale');
+            } else {
+                $language = $this->language = app()->getLocale();
+            }
+
+            $resp['status'] = false;
+            $resp['message'] = "Discount Voucher not inserted..!";
+            $resp['data'] = null;
+            $resp['language'] = $language;          
+
+            $post_params = $Request->all();
+            if(is_null($post_params['_token']) || $post_params['_token']!=csrf_token()){
+                return view('Admin.add_discount_voucher', compact('language', 'users', 'categoryall', 'productlist'));
+                return redirect(route('admin.discountvoucheradd'));
+            }
+
+            if(isset($post_params['is_auto_generated'],$post_params['is_fixed_select'],$post_params['main_category_select'],$post_params['sub_category_select'],$post_params['products_select']) && $post_params['is_fixed_select'] != 0 && $post_params['main_category_select'] != 0 && $post_params['sub_category_select'] != 0 && $post_params['products_select'] != 0
+                && $post_params['is_auto_generated'] != "0"){
+                
+                $insertArry['is_auto_generated'] = $post_params['is_auto_generated'];
+                $insertArry['voucher_name'] = ($post_params['is_auto_generated'] == "yes")?$post_params['auto_coupan']:$post_params['manual_coupan'];
+                $insertArry['voucher_type_id'] = $post_params['is_fixed_select'];
+                $insertArry['voucher_validity'] = $post_params['is_validity_select'];
+                $insertArry['validity_start_date'] = null;
+                $insertArry['validity_end_date'] = null;
+                // $insertArry['validity_start_date'] = $post_params['fromdate'];
+                // $insertArry['validity_end_date'] = $post_params['todate'];
+                $insertArry['is_minimum_order'] = $post_params['is_minamt_select'];
+                $insertArry['minimum_amount'] = $post_params['minimum_amount'];
+                $insertArry['discount_type'] = $post_params['is_discount_by_select'];
+                $insertArry['discount_type_amount'] = $post_params['discount_type_input'];
+                $insertArry['category_id'] = $post_params['main_category_select'];
+                $insertArry['brand_id'] = $post_params['sub_category_select'];
+                $insertArry['product_id'] = $post_params['products_select'];
+
+                    $obj_discount = new discount_voucher();                     
+                    $add_discount = $obj_discount->get_discount_voucher($insertArry);
+                    dd($add_discount,'dii');
+
+            }else{
+                dd('error');
+                return view('Admin.add_discount_voucher', compact('language', 'users', 'categoryall', 'productlist'));
+            }
+      return redirect(route('admin.discountvoucheradd'));
+        }
 
      public function edit($id)
     {
