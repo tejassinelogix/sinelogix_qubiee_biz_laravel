@@ -124,18 +124,23 @@ $(document).on("change","#is_auto_generated, #is_validity_select, #is_minamt_sel
   	
   	if($(this).attr('id') == 'is_auto_generated'){
 		if($(this).val() == 'yes'){
+			$('.default_manual_gen_coupan').addClass('manual_coupan_form');
 			$('.auto_coupan_form').show();
 			$('.manual_coupan_form').hide();
+			$('.default_auto_gen_coupan').addClass('auto_coupan_form');
 		}else{
-			$('.manual_coupan_form').show();
+			$('.manual_coupan_form').show();			
+			$('.default_auto_gen_coupan').addClass('auto_coupan_form');
 			$('.auto_coupan_form').hide();
 		}
   	}
 
   	if($(this).attr('id') == 'is_validity_select'){
 		if($(this).val() == 'yes'){
+			// $('.default_voucher_date_validity').addClass('voucher_date_validity');
 			$('.voucher_date_validity').show();
 		}else{
+			$('.default_voucher_date_validity').addClass('voucher_date_validity');
 			$('.voucher_date_validity').hide();
 		}
   	}
@@ -144,6 +149,7 @@ $(document).on("change","#is_auto_generated, #is_validity_select, #is_minamt_sel
 		if($(this).val() == 'yes'){
 			$('.minimum_amount_form').show();
 		}else{
+			$('.default_minimum_amount_form').addClass('minimum_amount_form');
 			$('.minimum_amount_form').hide();
 		}
   	}
