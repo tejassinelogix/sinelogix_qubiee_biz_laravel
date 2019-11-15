@@ -39,6 +39,7 @@
                     <div class="card">
                         <div class="card-body card-block">
                    @include('Admin.includes.messages')
+
                             <!-- /.box-header -->
                             <!-- form start -->
                             <form role="form" action="{{ action('AdminController@create_discount') }}" method="post">
@@ -47,7 +48,7 @@
                                 <div class="col-lg-offset-3 col-lg-6">
                                       <div class="is_auto_generated_select">
                                           <select id="is_auto_generated" name="is_auto_generated" class="form-control">
-                                              <option value="0">{{ __('message.Please Select Auto Generated') }}</option>
+                                              <option value="">{{ __('message.Please Select Auto Generated') }}</option>
                                                <option value="yes">{{ __('message.Yes') }}</option>
                                                <option value="no">{{ __('message.No') }}</option> 
                                           </select>
@@ -66,21 +67,21 @@
 
                                     <div class="is_fixed_select_form">
                                         <select id="is_fixed_select" name="is_fixed_select" class="form-control">
-                                          <option value="0">{{ __('message.Select Voucher Type') }}</option>
+                                          <option value="">{{ __('message.Select Voucher Type') }}</option>
                                           <?php 
                                           
                                           if(isset($list_voucher) && !empty($list_voucher)){
                                           foreach($list_voucher as $key => $voucher) { ?>
                                             <option value="<?php echo $voucher['voucher_id'] ?>"><?php echo $voucher['voucher_name'] ?></option>
                                             <?php } } else { ?>
-                                              <option value="0">{{ __('message.No Voucher Found') }}</option>
+                                              <option value="">{{ __('message.No Voucher Found') }}</option>
                                           <?php } ?>                                            
                                         </select>
                                     </div>
                                     <br>
                                     <div class="is_validity_select_form">
                                             <select id="is_validity_select" name="is_validity_select" class="form-control">
-                                                <option value="0">{{ __('message.Select Voucher Validity') }}</option>
+                                                <option value="">{{ __('message.Select Voucher Validity') }}</option>
                                                  <option value="yes">{{ __('message.Yes') }}</option>
                                                  <option value="no">{{ __('message.No') }}</option> 
                                             </select>
@@ -99,7 +100,7 @@
                                     <br>
                                     <div class="is_minamt_select_form">
                                             <select id="is_minamt_select" name="is_minamt_select" class="form-control">
-                                                <option value="0">{{ __('message.Select Minimum Amount') }}</option>
+                                                <option value="">{{ __('message.Select Minimum Amount') }}</option>
                                                  <option value="yes">{{ __('message.Yes') }}</option>
                                                  <option value="no">{{ __('message.No') }}</option> 
                                             </select>
@@ -113,7 +114,7 @@
 
                                         <div class="is_discount_by_select_form">
                                         <select id="is_discount_by_select" name="is_discount_by_select" class="form-control">
-                                          <option value="0">{{ __('message.Select Discount Type') }}</option>
+                                          <option value="">{{ __('message.Select Discount Type') }}</option>
                                                  <option value="percentage">{{ __('message.Percentage') }}</option>
                                                  <option value="rupees">{{ __('message.Rupees') }}</option> 
                                         </select>
@@ -126,7 +127,7 @@
                                     <br>
                                     <div class="main_category_form">
                                         <select id="main_category_select" name="main_category_select" class="form-control">
-                                          <option value="0">{{ __('message.Select Category') }}</option>
+                                          <option value="">{{ __('message.Select Category') }}</option>
                                           <?php 
                                           if(isset($category_parent_id) && !empty($category_parent_id)){
                                           foreach($category_parent_id as $key => $main_cat) { 
@@ -136,7 +137,7 @@
 
                                             <option value="<?php echo $main_cat->category_id; ?>"><?php echo $cat_name_display; ?></option>
                                             <?php } } else { ?>
-                                              <option value="0">No Category Found') }}</option>
+                                              <option value="">No Category Found') }}</option>
                                             <?php } ?>
                                         </select>
                                     </div>
@@ -144,21 +145,21 @@
 
                                     <div class="sub_category_form">
                                         <select id="sub_category_select" name="sub_category_select" class="form-control">
-                                          <option value="0">{{ __('message.Select Sub-Category') }}</option>
+                                          <option value="">{{ __('message.Select Sub-Category') }}</option>
                                         </select>
                                     </div>  
 
                                     <br>
                                     <div class="products_form">
                                         <select id="products_select" name="products_select" class="form-control">
-                                          <option value="0">{{ __('message.Select Products') }}</option>
+                                          <option value="">{{ __('message.Select Products') }}</option>
                                         </select>
                                     </div>
 
                                     <br>
                                     <div class="form-group">
                                       <button type="submit" class="btn btn-primary">{{ __('message.Submit') }}</button>
-                                      <a href='{{ route('user.index') }}' class="btn btn-warning">{{ __('message.Back') }}</a>
+                                      <a href='{{ URL('admin_2/discountvoucheradd' )}}' class="btn btn-warning">{{ __('message.Back') }}</a>
                                     </div>
 
                                     </div> <!-- col-e ends -->

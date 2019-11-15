@@ -5126,28 +5126,44 @@ return $pdf->download('Qubieepayabletransaction.pdf');
                 $language = $this->language = app()->getLocale();
             }
 
-            $resp['status'] = false;
-            $resp['message'] = "Discount Voucher not inserted..!";
-            $resp['data'] = null;
-            $resp['language'] = $language;          
+            $voucher_type_obj      = new voucher_type;
+            $list_voucher = $voucher_type_obj->get_voucher_type();
+            $category_parent_id = Category::getMainCategory();
+            $subcategory = Category::getSubCategory(); 
+            $not_in = '123';         
 
             $post_params = $Request->all();
+
             if(is_null($post_params['_token']) || $post_params['_token']!=csrf_token()){
-                return view('Admin.add_discount_voucher', compact('language', 'users', 'categoryall', 'productlist'));
-                return redirect(route('admin.discountvoucheradd'));
+               return view('Admin.add_discount_voucher',compact('language','category_parent_id','subcategory'),['language' => $this->language, 'category_parent_id' => $category_parent_id, 'subcategory' => $subcategory,'discount_voucher'=>$discounts]);
             }
 
-             $this->validate($Request,[
-                    'is_auto_generated' =>'required',
-                    'is_fixed_select' =>'required',
-                    'main_category_select' =>'required',
-                    'sub_category_select' =>'required',
-                    'products_select' =>'required'            
-            ]);
+             if($post_params['is_auto_generated'] == "yes" && $post_params['is_auto_generated'] != "0"){
+                    $this->validate($Request,[
+                        'is_auto_generated' =>'required',
+                        'auto_coupan' =>'required',
+                        'is_fixed_select' =>'required',
+                        'main_category_select' =>'required',
+                        'sub_category_select' =>'required',
+                        'products_select' =>'required'            
+                    ]);
 
-            if(isset($post_params['is_auto_generated'],$post_params['is_fixed_select'],$post_params['main_category_select'],$post_params['sub_category_select'],$post_params['products_select']) && $post_params['is_fixed_select'] != 0 && $post_params['main_category_select'] != 0 && $post_params['sub_category_select'] != 0 && $post_params['products_select'] != 0
-                && $post_params['is_auto_generated'] != "0"){
-                
+             }else if($post_params['is_auto_generated'] == "no" && $post_params['is_auto_generated'] != "0"){
+
+                    $this->validate($Request,[
+                        'is_auto_generated' =>'required',
+                        'manual_coupan' =>'required',
+                        'is_fixed_select' =>'required',
+                        'main_category_select' =>'required',
+                        'sub_category_select' =>'required',
+                        'products_select' =>'required'            
+                    ]);
+             }else if(($post_params['is_auto_generated'] != "no" && $post_params['is_auto_generated'] != "yes")){
+                $this->validate($Request,[
+                        'is_auto_generated' =>'required|in'.$not_in           
+                    ]);
+             }
+                            
                 $insertArry['is_auto_generated'] = $post_params['is_auto_generated'];
                 $insertArry['voucher_name'] = ($post_params['is_auto_generated'] == "yes")?$post_params['auto_coupan']:$post_params['manual_coupan'];
                 $insertArry['voucher_type_id'] = $post_params['is_fixed_select'];
@@ -5171,16 +5187,8 @@ return $pdf->download('Qubieepayabletransaction.pdf');
                          $subcategory = Category::getSubCategory();        
                         return view('Admin.view_discount_voucher', ['language' => $this->language, 'category_parent_id' => $category_parent_id, 'subcategory' => $subcategory,'discount_voucher'=>$discounts]);
                     }
-            }else{
-                    $voucher_type_obj      = new voucher_type;
-                    $list_voucher = $voucher_type_obj->get_voucher_type();
-                    $category_parent_id = Category::getMainCategory();
-                    $subcategory = Category::getSubCategory(); 
-                    // dd('test');
-                    // return view('Admin.add_discount_voucher', ['language' => $this->language, 'category_parent_id' => $category_parent_id, 'subcategory' => $subcategory, 'list_voucher' => $list_voucher]);
-                    // return redirect(route('permission.index'));
-                    return redirect(route('discountvoucheradd'));
-            }
+
+            return view('Admin.add_discount_voucher',['language' => $this->language, 'category_parent_id' => $category_parent_id, 'subcategory' => $subcategory,'discount_voucher'=>$discounts]);
       
         }
 
