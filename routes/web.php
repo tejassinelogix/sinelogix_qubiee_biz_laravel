@@ -290,6 +290,7 @@ Route::post('/addAddress','HomeController@add_address')->name('addAddress');
   // Route::get('/edit_vouchers', 'AdminController@edit');
   Route::get('/{discount_id}/edit_vouchers', 'AdminController@edit');  
   Route::get('/{discount_id}/del_vouchers', 'AdminController@destroy');
+  Route::resource('/admin','Admin\AdminController'); 
   
  });
 //});  

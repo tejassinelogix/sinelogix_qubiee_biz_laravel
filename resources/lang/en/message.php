@@ -411,7 +411,11 @@ return [
         'From Date'=>'From Date',
         'To Date'=>'To Date',
         'Minimum Amount'=>'Minimum Amount',
-        'Discount'=>'Discount',        
+        'Discount'=>'Discount',   
+        'Discount Voucher'=>'Discount Voucher',   
+        'All Discount'=>'All Discount',   
+        'Add Discount Voucher'=>'Add Discount Voucher',   
+             
     ]       
 
 ?>
