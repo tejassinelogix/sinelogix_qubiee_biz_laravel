@@ -150,7 +150,6 @@ service = {
 			console.log('Done Ajax')				
 		});
 	},init : function(){
-
 		ser_obj = this;
 		ser_obj.get_vouchers_list();
 		$("#main_category_select").change(ser_obj.get_subcategory_details);

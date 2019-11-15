@@ -5,6 +5,7 @@
 @endsection
 @section('main-content')
 
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <!-- All Product -->
 <div class="breadcrumbs">
     <div class="col-sm-4">
@@ -43,10 +44,11 @@
 
                    @foreach($discount_voucher as $discount)
 
-                          <form role="form" action="{{ action('AdminController@create_discount') }}" method="post">
+                          <form role="form" action="{{ url('admin_2/'.$discount->discount_id.'/update_discount/') }}" method="post">
                             {{ csrf_field() }}
                             <div class="box-body">
                                 <div class="col-lg-offset-3 col-lg-6">
+                                  <input type="text" name="discount_id" value="{{$discount->discount_id}}" style="border: none;color: #fff; ">
                                       <div class="is_auto_generated_select">
                                           <select id="is_auto_generated" name="is_auto_generated" class="form-control">
                                               <option value="0">Please Select Auto Generated</option>
@@ -74,17 +76,20 @@
                                     </div>                                
 
                                     <div class="is_fixed_select_form">
-                                        <select id="is_fixed_select" name="is_fixed_select" class="form-control">
-                                          <option value="0">Select Voucher Type</option>
-                                          <?php 
-                                          
-                                          if(isset($list_voucher) && !empty($list_voucher)){
-                                          foreach($list_voucher as $key => $voucher) { ?>
-                                            <option value="<?php echo $voucher['voucher_id'] ?>"><?php echo $voucher['voucher_name'] ?></option>
-                                            <?php } } else { ?>
-                                              <option value="0">No Voucher Found</option>
-                                          <?php } ?>                                            
-                                        </select>
+                                      <select id="is_fixed_select" name="is_fixed_select" class="form-control">
+                                              <option value="0">Select Voucher Type</option>
+                                              @if($discount->voucher_type_id == '1')
+                                               <option value="{{$discount->voucher_type_id}}" selected>One time use</option>
+                                               <option value="no" >Fixed Code</option>
+                                               @endif
+
+                                               @if($discount->voucher_type_id == '2')
+                                               <option value="{{$discount->voucher_type_id}}" selected="selected">Fixed Code</option>
+                                               <option value="yes">One time use</option>
+                                                @endif
+                                          </select>
+
+                                       
                                     </div>
                                     <br>
                                     <div class="is_validity_select_form">
@@ -106,12 +111,12 @@
                                         <br>
                                       <div class="form-group col-sm-6 voucher_date_validity">
                                         <label for="from_date">From Date </label>
-                                        <input type="date" class="form-control" id="from_date_order" name="fromdate" placeholder="">
+                                        <input type="date" class="form-control" id="from_date_order" name="fromdate" placeholder="" value="{{$discount->validity_start_date}}">
                                     </div>
 
                                     <div class="form-group col-sm-6 voucher_date_validity">
                                         <label for="to_date">To Date </label>
-                                        <input type="date" class="form-control" id="to_date_order" name="todate" placeholder="">
+                                        <input type="date" class="form-control" id="to_date_order" name="todate" placeholder="" value="{{$discount->validity_end_date}}">
                                     </div>
 
                                     <br>
@@ -121,7 +126,6 @@
                                                  @if($discount->is_minimum_order == 'yes')
                                                  <option value="{{$discount->is_minimum_order}}" selected>Yes</option>
                                                  <option value="no">No</option> 
-
                                                  @endif
 
                                                   @if($discount->is_minimum_order == 'no')
@@ -140,14 +144,21 @@
                                         <div class="is_discount_by_select_form">
                                         <select id="is_discount_by_select" name="is_discount_by_select" class="form-control">
                                           <option value="0">Select Discount Type</option>
-                                                 <option value="percentage">Percentage</option>
+                                              @if($discount->discount_type == 'percentage')
+                                                 <option value="{{$discount->discount_type}}" selected="">Percentage</option>
                                                  <option value="rupees">Rupees</option> 
+                                              @endif
+
+                                              @if($discount->discount_type == 'rupees')
+                                               <option value="{{$discount->discount_type}}" selected="">Rupees</option>
+                                                 <option value="percentage">Percentage</option> 
+                                              @endif
                                         </select>
                                       </div>
                                       <br>
                                       <div class="form-group discount_type_input_form">
                                           <label for="name">Discount</label>
-                                          <input type="text" class="form-control" id="discount_type_input" name="discount_type_input" placeholder="Enter Discount" value="{{ old('discount_type_input') }}">
+                                          <input type="text" class="form-control" id="discount_type_input" name="discount_type_input" placeholder="Enter Discount" value="{{ $discount->discount_type_amount }}">
                                         </div>
                                     <br>
                                     <div class="main_category_form">
@@ -210,7 +221,6 @@
 
 
 @section('footerSection')
-
 <script src="{{ asset('admin/plugins/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('admin/plugins/datatables/dataTables.bootstrap.min.js') }}"></script>
 <script>

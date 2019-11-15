@@ -332,4 +332,7 @@ $users = DB::select("select id,status,class_name,background_image,background_col
         return $sub_category;
     }
 
+
+
+
 }

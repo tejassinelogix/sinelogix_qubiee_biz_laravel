@@ -29,4 +29,22 @@ class Discount_Voucher extends Model
             return $result;
         }
     }
+
+    public function getDiscountVoucher_id($discount_id){
+        $discounts = DB::select("select * from discount_voucher Where discount_id = $discount_id");
+        return $discounts;
+    }
+
+     public function getDiscountVoucher_del($discount_id){
+       $discounts2 = DB::table('discount_voucher')->where('discount_id', $discount_id)->delete();
+       return $discounts2;
+    }
+
+    public function update_discounts($discount_id, $discount_data){
+      
+      $discounts1 = DB::table('discount_voucher')->where('discount_id', $discount_id)->update($discount_data);
+      return $discounts1;
+     
+    }
+
 }

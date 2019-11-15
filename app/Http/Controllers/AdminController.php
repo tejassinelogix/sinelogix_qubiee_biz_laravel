@@ -5126,16 +5126,15 @@ return $pdf->download('Qubieepayabletransaction.pdf');
                 $language = $this->language = app()->getLocale();
             }
 
-            $voucher_type_obj      = new voucher_type;
-            $list_voucher = $voucher_type_obj->get_voucher_type();
-            $category_parent_id = Category::getMainCategory();
-            $subcategory = Category::getSubCategory(); 
-            $not_in = '123';         
+            $resp['status'] = false;
+            $resp['message'] = "Discount Voucher not inserted..!";
+            $resp['data'] = null;
+            $resp['language'] = $language;          
 
             $post_params = $Request->all();
-
             if(is_null($post_params['_token']) || $post_params['_token']!=csrf_token()){
-               return view('Admin.add_discount_voucher',compact('language','category_parent_id','subcategory'),['language' => $this->language, 'category_parent_id' => $category_parent_id, 'subcategory' => $subcategory,'discount_voucher'=>$discounts]);
+                return view('Admin.add_discount_voucher', compact('language', 'users', 'categoryall', 'productlist'));
+                return redirect(route('admin.discountvoucheradd'));
             }
 
              if($post_params['is_auto_generated'] == "yes" && $post_params['is_auto_generated'] != "0"){
@@ -5187,25 +5186,65 @@ return $pdf->download('Qubieepayabletransaction.pdf');
                          $subcategory = Category::getSubCategory();        
                         return view('Admin.view_discount_voucher', ['language' => $this->language, 'category_parent_id' => $category_parent_id, 'subcategory' => $subcategory,'discount_voucher'=>$discounts]);
                     }
-
-            return view('Admin.add_discount_voucher',['language' => $this->language, 'category_parent_id' => $category_parent_id, 'subcategory' => $subcategory,'discount_voucher'=>$discounts]);
+            }else{
+                    $voucher_type_obj      = new voucher_type;
+                    $list_voucher = $voucher_type_obj->get_voucher_type();
+                    $category_parent_id = Category::getMainCategory();
+                    $subcategory = Category::getSubCategory(); 
+                    // dd('test');
+                    // return view('Admin.add_discount_voucher', ['language' => $this->language, 'category_parent_id' => $category_parent_id, 'subcategory' => $subcategory, 'list_voucher' => $list_voucher]);
+                    // return redirect(route('permission.index'));
+                    return redirect(route('discountvoucheradd'));
+            }
       
         }
 
-     public function edit($id)
+     public function edit($discounts_id)
     {
+         if (Session::has('locale')) {
+                 $language = $this->language = Session::get('locale');
+            } else {
+                $language = $this->language = app()->getLocale();
+            }
+
+        $voucher_type_obj  = new voucher_type;
+        $list_voucher = $voucher_type_obj->get_voucher_type();
+        $category_parent_id = Category::getMainCategory();          
+        $subcategory = Category::getSubCategory();  
+        //dd($subcategory);
         $obj_discounts1 = new discount_voucher();                     
-        $discounts1 = $obj_discounts1->getDiscountVoucher_id($discounts_id);       
-        return view('Admin.edit_discount_voucher', ['discount_voucher' => $discounts1]);
+        $discounts1 = $obj_discounts1->getDiscountVoucher_id($discounts_id);           
+        return view('Admin.edit_discount_voucher', ['language' => $this->language,'discount_voucher' => $discounts1,'list_voucher' => $list_voucher,'category_parent_id' => $category_parent_id, 'subcategory' => $subcategory]);
     
     }
 
-    public function destroy($discounts_id)
-    {        
+    public function update_discounts(Request $request, $discounts_id){
+        $input = $request->input();
+        //dd($input);
+         $insertArry['is_auto_generated'] = $input['is_auto_generated'];
+        $insertArry['voucher_name'] = ($input['is_auto_generated'] == "yes")?$input['auto_coupan']:$input['manual_coupan'];
+        $insertArry['voucher_type_id'] = $input['is_fixed_select'];
+        $insertArry['voucher_validity'] = $input['is_validity_select'];
+        $insertArry['validity_start_date'] = $input['fromdate'];
+        $insertArry['validity_end_date'] = $input['todate'];
+        $insertArry['is_minimum_order'] = $input['is_minamt_select'];
+        $insertArry['minimum_amount'] = $input['minimum_amount'];
+        $insertArry['discount_type'] = $input['is_discount_by_select'];
+        $insertArry['discount_type_amount'] = $input['discount_type_input'];
+        $insertArry['category_id'] = $input['main_category_select'];
+        $insertArry['brand_id'] = $input['sub_category_select'];
+        $insertArry['product_id'] = $input['products_select'];
+        $discount_id = $input['discount_id'];
         $del_discounts = new discount_voucher(); 
-        $discountsj = $del_discounts->getDiscountVoucher_id($discounts_id); 
-       
+        $discountsj = $del_discounts->update_discounts($discount_id, $insertArry); 
+        return redirect()->back()->with('message','Discount Voucher is Updated successfully');
+    }
+
+    public function destroy($discounts_id) 
+      { 
+        $del_discounts = new discount_voucher(); 
+        $discountsj2 = $del_discounts->getDiscountVoucher_del($discounts_id); 
         return redirect()->back()->with('message','Discount Voucher is Deleted successfully');
         
-    }
+       }
 }
