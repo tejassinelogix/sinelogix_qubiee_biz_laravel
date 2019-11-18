@@ -5119,7 +5119,7 @@ return $pdf->download('Qubieepayabletransaction.pdf');
 
 
     public function create_discount(Request $Request){ 
-
+            
             if (Session::has('locale')) {
                  $language = $this->language = Session::get('locale');
             } else {
@@ -5129,7 +5129,8 @@ return $pdf->download('Qubieepayabletransaction.pdf');
             $resp['status'] = false;
             $resp['message'] = "Discount Voucher not inserted..!";
             $resp['data'] = null;
-            $resp['language'] = $language;          
+            $resp['language'] = $language; 
+            $not_in = 123;         
 
             $post_params = $Request->all();
             if(is_null($post_params['_token']) || $post_params['_token']!=csrf_token()){
@@ -5185,15 +5186,11 @@ return $pdf->download('Qubieepayabletransaction.pdf');
                          $category_parent_id = Category::getMainCategory();        
                          $subcategory = Category::getSubCategory();        
                         return view('Admin.view_discount_voucher', ['language' => $this->language, 'category_parent_id' => $category_parent_id, 'subcategory' => $subcategory,'discount_voucher'=>$discounts]);
-                    }
-            }else{
+                    }else{
                     $voucher_type_obj      = new voucher_type;
                     $list_voucher = $voucher_type_obj->get_voucher_type();
                     $category_parent_id = Category::getMainCategory();
                     $subcategory = Category::getSubCategory(); 
-                    // dd('test');
-                    // return view('Admin.add_discount_voucher', ['language' => $this->language, 'category_parent_id' => $category_parent_id, 'subcategory' => $subcategory, 'list_voucher' => $list_voucher]);
-                    // return redirect(route('permission.index'));
                     return redirect(route('discountvoucheradd'));
             }
       
