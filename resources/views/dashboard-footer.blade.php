@@ -520,6 +520,7 @@ type:'get',
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4y42DfJUNmx6YzlPWFdbhwj4m-6XEIg8&libraries=places&callback=initialize" async defer></script>
 <script type="text/javascript" src="{{ URL::to('public/js/mapInput.js') }}"></script>
+<script type="text/javascript" src="{{ URL::to('public/js/coupon_code.js') }}"></script>
 <script type="text/javascript" src="{{ URL::to('public/assets/rate/star-rating.js') }}"></script>
 <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4y42DfJUNmx6YzlPWFdbhwj4m-6XEIg8&libraries=places&callback=initialize" async defer></script>-->
 
