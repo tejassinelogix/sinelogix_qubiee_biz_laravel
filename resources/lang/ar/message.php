@@ -414,6 +414,7 @@ return [
         'Discount Voucher'=>'قسيمة الخصم',   
         'All Discount'=>'جميع الخصم',   
         'Add Discount Voucher'=>'جميع الخصم', 
+        'Coupon'=>'كوبون',
     ]
 
 ?>

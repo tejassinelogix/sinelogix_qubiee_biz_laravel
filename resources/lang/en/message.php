@@ -415,6 +415,7 @@ return [
         'Discount Voucher'=>'Discount Voucher',   
         'All Discount'=>'All Discount',   
         'Add Discount Voucher'=>'Add Discount Voucher',   
+        'Coupon'=>'Coupon',
              
     ]       
 

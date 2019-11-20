@@ -49,6 +49,8 @@ Route::get('/shopping-cart','ProductController@getCart');
 
 Route::get('/front-page','HomeController@frontpage');
 
+Route::post('/fetch_coupon_details','HomeController@get_coupon_details');
+
 Route::get('guest-checkout','DashboardController@guestCheckout')->name('guest-checkout');
 Route::post('guest-checkoutRegister','DashboardController@guestCheckoutRegister')->name('guest-checkoutRegister');
 

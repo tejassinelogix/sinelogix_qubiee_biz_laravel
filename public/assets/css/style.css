@@ -2226,7 +2226,7 @@ button:target {
     float: left;
 }
 .cartBlockTotal {
-    width: 15%;
+    /*width: 15%;*/
     float: left;
 }
 .cartBlockRow {
@@ -2263,7 +2263,7 @@ button:target {
 }
 .cartBlockRow .cartBlockRate,
 .cartBlockRow .cartBlockQty,
-.cartBlockRow .cartBlockTotal {
+.cartBlockRow .cartBlockTotal,.cartBlockCoupon {
     padding: 15px 0;
 }
 .cartBlockRow .cartBlockTotal > .totalCartRemoveBtn {
@@ -4586,4 +4586,17 @@ body.backgroundimage {
         right: 0;
         border-radius: 0;
     }
+}
+
+.cartBlockCoupon {
+    width: 15%;
+    float: left;
+}
+
+.success_green{
+    color: green;
+}
+
+.error_red{
+    color: red;   
 }
