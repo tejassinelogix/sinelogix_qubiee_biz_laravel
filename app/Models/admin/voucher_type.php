@@ -9,15 +9,17 @@ use DB;
 class voucher_type extends Model
 {
 
-	protected $table = 'voucher_type'; 
+  protected $table = 'voucher_type'; 
     public $timestamps = true;
     protected $guarded = [];
 
     public function get_voucher_type()
-    {	
-      try {      	
-    	  return voucher_type::select('*')->get()->toArray();
-      } catch (\Exception $ex) {	return null; } 
+    { 
+      try {       
+        return voucher_type::select('*')->get()->toArray();
+      } catch (\Exception $ex) {  return null; } 
+
+
     }
 
       public static function getvoucher_type_id($voucher_id) {

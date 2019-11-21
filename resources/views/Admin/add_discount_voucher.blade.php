@@ -118,7 +118,8 @@
                                         </select>
                                       </div>
                                       <br>
-                                      <div class="form-group discount_type_input_form">
+
+                                      <div class="form-group <?php echo (isset($old_value['is_discount_by_select']) && ($old_value['is_discount_by_select'] == 'percentage' || $old_value['is_discount_by_select'] == 'rupees'))?'':'discount_type_input_form'; ?>">
                                           <label for="name">{{ __('message.Discount') }}</label>
                                           <input type="text" class="form-control" id="discount_type_input" name="discount_type_input" placeholder="Enter Discount" value="{{ old('discount_type_input') }}">
                                         </div>

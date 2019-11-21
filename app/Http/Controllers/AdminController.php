@@ -5140,7 +5140,7 @@ return $pdf->download('Qubieepayabletransaction.pdf');
              if($post_params['is_auto_generated'] == "yes" && $post_params['is_auto_generated'] != "0"){
                     $this->validate($Request,[
                         'is_auto_generated' =>'required',
-                        'auto_coupan' =>'required',
+                        'auto_coupan' =>'required|unique:discount_voucher,voucher_name',
                         'is_fixed_select' =>'required',
                         'main_category_select' =>'required',
                         'sub_category_select' =>'required',
@@ -5151,7 +5151,7 @@ return $pdf->download('Qubieepayabletransaction.pdf');
 
                     $this->validate($Request,[
                         'is_auto_generated' =>'required',
-                        'manual_coupan' =>'required',
+                        'manual_coupan' =>'required|unique:discount_voucher,voucher_name',
                         'is_fixed_select' =>'required',
                         'main_category_select' =>'required',
                         'sub_category_select' =>'required',

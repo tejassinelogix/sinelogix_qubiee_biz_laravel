@@ -454,7 +454,6 @@ public function getCart(){
             return view('shopping-cart');
         }
         $oldCart = Session::get('cart');
-        $cart = new Cart($oldCart);
 //        echo '<pre>';
 //        print_r($cart);
 //        die;
@@ -1289,5 +1288,40 @@ public function getAjaxDecreaseByOne(Request $Request){
  return json_encode(array("success" => 1,'totalPrice' => $cart->totalPrice,'dilverycharge' => $cart->dilverycharge,'giftboxtotal' => $cart->giftboxtotal,'giftcart'=> $cart->giftcart,'data'=>$cart));
       //  return back(); 
 }
+
+
+public function cart_update(Request $request){
+     
+
+      if(Session::has('locale') ){
+            $this->language = Session::get('locale');
+        }
+        else{
+            $this->language = app()->getLocale();
+        } 
+
+         $getHome= Category::getHome();
+        
+        $getSubCategorycate = Category::getSubCategorycate();
+        $getSubCategoryWordpress = Category::getSubCategoryWordpress();
+        $getSubCategoryWebsite = Category::getSubCategoryWebsite();
+        $getSubCategorywoocomer = Category::getSubCategorywoocomer();
+        $getSubCategorypresta = Category::getSubCategorypresta();
+        $getSubCategorymagento = Category::getSubCategorymagento();
+        $getSubCategoryjoomala = Category::getSubCategoryjoomala();
+        $getSubBlogs = Category::getSubBlogs();
+        $homedata = json_decode(json_encode($getHome), true);
+        $getPagesdetails= Category::getPagesdetails();
+        $getMainCategory = Category::getMainCategory();
+        $getSubCategory = Category::getSubCategory();
+
+        if(!Session::has('cart')){
+            return view('shopping-cart');
+        }
+        $oldCart = Session::get('cart');
+        // dd($request->all());
+        $cart = new Cart($oldCart);
+
+    }
 
 }

@@ -418,6 +418,7 @@ return [
         'Voucher Name'=>'اسم القسيمة',
         'Voucher Type'=>'نوع القسيمة',
         'Voucher Validity'=>'صلاحية القسيمة'
-    ]
+
+    ];
 
 ?>

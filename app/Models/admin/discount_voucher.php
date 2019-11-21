@@ -15,9 +15,9 @@ class Discount_Voucher extends Model
     protected $guarded = [];
 
     public function get_discount_voucher($inputs)
-    {	
+    {   
 
-    	$result = [];
+        $result = [];
         try{            
             // DB::enableQueryLog();
             $data = Discount_Voucher::create($inputs);           

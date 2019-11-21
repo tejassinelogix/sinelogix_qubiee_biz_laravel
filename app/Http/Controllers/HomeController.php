@@ -15,6 +15,8 @@ use PDF;
 use App\order_product;
 use App\Order;
 use App\User;
+use App\Models\admin\discount_voucher;
+use App\Models\admin\voucher_type;
 
 class HomeController extends Controller {
 
@@ -904,6 +906,137 @@ $getlayoutinfo = Category::getlayoutdetails();
 
 
         return view('my-notification');
+    }
+
+
+     public function get_coupon_details(Request $request)
+    {         
+        $post_params = $request->all();        
+        $resp['status'] = false;
+        $resp['message']['success'] = null;
+        $resp['message']['error'] = 'Coupan Code empty';
+        $resp['is_onetime'] = array('status' => false, 'message' => '');
+        $resp['is_minimum'] = array('status' => false, 'message' => '');
+        $resp['is_validity'] = array('status' => false, 'message' => '');
+        $resp['is_specific'] = array('status' => false, 'message' => '');
+        $resp['data'] = null;
+
+        if(isset($post_params['data'], $post_params['data']['voucher_name']) && 
+        !empty($post_params['data']['voucher_name'])){
+
+            $voucher_type_obj  = new discount_voucher;
+            $list_voucher = $voucher_type_obj->get_voucher_by_name($post_params['data']['voucher_name']);
+            if(!empty($list_voucher)){                  
+                  $voucher_type_status = $this->check_voucher_type($list_voucher[0]);
+                  $voucher_validity_status = $this->check_voucher_validity($list_voucher[0]);
+                  $voucher_minimum_status = $this->check_minimum_validity($list_voucher[0], $post_params['data']['qty_select']);                  
+                  $voucher_specific_status = $this->check_cat_prod_coupan($post_params['data']);
+
+                      if($voucher_type_status['status'] == false){                        
+                          $resp['is_onetime'] = array('status' => true,'message' => $voucher_type_status['message']);
+                      }
+                      if($voucher_validity_status['status'] == false){             
+                          $resp['is_validity'] = array('status' => true,'message' => $voucher_validity_status['message']);                          
+                      }if($voucher_minimum_status['status'] == false){
+                          $resp['is_minimum'] = array('status' => true,'message' => $voucher_minimum_status['message']); 
+                      }if($voucher_specific_status['status'] == false){
+                          $resp['is_specific'] = array('status' => true,'message' => $voucher_specific_status['message']); 
+                      }
+
+                      // final validation
+                      if($voucher_specific_status['status'] == false || $voucher_type_status['status'] == false || $voucher_validity_status['status'] == false || $voucher_minimum_status['status'] == false){ //
+                        $resp['status'] = false;
+                        $resp['message']['error'] = 'Coupan validation does not matched';
+                      }else{
+                        $resp['status'] = true;
+                        $resp['message']['success'] = 'Coupan code applied successfully';
+                        $resp['data'] = $list_voucher;
+                      }
+            }else{
+              $resp['message']['error'] = 'Coupon Code not found..!';
+            }           
+        }        
+        die(json_encode($resp));    
+    }
+
+    private function check_voucher_type($voucher_data){
+         
+         $voucher_check = false;
+         $voucher_type_obj  = new voucher_type;
+         $list_voucher = $voucher_type_obj->get_voucher_by_id($voucher_data['voucher_type_id']); 
+
+         $resp['status'] = false;
+         $resp['message'] = 'Voucher not found';
+
+         if(is_array($list_voucher) && !empty($list_voucher)){              
+              if(strpos($list_voucher[0]['voucher_alias'], 'fixed') !== false){
+                  $voucher_check = false;
+                  $resp['status'] = true;
+                  $resp['message'] = 'Voucher type can use..!';
+              } else{ // one time voucher found
+                  $voucher_check = true;
+              }
+         }  
+
+         if($voucher_check){ // check voucher used validation          
+              if($voucher_data['is_voucher_used'] == 'yes'){ // error voucher is used
+                  $resp['message'] = 'Voucher can be used only one time..!';
+              }else{
+                $resp['status'] = true;
+                $resp['message'] = 'Voucher type can use..!';
+              }
+         }  
+         return $resp;
+    }
+
+    private function check_voucher_validity($voucher_data){
+        $resp['status'] = false;
+        $resp['message'] = 'Voucher validation error';
+        
+      if(isset($voucher_data['voucher_validity']) && $voucher_data['voucher_validity']){
+          
+          $paymentDate = date('Y-m-d');
+          $paymentDate=date('Y-m-d', strtotime($paymentDate));          
+          $contractDateBegin = date('Y-m-d', strtotime($voucher_data['validity_start_date']));
+          $contractDateEnd = date('Y-m-d', strtotime($voucher_data['validity_end_date']));
+
+          if (($paymentDate >= $contractDateBegin) && ($paymentDate <= $contractDateEnd)){
+              $resp['status'] = true;
+              $resp['message'] = 'Voucher validation can be used';
+          }else{
+              $resp['message'] = 'Voucher has expired';
+          }
+      }else{
+          $resp['status'] = true;
+          $resp['message'] = 'Voucher validation can be used';
+      }
+      return $resp;
+    }
+
+    private function check_minimum_validity($voucher_data = "", $qty_select = ""){
+        $resp['status'] = false;
+        $resp['message'] = 'Voucher minimum error';  
+
+        if(isset($voucher_data['is_minimum_order']) && $voucher_data['is_minimum_order'] == "yes"){
+          // dd($voucher_data['minimum_amount'],$qty_select);
+          if ($qty_select >= $voucher_data['minimum_amount']){
+              $resp['status'] = true;
+              $resp['message'] = 'Voucher quantity can be used';
+          }else{
+              $resp['message'] = 'This Coupan code requires minimum quantity of '.$voucher_data['minimum_amount'];
+          }
+      }else{
+          $resp['status'] = true;
+          $resp['message'] = 'Voucher minimum can be used';
+      }
+      return $resp;
+    }
+
+    private function check_cat_prod_coupan($voucher_data = ""){
+        $discount_check = false;
+        $discount_voucher_obj  = new discount_voucher;
+        $list_discount = $discount_voucher_obj->get_discount_apply_coupan($voucher_data);
+        return $list_discount;
     }
 
 }

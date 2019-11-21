@@ -27,7 +27,7 @@
                             @endif
       <h3 class="heading-center"><span><i class="fa fa-shopping-cart"></i> {{ __('message.My Cart') }}  | <small> {{ __('message.Item') }}</small></span></h3>
       <div class="cartBlockRowHead">
-        <div class="cartBlockDesc">
+        <div class="cartBlockDesc" style="width: 30%;">
           <h3>{{ __('message.Item Description') }}</h3>
         </div>
         <div class="cartBlockRate">
@@ -35,6 +35,9 @@
         </div>
         <div class="cartBlockQty">
           <h3>{{ __('message.Quantity') }}</h3>
+        </div>
+        <div class="cartBlockCoupon">
+          <h3>{{ __('message.Coupon') }}</h3>
         </div>
            <div class="cartBlockWrap">
                <h3>Put in a Gift Box <span data-toggle="tooltip" data-placement="left" title="You can add up to maximum 3 items in the box">(?)</span></h3>
@@ -67,8 +70,8 @@
 <!--       <form action="" method="post">
             {{ csrf_field() }}-->
        <!--cartBlockRow--> 
-      <div class="cartBlockRow">
-        <div class="cartBlockDesc">
+      <div class="cartBlockRow" id="cartBlockRow_{{ $product['item']['id'] }}">
+        <div class="cartBlockDesc" style="width: 30%;">
           <div class="cartBlockImg">
             <img src="public/images/{{ $product['item']['product_image'] }}" alt="">
 
@@ -122,6 +125,19 @@
             <?php } ?>
             
         </div>
+
+        <!-- TDS : Coupan Starts -->
+        <div class="cartBlockCoupon" >
+          <p><input type="text" name="coupon_code" id="coupon_code_<?php echo $product['item']['id']; ?>" class="coupon_code" value="" style="width: 60%;"><button type="button" class="btn btn-success btn-sm coupon_apply" product_id="<?php echo $product['item']['id']; ?>" id="coupon_apply_<?php echo $product['item']['id']; ?>"><i class="fa fa-check"></i></button><button type="button" class="btn btn-danger btn-sm coupon_cancel" id="coupon_cancel_<?php echo $product['item']['id']; ?>" product_id="<?php echo $product['item']['id']; ?>"><i class="fa fa-times"></i></button></p>
+          <span class="success_green" id="success_green_<?php echo $product['item']['id']; ?>">Coupan code applied successfully..!</span>
+          <span class="error_red one_time_error" id="one_time_error_<?php echo $product['item']['id']; ?>"></span>
+          <span class="error_red is_validity_error" id="is_validity_error_<?php echo $product['item']['id']; ?>"></span>
+          <span class="error_red is_minimum_error" id="is_minimum_error_<?php echo $product['item']['id']; ?>"></span>
+          <span class="error_red is_specific_error" id="is_specific_error_<?php echo $product['item']['id']; ?>"></span>
+          <span class="additional_product_details_<?php echo $product['item']['id']; ?>" main_category="<?php echo $product['item']['main_category']; ?>" sub_category="<?php echo $product['item']['sub_category']; ?>"
+            product_id="<?php echo $product['item']['id']; ?>">
+        </div>
+        <!-- TDS : Coupan Ends -->
           <div class="cartBlockWrap" id="cartBlockWrap<?php echo $product['item']['id']; ?>" >
                <?php if($product['item']['gift_wrapping']==1){
                     if($product['giftwraping']==1){ 

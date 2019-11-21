@@ -414,13 +414,15 @@ return [
         'Discount'=>'Discount',   
         'Discount Voucher'=>'Discount Voucher',   
         'All Discount'=>'All Discount',   
+
         'Add Discount Voucher'=>'Add Discount Voucher' ,
         'All Discount Voucher'=>'All Discount Voucher',
         'Voucher Name'=>'Voucher Name' ,
         'Voucher Type'=>'Voucher Type',
         'Voucher Validity'=>'Voucher Validity' 
 
+
              
-    ]       
+    ];      
 
 ?>
