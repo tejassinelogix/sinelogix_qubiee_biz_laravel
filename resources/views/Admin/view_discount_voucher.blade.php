@@ -58,8 +58,8 @@
                                       @foreach($discount_voucher as $discount)
                                       <tr>
                                       <td>{{ $loop->index + 1 }}</td>
-                                      <td>{{ $discount->voucher_name }}</td>
-                                      <td>{{ $discount->voucher_name }}</td>
+                                      <td>{{ $discount->main_voucher_name }}</td>
+                                      <td>{{ $discount->sub_voucher_name }}</td>
                                       <td>{{ $discount->validity_end_date}}</td>
                                       <td><a href="{{ url('admin_2/'.$discount->discount_id.'/edit_vouchers/') }}"><span class="glyphicon glyphicon-edit"></span><i class="fa fa-pencil"></i></a></td>
                                     <td>                                     

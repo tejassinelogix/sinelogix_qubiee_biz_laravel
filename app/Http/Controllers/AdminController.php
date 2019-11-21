@@ -5038,8 +5038,8 @@ return $pdf->download('Qubieepayabletransaction.pdf');
             $language = $this->language = app()->getLocale();
         }
 
-        $discounts = DB::select("select * from discount_voucher");
-
+        $obj_discount = new discount_voucher();                     
+        $discounts = $obj_discount->getDiscount_with_vouchers();
         $category_parent_id = Category::getMainCategory();        
         $subcategory = Category::getSubCategory();        
         return view('Admin.view_discount_voucher', ['language' => $this->language, 'category_parent_id' => $category_parent_id, 'subcategory' => $subcategory,'discount_voucher'=>$discounts]);
@@ -5119,7 +5119,6 @@ return $pdf->download('Qubieepayabletransaction.pdf');
 
 
     public function create_discount(Request $Request){ 
-            
             if (Session::has('locale')) {
                  $language = $this->language = Session::get('locale');
             } else {
@@ -5186,7 +5185,8 @@ return $pdf->download('Qubieepayabletransaction.pdf');
                          $category_parent_id = Category::getMainCategory();        
                          $subcategory = Category::getSubCategory();        
                         return view('Admin.view_discount_voucher', ['language' => $this->language, 'category_parent_id' => $category_parent_id, 'subcategory' => $subcategory,'discount_voucher'=>$discounts]);
-                    }else{
+                    
+            }else{
                     $voucher_type_obj      = new voucher_type;
                     $list_voucher = $voucher_type_obj->get_voucher_type();
                     $category_parent_id = Category::getMainCategory();

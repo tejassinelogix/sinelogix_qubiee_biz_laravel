@@ -413,7 +413,11 @@ return [
         'Discount'=>'خصم',   
         'Discount Voucher'=>'قسيمة الخصم',   
         'All Discount'=>'جميع الخصم',   
-        'Add Discount Voucher'=>'جميع الخصم', 
+        'Add Discount Voucher'=>'جميع الخصم',
+        'All Discount Voucher'=>'جميع قسيمة الخصم',
+        'Voucher Name'=>'اسم القسيمة',
+        'Voucher Type'=>'نوع القسيمة',
+        'Voucher Validity'=>'صلاحية القسيمة'
     ]
 
 ?>

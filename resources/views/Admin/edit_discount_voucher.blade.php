@@ -64,17 +64,21 @@
                                           </select>
                                       </div>
                                       <br>
-                                    <?php $auto_code = sprintf("QUB%u%s",rand(10,99),chr(rand(65,90))); ?>
+                                    <?php $auto_code = sprintf("QUB%u%s",rand(10,99),chr(rand(65,90)));
+
+                                     ?>
+                                    @if($discount->is_auto_generated == 'yes')
                                     <div class="form-group auto_coupan_form">
                                         <label for="name">Coupan Code</label>
-                                        <input type="text" class="form-control" id="auto_coupan" name="auto_coupan" value="<?php echo $auto_code; ?>" readonly>
+                                        <input type="text" class="form-control"  name="auto_coupan" value="<?php echo $auto_code; ?>" readonly>
                                     </div>
-
+                                    @endif
+                                    
                                     <div class="form-group manual_coupan_form">
                                         <label for="name">Coupan Code</label>
-                                        <input type="text" class="form-control" id="manual_coupan" name="manual_coupan" placeholder="Enter Coupan Code" value="{{ old('manual_coupan') }}" maxlength="6" minlength="6">
+                                        <input type="text" class="form-control"  name="manual_coupan" placeholder="Enter Coupan Code" value="{{ old('manual_coupan') }}" maxlength="6" minlength="6">
                                     </div>                                
-
+                                   
                                     <div class="is_fixed_select_form">
                                       <select id="is_fixed_select" name="is_fixed_select" class="form-control">
                                               <option value="0">Select Voucher Type</option>
@@ -109,6 +113,7 @@
                                             </select>
                                         </div>
                                         <br>
+                                        @if($discount->voucher_validity == 'yes')
                                       <div class="form-group col-sm-6 voucher_date_validity">
                                         <label for="from_date">From Date </label>
                                         <input type="date" class="form-control" id="from_date_order" name="fromdate" placeholder="" value="{{$discount->validity_start_date}}">
@@ -118,7 +123,7 @@
                                         <label for="to_date">To Date </label>
                                         <input type="date" class="form-control" id="to_date_order" name="todate" placeholder="" value="{{$discount->validity_end_date}}">
                                     </div>
-
+                                     @endif
                                     <br>
                                     <div class="is_minamt_select_form">
                                             <select id="is_minamt_select" name="is_minamt_select" class="form-control">
@@ -135,10 +140,12 @@
                                             </select>
                                         </div>                                        
                                          <br>
+                                         @if($discount->is_minimum_order == 'yes')
                                         <div class="form-group minimum_amount_form">
                                           <label for="name">Minimum Amount</label>
                                           <input type="text" class="form-control" id="minimum_amount" name="minimum_amount" placeholder="Enter Minimum Amount" value="{{$discount->minimum_amount }}">
                                         </div> 
+                                        @endif
                                         <br>
 
                                         <div class="is_discount_by_select_form">
@@ -156,10 +163,18 @@
                                         </select>
                                       </div>
                                       <br>
+                                       @if($discount->discount_type == 'percentage')
                                       <div class="form-group discount_type_input_form">
                                           <label for="name">Discount</label>
                                           <input type="text" class="form-control" id="discount_type_input" name="discount_type_input" placeholder="Enter Discount" value="{{ $discount->discount_type_amount }}">
                                         </div>
+                                        @endif
+                                         @if($discount->discount_type == 'rupees')
+                                      <div class="form-group discount_type_input_form">
+                                          <label for="name">Discount</label>
+                                          <input type="text" class="form-control" id="discount_type_input" name="discount_type_input" placeholder="Enter Discount" value="{{ $discount->discount_type_amount }}">
+                                        </div>
+                                        @endif
                                     <br>
                                     <div class="main_category_form">
                                         <select id="main_category_select" name="main_category_select" class="form-control">
@@ -169,9 +184,11 @@
                                           foreach($category_parent_id as $key => $main_cat) { 
                                             $cat_name = json_decode($main_cat->category_name, true);
                                             $cat_name_display = (isset($language) && $language == 'en')?$cat_name['en']:$cat_name['ar'];
-                                            ?>
-
-                                            <option value="<?php echo $main_cat->category_id; ?>"><?php echo $cat_name_display; ?></option>
+                                            //dd($cat_name);
+                                            ?>                                            
+                                            <option value="<?php echo $main_cat->category_id; ?>" ><?php echo $cat_name_display; ?></option>
+                                           
+                                         
                                             <?php } } else { ?>
                                               <option value="0">No Category Found</option>
                                             <?php } ?>
@@ -224,6 +241,10 @@
 <script src="{{ asset('admin/plugins/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('admin/plugins/datatables/dataTables.bootstrap.min.js') }}"></script>
 <script>
+
+
+
+
 $(function () {
 $("#example1").DataTable();
 });

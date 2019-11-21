@@ -47,4 +47,14 @@ class Discount_Voucher extends Model
      
     }
 
+      public function getDiscount_with_vouchers()
+    {
+    $discounts = DB::table('discount_voucher')
+    ->selectRaw('discount_voucher.discount_id as discount_id,discount_voucher.voucher_type_id as main_voucher_type_id,discount_voucher.voucher_name as main_voucher_name,discount_voucher.validity_end_date as validity_end_date,voucher_type.voucher_id as sub_voucher_id,voucher_type.voucher_name as sub_voucher_name')
+    ->join('voucher_type', 'voucher_type.voucher_id', '=', 'discount_voucher.voucher_type_id')    
+    ->get();
+
+    return $discounts;
+}
+
 }

@@ -30,9 +30,10 @@ service = {
 				console.log('Before Ajax')
 			},
 			success: function(resp_data,status,xhr){
-
+			
 				if(resp_data.status){
-						var obj = jQuery.parseJSON(resp_data.data);						
+						var obj = jQuery.parseJSON(resp_data.data);
+						
 						if (obj) {
                         $("#sub_category_select").empty();
                         $("#sub_category_select").append('<option option value="0">Please Select Sub Category</option>');
@@ -79,13 +80,14 @@ service = {
 			},
 			success: function(resp_data,status,xhr){
 				if(resp_data.status){
-						var obj = jQuery.parseJSON(resp_data.data);						
+					var obj = jQuery.parseJSON(resp_data.data);	
+
 						if (obj) {
 
                         $("#products_select").empty();
                         $("#products_select").append('<option option value="0">Please Select Products</option>');
-                        $.each(obj, function (key, value) {
-                            $("#products_select").append('<option value="' + value.id + '">' + value.product_name + '</option>');
+                        $.each(obj, function (key, value) {                        	
+                            $("#products_select").append('<option value="' + value.id + '" >' + value.product_name + '</option>');
                         });
                     } else {
                         $("#products_select").empty();
@@ -161,15 +163,22 @@ service = {
 service.init();
 
 // Custom Events
-$('.auto_coupan_form').hide();
+// $('.auto_coupan_form').hide();
 $('.manual_coupan_form').hide();
-$('.voucher_date_validity').hide();
-$('.minimum_amount_form').hide();
-$('.discount_type_input_form').hide();
+//$('.voucher_date_validity').hide();
+//$('.minimum_amount_form').hide();
+//$('.discount_type_input_form').hide();
+
+
+// $("#is_autoptiono_generated").on("select",function() {
+//   alert( "Handler for called." );
+// });
+
+
 $(document).on("change","#is_auto_generated, #is_validity_select, #is_minamt_select, #is_discount_by_select",function(event){
   	
   	if($(this).attr('id') == 'is_auto_generated'){
-		if($(this).val() == 'yes'){
+		if($(this).val() == 'yes'){			
 			$('.auto_coupan_form').show();
 			$('.manual_coupan_form').hide();
 		}else{
@@ -180,7 +189,7 @@ $(document).on("change","#is_auto_generated, #is_validity_select, #is_minamt_sel
 
   	if($(this).attr('id') == 'is_validity_select'){
 		if($(this).val() == 'yes'){
-			$('.voucher_date_validity').show();
+		   $('.voucher_date_validity').show();
 		}else{
 			$('.voucher_date_validity').hide();
 		}
@@ -199,3 +208,6 @@ $(document).on("change","#is_auto_generated, #is_validity_select, #is_minamt_sel
   	}
 
 });
+
+
+
