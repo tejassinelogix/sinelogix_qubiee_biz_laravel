@@ -57,4 +57,60 @@ class Discount_Voucher extends Model
     return $discounts;
 }
 
+ public function get_voucher_by_name($voucher_name)
+    {
+        try {
+            // DB::enableQueryLog();
+            $data = Discount_Voucher::select('*')
+                ->where('voucher_name', 'LIKE', $voucher_name)->get();
+          // dd($data,'query',$voucher_name);
+           // dd(DB::getQueryLog(),$voucher_name,'test',$data);
+            if (!empty($data)) {
+                $data = $data->toArray();
+            }
+            return $data;
+        } catch (\Exception $ex) {return null;}
+    }
+
+
+      /*
+    * Code   : TDS 
+    * Params : date , policy no, dealer codelead status, dlrcode
+    * Return : Policy details result as per params  
+    */
+    public function get_discount_apply_coupan($search_data = array())
+    { 
+        try{
+            if(empty($search_data))
+                throw new Exception("Search Params Empty", 401);
+            $data = self::select('*');             
+            if(array_key_exists('voucher_name', $search_data) 
+                && !empty($search_data['voucher_name']))
+                $data->where("discount_voucher.voucher_name", $search_data['voucher_name']);
+            if(array_key_exists('category_id', $search_data) 
+                && !empty($search_data['category_id']))
+                $data->where("discount_voucher.category_id", $search_data['category_id']);
+            if(array_key_exists('brand_id', $search_data) 
+                && !empty($search_data['brand_id']))
+                $data->where("discount_voucher.brand_id",$search_data['brand_id']);
+            if(array_key_exists('product_id', $search_data) 
+                && !empty($search_data['product_id']))
+                $data->where("discount_voucher.product_id",$search_data['product_id']);
+            $data = $data->get();
+            if(count($data) > 0){ // success
+                $res['status'] = true;
+                $res['message'] = "Discount get successfully..!";
+                $res['data'] = $data->toArray();   
+            }else{ // error                
+                $res['status'] = false;
+                $res['message'] = "Coupan code not valid for this product!";
+            }                          
+            return $res;
+        } catch (Exception $ex) {                
+               $res['status'] = false;
+               $res['message'] = "Discount not empty!";
+              return $res;
+        }
+    }
+
 }

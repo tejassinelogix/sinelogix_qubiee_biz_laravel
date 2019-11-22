@@ -74,17 +74,12 @@ service = {
 		var url_app = '/admin_2/get_products_details';
 		REQ.data['category_id'] = $("#main_category_select").val();
 		if(is_init_load){
-			console.log('if calls')
 			REQ.data['sub_category_id'] = $("#sub_category_hidden").val();
 		} 
-		else{
-			console.log('else calls')
+		else{			
 			REQ.data['sub_category_id'] = $("#sub_category_select").val();
 		}
 		is_init_load = false;
-
-		console.log('REQ')
-		console.log(REQ)
 
 		// Setup X-CSRF-Token
 		$.ajaxSetup({

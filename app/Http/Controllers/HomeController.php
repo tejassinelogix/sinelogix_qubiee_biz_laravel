@@ -926,10 +926,10 @@ $getlayoutinfo = Category::getlayoutdetails();
 
             $voucher_type_obj  = new discount_voucher;
             $list_voucher = $voucher_type_obj->get_voucher_by_name($post_params['data']['voucher_name']);
-            if(!empty($list_voucher)){                  
-                  $voucher_type_status = $this->check_voucher_type($list_voucher[0]);
+            if(!empty($list_voucher)){                 
+                  $voucher_type_status = $this->check_voucher_type($list_voucher[0]);                  
                   $voucher_validity_status = $this->check_voucher_validity($list_voucher[0]);
-                  $voucher_minimum_status = $this->check_minimum_validity($list_voucher[0], $post_params['data']['qty_select']);                  
+                  $voucher_minimum_status = $this->check_minimum_validity($list_voucher[0], $post_params['data']['qty_select']);                                    
                   $voucher_specific_status = $this->check_cat_prod_coupan($post_params['data']);
 
                       if($voucher_type_status['status'] == false){                        
@@ -964,7 +964,6 @@ $getlayoutinfo = Category::getlayoutdetails();
          $voucher_check = false;
          $voucher_type_obj  = new voucher_type;
          $list_voucher = $voucher_type_obj->get_voucher_by_id($voucher_data['voucher_type_id']); 
-
          $resp['status'] = false;
          $resp['message'] = 'Voucher not found';
 
