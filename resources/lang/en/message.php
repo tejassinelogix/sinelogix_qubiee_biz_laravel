@@ -420,6 +420,9 @@ return [
         'Voucher Type'=>'Voucher Type',
         'Voucher Validity'=>'Voucher Validity',   
         'Coupon'=>'Coupon',
+        'Edit Discount'=>'Edit Discount',
+        'Edit Discount Voucher'=>'Edit Discount Voucher',
+        'Please Select Auto Generated'=>'Please Select Auto Generated',
              
     ];      
 

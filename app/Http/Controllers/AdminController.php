@@ -5181,7 +5181,8 @@ return $pdf->download('Qubieepayabletransaction.pdf');
                     $add_discount = $obj_discount->get_discount_voucher($insertArry);
 
                     if(!empty($add_discount)){                        
-                         $discounts = DB::select("select * from discount_voucher");
+                         $obj_discount = new discount_voucher();                     
+                         $discounts = $obj_discount->getDiscount_with_vouchers();
                          $category_parent_id = Category::getMainCategory();        
                          $subcategory = Category::getSubCategory();        
                         return view('Admin.view_discount_voucher', ['language' => $this->language, 'category_parent_id' => $category_parent_id, 'subcategory' => $subcategory,'discount_voucher'=>$discounts]);

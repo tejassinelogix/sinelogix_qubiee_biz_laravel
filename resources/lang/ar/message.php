@@ -419,6 +419,9 @@ return [
         'Voucher Type'=>'نوع القسيمة',
         'Voucher Validity'=>'صلاحية القسيمة',
         'Coupon'=>'كوبون',
+        'Edit Discount'=>'تحرير الخصم',
+        'Edit Discount Voucher'=>'تحرير قسيمة الخصم',
+        'Please Select Auto Generated'=>'يرجى اختيار السيارات التي تم إنشاؤها',
     ]
 
 ?>
