@@ -186,13 +186,14 @@
                                             $cat_name_display = (isset($language) && $language == 'en')?$cat_name['en']:$cat_name['ar'];
                                             //dd($cat_name);
                                             ?>                                            
-                                            <option value="<?php echo $main_cat->category_id; ?>" ><?php echo $cat_name_display; ?></option>
+                                            <option value="<?php echo $main_cat->category_id; ?>" <?php echo (isset($discount->category_id,$main_cat->category_id) && $discount->category_id == $main_cat->category_id)?'selected':''; ?>><?php echo $cat_name_display; ?></option>
                                            
                                          
                                             <?php } } else { ?>
                                               <option value="0">{{ __('message.No Category Found') }}</option>
                                             <?php } ?>
                                         </select>
+                                        <input type="hidden" name="main_category_hidden" id="main_category_hidden" value="{{ $discount->category_id }}">
                                     </div>
                                     <br>
 
@@ -200,6 +201,7 @@
                                         <select id="sub_category_select" name="sub_category_select" class="form-control">
                                           <option value="0">{{ __('message.Select Sub-Category') }}</option>
                                         </select>
+                                        <input type="hidden" name="sub_category_hidden" id="sub_category_hidden" value="{{ $discount->brand_id }}">
                                     </div>  
 
                                     <br>
@@ -207,6 +209,7 @@
                                         <select id="products_select" name="products_select" class="form-control">
                                           <option value="0">{{ __('message.Select Products') }}</option>
                                         </select>
+                                        <input type="hidden" name="products_hidden" id="products_hidden" value="{{ $discount->product_id }}">
                                     </div>
 
                                     <br>
