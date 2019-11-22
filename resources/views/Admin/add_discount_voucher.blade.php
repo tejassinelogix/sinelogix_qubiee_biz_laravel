@@ -41,8 +41,12 @@
                    @include('Admin.includes.messages')
                             <!-- /.box-header -->
                             <!-- form start -->
-                            <form role="form" action="admin_2/add_discount" method="post">
+                            <form role="form" action="{{ action('AdminController@create_discount') }}" method="post">
+			    <!-- form role="form" action="admin_2/add_discount" method="post" -->
                             {{ csrf_field() }}
+                            <?php $old_value = old(); 
+                           // dd($old_value);
+                            ?>
                             <div class="box-body">
                                 <div class="col-lg-offset-3 col-lg-6">
                                       <div class="is_auto_generated_select">
@@ -66,6 +70,7 @@
 
                                     <div class="is_fixed_select_form">
                                         <select id="is_fixed_select" name="is_fixed_select" class="form-control">
+                                          <option value="">{{ __('message.Select Voucher Type') }}</option>
                                           <?php 
                                           
                                           if(isset($list_voucher) && !empty($list_voucher)){

@@ -417,8 +417,8 @@ return [
         'All Discount Voucher'=>'جميع قسيمة الخصم',
         'Voucher Name'=>'اسم القسيمة',
         'Voucher Type'=>'نوع القسيمة',
-        'Voucher Validity'=>'صلاحية القسيمة'
-
-    ];
+        'Voucher Validity'=>'صلاحية القسيمة',
+        'Coupon'=>'كوبون',
+    ]
 
 ?>

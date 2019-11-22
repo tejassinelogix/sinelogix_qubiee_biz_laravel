@@ -30,10 +30,9 @@ service = {
 				console.log('Before Ajax')
 			},
 			success: function(resp_data,status,xhr){
-			
+
 				if(resp_data.status){
-						var obj = jQuery.parseJSON(resp_data.data);
-						
+						var obj = jQuery.parseJSON(resp_data.data);						
 						if (obj) {
                         $("#sub_category_select").empty();
                         $("#sub_category_select").append('<option option value="0">Please Select Sub Category</option>');
@@ -80,14 +79,13 @@ service = {
 			},
 			success: function(resp_data,status,xhr){
 				if(resp_data.status){
-					var obj = jQuery.parseJSON(resp_data.data);	
-
+						var obj = jQuery.parseJSON(resp_data.data);						
 						if (obj) {
 
                         $("#products_select").empty();
                         $("#products_select").append('<option option value="0">Please Select Products</option>');
-                        $.each(obj, function (key, value) {                        	
-                            $("#products_select").append('<option value="' + value.id + '" >' + value.product_name + '</option>');
+                        $.each(obj, function (key, value) {
+                            $("#products_select").append('<option value="' + value.id + '">' + value.product_name + '</option>');
                         });
                     } else {
                         $("#products_select").empty();
@@ -208,6 +206,3 @@ $(document).on("change","#is_auto_generated, #is_validity_select, #is_minamt_sel
   	}
 
 });
-
-
-

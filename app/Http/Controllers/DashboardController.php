@@ -262,7 +262,7 @@ class DashboardController extends Controller {
 //         $meta_keyword = $homedata[0]['meta_keyword'];
         echo View::make('dashboard-header', ['backgroundStatus'=>$backgroundStatus,'background_color' => $background_color,'layoutbackground_image' => $layoutbackground_image,'layoutclass_name' => $layoutclass_name,'getSubCategory' => $getSubCategory, 'getMainCategory' => $getMainCategory, 'getSubCategorycate' => $getSubCategorycate, 'getSubBlogs' => $getSubBlogs, 'homedata' => $homedata, 'language' => $this->language])->render();
         //echo View::make('dashboard-header')->render();
-        echo View('welcome', ['getBannersectionProduct'=>$getBannersectionProduct,'getAddsectionProduct'=>$getAddsectionProduct,'getBannerslider' => $getBannerslider, 'getNewproduct' => $getNewproduct, 'getFetureproduct' => $getFetureproduct, 'getProductoffers' => $getProductoffers, 'language' => $this->language]);
+        echo View::make('welcome', ['getBannersectionProduct'=>$getBannersectionProduct,'getAddsectionProduct'=>$getAddsectionProduct,'getBannerslider' => $getBannerslider, 'getNewproduct' => $getNewproduct, 'getFetureproduct' => $getFetureproduct, 'getProductoffers' => $getProductoffers, 'language' => $this->language])->render();
 
         echo View::make('dashboard-footer', ['getPagesdetails' => $getPagesdetails, 'getMainCategory' => $getMainCategory, 'language' => $this->language])->render();
     }

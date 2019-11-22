@@ -454,9 +454,9 @@ public function getCart(){
             return view('shopping-cart');
         }
         $oldCart = Session::get('cart');
-//        echo '<pre>';
-//        print_r($cart);
-//        die;
+
+        $cart = new Cart($oldCart);
+
         $total = $cart->totalPrice;
         $totalQty = $cart->totalQty;
         $giftcart = $cart->giftcart;
@@ -1293,34 +1293,56 @@ public function getAjaxDecreaseByOne(Request $Request){
 public function cart_update(Request $request){
      
 
-      if(Session::has('locale') ){
-            $this->language = Session::get('locale');
-        }
-        else{
-            $this->language = app()->getLocale();
-        } 
+ //      if(Session::has('locale') ){
+ //            $this->language = Session::get('locale');
+ //        }
+ //        else{
+ //            $this->language = app()->getLocale();
+ //        } 
 
-         $getHome= Category::getHome();
+ //         $getHome= Category::getHome();
         
-        $getSubCategorycate = Category::getSubCategorycate();
-        $getSubCategoryWordpress = Category::getSubCategoryWordpress();
-        $getSubCategoryWebsite = Category::getSubCategoryWebsite();
-        $getSubCategorywoocomer = Category::getSubCategorywoocomer();
-        $getSubCategorypresta = Category::getSubCategorypresta();
-        $getSubCategorymagento = Category::getSubCategorymagento();
-        $getSubCategoryjoomala = Category::getSubCategoryjoomala();
-        $getSubBlogs = Category::getSubBlogs();
-        $homedata = json_decode(json_encode($getHome), true);
-        $getPagesdetails= Category::getPagesdetails();
-        $getMainCategory = Category::getMainCategory();
-        $getSubCategory = Category::getSubCategory();
+ //        $getSubCategorycate = Category::getSubCategorycate();
+ //        $getSubCategoryWordpress = Category::getSubCategoryWordpress();
+ //        $getSubCategoryWebsite = Category::getSubCategoryWebsite();
+ //        $getSubCategorywoocomer = Category::getSubCategorywoocomer();
+ //        $getSubCategorypresta = Category::getSubCategorypresta();
+ //        $getSubCategorymagento = Category::getSubCategorymagento();
+ //        $getSubCategoryjoomala = Category::getSubCategoryjoomala();
+ //        $getSubBlogs = Category::getSubBlogs();
+ //        $homedata = json_decode(json_encode($getHome), true);
+ //        $getPagesdetails= Category::getPagesdetails();
+ //        $getMainCategory = Category::getMainCategory();
+ //        $getSubCategory = Category::getSubCategory();
 
-        if(!Session::has('cart')){
-            return view('shopping-cart');
-        }
-        $oldCart = Session::get('cart');
-        // dd($request->all());
-        $cart = new Cart($oldCart);
+ //        $oldCart = Session::get('cart');
+ //       //  foreach ($oldCart as $old) {
+ //       //   if ($old['item'] == $item) {
+ //       //      $old['product_price'];
+ //       //  }
+ //       //  }   
+
+ //       // Session::set('oldCart', $oldCart);
+
+ //        foreach ($oldCart->items as $key=>$products) {
+ //            # code...
+ //            echo "<pre>";
+
+ //            $temp = $products['item'];
+ //            $fields = $temp->getAttributes();
+ //            //print_r($products['item']);
+ //            $fields['product_price']=139;
+ //            $temp->setRawAttributes($fields);
+ //            // $fields = $temp->getAttributes();
+ //           // $products['item']->setRawAttributes()->update($fields);
+ //            //print_r($fields);
+ //            $products['item'] = $temp;
+ //            $oldCart->items[$key] = $products['item'];
+ //        }
+ // print_r($oldCart);
+ //        exit;
+        
+ //        $cart = new Cart($oldCart);
 
     }
 
