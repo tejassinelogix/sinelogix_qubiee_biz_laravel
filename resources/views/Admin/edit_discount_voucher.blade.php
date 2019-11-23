@@ -152,7 +152,7 @@
                                         <select id="is_discount_by_select" name="is_discount_by_select" class="form-control">
                                           <option value="0">{{ __('message.Select Discount Type') }}</option>
                                               @if($discount->discount_type == 'percentage')
-                                                 <option value="{{$discount->discount_type}}" selected="">Percentage') }}</option>
+                                                 <option value="{{$discount->discount_type}}" selected="">{{ __('message.Percentage') }}</option>
                                                  <option value="rupees">{{ __('message.Rupees') }}</option> 
                                               @endif
 

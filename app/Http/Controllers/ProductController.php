@@ -25,6 +25,7 @@ use App\verify_email_subscription;
 Use Alert;
 use PDF;
 use Intervention;
+use App\Models\admin\discount_voucher;
 use Intervention\Image\ImageManagerStatic as Image;
 
 class ProductController extends Controller
@@ -454,9 +455,19 @@ public function getCart(){
             return view('shopping-cart');
         }
         $oldCart = Session::get('cart');
-        // echo "<pre>";
-        // print_r($oldCart);
-        // exit;
+      
+        // update onetime coupon code
+        if(is_array($oldCart->coupon_name) && sizeof($oldCart->coupon_name) > 0){            
+                $obj_discount = new discount_voucher();
+                foreach ($oldCart->coupon_name as $c_key => $c_value) {                    
+                    $get_vouchers = $obj_discount->get_voucher_by_name($c_value);                  
+                    if(isset($get_vouchers) && !empty($get_vouchers)){                    
+                        if($get_vouchers[0]['is_voucher_used'] == "no")
+                            $obj_discount->update_coupon_onetime($get_vouchers[0]['voucher_name'],['is_voucher_used' => 'yes']);                     
+                    }                       
+                 }
+        }
+
         $cart = new Cart($oldCart);
 
         $total = $cart->totalPrice;
@@ -494,6 +505,9 @@ public function getCart(){
 
         echo View::make('dashboard-header', ['backgroundStatus'=>$backgroundStatus,'background_color' => $background_color,'layoutbackground_image' => $layoutbackground_image,'layoutclass_name' => $layoutclass_name,'language' => $this->language,'getSubCategoryWordpress' => $getSubCategoryWordpress, 'getSubCategory' => $getSubCategory, 'getMainCategory' => $getMainCategory, 'getSubCategoryWebsite' => $getSubCategoryWebsite, 'getSubCategorywoocomer' => $getSubCategorywoocomer, 'getSubCategorypresta' => $getSubCategorypresta, 'getSubCategorymagento' => $getSubCategorymagento, 'getSubCategoryjoomala' => $getSubCategoryjoomala, 'getSubCategorycate' => $getSubCategorycate, 'getSubBlogs' => $getSubBlogs, 'homedata' => $homedata])->render();
 //        echo view('paypalPay',['language' => $this->language,'products' => $cart->items,'total' => $total])->render();
+        // echo "<pre>  test";
+        // print_r($cart->items);
+        // exit;
         echo view('checkout',['language' => $this->language,'products' => $cart->items,'shippingmark' => $shippingmark,'giftcart' => $giftcart,'totalQty' => $totalQty,'total' => $total, 'address' => $getUserAddress, 'profile' => $getProfileInfo])->render();
         echo View::make('dashboard-footer', ['language' => $this->language,'getMainCategory' => $getMainCategory,'getPagesdetails' => $getPagesdetails])->render();
     }
@@ -1316,7 +1330,10 @@ public function cart_update(Request $request){
         $getSubCategory = Category::getSubCategory();
 
         $oldCart = Session::get('cart');
-        
+        // echo "<pre> test";
+       // print_r($oldCart->items);
+        // dd($post_params);
+       // exit;
         foreach ($oldCart->items as $key=>$products) {
             
             $oldCart->totalPrice = $post_params['data']['You_Pay'];
@@ -1330,8 +1347,10 @@ public function cart_update(Request $request){
                  // $products['item']->setRawAttributes()->update($fields);
                  // print_r($fields);
                  /* comment ends */
-                 $products['item'] = $temp;                 
-                 $oldCart->items[$key] = $products['item'];                 
+                 $products['item'] = $temp;      
+                 // echo "<pre> tet";
+                 // print_r($products);
+                 $oldCart->items[$key] = $products;  
             }            
         }
         $oldCart->coupon_name = $post_params['data']['coupon_name'];      
@@ -1346,7 +1365,9 @@ public function cart_update(Request $request){
         }else{
             $oldCart->coupon_name = $post_params['data']['coupon_name'];
         }
-        
+        // echo "<pre> after";
+        // print_r($oldCart);
+        // exit;
         $new_cart = Session::set('cart', $oldCart);
         $test = Session::get('cart');
         // dd($oldCart, $new_cart,$test, session()->all());

@@ -113,4 +113,7 @@ class Discount_Voucher extends Model
         }
     }
 
+    public function update_coupon_onetime($coupon_name, $updateArray) {
+            return self::where('voucher_name', $coupon_name)->update($updateArray);
+    }
 }

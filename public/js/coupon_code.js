@@ -172,29 +172,47 @@ service = {
 									total_discount_new = $.trim(total_amt) - resp_data.data[0].discount_type_amount;
 									total_amt_new = org_total_price - resp_data.data[0].discount_type_amount;
 									total_youpay_new = youpay_amt - resp_data.data[0].discount_type_amount;
+									product_price_new = total_discount_new;
+									 // console.log('org_total_price')
+									 //  console.log(org_total_price)	
+									 //  console.log('total_amt')
+									 //  console.log(total_amt)
+									 //  console.log('total_discount_new')
+									 //  console.log(total_discount_new)
 								}else if(resp_data.data[0].discount_type == "percentage"){								
 									  total_discount_new = total_amt * resp_data.data[0].discount_type_amount / 100;								
 									  total_amt_new = org_total_price - total_discount_new;	
-									  total_youpay_new = youpay_amt - total_discount_new;			
+									  total_youpay_new = youpay_amt - total_discount_new;
+									  product_price_new = total_amt - total_discount_new;
+									  // console.log('org_total_price')
+									  // console.log(org_total_price)	
+									  // console.log('total_amt')
+									  // console.log(total_amt)
+									  // console.log('total_discount_new')
+									  // console.log(total_discount_new)										  		
 								}
+								// return 0;
 								// set new discount value into view
 								$("#loadtotalpay").html("<strong>$ "+total_youpay_new+"</strong>");
 								$("#loadtotalprice").html("$ "+total_amt_new);
-								$("#loaditemtotal"+__this_product).text("$ "+total_discount_new);
-
+								$("#loaditemtotal"+__this_product).text("$ "+product_price_new);
 								REQ  =  ser_obj.product_new_data;
 								REQ.data['Total'] = total_amt_new;
 								if($.trim(delivery_amt) == "Free"){
 									REQ.data['Delivery_Charges'] = "Free";	
 								}else{
-									REQ.data['Delivery_Charges'] = delivery_amt;	
+									REQ.data['Delivery_Charges'] = $.trim(delivery_amt);	
 								}
 								var COUPON_NAME = [];
 								REQ.data['Gift_Box'] = gift_amt;								
 								REQ.data['You_Pay'] = total_youpay_new;
 								REQ.data['Product_id'] = __this_product;
-								REQ.data['Product_Price'] = total_discount_new;
+								REQ.data['Product_Price'] = product_price_new;
 								REQ.data['coupon_name'] = [$('#coupon_code_'+__this_product).val()];
+
+								console.log('prod new price')
+								console.log(REQ)
+
 								// set ajax updated value ends
 								
 									$('#success_green_'+__this_product).show();
@@ -254,34 +272,34 @@ service = {
 		$(".coupon_cancel").click(function(){
 				location.reload(true);
 
-  				__this = $(this).attr('id');
-  				__this_product = $(this).attr('product_id');
-  			// 	console.log('__this_product')
-					// console.log(__this_product)
-					// return 0;
-				if($("#coupon_code_"+__this_product).val() != ""){  
-					$('#coupon_code_'+__this_product).removeAttr('disabled','disabled');
-					$('#coupon_apply_'+__this_product).removeAttr('disabled','disabled');
-					$('#coupon_code_'+__this_product).val('');
-					$('#success_green_'+__this_product).hide();
-					$('#one_time_error_'+__this_product).hide();
-					$('#is_validity_error_'+__this_product).hide();
-					$('#is_minimum_error_'+__this_product).hide();
-					$('#is_specific_error_'+__this_product).hide();
-					$('#one_time_error_'+__this_product).text('');
-					$('#is_validity_error_'+__this_product).text('');
-					$('#is_minimum_error_'+__this_product).text('');
-					$('#is_specific_error_'+__this_product).text('');
+  		// 		__this = $(this).attr('id');
+  		// 		__this_product = $(this).attr('product_id');
+  		// 	// 	console.log('__this_product')
+				// 	// console.log(__this_product)
+				// 	// return 0;
+				// if($("#coupon_code_"+__this_product).val() != ""){  
+				// 	$('#coupon_code_'+__this_product).removeAttr('disabled','disabled');
+				// 	$('#coupon_apply_'+__this_product).removeAttr('disabled','disabled');
+				// 	$('#coupon_code_'+__this_product).val('');
+				// 	$('#success_green_'+__this_product).hide();
+				// 	$('#one_time_error_'+__this_product).hide();
+				// 	$('#is_validity_error_'+__this_product).hide();
+				// 	$('#is_minimum_error_'+__this_product).hide();
+				// 	$('#is_specific_error_'+__this_product).hide();
+				// 	$('#one_time_error_'+__this_product).text('');
+				// 	$('#is_validity_error_'+__this_product).text('');
+				// 	$('#is_minimum_error_'+__this_product).text('');
+				// 	$('#is_specific_error_'+__this_product).text('');
 					
-					if(is_coupon_set){ // revert with old value						
-						REQ_OLD  =  ser_obj.product_old_data;
-						console.log('old value')
-						console.log(REQ_OLD)
-						$("#loaditemtotal"+__this_product).html("$ "+REQ_OLD.data.Product_Price);
-						$("#loadtotalpay").html("<strong>$ "+REQ_OLD.data.You_Pay+"</strong>");
-						$("#loadtotalprice").html("$ "+REQ_OLD.data.Total);
-					}
-				}	
+				// 	if(is_coupon_set){ // revert with old value						
+				// 		REQ_OLD  =  ser_obj.product_old_data;
+				// 		console.log('old value')
+				// 		console.log(REQ_OLD)
+				// 		$("#loaditemtotal"+__this_product).html("$ "+REQ_OLD.data.Product_Price);
+				// 		$("#loadtotalpay").html("<strong>$ "+REQ_OLD.data.You_Pay+"</strong>");
+				// 		$("#loadtotalprice").html("$ "+REQ_OLD.data.Total);
+				// 	}
+				// }	
   					
 
   		});
