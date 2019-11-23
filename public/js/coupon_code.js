@@ -12,8 +12,8 @@ $('.is_validity_error').hide();
 $('.is_minimum_error').hide();
 service = {
 	req_data : {"data": {}},
-	product_old_data : {"data": {"Total": 0,"Gift_Box": 0,"Delivery_Charges":"Free","You_Pay":0,"Product_id":0,"Product_Price":0}},
-	product_new_data : {"data": {"Total": 0,"Gift_Box": 0,"Delivery_Charges":"Free","You_Pay":0,"Product_id":0,"Product_Price":0}},		
+	product_old_data : {"data": {"Total": 0,"Gift_Box": 0,"Delivery_Charges":"Free","You_Pay":0,"Product_id":0,"Product_Price":0,"coupon_name":{}}},		
+	product_new_data : {"data": {"Total": 0,"Gift_Box": 0,"Delivery_Charges":"Free","You_Pay":0,"Product_id":0,"Product_Price":0,"coupon_name":{}}},		
 	render_db: {'filter_dlr_code':''},
 	update_session_details: function(){
 		REQ  =  ser_obj.product_new_data;
@@ -35,7 +35,7 @@ service = {
 			},
 			success: function(resp_data,status,xhr){
 
-				console.log('resp_data')
+				console.log('resp_data update debuged')
 				console.log(resp_data)
 				return 0;
 
@@ -189,18 +189,14 @@ service = {
 								}else{
 									REQ.data['Delivery_Charges'] = delivery_amt;	
 								}
+								var COUPON_NAME = [];
 								REQ.data['Gift_Box'] = gift_amt;								
 								REQ.data['You_Pay'] = total_youpay_new;
 								REQ.data['Product_id'] = __this_product;
-								REQ.data['Product_Price'] = total_discount_new;								
-
-								console.log('REQ')
-								console.log(REQ)
-
+								REQ.data['Product_Price'] = total_discount_new;
+								REQ.data['coupon_name'] = [$('#coupon_code_'+__this_product).val()];
 								// set ajax updated value ends
-
-									console.log('__this_product')
-									console.log(__this_product)
+								
 									$('#success_green_'+__this_product).show();
 									$('#one_time_error_'+__this_product).hide();
 									$('#is_validity_error_'+__this_product).hide();

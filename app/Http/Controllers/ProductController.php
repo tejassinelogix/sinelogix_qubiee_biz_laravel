@@ -454,7 +454,9 @@ public function getCart(){
             return view('shopping-cart');
         }
         $oldCart = Session::get('cart');
-
+        // echo "<pre>";
+        // print_r($oldCart);
+        // exit;
         $cart = new Cart($oldCart);
 
         $total = $cart->totalPrice;
@@ -1292,58 +1294,64 @@ public function getAjaxDecreaseByOne(Request $Request){
 
 public function cart_update(Request $request){
      
+        $post_params = $request->all();
+        if(Session::has('locale') ){
+            $this->language = Session::get('locale');
+        } else{
+            $this->language = app()->getLocale();
+        } 
 
- //      if(Session::has('locale') ){
- //            $this->language = Session::get('locale');
- //        }
- //        else{
- //            $this->language = app()->getLocale();
- //        } 
+        $getHome= Category::getHome();        
+        $getSubCategorycate = Category::getSubCategorycate();
+        $getSubCategoryWordpress = Category::getSubCategoryWordpress();
+        $getSubCategoryWebsite = Category::getSubCategoryWebsite();
+        $getSubCategorywoocomer = Category::getSubCategorywoocomer();
+        $getSubCategorypresta = Category::getSubCategorypresta();
+        $getSubCategorymagento = Category::getSubCategorymagento();
+        $getSubCategoryjoomala = Category::getSubCategoryjoomala();
+        $getSubBlogs = Category::getSubBlogs();
+        $homedata = json_decode(json_encode($getHome), true);
+        $getPagesdetails= Category::getPagesdetails();
+        $getMainCategory = Category::getMainCategory();
+        $getSubCategory = Category::getSubCategory();
 
- //         $getHome= Category::getHome();
+        $oldCart = Session::get('cart');
         
- //        $getSubCategorycate = Category::getSubCategorycate();
- //        $getSubCategoryWordpress = Category::getSubCategoryWordpress();
- //        $getSubCategoryWebsite = Category::getSubCategoryWebsite();
- //        $getSubCategorywoocomer = Category::getSubCategorywoocomer();
- //        $getSubCategorypresta = Category::getSubCategorypresta();
- //        $getSubCategorymagento = Category::getSubCategorymagento();
- //        $getSubCategoryjoomala = Category::getSubCategoryjoomala();
- //        $getSubBlogs = Category::getSubBlogs();
- //        $homedata = json_decode(json_encode($getHome), true);
- //        $getPagesdetails= Category::getPagesdetails();
- //        $getMainCategory = Category::getMainCategory();
- //        $getSubCategory = Category::getSubCategory();
-
- //        $oldCart = Session::get('cart');
- //       //  foreach ($oldCart as $old) {
- //       //   if ($old['item'] == $item) {
- //       //      $old['product_price'];
- //       //  }
- //       //  }   
-
- //       // Session::set('oldCart', $oldCart);
-
- //        foreach ($oldCart->items as $key=>$products) {
- //            # code...
- //            echo "<pre>";
-
- //            $temp = $products['item'];
- //            $fields = $temp->getAttributes();
- //            //print_r($products['item']);
- //            $fields['product_price']=139;
- //            $temp->setRawAttributes($fields);
- //            // $fields = $temp->getAttributes();
- //           // $products['item']->setRawAttributes()->update($fields);
- //            //print_r($fields);
- //            $products['item'] = $temp;
- //            $oldCart->items[$key] = $products['item'];
- //        }
- // print_r($oldCart);
- //        exit;
+        foreach ($oldCart->items as $key=>$products) {
+            
+            $oldCart->totalPrice = $post_params['data']['You_Pay'];
+            if($key == $post_params['data']['Product_id']){
+                $temp = $products['item'];              
+                 $fields = $temp->getAttributes();                
+                 $fields['product_price'] = $post_params['data']['Product_Price'];
+                 $temp->setRawAttributes($fields);
+                 /* comment starts */
+                 // $fields = $temp->getAttributes();
+                 // $products['item']->setRawAttributes()->update($fields);
+                 // print_r($fields);
+                 /* comment ends */
+                 $products['item'] = $temp;                 
+                 $oldCart->items[$key] = $products['item'];                 
+            }            
+        }
+        $oldCart->coupon_name = $post_params['data']['coupon_name'];      
+        if(!empty($oldCart->coupon_name)){  
+            foreach ($oldCart->coupon_name as $key => $value) {  
+                if(in_array($value,$post_params['data']['coupon_name'])){
+                   // echo "found";
+                }else{                  
+                    array_push($oldCart->coupon_name, $post_params['data']['coupon_name']);
+                }
+            }
+        }else{
+            $oldCart->coupon_name = $post_params['data']['coupon_name'];
+        }
         
- //        $cart = new Cart($oldCart);
-
+        $new_cart = Session::set('cart', $oldCart);
+        $test = Session::get('cart');
+        // dd($oldCart, $new_cart,$test, session()->all());
+        $cart = new Cart($test);                
+        die(json_encode(array("status" => true)));
     }
 
 }

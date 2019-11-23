@@ -5218,23 +5218,24 @@ return $pdf->download('Qubieepayabletransaction.pdf');
 
     public function update_discounts(Request $request, $discounts_id){
         $input = $request->input();
-        //dd($input);
-         $insertArry['is_auto_generated'] = $input['is_auto_generated'];
-        $insertArry['voucher_name'] = ($input['is_auto_generated'] == "yes")?$input['auto_coupan']:$input['manual_coupan'];
-        $insertArry['voucher_type_id'] = $input['is_fixed_select'];
-        $insertArry['voucher_validity'] = $input['is_validity_select'];
-        $insertArry['validity_start_date'] = $input['fromdate'];
-        $insertArry['validity_end_date'] = $input['todate'];
-        $insertArry['is_minimum_order'] = $input['is_minamt_select'];
-        $insertArry['minimum_amount'] = $input['minimum_amount'];
-        $insertArry['discount_type'] = $input['is_discount_by_select'];
-        $insertArry['discount_type_amount'] = $input['discount_type_input'];
-        $insertArry['category_id'] = $input['main_category_select'];
-        $insertArry['brand_id'] = $input['sub_category_select'];
-        $insertArry['product_id'] = $input['products_select'];
-        $discount_id = $input['discount_id'];
-        $del_discounts = new discount_voucher(); 
-        $discountsj = $del_discounts->update_discounts($discount_id, $insertArry); 
+
+         $updateArry['is_auto_generated'] = $input['is_auto_generated'];
+        $updateArry['voucher_name'] = ($input['is_auto_generated'] == "yes")?$input['auto_coupan']:$input['manual_coupan'];
+        $updateArry['voucher_type_id'] = (isset($input['is_fixed_select']) && !empty($input['is_fixed_select']))?$input['is_fixed_select']:null;
+        $updateArry['voucher_validity'] = (isset($input['is_validity_select']) && !empty($input['is_validity_select']))?$input['is_validity_select']:'no';
+        $updateArry['validity_start_date'] = (isset($input['fromdate']) && !empty($input['fromdate']))?$input['fromdate']:null;
+        $updateArry['validity_end_date'] = (isset($input['todate']) && !empty($input['todate']))?$input['todate']:null;
+        $updateArry['is_minimum_order'] = (isset($input['is_minamt_select']) && !empty($input['is_minamt_select']))?$input['is_minamt_select']:'no';
+        $updateArry['minimum_amount'] = (isset($input['minimum_amount']) && !empty($input['minimum_amount']))?$input['minimum_amount']:null;
+        $updateArry['discount_type'] = (isset($input['is_discount_by_select']) && !empty($input['is_discount_by_select']))?$input['is_discount_by_select']:null;
+        $updateArry['discount_type_amount'] = (isset($input['discount_type_input']) && !empty($input['discount_type_input']))?$input['discount_type_input']:null;
+        $updateArry['category_id'] = (isset($input['main_category_select']) && !empty($input['main_category_select']))?$input['main_category_select']:null;
+        $updateArry['brand_id'] = (isset($input['sub_category_select']) && !empty($input['sub_category_select']))?$input['sub_category_select']:null;
+        $updateArry['product_id'] = (isset($input['products_select']) && !empty($input['products_select']))?$input['products_select']:null;
+        $discount_id = (isset($input['discount_id']) && !empty($input['discount_id']))?$input['discount_id']:null;
+        
+        $obj_discounts = new discount_voucher(); 
+        $discountsj = $obj_discounts->update_discounts($discount_id, $updateArry); 
         return redirect()->back()->with('message','Discount Voucher is Updated successfully');
     }
 

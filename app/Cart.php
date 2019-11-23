@@ -11,6 +11,7 @@ class Cart
     public $giftcart = 0;
     public $giftboxtotal = 0;
     public $dilverycharge= 0;
+    public $coupon_name = array();
     
     
     // for sender details for send as gift
@@ -20,8 +21,20 @@ class Cart
     public $sendergiftevent = 0;
     public $senderaddress = 0;
     public $shippingmark = 0;
+
+    // protected $daynamic_attr = [];
     
     
+    // public function __set($field,$value){
+    //     $this->daynamic_attr[$field] = $value;
+    // }
+
+    // public function __get($field){
+    //     if(array_key_exists($field,$this->daynamic_attr))
+    //         return $this->daynamic_attr[$field];
+    //     else
+    //         return null;
+    // }
 
     public function __construct($oldCart){
     	if($oldCart){
