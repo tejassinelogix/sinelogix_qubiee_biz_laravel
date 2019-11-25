@@ -402,7 +402,7 @@ return [
         'Select Minimum Amount'=>'حدد الحد الأدنى للمبلغ',
         'Select Discount Type'=>'اختر نوع الخصم',
         'Percentage'=>'النسبة المئوية',
-        'Rupees'=>'روبية',
+        'Dollar'=>'روبية',
         'Select Category'=>'اختر الفئة',
         'Select Sub-Category'=>'اختر الفئة الفرعية',
         'Select Products'=>'اختر المنتجات',

@@ -120,12 +120,12 @@
                                         <select id="is_discount_by_select" name="is_discount_by_select" class="form-control">
                                           <option value="">{{ __('message.Select Discount Type') }}</option>
                                                  <option value="percentage" {{ old('is_discount_by_select') == 'percentage' ? 'selected' : '' }}>{{ __('message.Percentage') }}</option>
-                                                 <option value="rupees" {{ old('is_discount_by_select') == 'rupees' ? 'selected' : '' }}>{{ __('message.Rupees') }}</option> 
+                                                 <option value="dollar" {{ old('is_discount_by_select') == 'dollar' ? 'selected' : '' }}>{{ __('message.Dollar') }}</option> 
                                         </select>
                                       </div>
                                       <br>
 
-                                      <div class="form-group <?php echo (isset($old_value['is_discount_by_select']) && ($old_value['is_discount_by_select'] == 'percentage' || $old_value['is_discount_by_select'] == 'rupees'))?'':'discount_type_input_form'; ?>">
+                                      <div class="form-group <?php echo (isset($old_value['is_discount_by_select']) && ($old_value['is_discount_by_select'] == 'percentage' || $old_value['is_discount_by_select'] == 'dollar'))?'':'discount_type_input_form'; ?>">
                                           <label for="name">{{ __('message.Discount') }}</label>
                                           <input type="text" class="form-control" id="discount_type_input" name="discount_type_input" placeholder="Enter Discount" value="{{ old('discount_type_input') }}">
                                         </div>

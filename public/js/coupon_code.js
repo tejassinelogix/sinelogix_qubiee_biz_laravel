@@ -98,10 +98,13 @@ service = {
   				__this_product = $(this).attr('product_id');
 
   				if($("#coupon_code_"+__this_product).val() != ""){  					
-  					
+  						// TDS : changes minimum amount validation
+  						var price_min_amt_string = $("#loaditemtotal"+__this_product).text();
+						var price_min_amt = price_min_amt_string.replace('$ ','');
+
 						REQ  =  ser_obj.req_data;
 						REQ.data['voucher_name'] = $("#coupon_code_"+__this_product).val();
-						REQ.data['qty_select'] = $("#qtyinc"+__this_product).val();
+						REQ.data['min_amt_select'] = price_min_amt;
 						REQ.data['category_id'] = $(".additional_product_details_"+__this_product).attr('main_category');
 						REQ.data['brand_id'] = $(".additional_product_details_"+__this_product).attr('sub_category');
 						REQ.data['product_id'] = $(".additional_product_details_"+__this_product).attr('product_id');
@@ -168,7 +171,7 @@ service = {
 								var total_amt_new = 0;
 								var total_youpay_new = 0;
 								var total_discount_new = 0;
-								if(resp_data.data[0].discount_type == "rupees"){
+								if(resp_data.data[0].discount_type == "dollar"){
 									total_discount_new = $.trim(total_amt) - resp_data.data[0].discount_type_amount;
 									total_amt_new = org_total_price - resp_data.data[0].discount_type_amount;
 									total_youpay_new = youpay_amt - resp_data.data[0].discount_type_amount;
@@ -193,9 +196,9 @@ service = {
 								}
 								// return 0;
 								// set new discount value into view
-								$("#loadtotalpay").html("<strong>$ "+total_youpay_new+"</strong>");
-								$("#loadtotalprice").html("$ "+total_amt_new);
-								$("#loaditemtotal"+__this_product).text("$ "+product_price_new);
+								$("#loadtotalpay").html("<strong>$ "+total_youpay_new.toFixed(2)+"</strong>");
+								$("#loadtotalprice").html("$ "+total_amt_new.toFixed(2));
+								$("#loaditemtotal"+__this_product).text("$ "+product_price_new.toFixed(2));
 								REQ  =  ser_obj.product_new_data;
 								REQ.data['Total'] = total_amt_new;
 								if($.trim(delivery_amt) == "Free"){

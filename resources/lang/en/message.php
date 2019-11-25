@@ -403,7 +403,7 @@ return [
         'Select Minimum Amount'=>'Select Minimum Amount',
         'Select Discount Type'=>'Select Discount Type',
         'Percentage'=>'Percentage',
-        'Rupees'=>'Rupees',
+        'Dollar'=>'Dollar',
         'Select Category'=>'Select Category',
         'Select Sub-Category'=>'Select Sub-Category',
         'Select Products'=>'Select Products',

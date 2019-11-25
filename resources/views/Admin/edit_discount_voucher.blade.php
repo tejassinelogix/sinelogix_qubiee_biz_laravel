@@ -155,12 +155,12 @@
                                           <option value="0">{{ __('message.Select Discount Type') }}</option>
                                               @if($discount->discount_type == 'percentage')
                                                  <option value="{{$discount->discount_type}}" selected="">{{ __('message.Percentage') }}</option>
-                                                 <option value="rupees">{{ __('message.Rupees') }}</option>
+                                                 <option value="dollar">{{ __('message.Dollar') }}</option>
                                               @endif
 
-                                              @if($discount->discount_type == 'rupees')
+                                              @if($discount->discount_type == 'dollar')
                                                <option value="percentage">{{ __('message.Percentage') }}</option>
-                                               <option value="{{$discount->discount_type}}" selected="">{{ __('message.Rupees') }}</option>
+                                               <option value="{{$discount->discount_type}}" selected="">{{ __('message.Dollar') }}</option>
                                               @endif
                                         </select>
                                       </div>

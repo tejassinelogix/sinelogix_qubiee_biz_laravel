@@ -929,7 +929,7 @@ $getlayoutinfo = Category::getlayoutdetails();
             if(!empty($list_voucher)){                 
                   $voucher_type_status = $this->check_voucher_type($list_voucher[0]);                  
                   $voucher_validity_status = $this->check_voucher_validity($list_voucher[0]);
-                  $voucher_minimum_status = $this->check_minimum_validity($list_voucher[0], $post_params['data']['qty_select']);                                    
+                  $voucher_minimum_status = $this->check_minimum_validity($list_voucher[0], $post_params['data']['min_amt_select']);                                    
                   $voucher_specific_status = $this->check_cat_prod_coupan($post_params['data']);
 
                       if($voucher_type_status['status'] == false){                        
@@ -1012,17 +1012,17 @@ $getlayoutinfo = Category::getlayoutdetails();
       return $resp;
     }
 
-    private function check_minimum_validity($voucher_data = "", $qty_select = ""){
+    private function check_minimum_validity($voucher_data = "", $min_amt_select = ""){
         $resp['status'] = false;
         $resp['message'] = 'Voucher minimum error';  
 
         if(isset($voucher_data['is_minimum_order']) && $voucher_data['is_minimum_order'] == "yes"){
-          // dd($voucher_data['minimum_amount'],$qty_select);
-          if ($qty_select >= $voucher_data['minimum_amount']){
+          // dd($voucher_data['minimum_amount'],$min_amt_select);
+          if ($min_amt_select >= $voucher_data['minimum_amount']){
               $resp['status'] = true;
-              $resp['message'] = 'Voucher quantity can be used';
+              $resp['message'] = 'Voucher amount can be used';
           }else{
-              $resp['message'] = 'This Coupan code requires minimum quantity of '.$voucher_data['minimum_amount'];
+              $resp['message'] = 'This Coupan code requires minimum amount of '.$voucher_data['minimum_amount'];
           }
       }else{
           $resp['status'] = true;
