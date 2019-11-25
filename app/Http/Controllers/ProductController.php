@@ -508,7 +508,7 @@ public function getCart(){
         // echo "<pre>  test";
         // print_r($cart->items);
         // exit;
-        echo view('checkout',['language' => $this->language,'products' => $cart->items,'shippingmark' => $shippingmark,'giftcart' => $giftcart,'totalQty' => $totalQty,'total' => $total, 'address' => $getUserAddress, 'profile' => $getProfileInfo])->render();
+        echo View::make('checkout',['language' => $this->language,'products' => $cart->items,'shippingmark' => $shippingmark,'giftcart' => $giftcart,'giftboxtotal' => $cart->giftboxtotal,'dilverycharge' => $cart->dilverycharge,'totalQty' => $totalQty,'total' => $total, 'address' => $getUserAddress, 'profile' => $getProfileInfo])->render();
         echo View::make('dashboard-footer', ['language' => $this->language,'getMainCategory' => $getMainCategory,'getPagesdetails' => $getPagesdetails])->render();
     }
 
