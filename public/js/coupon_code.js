@@ -1,6 +1,6 @@
 /* 
- Page Name: add discount
- Module Name: admin
+ Page Name: coupon code apply
+ Module Name: customer
 */
 var url = document.URL;
 var str = url.substr(url.lastIndexOf('/') + 1) + '$';
@@ -35,9 +35,9 @@ service = {
 			},
 			success: function(resp_data,status,xhr){
 
-				console.log('resp_data update debuged')
-				console.log(resp_data)
-				return 0;
+				// console.log('resp_data update debuged')
+				// console.log(resp_data)
+				// return 0;
 
 				if(resp_data.status){
 						var obj = jQuery.parseJSON(resp_data.data);						

@@ -5178,8 +5178,7 @@ return $pdf->download('Qubieepayabletransaction.pdf');
                 $insertArry['product_id'] = $post_params['products_select'];
 
                     $obj_discount = new discount_voucher();                     
-                    $add_discount = $obj_discount->get_discount_voucher($insertArry);
-
+                    $add_discount = $obj_discount->get_discount_voucher($insertArry); 
                     if(!empty($add_discount)){                        
                          $obj_discount = new discount_voucher();                     
                          $discounts = $obj_discount->getDiscount_with_vouchers();

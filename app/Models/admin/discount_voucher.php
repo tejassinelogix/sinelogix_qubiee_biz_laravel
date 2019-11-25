@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
 use DB;
 
-class Discount_Voucher extends Model
+class discount_voucher extends Model
 {
     protected $table = 'discount_voucher';
     protected $primaryKey = 'discount_id';
@@ -18,10 +18,8 @@ class Discount_Voucher extends Model
     {   
 
         $result = [];
-        try{            
-            // DB::enableQueryLog();
-            $data = Discount_Voucher::create($inputs);           
-            // dd(DB::getQueryLog(),$inputs,'test');
+        try{        
+            $data = discount_voucher::create($inputs); 
             if($data)
                 $result = $data->toArray();
             return $result; 

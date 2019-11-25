@@ -19,7 +19,9 @@
         <div class="page-header float-right">
             <div class="page-title">
                 <ol class="breadcrumb text-right">
-                    <li><a href="<?php echo url('/admin/dashboard') ?>">{{ __('message.Dashboard') }}</a></li>
+                    <!-- TDS :: Server Changes requires  -->
+                   <!--  <li><a href="<?php echo url('/admin/dashboard') ?>">{{ __('message.Dashboard') }}</a></li> -->
+                    <li><a href="<?php echo url('/admin_2/dashboard') ?>">{{ __('message.Dashboard') }}</a></li>
                     <!--<li><a href="<?php //echo url('/admin/createproduct')  ?>">Add User</a></li>-->
                     <li class="active">{{ __('message.Edit Discount') }}</li>
                 </ol>
@@ -43,8 +45,10 @@
                     <div class="card-body">
 
                    @foreach($discount_voucher as $discount)
-
+                         <!-- TDS :: Server Changes requires  -->
+                         <!--  <form role="form" action="{{ url('admin/'.$discount->discount_id.'/update_discount/') }}" method="post"> -->
                           <form role="form" action="{{ url('admin_2/'.$discount->discount_id.'/update_discount/') }}" method="post">
+
                             {{ csrf_field() }}
                             <div class="box-body">
                                 <div class="col-lg-offset-3 col-lg-6">
@@ -54,12 +58,10 @@
                                               <option value="0">{{ __('message.Please Select Auto Generated') }}</option>
                                               @if($discount->is_auto_generated == 'yes')
                                                <option value="{{$discount->is_auto_generated}}" selected>{{ __('message.Yes') }}</option>
-                                               <option value="no" >{{ __('message.No') }}</option>
                                                @endif
 
                                                @if($discount->is_auto_generated == 'no')
                                                <option value="{{$discount->is_auto_generated}}" selected="selected">{{ __('message.No') }}</option>
-                                               <option value="yes">{{ __('message.Yes') }}</option>
                                                 @endif
                                           </select>
                                       </div>
@@ -70,7 +72,7 @@
                                     @if($discount->is_auto_generated == 'yes')
                                     <div class="form-group auto_coupan_form">
                                         <label for="name">{{ __('message.Coupan Code') }}</label>
-                                        <input type="text" class="form-control"  name="auto_coupan" value="<?php echo $auto_code; ?>" readonly>
+                                        <input type="text" class="form-control"  name="auto_coupan" value="<?php echo (isset($discount->voucher_name) && !empty($discount->voucher_name))?$discount->voucher_name:$auto_code; ?>" readonly>
                                     </div>
                                     @endif
                                     
@@ -84,12 +86,12 @@
                                               <option value="0">{{ __('message.Select Voucher Type') }}</option>
                                               @if($discount->voucher_type_id == '1')
                                                <option value="{{$discount->voucher_type_id}}" selected>{{ __('message.One time use') }}</option>
-                                               <option value="no" >{{ __('message.Fixed Code') }}</option>
+                                               <option value="2">{{ __('message.Fixed Code') }}</option>
                                                @endif
 
                                                @if($discount->voucher_type_id == '2')
+                                               <option value="1">{{ __('message.One time use') }}</option>
                                                <option value="{{$discount->voucher_type_id}}" selected="selected">{{ __('message.Fixed Code') }}</option>
-                                               <option value="yes">{{ __('message.One time use') }}</option>
                                                 @endif
                                           </select>
 
@@ -102,12 +104,12 @@
 
                                               @if($discount->voucher_validity == 'yes')
                                                <option value="{{$discount->voucher_validity}}" selected>{{ __('message.Yes') }}</option>
-                                               <option value="no" >{{ __('message.No') }}</option>
+                                               <option value="no">{{ __('message.No') }}</option>
                                                @endif
                                                
                                                @if($discount->voucher_validity == 'no')
-                                               <option value="{{$discount->voucher_validity}}" selected="selected">{{ __('message.No') }}</option>
                                                <option value="yes">{{ __('message.Yes') }}</option>
+                                               <option value="{{$discount->voucher_validity}}" selected="selected">{{ __('message.No') }}</option>
                                                 @endif
                                                 
                                             </select>
@@ -130,12 +132,12 @@
                                                 <option value="0">{{ __('message.Select Minimum Amount') }}</option>
                                                  @if($discount->is_minimum_order == 'yes')
                                                  <option value="{{$discount->is_minimum_order}}" selected>{{ __('message.Yes') }}</option>
-                                                 <option value="no">{{ __('message.No') }}</option> 
+                                                 <option value="no">{{ __('message.No') }}</option>
                                                  @endif
 
                                                   @if($discount->is_minimum_order == 'no')
-                                               <option value="{{$discount->is_minimum_order}}" selected="selected">{{ __('message.No') }}</option>
-                                               <option value="yes">{{ __('message.Yes') }}</option>
+                                                  <option value="yes">{{ __('message.Yes') }}</option>
+                                                  <option value="{{$discount->is_minimum_order}}" selected="selected">{{ __('message.No') }}</option>
                                                 @endif
                                             </select>
                                         </div>                                        
@@ -153,12 +155,12 @@
                                           <option value="0">{{ __('message.Select Discount Type') }}</option>
                                               @if($discount->discount_type == 'percentage')
                                                  <option value="{{$discount->discount_type}}" selected="">{{ __('message.Percentage') }}</option>
-                                                 <option value="rupees">{{ __('message.Rupees') }}</option> 
+                                                 <option value="rupees">{{ __('message.Rupees') }}</option>
                                               @endif
 
                                               @if($discount->discount_type == 'rupees')
+                                               <option value="percentage">{{ __('message.Percentage') }}</option>
                                                <option value="{{$discount->discount_type}}" selected="">{{ __('message.Rupees') }}</option>
-                                                 <option value="percentage">{{ __('message.Percentage') }}</option> 
                                               @endif
                                         </select>
                                       </div>
@@ -235,7 +237,10 @@
 
 
 </div><!-- /#right-panel -->
+<!-- TDS :: Server Changes requires  -->
+<!-- <script type="text/javascript" src="{{ URL::asset('public/js/view_discount_service.js') }}"></script>  -->
 <script type="text/javascript" src="{{ URL::asset('/js/view_discount_service.js') }}"></script> 
+
 <!-- Right Panel -->
 @endsection
 

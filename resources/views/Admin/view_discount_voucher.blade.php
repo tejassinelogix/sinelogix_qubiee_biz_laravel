@@ -18,8 +18,9 @@
         <div class="page-header float-right">
             <div class="page-title">
                 <ol class="breadcrumb text-right">
-                    <li><a href="<?php echo url('/admin/dashboard') ?>">{{ __('message.Dashboard') }}</a></li>
+                    <!-- TDS :: Server Changes requires  -->
                     <!--<li><a href="<?php //echo url('/admin/createproduct')  ?>">Add User</a></li>-->
+                    <li><a href="<?php echo url('/admin_2/dashboard') ?>">{{ __('message.Dashboard') }}</a></li>
                     <li class="active">{{ __('message.All Discount') }}</li>
                 </ol>
             </div>
@@ -61,6 +62,8 @@
                                       <td>{{ $discount->main_voucher_name }}</td>
                                       <td>{{ $discount->sub_voucher_name }}</td>
                                       <td>{{ $discount->validity_end_date}}</td>
+                                      <!-- TDS :: Server Changes requires  -->
+                                      <!-- <td><a href="{{ url('admin/'.$discount->discount_id.'/edit_vouchers/') }}"><span class="glyphicon glyphicon-edit"></span><i class="fa fa-pencil"></i></a></td> -->
                                       <td><a href="{{ url('admin_2/'.$discount->discount_id.'/edit_vouchers/') }}"><span class="glyphicon glyphicon-edit"></span><i class="fa fa-pencil"></i></a></td>
                                     <td>                                     
                                     <form id="delete-form-{{ $discount->discount_id }}" deleteuid="{{$discount->discount_id}}" method="get" action="<?php echo $discount->discount_id.'/del_vouchers'; ?>">
@@ -94,7 +97,9 @@
 
 
 </div><!-- /#right-panel -->
-<script type="text/javascript" src="{{ URL::asset('/js/view_discount_service.js') }}"></script> 
+<!-- TDS :: Server Changes requires  -->
+<!-- <script type="text/javascript" src="{{ URL::asset('public/js/view_discount_service.js') }}"></script>  -->
+<script type="text/javascript" src="{{ URL::asset('public/js/view_discount_service.js') }}"></script>
 <!-- Right Panel -->
 @endsection
 

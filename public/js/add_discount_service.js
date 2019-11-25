@@ -12,6 +12,8 @@ service = {
 
 		REQ  =  ser_obj.req_data;
 		var url = APP_URL+'get_subcategory_details';
+		/* TDS :: Server Changes requires */
+	//	var url_app = '/admin/get_subcategory_details';
 		var url_app = '/admin_2/get_subcategory_details';
 		REQ.data['category_id'] = $("#main_category_select").val();
 		// Setup X-CSRF-Token
@@ -59,6 +61,8 @@ service = {
 
 		REQ  =  ser_obj.req_data;
 		var url = APP_URL+'get_products_details';
+		/* TDS :: Server Changes requires */
+		// var url_app = '/admin/get_products_details';
 		var url_app = '/admin_2/get_products_details';
 		REQ.data['category_id'] = $("#main_category_select").val();
 		REQ.data['sub_category_id'] = $("#sub_category_select").val();

@@ -7,7 +7,8 @@
     }
     ?>
 @section('main-content')
-
+ <!-- TDS :: Server Changes requires  -->
+<!-- <link rel="stylesheet" type="text/css" href="{{ URL::asset('public/css/custom_all.css') }}"/> -->
 <link rel="stylesheet" type="text/css" href="{{ URL::asset('/css/custom_all.css') }}"/>
   <!-- Content Wrapper. Contains page content -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -41,7 +42,7 @@
                    @include('Admin.includes.messages')
                             <!-- /.box-header -->
                             <!-- form start -->
-                            <form role="form" action="{{ action('AdminController@create_discount') }}" method="post">
+                              <form role="form" action="{{ action('AdminController@create_discount') }}" method="post">
 			    <!-- form role="form" action="admin_2/add_discount" method="post" -->
                             {{ csrf_field() }}
                             <?php $old_value = old(); 
@@ -163,6 +164,8 @@
                                     <br>
                                     <div class="form-group">
                                       <button type="submit" class="btn btn-primary">{{ __('message.Submit') }}</button>
+                                      <!-- TDS :: Server Changes requires  -->
+                                      <!-- <a href='{{ URL('admin/discountvoucheradd' )}}' class="btn btn-warning">{{ __('message.Back') }}</a> -->
                                       <a href='{{ URL('admin_2/discountvoucheradd' )}}' class="btn btn-warning">{{ __('message.Back') }}</a>
                                     </div>
 
@@ -178,7 +181,8 @@
 </div>
 
 </div><!-- /#right-panel -->
-
+ <!-- TDS :: Server Changes requires  -->
+<!-- <script type="text/javascript" src="{{ URL::asset('public/js/add_discount_service.js') }}"></script> -->
 <script type="text/javascript" src="{{ URL::asset('/js/add_discount_service.js') }}"></script>
 @endsection
 

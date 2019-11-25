@@ -1368,7 +1368,7 @@ public function cart_update(Request $request){
         // echo "<pre> after";
         // print_r($oldCart);
         // exit;
-        $new_cart = Session::set('cart', $oldCart);
+        $new_cart = $request->session('cart', $oldCart);
         $test = Session::get('cart');
         // dd($oldCart, $new_cart,$test, session()->all());
         $cart = new Cart($test);                
