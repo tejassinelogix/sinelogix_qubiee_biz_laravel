@@ -35,25 +35,10 @@ service = {
 			},
 			success: function(resp_data,status,xhr){
 
-				// console.log('resp_data update debuged')
-				// console.log(resp_data)
-				// return 0;
-
 				if(resp_data.status){
-						var obj = jQuery.parseJSON(resp_data.data);						
-						if (obj) {
-                        $("#sub_category_select").empty();
-                        $("#sub_category_select").append('<option option value="0">Please Select Sub Category</option>');
-                        $.each(obj, function (key, value) {
-                            $("#sub_category_select").append('<option value="' + value + '">' + key + '</option>');
-                        });
-                    } else {
-                        $("#sub_category_select").empty();
-                        $("#sub_category_select").append('<option value="0">Please Select Category</option>');
-                    }
+					console.log('Session cart updated')
 				}else{ // no records found
-					$("#sub_category_select").empty(); 
-                    $("#sub_category_select").append('<option value="0">No Sub Category found</option>');
+					console.log('Session cart not updated')
 				}
 
 			},
@@ -258,6 +243,14 @@ service = {
 									$('#is_minimum_error_'+__this_product).hide();
 									$('#is_specific_error_'+__this_product).show();
 									$('#is_specific_error_'+__this_product).text(resp_data.is_specific.message);
+								}else{
+									$('#success_green_'+__this_product).hide();
+									$('#one_time_error_'+__this_product).hide();
+									$('#is_validity_error_'+__this_product).hide();
+									$('#is_minimum_error_'+__this_product).hide();
+									$('#is_specific_error_'+__this_product).hide();
+									$('#is_specific_error_'+__this_product).show();
+									$('#is_specific_error_'+__this_product).text(resp_data.message.error);
 								}
 							},
 							error : function(jqXhr, textStatus, errorMessage){	
