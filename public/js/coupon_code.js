@@ -31,22 +31,22 @@ service = {
 			data: REQ,
 			dataType: "json",
 			beforeSend: function(){
-				console.log('Before Ajax')
+				// // console.log('Before Ajax')
 			},
 			success: function(resp_data,status,xhr){
 
 				if(resp_data.status){
-					console.log('Session cart updated')
+					// console.log('Session cart updated')
 				}else{ // no records found
-					console.log('Session cart not updated')
+					// console.log('Session cart not updated')
 				}
 
 			},
 			error : function(jqXhr, textStatus, errorMessage){	
-				console.log('Error Ajax')				
+				// console.log('Error Ajax')				
 			}
 		}).done(function(){
-			console.log('Done Ajax')				
+			// console.log('Done Ajax')				
 		});
 
 	},reset_coupon_details: function(){
@@ -64,10 +64,10 @@ service = {
 			// $('.is_specific_error').text('');
 
 			// if(is_coupon_set){ // revert with old value
-			// 	console.log('old value set')
+			// 	// console.log('old value set')
 			// 	REQ_OLD  =  ser_obj.product_old_data;
 
-			// 	console.log(REQ_OLD)
+			// 	// console.log(REQ_OLD)
 			// 	$("#loadtotalpay").html("<strong>$ "+REQ_OLD.data.You_Pay+"</strong>");
 			// 	$("#loadtotalprice").html("$ "+REQ_OLD.data.Total);
 			// 	$(".loaditemtotal").html("$ "+REQ_OLD.data.Total);
@@ -93,7 +93,7 @@ service = {
 						REQ.data['category_id'] = $(".additional_product_details_"+__this_product).attr('main_category');
 						REQ.data['brand_id'] = $(".additional_product_details_"+__this_product).attr('sub_category');
 						REQ.data['product_id'] = $(".additional_product_details_"+__this_product).attr('product_id');
-						console.log('before product code'+__this_product)
+						// console.log('before product code'+__this_product)
 						var url = APP_URL+'fetch_coupon_details';
 						// Setup X-CSRF-Token
 						$.ajaxSetup({
@@ -108,7 +108,7 @@ service = {
 							data: REQ,
 							dataType: "json",
 							beforeSend: function(){
-								console.log('Before Ajax')
+								// console.log('Before Ajax')
 								$('#one_time_error_'+__this_product).text('');
 								$('#is_validity_error_'+__this_product).text('');
 								$('#is_minimum_error_'+__this_product).text('');
@@ -117,8 +117,8 @@ service = {
 								$('#coupon_apply_'+__this_product).removeAttr('disabled','disabled');
 							},
 							success: function(resp_data,status,xhr){
-								console.log('resp_data')
-								console.log(resp_data)
+								// console.log('resp_data')
+								// console.log(resp_data)
 								if(resp_data.status){
 
 								// pre set data starts
@@ -148,8 +148,8 @@ service = {
 								REQ_OLD.data['You_Pay'] = $.trim(youpay_amt);
 								REQ_OLD.data['Product_id'] = __this_product;
 								REQ_OLD.data['Product_Price'] = total_amt;
-								console.log('REQ_OLD')
-								console.log(REQ_OLD)
+								// console.log('REQ_OLD')
+								// console.log(REQ_OLD)
 								// set old value ends
 
 								// set ajax updated value starts
@@ -161,23 +161,23 @@ service = {
 									total_amt_new = org_total_price - resp_data.data[0].discount_type_amount;
 									total_youpay_new = youpay_amt - resp_data.data[0].discount_type_amount;
 									product_price_new = total_discount_new;
-									 // console.log('org_total_price')
-									 //  console.log(org_total_price)	
-									 //  console.log('total_amt')
-									 //  console.log(total_amt)
-									 //  console.log('total_discount_new')
-									 //  console.log(total_discount_new)
+									 // // console.log('org_total_price')
+									 //  // console.log(org_total_price)	
+									 //  // console.log('total_amt')
+									 //  // console.log(total_amt)
+									 //  // console.log('total_discount_new')
+									 //  // console.log(total_discount_new)
 								}else if(resp_data.data[0].discount_type == "percentage"){								
 									  total_discount_new = total_amt * resp_data.data[0].discount_type_amount / 100;								
 									  total_amt_new = org_total_price - total_discount_new;	
 									  total_youpay_new = youpay_amt - total_discount_new;
 									  product_price_new = total_amt - total_discount_new;
-									  // console.log('org_total_price')
-									  // console.log(org_total_price)	
-									  // console.log('total_amt')
-									  // console.log(total_amt)
-									  // console.log('total_discount_new')
-									  // console.log(total_discount_new)										  		
+									  // // console.log('org_total_price')
+									  // // console.log(org_total_price)	
+									  // // console.log('total_amt')
+									  // // console.log(total_amt)
+									  // // console.log('total_discount_new')
+									  // // console.log(total_discount_new)										  		
 								}
 								// return 0;
 								// set new discount value into view
@@ -198,8 +198,8 @@ service = {
 								REQ.data['Product_Price'] = product_price_new;
 								REQ.data['coupon_name'] = [$('#coupon_code_'+__this_product).val()];
 
-								console.log('prod new price')
-								console.log(REQ)
+								// console.log('prod new price')
+								// console.log(REQ)
 
 								// set ajax updated value ends
 								
@@ -254,10 +254,10 @@ service = {
 								}
 							},
 							error : function(jqXhr, textStatus, errorMessage){	
-								console.log('Error Ajax')				
+								// console.log('Error Ajax')				
 							}
 						}).done(function(){
-							console.log('Done Ajax')				
+							// console.log('Done Ajax')				
 						});	
   				}
   				
@@ -270,8 +270,8 @@ service = {
 
   		// 		__this = $(this).attr('id');
   		// 		__this_product = $(this).attr('product_id');
-  		// 	// 	console.log('__this_product')
-				// 	// console.log(__this_product)
+  		// 	// 	// console.log('__this_product')
+				// 	// // console.log(__this_product)
 				// 	// return 0;
 				// if($("#coupon_code_"+__this_product).val() != ""){  
 				// 	$('#coupon_code_'+__this_product).removeAttr('disabled','disabled');
@@ -289,8 +289,8 @@ service = {
 					
 				// 	if(is_coupon_set){ // revert with old value						
 				// 		REQ_OLD  =  ser_obj.product_old_data;
-				// 		console.log('old value')
-				// 		console.log(REQ_OLD)
+				// 		// console.log('old value')
+				// 		// console.log(REQ_OLD)
 				// 		$("#loaditemtotal"+__this_product).html("$ "+REQ_OLD.data.Product_Price);
 				// 		$("#loadtotalpay").html("<strong>$ "+REQ_OLD.data.You_Pay+"</strong>");
 				// 		$("#loadtotalprice").html("$ "+REQ_OLD.data.Total);

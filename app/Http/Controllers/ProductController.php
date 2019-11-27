@@ -1353,7 +1353,7 @@ public function cart_update(Request $request){
                  $oldCart->items[$key] = $products;  
             }            
         }
-        $oldCart->coupon_name = $post_params['data']['coupon_name'];      
+        //$oldCart->coupon_name = $post_params['data']['coupon_name'];      
         if(!empty($oldCart->coupon_name)){  
             foreach ($oldCart->coupon_name as $key => $value) {  
                 if(in_array($value,$post_params['data']['coupon_name'])){
@@ -1368,7 +1368,7 @@ public function cart_update(Request $request){
         // echo "<pre> after";
         // print_r($oldCart);
         // exit;
-        $new_cart = $request->session('cart', $oldCart);
+        $new_cart = $request->session()->save('cart', $oldCart);
         $test = Session::get('cart');
         // dd($oldCart, $new_cart,$test, session()->all());
         $cart = new Cart($test);                

@@ -290,7 +290,7 @@ Route::post('/addAddress','HomeController@add_address')->name('addAddress');
   Route::get('/discountvoucheradd', 'AdminController@add_discount_voucher')->name('discountvoucheradd');
   Route::post('/get_subcategory_details', 'AdminController@get_sub_category');
   Route::post('/get_products_details', 'AdminController@get_products');
-  Route::post('/add_discount', 'AdminController@create_discount')->name('add_discount');
+  Route::post('/discountvoucher', 'AdminController@create_discount');
   Route::get('/get_vouchers_details', 'AdminController@view_discount_voucher');
   // Route::get('/edit_vouchers', 'AdminController@edit');
   Route::get('/{discount_id}/edit_vouchers', 'AdminController@edit');  

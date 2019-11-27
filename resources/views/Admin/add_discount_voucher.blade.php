@@ -25,7 +25,7 @@
                 <div class="page-title">
                     <ol class="breadcrumb text-right">
                         <li><a href="{{ route('admin.home')}}">{{ __('message.Dashboard') }}</a></li>
-                        <li><a href="{{ route('user.index')}}">{{ __('message.All Voucher') }}</a></li>
+                        <li><a href="{{ action('AdminController@view_discount_voucher') }}">{{ __('message.All Voucher') }}</a></li>
                         <li class="active">{{ __('message.Add Discount Voucher') }}</li>
                     </ol>
                 </div>
