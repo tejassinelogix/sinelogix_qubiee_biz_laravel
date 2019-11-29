@@ -248,9 +248,9 @@ $(document).ready(function () {
                         // $("#finalResult").append('<a>Please Select</a>');
                         var guestfamilyName = response.product;
                         $.each(guestfamilyName, function (key, value) {
-                    //alert(value.original_price);
-                    
-                            if (value.discount == 0 || value.discount =="") {
+                            //alert(value.original_price);
+
+                            if (value.discount == 0 || value.discount == "") {
                                 $('#finalResult').append($('<div class="addtocart-btn-search-wrap"><a href="/productdetails/' + value.url + '"><strong>' + value.name + '</strong><span class="searchcategory">|' + value.category_name + '</span><span class="searchprice"> $ ' + value.original_price + '</span><a href="/product-add-to-cart/' + value.id + '" class="addtocart-btn addtocart-btn-search"><ion-icon name="cart"></ion-icon> Add<a></a></div>'));
                             } else {
                                 $('#finalResult').append($('<div class="addtocart-btn-search-wrap"><a href="/productdetails/' + value.url + '"><strong>' + value.name + '</strong><span class="searchcategory">|' + value.category_name + '</span><span class="searchprice"> $ ' + value.price + '</span><span class="searchprice"><strike> $ ' + value.original_price + '</strike></span><a href="/product-add-to-cart/' + value.id + '" class="addtocart-btn addtocart-btn-search"><ion-icon name="cart"></ion-icon> Add<a></a></div>'));
@@ -286,7 +286,7 @@ $(document).ready(function () {
         $.ajax({
             url: '/categoryfilterprice',
             type: "GET",
-            data: {minimum_price: minimum_price, maximum_price: maximum_price, categoryname: categoryname,pagename:pagename},
+            data: {minimum_price: minimum_price, maximum_price: maximum_price, categoryname: categoryname, pagename: pagename},
             // data:{brand:brand},
             // dataType:"JSON",
             success: function (data) {
@@ -302,18 +302,18 @@ $(document).ready(function () {
                 if (data.success == "1") {
 
                     $.each(data.data, function (index, value) {
-                        var valuediscount= value.discount;
+                        var valuediscount = value.discount;
                         $('.filter_data').show();
-                         var hideclass
-                       if (!valuediscount || value.discount == 0 ) {
-                          // $('.discountoffer').hide();
-                            hideclass="display: none;";
-                            
-                           // $('.orignalpricehide').show();
+                        var hideclass
+                        if (!valuediscount || value.discount == 0) {
+                            // $('.discountoffer').hide();
+                            hideclass = "display: none;";
+
+                            // $('.orignalpricehide').show();
                         } else {
                             //  alert("call not empty");
-                             hideclass="display: block;";
-                             //$('.orignalpricehide').hide();
+                            hideclass = "display: block;";
+                            //$('.orignalpricehide').hide();
                         }
                         $('.product-box-class').hide();
 
@@ -323,7 +323,7 @@ $(document).ready(function () {
                                 '<a href="/productdetails/' + value.url + '" class="productBlockImg">' +
                                 '<div style="background: url(' + "/public/images/" + value.product_image + "" + ') no-repeat;"></div>' +
                                 '</a>' +
-                                '<span class="discountoffer" style="'+ hideclass +'"> % Offer '+value.discount+'</span>'+
+                                '<span class="discountoffer" style="' + hideclass + '"> % Offer ' + value.discount + '</span>' +
                                 '<div class="productBlockInfo">' +
                                 '<h3 class="protitle">' + value.name + '</h3>' +
                                 '<ul class="proRating">' +
@@ -333,10 +333,10 @@ $(document).ready(function () {
                                 '<li><i class="fa fa-star"></i></li>' +
                                 '<li><i class="fa fa-star-half-o"></i></li>' +
                                 '</ul>' +
-                                '<div class="loaderWrapperAjax loader-wrapper'+ value.id +'" style="display: none;"><img src="public/assets/images/ajax-loader.gif"></div>'+
-                                '<div class="productInfoMsgAlert addtowishmessage'+ value.id +'" ></div>'+
-                                '<button  data-id="'+value.id +'" class="wishlist-btn addtowishlist">Add to Wishlist</button>'+
-                                '<h2 class="propricing">$' + value.price + 
+                                '<div class="loaderWrapperAjax loader-wrapper' + value.id + '" style="display: none;"><img src="public/assets/images/ajax-loader.gif"></div>' +
+                                '<div class="productInfoMsgAlert addtowishmessage' + value.id + '" ></div>' +
+                                '<button  data-id="' + value.id + '" class="wishlist-btn addtowishlist">Add to Wishlist</button>' +
+                                '<h2 class="propricing">$' + value.price +
                                 '<small><strike>$' + value.original_price + '</strike></small></h2>' +
                                 '</div>' +
                                 '<div class="productBlockViewDtl">' +
@@ -498,7 +498,7 @@ $(document).ready(function () {
                                 '<span class="discountoffer">' +
                                 '<a href="/add-to-wishlist/' + value.id + '" class="wishlist-btn" title="wishlist"><i class="fa fa-heart"></i> Add to Wishlist</a>' +
                                 '</span>' +
-                                '<h2 class="propricing">$' + value.price + 
+                                '<h2 class="propricing">$' + value.price +
                                 '<small><strike> $' + value.original_price + '</strike></small></h2>' +
                                 '<p class="proinfo">Earliest Delivery: Today</p>' +
                                 '</div>' +
@@ -631,18 +631,18 @@ $(document).ready(function () {
                 if (data.success == "1") {
 
                     $.each(data.data, function (index, value) {
-                       var valuediscount = value.discount;
+                        var valuediscount = value.discount;
 //                        alert(value.discount);
-                     var hideclass
-                       if (!valuediscount || value.discount == 0 ) {
-                          // $('.discountoffer').hide();
-                            hideclass="display: none;";
-                            
-                           // $('.orignalpricehide').show();
+                        var hideclass
+                        if (!valuediscount || value.discount == 0) {
+                            // $('.discountoffer').hide();
+                            hideclass = "display: none;";
+
+                            // $('.orignalpricehide').show();
                         } else {
                             //  alert("call not empty");
-                             hideclass="display: block;";
-                             //$('.orignalpricehide').hide();
+                            hideclass = "display: block;";
+                            //$('.orignalpricehide').hide();
                         }
                         $('.product-box-class').hide();
                         text += '<div class="col-sm-3 product-box-class filter">' +
@@ -650,7 +650,7 @@ $(document).ready(function () {
                                 '<a href="/productdetails/' + value.url + '" class="productBlockImg">' +
                                 '<div style="background: url(' + "/public/images/" + value.product_image + "" + ') no-repeat;"></div>' +
                                 '</a>' +
-                                '<span class="discountoffer" style="'+ hideclass +'"> % Offer '+value.discount+'</span>'+
+                                '<span class="discountoffer" style="' + hideclass + '"> % Offer ' + value.discount + '</span>' +
                                 '<div class="productBlockInfo">' +
                                 '<h3 class="protitle">' + value.name + '</h3>' +
                                 '<ul class="proRating">' +
@@ -660,10 +660,10 @@ $(document).ready(function () {
                                 '<li><i class="fa fa-star"></i></li>' +
                                 '<li><i class="fa fa-star-half-o"></i></li>' +
                                 '</ul>' +
-                                '<div class="loaderWrapperAjax loader-wrapper'+ value.id +'" style="display: none;"><img src="public/assets/images/ajax-loader.gif"></div>'+
-                                '<div class="productInfoMsgAlert addtowishmessage'+ value.id +'" ></div>'+
-                                '<button  data-id="'+value.id +'" class="wishlist-btn addtowishlist">Add to Wishlist</button>'+
-                                '<h2 class="propricing">$' + value.price + 
+                                '<div class="loaderWrapperAjax loader-wrapper' + value.id + '" style="display: none;"><img src="public/assets/images/ajax-loader.gif"></div>' +
+                                '<div class="productInfoMsgAlert addtowishmessage' + value.id + '" ></div>' +
+                                '<button  data-id="' + value.id + '" class="wishlist-btn addtowishlist">Add to Wishlist</button>' +
+                                '<h2 class="propricing">$' + value.price +
                                 '<small><strike>$' + value.original_price + '</strike></small></h2>' +
                                 '</div>' +
                                 '<div class="productBlockViewDtl">' +
@@ -683,7 +683,7 @@ $(document).ready(function () {
                     $('#postfilterdata').html(text);
                 } else {
                     $('#remove-row').remove();
-                   // $('.filter_data').html('<div class="NoCar"><i class="fa fa-exclamation-triangle"></i> <br> No Product Saled!</div>');
+                    // $('.filter_data').html('<div class="NoCar"><i class="fa fa-exclamation-triangle"></i> <br> No Product Saled!</div>');
                 }
             }
         });
@@ -737,7 +737,7 @@ $(document).ready(function () {
                                 '<li><i class="fa fa-star-half-o"></i></li>' +
                                 '</ul>' +
                                 '<span class="discountoffer">&nbsp;</span>' +
-                                '<h2 class="propricing">$' + value.price + 
+                                '<h2 class="propricing">$' + value.price +
                                 '<small><strike> $' + value.original_price + '</strike><small></h2>' +
                                 '<p class="proinfo">Earliest Delivery: Today</p>' +
                                 '</div>' +
@@ -795,7 +795,7 @@ $(document).ready(function () {
                     $('.filter_data').append(text);
                 } else {
                     //$('.filter_data').append('<div class="NoCar"><i class="fa fa-exclamation-triangle"></i> <br> No Product !</div>');
-                    
+
                     //$('#btn-more').html("No Data");
                     $('#btn-more').prop("disabled", true);
                     $('#btn-more').hide();
@@ -831,15 +831,26 @@ $(document).ready(function () {
     $('#nextreviewnogift').attr("disabled", "disabled");
     var sendergiftmark = $("#sendergiftmark").val();
     var shippingmark = $("#shippingmark").val();
-   if(sendergiftmark== 1 && shippingmark !=1){
-  event.preventDefault();
-       jQuery.noConflict();
+
+    if (sendergiftmark == 1 && shippingmark != 1) {
+
+        event.preventDefault();
+        jQuery.noConflict();
         $("#senderDetailsModalOpen").modal("show");
 //       if(shippingmark !=1){
 //           
 //       }
-    
-   }
+        $(".ConfirmAddress").attr("href", "#");
+    } else if (sendergiftmark == 1 && shippingmark == 1) {
+
+        $(".ConfirmAddress").attr("href", "#ConfirmAddress");
+    } else if (sendergiftmark == 0 && shippingmark == 0) {
+
+        $(".ConfirmAddress").attr("href", "#ConfirmAddress");
+    } else {
+
+        $(".ConfirmAddress").attr("href", "#");
+    }
 //    $('.chb').click(function() { 
     $(".chb").click(function (e) {
         $('#nextreviewnogift').attr("enabled", "enabled");
@@ -848,13 +859,14 @@ $(document).ready(function () {
             //alert("is checked");
             $('#nextreview').attr("enabled", "enabled");
             $("#nextreview").removeAttr("disabled");
-
+            $(".ConfirmAddress").attr("href", "#ConfirmAddress");
             $("#ReviewOrderTab").attr("href", "#ReviewOrder");
             $("#MakePaymentTab").attr("href", "#MakePayment");
         } else {
             //alert("not checked");
             $('#nextreview').attr("disabled", "disabled");
             $("#nextreview").removeAttr("enabled");
+            $("#ConfirmAddress").attr("href", "#");
             $("#ReviewOrderTab").attr("href", "#");
             $("#MakePaymentTab").attr("href", "#");
         }
@@ -864,13 +876,14 @@ $(document).ready(function () {
             //alert("is checked");
             $('#nextreview').attr("enabled", "enabled");
             $("#nextreview").removeAttr("disabled");
-
+            $(".ConfirmAddress").attr("href", "#ConfirmAddress");
             $("#ReviewOrderTab").attr("href", "#ReviewOrder");
             $("#MakePaymentTab").attr("href", "#MakePayment");
         } else {
             //alert("not checked");
             $('#nextreview').attr("disabled", "disabled");
             $("#nextreview").removeAttr("enabled");
+            $("#ConfirmAddress").attr("href", "#");
             $("#ReviewOrderTab").attr("href", "#");
             $("#MakePaymentTab").attr("href", "#");
         }
@@ -881,12 +894,12 @@ $(document).ready(function () {
             event.preventDefault();
         }
     });
-    
-    $(document).on('click','.addtowishlist',function(){
+
+    $(document).on('click', '.addtowishlist', function () {
         var id = $(this).data('id');
-          
-        jQuery('.loader-wrapper'+id).show();
-       $.ajax({
+
+        jQuery('.loader-wrapper' + id).show();
+        $.ajax({
             //url : '{{ url("demos/loaddata") }}',
             url: '/add-to-wishlist',
             method: "get",
@@ -894,35 +907,35 @@ $(document).ready(function () {
             //dataType : "text",
             success: function (data)
             { //alert(JSON.parse(data));
-                jQuery('.loader-wrapper'+id).hide();
+                jQuery('.loader-wrapper' + id).hide();
                 data = JSON.parse(data);
-                    event.preventDefault();
+                event.preventDefault();
                 if (data.success == "1") {
-                     jQuery.noConflict();
-                     $("#myModalajax").modal("show");
-              $('.addtowishmessage'+id).html('<span class="addtoWishMsg">Product added in wishlist </span>');
-              $('.modal-body-addtowish').html('<span class="addtoWishMsg">Product added in wishlist <span>');             
+                    jQuery.noConflict();
+                    $("#myModalajax").modal("show");
+                    $('.addtowishmessage' + id).html('<span class="addtoWishMsg">Product added in wishlist </span>');
+                    $('.modal-body-addtowish').html('<span class="addtoWishMsg">Product added in wishlist <span>');
 //                    $.each(data.data, function (index, value) {
 //                        });
-                 } else if(data.success == "2"){
-                      
-                     $('.addtowishmessage'+id).html('<span class="addtoWishMsg">Product already added in wishlist <span>');
-                     
-                }else{
-                     $('.addtowishmessage'+id).html('<span class="addtoWishMsgFiled">Product added in wishlist failed </span>');
+                } else if (data.success == "2") {
+
+                    $('.addtowishmessage' + id).html('<span class="addtoWishMsg">Product already added in wishlist <span>');
+
+                } else {
+                    $('.addtowishmessage' + id).html('<span class="addtoWishMsgFiled">Product added in wishlist failed </span>');
                 }
 
             },
-            error: function(){
-                jQuery('.loader-wrapper'+id).hide();
-                 $('.addtowishmessage'+id).html('<span class="addtoWishMsgLogin">Please login to check Wishlist<span>');
-               
+            error: function () {
+                jQuery('.loader-wrapper' + id).hide();
+                $('.addtowishmessage' + id).html('<span class="addtoWishMsgLogin">Please login to check Wishlist<span>');
+
             }
-            
+
         });
     });
     $('.common_seleing_selector-higher').click(function () {
-         
+
         //var a= $('input[name=chechkmostselling]').attr('checked', true);
         var categorycheck = $('input[name=chechkhigherprice]').is(':checked')
         var categoryvalue = JSON.stringify(categorycheck)
@@ -934,16 +947,16 @@ $(document).ready(function () {
         }
 
     });
-     //start code for main category higher and lower filters
-        function filter_data_higher()
+    //start code for main category higher and lower filters
+    function filter_data_higher()
     {
-        
+
         $('.filter_data').show();
 
         $('.filter_data').html('<div id="loading" style="" ></div>');
 
-          //var brand = get_filter_sel('brandseling');
-           var brand = $('#cateoryname').val();
+        //var brand = get_filter_sel('brandseling');
+        var brand = $('#cateoryname').val();
         $.ajax({
             url: '/higherpricefilter',
             type: "GET",
@@ -959,18 +972,18 @@ $(document).ready(function () {
                 if (data.success == "1") {
 
                     $.each(data.data, function (index, value) {
-                       var valuediscount = value.discount;
+                        var valuediscount = value.discount;
 //                        alert(value.discount);
-                     var hideclass
-                       if (!valuediscount || value.discount == 0 ) {
-                          // $('.discountoffer').hide();
-                            hideclass="display: none;";
-                            
-                           // $('.orignalpricehide').show();
+                        var hideclass
+                        if (!valuediscount || value.discount == 0) {
+                            // $('.discountoffer').hide();
+                            hideclass = "display: none;";
+
+                            // $('.orignalpricehide').show();
                         } else {
                             //  alert("call not empty");
-                             hideclass="display: block;";
-                             //$('.orignalpricehide').hide();
+                            hideclass = "display: block;";
+                            //$('.orignalpricehide').hide();
                         }
                         $('.product-box-class').hide();
                         text += '<div class="col-sm-3 product-box-class filter">' +
@@ -978,7 +991,7 @@ $(document).ready(function () {
                                 '<a href="/productdetails/' + value.url + '" class="productBlockImg">' +
                                 '<div style="background: url(' + "/public/images/" + value.product_image + "" + ') no-repeat;"></div>' +
                                 '</a>' +
-                                '<span class="discountoffer" style="'+ hideclass +'"> % Offer '+value.discount+'</span>'+
+                                '<span class="discountoffer" style="' + hideclass + '"> % Offer ' + value.discount + '</span>' +
                                 '<div class="productBlockInfo">' +
                                 '<h3 class="protitle">' + value.name + '</h3>' +
                                 '<ul class="proRating">' +
@@ -988,10 +1001,10 @@ $(document).ready(function () {
                                 '<li><i class="fa fa-star"></i></li>' +
                                 '<li><i class="fa fa-star-half-o"></i></li>' +
                                 '</ul>' +
-                                '<div class="loaderWrapperAjax loader-wrapper'+ value.id +'" style="display: none;"><img src="public/assets/images/ajax-loader.gif"></div>'+
-                                '<div class="productInfoMsgAlert addtowishmessage'+ value.id +'" ></div>'+
-                                '<button  data-id="'+value.id +'" class="wishlist-btn addtowishlist">Add to Wishlist</button>'+
-                                '<h2 class="propricing">$' + value.price + 
+                                '<div class="loaderWrapperAjax loader-wrapper' + value.id + '" style="display: none;"><img src="public/assets/images/ajax-loader.gif"></div>' +
+                                '<div class="productInfoMsgAlert addtowishmessage' + value.id + '" ></div>' +
+                                '<button  data-id="' + value.id + '" class="wishlist-btn addtowishlist">Add to Wishlist</button>' +
+                                '<h2 class="propricing">$' + value.price +
                                 '<small><strike>$' + value.original_price + '</strike></small></h2>' +
                                 '</div>' +
                                 '<div class="productBlockViewDtl">' +
@@ -1011,13 +1024,13 @@ $(document).ready(function () {
                     $('#postfilterdata').html(text);
                 } else {
                     $('#remove-row').remove();
-                   // $('.filter_data').html('<div class="NoCar"><i class="fa fa-exclamation-triangle"></i> <br> No Product Saled!</div>');
+                    // $('.filter_data').html('<div class="NoCar"><i class="fa fa-exclamation-triangle"></i> <br> No Product Saled!</div>');
                 }
             }
         });
     }
     $('.common_seleing_selector-lawer').click(function () {
-         
+
         //var a= $('input[name=chechkmostselling]').attr('checked', true);
         var categorycheck = $('input[name=chechkhigherprice]').is(':checked')
         var categoryvalue = JSON.stringify(categorycheck)
@@ -1029,15 +1042,15 @@ $(document).ready(function () {
         }
 
     });
-     function filter_data_lower()
+    function filter_data_lower()
     {
-         
+
         $('.filter_data').show();
 
         $('.filter_data').html('<div id="loading" style="" ></div>');
 
-          //var brand = get_filter_sel('brandseling');
-           var brand = $('#cateoryname').val();
+        //var brand = get_filter_sel('brandseling');
+        var brand = $('#cateoryname').val();
         $.ajax({
             url: '/lowerpricefilter',
             type: "GET",
@@ -1053,18 +1066,18 @@ $(document).ready(function () {
                 if (data.success == "1") {
 
                     $.each(data.data, function (index, value) {
-                       var valuediscount = value.discount;
+                        var valuediscount = value.discount;
 //                        alert(value.discount);
-                     var hideclass
-                       if (!valuediscount || value.discount == 0 ) {
-                          // $('.discountoffer').hide();
-                            hideclass="display: none;";
-                            
-                           // $('.orignalpricehide').show();
+                        var hideclass
+                        if (!valuediscount || value.discount == 0) {
+                            // $('.discountoffer').hide();
+                            hideclass = "display: none;";
+
+                            // $('.orignalpricehide').show();
                         } else {
                             //  alert("call not empty");
-                             hideclass="display: block;";
-                             //$('.orignalpricehide').hide();
+                            hideclass = "display: block;";
+                            //$('.orignalpricehide').hide();
                         }
                         $('.product-box-class').hide();
                         text += '<div class="col-sm-3 product-box-class filter">' +
@@ -1072,7 +1085,7 @@ $(document).ready(function () {
                                 '<a href="/productdetails/' + value.url + '" class="productBlockImg">' +
                                 '<div style="background: url(' + "/public/images/" + value.product_image + "" + ') no-repeat;"></div>' +
                                 '</a>' +
-                                '<span class="discountoffer" style="'+ hideclass +'"> % Offer '+value.discount+'</span>'+
+                                '<span class="discountoffer" style="' + hideclass + '"> % Offer ' + value.discount + '</span>' +
                                 '<div class="productBlockInfo">' +
                                 '<h3 class="protitle">' + value.name + '</h3>' +
                                 '<ul class="proRating">' +
@@ -1082,10 +1095,10 @@ $(document).ready(function () {
                                 '<li><i class="fa fa-star"></i></li>' +
                                 '<li><i class="fa fa-star-half-o"></i></li>' +
                                 '</ul>' +
-                                '<div class="loaderWrapperAjax loader-wrapper'+ value.id +'" style="display: none;"><img src="public/assets/images/ajax-loader.gif"></div>'+
-                                '<div class="productInfoMsgAlert addtowishmessage'+ value.id +'" ></div>'+
-                                '<button  data-id="'+value.id +'" class="wishlist-btn addtowishlist">Add to Wishlist</button>'+
-                                '<h2 class="propricing">$' + value.price + 
+                                '<div class="loaderWrapperAjax loader-wrapper' + value.id + '" style="display: none;"><img src="public/assets/images/ajax-loader.gif"></div>' +
+                                '<div class="productInfoMsgAlert addtowishmessage' + value.id + '" ></div>' +
+                                '<button  data-id="' + value.id + '" class="wishlist-btn addtowishlist">Add to Wishlist</button>' +
+                                '<h2 class="propricing">$' + value.price +
                                 '<small><strike>$' + value.original_price + '</strike></small></h2>' +
                                 '</div>' +
                                 '<div class="productBlockViewDtl">' +
@@ -1105,7 +1118,7 @@ $(document).ready(function () {
                     $('#postfilterdata').html(text);
                 } else {
                     $('#remove-row').remove();
-                   // $('.filter_data').html('<div class="NoCar"><i class="fa fa-exclamation-triangle"></i> <br> No Product Saled!</div>');
+                    // $('.filter_data').html('<div class="NoCar"><i class="fa fa-exclamation-triangle"></i> <br> No Product Saled!</div>');
                 }
             }
         });
@@ -1113,7 +1126,7 @@ $(document).ready(function () {
     //end code for main category higher and lower filters
     // start code for sub category higer and lower filters
     $('.common_sub_selector-lawer').click(function () {
-         
+
         //var a= $('input[name=chechkmostselling]').attr('checked', true);
         var categorycheck = $('input[name=chechkhigherprice]').is(':checked')
         var categoryvalue = JSON.stringify(categorycheck)
@@ -1125,16 +1138,16 @@ $(document).ready(function () {
         }
 
     });
-    
+
     function filter_subdata_lower()
     {
-         
+
         $('.filter_data').show();
 
         $('.filter_data').html('<div id="loading" style="" ></div>');
 
-          //var brand = get_filter_sel('brandseling');
-           var brand = $('#cateoryname').val();
+        //var brand = get_filter_sel('brandseling');
+        var brand = $('#cateoryname').val();
         $.ajax({
             url: '/lowersubpricefilter',
             type: "GET",
@@ -1150,18 +1163,18 @@ $(document).ready(function () {
                 if (data.success == "1") {
 
                     $.each(data.data, function (index, value) {
-                       var valuediscount = value.discount;
+                        var valuediscount = value.discount;
 //                        alert(value.discount);
-                     var hideclass
-                       if (!valuediscount || value.discount == 0 ) {
-                          // $('.discountoffer').hide();
-                            hideclass="display: none;";
-                            
-                           // $('.orignalpricehide').show();
+                        var hideclass
+                        if (!valuediscount || value.discount == 0) {
+                            // $('.discountoffer').hide();
+                            hideclass = "display: none;";
+
+                            // $('.orignalpricehide').show();
                         } else {
                             //  alert("call not empty");
-                             hideclass="display: block;";
-                             //$('.orignalpricehide').hide();
+                            hideclass = "display: block;";
+                            //$('.orignalpricehide').hide();
                         }
                         $('.product-box-class').hide();
                         text += '<div class="col-sm-3 product-box-class filter">' +
@@ -1169,7 +1182,7 @@ $(document).ready(function () {
                                 '<a href="/productdetails/' + value.url + '" class="productBlockImg">' +
                                 '<div style="background: url(' + "/public/images/" + value.product_image + "" + ') no-repeat;"></div>' +
                                 '</a>' +
-                                '<span class="discountoffer" style="'+ hideclass +'"> % Offer '+value.discount+'</span>'+
+                                '<span class="discountoffer" style="' + hideclass + '"> % Offer ' + value.discount + '</span>' +
                                 '<div class="productBlockInfo">' +
                                 '<h3 class="protitle">' + value.name + '</h3>' +
                                 '<ul class="proRating">' +
@@ -1179,10 +1192,10 @@ $(document).ready(function () {
                                 '<li><i class="fa fa-star"></i></li>' +
                                 '<li><i class="fa fa-star-half-o"></i></li>' +
                                 '</ul>' +
-                                '<div class="loaderWrapperAjax loader-wrapper'+ value.id +'" style="display: none;"><img src="public/assets/images/ajax-loader.gif"></div>'+
-                                '<div class="productInfoMsgAlert addtowishmessage'+ value.id +'" ></div>'+
-                                '<button  data-id="'+value.id +'" class="wishlist-btn addtowishlist">Add to Wishlist</button>'+
-                                '<h2 class="propricing">$' + value.price + 
+                                '<div class="loaderWrapperAjax loader-wrapper' + value.id + '" style="display: none;"><img src="public/assets/images/ajax-loader.gif"></div>' +
+                                '<div class="productInfoMsgAlert addtowishmessage' + value.id + '" ></div>' +
+                                '<button  data-id="' + value.id + '" class="wishlist-btn addtowishlist">Add to Wishlist</button>' +
+                                '<h2 class="propricing">$' + value.price +
                                 '<small><strike>$' + value.original_price + '</strike></small></h2>' +
                                 '</div>' +
                                 '<div class="productBlockViewDtl">' +
@@ -1202,14 +1215,14 @@ $(document).ready(function () {
                     $('#postfilterdata').html(text);
                 } else {
                     $('#remove-row').remove();
-                   // $('.filter_data').html('<div class="NoCar"><i class="fa fa-exclamation-triangle"></i> <br> No Product Saled!</div>');
+                    // $('.filter_data').html('<div class="NoCar"><i class="fa fa-exclamation-triangle"></i> <br> No Product Saled!</div>');
                 }
             }
         });
     }
-  
-      $('.common_sub_selector-higher').click(function () {
-         
+
+    $('.common_sub_selector-higher').click(function () {
+
         //var a= $('input[name=chechkmostselling]').attr('checked', true);
         var categorycheck = $('input[name=chechkhigherprice]').is(':checked')
         var categoryvalue = JSON.stringify(categorycheck)
@@ -1221,16 +1234,16 @@ $(document).ready(function () {
         }
 
     });
-    
+
     function filter_subdata_higher()
     {
-         
+
         $('.filter_data').show();
 
         $('.filter_data').html('<div id="loading" style="" ></div>');
 
-          //var brand = get_filter_sel('brandseling');
-           var brand = $('#cateoryname').val();
+        //var brand = get_filter_sel('brandseling');
+        var brand = $('#cateoryname').val();
         $.ajax({
             url: '/highersubpricefilter',
             type: "GET",
@@ -1246,18 +1259,18 @@ $(document).ready(function () {
                 if (data.success == "1") {
 
                     $.each(data.data, function (index, value) {
-                       var valuediscount = value.discount;
+                        var valuediscount = value.discount;
 //                        alert(value.discount);
-                     var hideclass
-                       if (!valuediscount || value.discount == 0 ) {
-                          // $('.discountoffer').hide();
-                            hideclass="display: none;";
-                            
-                           // $('.orignalpricehide').show();
+                        var hideclass
+                        if (!valuediscount || value.discount == 0) {
+                            // $('.discountoffer').hide();
+                            hideclass = "display: none;";
+
+                            // $('.orignalpricehide').show();
                         } else {
                             //  alert("call not empty");
-                             hideclass="display: block;";
-                             //$('.orignalpricehide').hide();
+                            hideclass = "display: block;";
+                            //$('.orignalpricehide').hide();
                         }
                         $('.product-box-class').hide();
                         text += '<div class="col-sm-3 product-box-class filter">' +
@@ -1265,7 +1278,7 @@ $(document).ready(function () {
                                 '<a href="/productdetails/' + value.url + '" class="productBlockImg">' +
                                 '<div style="background: url(' + "/public/images/" + value.product_image + "" + ') no-repeat;"></div>' +
                                 '</a>' +
-                                '<span class="discountoffer" style="'+ hideclass +'"> % Offer '+value.discount+'</span>'+
+                                '<span class="discountoffer" style="' + hideclass + '"> % Offer ' + value.discount + '</span>' +
                                 '<div class="productBlockInfo">' +
                                 '<h3 class="protitle">' + value.name + '</h3>' +
                                 '<ul class="proRating">' +
@@ -1275,10 +1288,10 @@ $(document).ready(function () {
                                 '<li><i class="fa fa-star"></i></li>' +
                                 '<li><i class="fa fa-star-half-o"></i></li>' +
                                 '</ul>' +
-                                '<div class="loaderWrapperAjax loader-wrapper'+ value.id +'" style="display: none;"><img src="public/assets/images/ajax-loader.gif"></div>'+
-                                '<div class="productInfoMsgAlert addtowishmessage'+ value.id +'" ></div>'+
-                                '<button  data-id="'+value.id +'" class="wishlist-btn addtowishlist">Add to Wishlist</button>'+
-                                '<h2 class="propricing">$' + value.price + 
+                                '<div class="loaderWrapperAjax loader-wrapper' + value.id + '" style="display: none;"><img src="public/assets/images/ajax-loader.gif"></div>' +
+                                '<div class="productInfoMsgAlert addtowishmessage' + value.id + '" ></div>' +
+                                '<button  data-id="' + value.id + '" class="wishlist-btn addtowishlist">Add to Wishlist</button>' +
+                                '<h2 class="propricing">$' + value.price +
                                 '<small><strike>$' + value.original_price + '</strike></small></h2>' +
                                 '</div>' +
                                 '<div class="productBlockViewDtl">' +
@@ -1298,12 +1311,12 @@ $(document).ready(function () {
                     $('#postfilterdata').html(text);
                 } else {
                     $('#remove-row').remove();
-                   // $('.filter_data').html('<div class="NoCar"><i class="fa fa-exclamation-triangle"></i> <br> No Product Saled!</div>');
+                    // $('.filter_data').html('<div class="NoCar"><i class="fa fa-exclamation-triangle"></i> <br> No Product Saled!</div>');
                 }
             }
         });
     }
-       $('.common_subseleing_selector').click(function () {
+    $('.common_subseleing_selector').click(function () {
         //var a= $('input[name=chechkmostselling]').attr('checked', true);
         var categorycheck = $('input[name=chechkmostselling]').is(':checked')
         var categoryvalue = JSON.stringify(categorycheck)
@@ -1315,8 +1328,8 @@ $(document).ready(function () {
         }
 
     });
-    
-   
+
+
     function filter_subdata_sel()
     {
         $('.filter_data').show();
@@ -1340,18 +1353,18 @@ $(document).ready(function () {
                 if (data.success == "1") {
 
                     $.each(data.data, function (index, value) {
-                       var valuediscount = value.discount;
+                        var valuediscount = value.discount;
 //                        alert(value.discount);
-                     var hideclass
-                       if (!valuediscount || value.discount == 0 ) {
-                          // $('.discountoffer').hide();
-                            hideclass="display: none;";
-                            
-                           // $('.orignalpricehide').show();
+                        var hideclass
+                        if (!valuediscount || value.discount == 0) {
+                            // $('.discountoffer').hide();
+                            hideclass = "display: none;";
+
+                            // $('.orignalpricehide').show();
                         } else {
                             //  alert("call not empty");
-                             hideclass="display: block;";
-                             //$('.orignalpricehide').hide();
+                            hideclass = "display: block;";
+                            //$('.orignalpricehide').hide();
                         }
                         $('.product-box-class').hide();
                         text += '<div class="col-sm-3 product-box-class filter">' +
@@ -1359,7 +1372,7 @@ $(document).ready(function () {
                                 '<a href="/productdetails/' + value.url + '" class="productBlockImg">' +
                                 '<div style="background: url(' + "/public/images/" + value.product_image + "" + ') no-repeat;"></div>' +
                                 '</a>' +
-                                '<span class="discountoffer" style="'+ hideclass +'"> % Offer '+value.discount+'</span>'+
+                                '<span class="discountoffer" style="' + hideclass + '"> % Offer ' + value.discount + '</span>' +
                                 '<div class="productBlockInfo">' +
                                 '<h3 class="protitle">' + value.name + '</h3>' +
                                 '<ul class="proRating">' +
@@ -1369,10 +1382,10 @@ $(document).ready(function () {
                                 '<li><i class="fa fa-star"></i></li>' +
                                 '<li><i class="fa fa-star-half-o"></i></li>' +
                                 '</ul>' +
-                                '<div class="loaderWrapperAjax loader-wrapper'+ value.id +'" style="display: none;"><img src="public/assets/images/ajax-loader.gif"></div>'+
-                                '<div class="productInfoMsgAlert addtowishmessage'+ value.id +'" ></div>'+
-                                '<button  data-id="'+value.id +'" class="wishlist-btn addtowishlist">Add to Wishlist</button>'+
-                                '<h2 class="propricing">$' + value.price + 
+                                '<div class="loaderWrapperAjax loader-wrapper' + value.id + '" style="display: none;"><img src="public/assets/images/ajax-loader.gif"></div>' +
+                                '<div class="productInfoMsgAlert addtowishmessage' + value.id + '" ></div>' +
+                                '<button  data-id="' + value.id + '" class="wishlist-btn addtowishlist">Add to Wishlist</button>' +
+                                '<h2 class="propricing">$' + value.price +
                                 '<small><strike>$' + value.original_price + '</strike></small></h2>' +
                                 '</div>' +
                                 '<div class="productBlockViewDtl">' +
@@ -1392,363 +1405,363 @@ $(document).ready(function () {
                     $('#postfilterdata').html(text);
                 } else {
                     $('#remove-row').remove();
-                   // $('.filter_data').html('<div class="NoCar"><i class="fa fa-exclamation-triangle"></i> <br> No Product Saled!</div>');
+                    // $('.filter_data').html('<div class="NoCar"><i class="fa fa-exclamation-triangle"></i> <br> No Product Saled!</div>');
                 }
             }
         });
     }
-    
-    // end  code for sub category higer and lower filters
-    
-    //code for veiw change main page and sub pages
-        //proListViewBtns
-	   //proListViewBtns
-	$(".proListView .proListViewBtns").click(function(event) {
-		event.preventDefault();
-	});
-          $('.proListView .gridColViewBtn').attr('data-id', '1');
-	//1 Row 1 column button
-	$(".proListView .rowColViewBtn").click(function() {
-		$(".proListView .proListViewBtns").removeClass("proListViewBtnsActive");
-		$(this).addClass("proListViewBtnsActive");
-                $(this).attr('data-id', '2');
-		$(".innerproductCol .col-sm-3.product-box-class").addClass("rowCol1ProductBoxClass");
-                $(".categoryMainSection .col-sm-3.product-box-class").addClass("rowCol1ProductBoxClass");
-	});
 
-	//4 columns button - grid view
-	$(".proListView .gridColViewBtn").click(function() {
-		$(".proListView .proListViewBtns").removeClass("proListViewBtnsActive");
-		$(this).addClass("proListViewBtnsActive");
-	        $(this).attr('data-id', '1');	
-               $(".innerproductCol .col-sm-3.product-box-class").removeClass("rowCol1ProductBoxClass");
-                $(".categoryMainSection .col-sm-3.product-box-class").removeClass("rowCol1ProductBoxClass");
-	});
-           $(".remove").click(function(){
-        
-    
-       swal({
-        title: "Are you sure?",
-        text: "You  want to empty cart!",
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonClass: "btn-danger",
-        confirmButtonText: "Yes, Empty it!",
-        cancelButtonText: "No, Cancel !",
-        closeOnConfirm: false,
-        closeOnCancel: false,
-        timer: 10000
-      },
-      function(isConfirm) {
-        if (isConfirm) {
-             
-          $.ajax({
-              url: '/removeAll',
-              type: "GET",
-             //url: '/removeAll/',
-            // type: 'DELETE',
-             error: function() {
-                alert('Something is wrong');
-             },
-             success: function(data) {
-                  swal("Deleted!", "Your Cart has been Empty.", "success");
-             }
-          });
-        } else {
-             
-          swal("Cancelled", "Your Cart is safe :)", "error");
-        }
-      });
-     
+    // end  code for sub category higer and lower filters
+
+    //code for veiw change main page and sub pages
+    //proListViewBtns
+    //proListViewBtns
+    $(".proListView .proListViewBtns").click(function (event) {
+        event.preventDefault();
     });
-         $('#ajaxtotalprice').hide();
-         $('#ajaxgiftboxtotal').hide();
-         $('#ajaxdeliverycharge').hide();
-         $('#ajaxtotalpay').hide();
-         $('#ajaxtotalpay').hide();
-         $('.ajaxitemtotal').hide();
-          
-     $('.giftwrappingcheck').change(function(){
+    $('.proListView .gridColViewBtn').attr('data-id', '1');
+    //1 Row 1 column button
+    $(".proListView .rowColViewBtn").click(function () {
+        $(".proListView .proListViewBtns").removeClass("proListViewBtnsActive");
+        $(this).addClass("proListViewBtnsActive");
+        $(this).attr('data-id', '2');
+        $(".innerproductCol .col-sm-3.product-box-class").addClass("rowCol1ProductBoxClass");
+        $(".categoryMainSection .col-sm-3.product-box-class").addClass("rowCol1ProductBoxClass");
+    });
+
+    //4 columns button - grid view
+    $(".proListView .gridColViewBtn").click(function () {
+        $(".proListView .proListViewBtns").removeClass("proListViewBtnsActive");
+        $(this).addClass("proListViewBtnsActive");
+        $(this).attr('data-id', '1');
+        $(".innerproductCol .col-sm-3.product-box-class").removeClass("rowCol1ProductBoxClass");
+        $(".categoryMainSection .col-sm-3.product-box-class").removeClass("rowCol1ProductBoxClass");
+    });
+    $(".remove").click(function () {
+
+
+        swal({
+            title: "Are you sure?",
+            text: "You  want to empty cart!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonClass: "btn-danger",
+            confirmButtonText: "Yes, Empty it!",
+            cancelButtonText: "No, Cancel !",
+            closeOnConfirm: false,
+            closeOnCancel: false,
+            timer: 10000
+        },
+                function (isConfirm) {
+                    if (isConfirm) {
+
+                        $.ajax({
+                            url: '/removeAll',
+                            type: "GET",
+                            //url: '/removeAll/',
+                            // type: 'DELETE',
+                            error: function () {
+                                alert('Something is wrong');
+                            },
+                            success: function (data) {
+                                swal("Deleted!", "Your Cart has been Empty.", "success");
+                            }
+                        });
+                    } else {
+
+                        swal("Cancelled", "Your Cart is safe :)", "error");
+                    }
+                });
+
+    });
+    $('#ajaxtotalprice').hide();
+    $('#ajaxgiftboxtotal').hide();
+    $('#ajaxdeliverycharge').hide();
+    $('#ajaxtotalpay').hide();
+    $('#ajaxtotalpay').hide();
+    $('.ajaxitemtotal').hide();
+
+    $('.giftwrappingcheck').change(function () {
         var countCheckedCheckboxes = $('.giftwrappingcheck').filter(':checked').length;
         // $('#count-checked-checkboxes').text(countCheckedCheckboxes);
-         var giftwrapvalue= $(this).val();
-   
-         var categorycheck = $(this).is(':checked')
+        var giftwrapvalue = $(this).val();
+
+        var categorycheck = $(this).is(':checked')
         var categoryvalue = JSON.stringify(categorycheck)
         if (categoryvalue == 'true') {
-            var giftwrapvaluecheck= $(this).val();
-            
-              
-              if(countCheckedCheckboxes > 3){
-                 
-            $('#giftwrapmessage').html('<p style="color:red" >Gift wraspping more than 3 item not applicable</p>');   
-         $('.guestCheckOutBtns').attr("disabled", "disabled");
-      
-         }else{
-             var eachval= $('#qtyinc'+giftwrapvaluecheck).val();
-              
-                if(eachval > 3){
-               
-             //$('.decermentitem').on('click');
-            
+            var giftwrapvaluecheck = $(this).val();
+
+
+            if (countCheckedCheckboxes > 3) {
+
+                $('#giftwrapmessage').html('<p style="color:red" >Gift wraspping more than 3 item not applicable</p>');
+                $('.guestCheckOutBtns').attr("disabled", "disabled");
+
+            } else {
+                var eachval = $('#qtyinc' + giftwrapvaluecheck).val();
+
+                if (eachval > 3) {
+
+                    //$('.decermentitem').on('click');
+
 //             $('#decermentitem'+giftwrapvaluecheck).off('click');
-             //$('.decermentitembtn').on('click');
-             $('#giftwrapmessage').html('<p style="color:red" >Gift wraspping more than 3 item not applicable</p>');   
-         $('.guestCheckOutBtns').attr("disabled", "disabled");
-         $('#giftWrap'+giftwrapvalue).attr('checked', false); // Unchecks it
-        }else{
-            
-                 if(eachval == 3){ 
-                            $.ajax({
-            url: '/addgiftbox',
-            type: "GET",
-            data: {brand: giftwrapvaluecheck},
-            // dataType:"JSON",
-            success: function (data) {
- 
+                    //$('.decermentitembtn').on('click');
+                    $('#giftwrapmessage').html('<p style="color:red" >Gift wraspping more than 3 item not applicable</p>');
+                    $('.guestCheckOutBtns').attr("disabled", "disabled");
+                    $('#giftWrap' + giftwrapvalue).attr('checked', false); // Unchecks it
+                } else {
+
+                    if (eachval == 3) {
+                        $.ajax({
+                            url: '/addgiftbox',
+                            type: "GET",
+                            data: {brand: giftwrapvaluecheck},
+                            // dataType:"JSON",
+                            success: function (data) {
+
 //                alert(JSON.parse(data));
-                data = JSON.parse(data);
+                                data = JSON.parse(data);
 //                 alert(data.success);
-                if (data.success == "1") {
-                     $('#loadtotalprice').hide();
-                     $('#loadgiftboxtotal').hide();
-                     $('#loaddeliverycharge').hide();
-                     $('#loadtotalpay').hide();
-                     
-                     
-                     $('#ajaxtotalprice').show();
-                     $('#ajaxgiftboxtotal').show();
-                     $('#ajaxdeliverycharge').show();
-                     $('#ajaxtotalpay').show();
-                 
-                   var totalPriceitem= data.totalPrice;
-                    
-                   var giftboxtotalitem= data.giftboxtotal;
-                   var dilverycharge= data.dilverycharge;
-                   var dilverychargevalue = Math.abs(dilverycharge);
-                   var pricesing;
-                   if(dilverychargevalue == 0){
-                       dilverychargevalue="Free";
-                       var delivercharge=0;
-                       pricesing="";
-                   }else{
-                       dilverychargevalue=dilverychargevalue;
-                       delivercharge=dilverychargevalue
-                       pricesing="$";
-                   }
-                   var datatotal= parseInt(giftboxtotalitem) +  parseInt(delivercharge);
-                   var totalpay = totalPriceitem + datatotal;
+                                if (data.success == "1") {
+                                    $('#loadtotalprice').hide();
+                                    $('#loadgiftboxtotal').hide();
+                                    $('#loaddeliverycharge').hide();
+                                    $('#loadtotalpay').hide();
+
+
+                                    $('#ajaxtotalprice').show();
+                                    $('#ajaxgiftboxtotal').show();
+                                    $('#ajaxdeliverycharge').show();
+                                    $('#ajaxtotalpay').show();
+
+                                    var totalPriceitem = data.totalPrice;
+
+                                    var giftboxtotalitem = data.giftboxtotal;
+                                    var dilverycharge = data.dilverycharge;
+                                    var dilverychargevalue = Math.abs(dilverycharge);
+                                    var pricesing;
+                                    if (dilverychargevalue == 0) {
+                                        dilverychargevalue = "Free";
+                                        var delivercharge = 0;
+                                        pricesing = "";
+                                    } else {
+                                        dilverychargevalue = dilverychargevalue;
+                                        delivercharge = dilverychargevalue
+                                        pricesing = "$";
+                                    }
+                                    var datatotal = parseInt(giftboxtotalitem) + parseInt(delivercharge);
+                                    var totalpay = totalPriceitem + datatotal;
 //                    alert(totalpay+'this is totoal account');
-                   $('#ajaxtotalprice').html('$'+totalPriceitem);
-                   $('#ajaxgiftboxtotal').html('$'+giftboxtotalitem);
-                   $('#ajaxdeliverycharge').html(pricesing+dilverychargevalue);
-                   $('#ajaxtotalpay').html('$'+totalpay);
+                                    $('#ajaxtotalprice').html('$' + totalPriceitem);
+                                    $('#ajaxgiftboxtotal').html('$' + giftboxtotalitem);
+                                    $('#ajaxdeliverycharge').html(pricesing + dilverychargevalue);
+                                    $('#ajaxtotalpay').html('$' + totalpay);
 //                    $.each(data.data, function (index, value) {
 //                     
 //                    });
 
-                } else {
-                     $('#ajaxtotalprice').hide();
-                     $('#ajaxgiftboxtotal').hide();
-                      $('#ajaxdeliverycharge').hide();
-                      $('#ajaxtotalpay').hide();
-                      
-                      
-                       
-                      $('#loadtotalprice').show();
-                     $('#loadgiftboxtotal').show();
-                     $('#loaddeliverycharge').show();
-                     $('#loadtotalpay').show();
-                }
-            }
-        });
-               $(".decermentitem").on('click');
-               $(".incermentitem").on('click');
-               $(".decermentitembtn").on('click');
-               $(".incermentitembtn").on('click');
-               $('#giftwrapmessage').html("");
-    
-         $(".guestCheckOutBtns").removeAttr("disabled");
-                           $('#incermentitem'+giftwrapvaluecheck).attr("data-toggle","tooltip");
-                           $('#incermentitem'+giftwrapvaluecheck).attr("data-placement","left");
-                           $('#incermentitem'+giftwrapvaluecheck).attr("title","Gift wraspping more than 3 item not applicable");
-                          $('#incermentitem'+giftwrapvaluecheck).removeClass("incermentitem");
-                          $('#incermentitem'+giftwrapvaluecheck).addClass('incermentitemclick');
-                          $('label .giftwrappingcheck').not('#giftWrap'+giftwrapvaluecheck).attr("disabled", "disabled");
-                        }else if(countCheckedCheckboxes==1){
-                                  $.ajax({
-            url: '/addgiftbox',
-            type: "GET",
-            data: {brand: giftwrapvaluecheck},
-            // dataType:"JSON",
-            success: function (data) {
- 
+                                } else {
+                                    $('#ajaxtotalprice').hide();
+                                    $('#ajaxgiftboxtotal').hide();
+                                    $('#ajaxdeliverycharge').hide();
+                                    $('#ajaxtotalpay').hide();
+
+
+
+                                    $('#loadtotalprice').show();
+                                    $('#loadgiftboxtotal').show();
+                                    $('#loaddeliverycharge').show();
+                                    $('#loadtotalpay').show();
+                                }
+                            }
+                        });
+                        $(".decermentitem").on('click');
+                        $(".incermentitem").on('click');
+                        $(".decermentitembtn").on('click');
+                        $(".incermentitembtn").on('click');
+                        $('#giftwrapmessage').html("");
+
+                        $(".guestCheckOutBtns").removeAttr("disabled");
+                        $('#incermentitem' + giftwrapvaluecheck).attr("data-toggle", "tooltip");
+                        $('#incermentitem' + giftwrapvaluecheck).attr("data-placement", "left");
+                        $('#incermentitem' + giftwrapvaluecheck).attr("title", "Gift wraspping more than 3 item not applicable");
+                        $('#incermentitem' + giftwrapvaluecheck).removeClass("incermentitem");
+                        $('#incermentitem' + giftwrapvaluecheck).addClass('incermentitemclick');
+                        $('label .giftwrappingcheck').not('#giftWrap' + giftwrapvaluecheck).attr("disabled", "disabled");
+                    } else if (countCheckedCheckboxes == 1) {
+                        $.ajax({
+                            url: '/addgiftbox',
+                            type: "GET",
+                            data: {brand: giftwrapvaluecheck},
+                            // dataType:"JSON",
+                            success: function (data) {
+
 //                alert(JSON.parse(data));
-                data = JSON.parse(data);
+                                data = JSON.parse(data);
 //                 alert(data.success);
-                if (data.success == "1") {
-                     $('#loadtotalprice').hide();
-                     $('#loadgiftboxtotal').hide();
-                     $('#loaddeliverycharge').hide();
-                     $('#loadtotalpay').hide();
-                     
-                     
-                     $('#ajaxtotalprice').show();
-                     $('#ajaxgiftboxtotal').show();
-                     $('#ajaxdeliverycharge').show();
-                     $('#ajaxtotalpay').show();
-                 
-                   var totalPriceitem= data.totalPrice;
-                    
-                   var giftboxtotalitem= data.giftboxtotal;
-                   var dilverycharge= data.dilverycharge;
-                   var dilverychargevalue = Math.abs(dilverycharge);
-                   var pricesing;
-                   if(dilverychargevalue == 0){
-                       dilverychargevalue="Free";
-                       var delivercharge=0;
-                       pricesing="";
-                   }else{
-                       dilverychargevalue=dilverychargevalue;
-                       delivercharge=dilverychargevalue
-                       pricesing="$";
-                   }
-                    var datatotal= parseInt(giftboxtotalitem) +  parseInt(delivercharge);
-                   var totalpay = totalPriceitem + datatotal;
+                                if (data.success == "1") {
+                                    $('#loadtotalprice').hide();
+                                    $('#loadgiftboxtotal').hide();
+                                    $('#loaddeliverycharge').hide();
+                                    $('#loadtotalpay').hide();
+
+
+                                    $('#ajaxtotalprice').show();
+                                    $('#ajaxgiftboxtotal').show();
+                                    $('#ajaxdeliverycharge').show();
+                                    $('#ajaxtotalpay').show();
+
+                                    var totalPriceitem = data.totalPrice;
+
+                                    var giftboxtotalitem = data.giftboxtotal;
+                                    var dilverycharge = data.dilverycharge;
+                                    var dilverychargevalue = Math.abs(dilverycharge);
+                                    var pricesing;
+                                    if (dilverychargevalue == 0) {
+                                        dilverychargevalue = "Free";
+                                        var delivercharge = 0;
+                                        pricesing = "";
+                                    } else {
+                                        dilverychargevalue = dilverychargevalue;
+                                        delivercharge = dilverychargevalue
+                                        pricesing = "$";
+                                    }
+                                    var datatotal = parseInt(giftboxtotalitem) + parseInt(delivercharge);
+                                    var totalpay = totalPriceitem + datatotal;
 //                    alert(giftboxtotalitem+'this is giftboxtotalitem account');
 //                     alert(datatotal+'this is delivercharge account');
 //                    alert(totalpay+'this is totoal account');
-                   $('#ajaxtotalprice').html('$'+totalPriceitem);
-                   $('#ajaxgiftboxtotal').html('$'+giftboxtotalitem);
-                   $('#ajaxdeliverycharge').html(pricesing+dilverychargevalue);
-                   $('#ajaxtotalpay').html('$'+totalpay);
+                                    $('#ajaxtotalprice').html('$' + totalPriceitem);
+                                    $('#ajaxgiftboxtotal').html('$' + giftboxtotalitem);
+                                    $('#ajaxdeliverycharge').html(pricesing + dilverychargevalue);
+                                    $('#ajaxtotalpay').html('$' + totalpay);
 //                    $.each(data.data, function (index, value) {
 //                     
 //                    });
 
-                } else {
-                     $('#ajaxtotalprice').hide();
-                     $('#ajaxgiftboxtotal').hide();
-                      $('#ajaxdeliverycharge').hide();
-                      $('#ajaxtotalpay').hide();
-                      
-                      
-                       
-                      $('#loadtotalprice').show();
-                     $('#loadgiftboxtotal').show();
-                     $('#loaddeliverycharge').show();
-                     $('#loadtotalpay').show();
-                }
-            }
-        });
-               $(".decermentitem").on('click');
-               $(".incermentitem").on('click');
-               $(".decermentitembtn").on('click');
-               $(".incermentitembtn").on('click');
-               $('#giftwrapmessage').html("");
-    
-         $(".guestCheckOutBtns").removeAttr("disabled");
-                        }else{
-                             var checkvalue = $("#qtyinc"+giftwrapvaluecheck).val();
+                                } else {
+                                    $('#ajaxtotalprice').hide();
+                                    $('#ajaxgiftboxtotal').hide();
+                                    $('#ajaxdeliverycharge').hide();
+                                    $('#ajaxtotalpay').hide();
+
+
+
+                                    $('#loadtotalprice').show();
+                                    $('#loadgiftboxtotal').show();
+                                    $('#loaddeliverycharge').show();
+                                    $('#loadtotalpay').show();
+                                }
+                            }
+                        });
+                        $(".decermentitem").on('click');
+                        $(".incermentitem").on('click');
+                        $(".decermentitembtn").on('click');
+                        $(".incermentitembtn").on('click');
+                        $('#giftwrapmessage').html("");
+
+                        $(".guestCheckOutBtns").removeAttr("disabled");
+                    } else {
+                        var checkvalue = $("#qtyinc" + giftwrapvaluecheck).val();
 //                            alert("call now each 1 or 2");
 //                              alert(giftwrapvalue+'id of click');
 //                            alert(checkvalue+'value of click');
-                          //alert(eachval+'this ech val click');
-         
-              $('.cartBlockWrap label input[class="giftwrappingcheck"]:checked').not('#giftWrap'+giftwrapvalue).each(function() {
-         var valueofcheck= this.value;
-              var giftwrapvaluechecktotal= $("#qtyinc"+valueofcheck).val();
-            var balanccheck = parseInt(checkvalue) + parseInt(giftwrapvaluechecktotal);
-            //alert(balanccheck+'thsi balacne value now');
-              if(eachval !=3 && balanccheck > 3 ){
-                      $('#giftWrap'+giftwrapvalue).attr('checked', false); // Unchecks it
+                        //alert(eachval+'this ech val click');
+
+                        $('.cartBlockWrap label input[class="giftwrappingcheck"]:checked').not('#giftWrap' + giftwrapvalue).each(function () {
+                            var valueofcheck = this.value;
+                            var giftwrapvaluechecktotal = $("#qtyinc" + valueofcheck).val();
+                            var balanccheck = parseInt(checkvalue) + parseInt(giftwrapvaluechecktotal);
+                            //alert(balanccheck+'thsi balacne value now');
+                            if (eachval != 3 && balanccheck > 3) {
+                                $('#giftWrap' + giftwrapvalue).attr('checked', false); // Unchecks it
 //                    $('label .giftwrappingcheck').not('#giftWrap'+valueofcheck).attr("disabled", "disabled");
-                      $('label .giftwrappingcheck').not('#giftWrap'+valueofcheck).attr("data-toggle","tooltip");
-                      $('label .giftwrappingcheck').not('#giftWrap'+valueofcheck).attr("data-placement","left");
-                      $('label .giftwrappingcheck').not('#giftWrap'+valueofcheck).attr("title","Gift wraspping more than 3 item not applicable");
-                       $('#giftwrapmessage').html('<p style="color:red" >Gift wraspping more than 3 item not applicable</p>');  
-                  }else{
-                  
-                            $.ajax({
-            url: '/addgiftbox',
-            type: "GET",
-            data: {brand: giftwrapvaluecheck},
-            // dataType:"JSON",
-            success: function (data) {
- 
+                                $('label .giftwrappingcheck').not('#giftWrap' + valueofcheck).attr("data-toggle", "tooltip");
+                                $('label .giftwrappingcheck').not('#giftWrap' + valueofcheck).attr("data-placement", "left");
+                                $('label .giftwrappingcheck').not('#giftWrap' + valueofcheck).attr("title", "Gift wraspping more than 3 item not applicable");
+                                $('#giftwrapmessage').html('<p style="color:red" >Gift wraspping more than 3 item not applicable</p>');
+                            } else {
+
+                                $.ajax({
+                                    url: '/addgiftbox',
+                                    type: "GET",
+                                    data: {brand: giftwrapvaluecheck},
+                                    // dataType:"JSON",
+                                    success: function (data) {
+
 //                alert(JSON.parse(data));
-                data = JSON.parse(data);
+                                        data = JSON.parse(data);
 //                 alert(data.success);
-                if (data.success == "1") {
-                     $('#loadtotalprice').hide();
-                     $('#loadgiftboxtotal').hide();
-                     $('#loaddeliverycharge').hide();
-                     $('#loadtotalpay').hide();
-                     
-                     
-                     $('#ajaxtotalprice').show();
-                     $('#ajaxgiftboxtotal').show();
-                     $('#ajaxdeliverycharge').show();
-                     $('#ajaxtotalpay').show();
-                 
-                   var totalPriceitem= data.totalPrice;
-                    
-                   var giftboxtotalitem= data.giftboxtotal;
-                   var dilverycharge= data.dilverycharge;
-                   var dilverychargevalue = Math.abs(dilverycharge);
-                   var pricesing;
-                   if(dilverychargevalue == 0){
-                       dilverychargevalue="Free";
-                       var delivercharge=0;
-                       pricesing="";
-                   }else{
-                       dilverychargevalue=dilverychargevalue;
-                       delivercharge=dilverychargevalue
-                       pricesing="$";
-                   }
-                   var datatotal= parseInt(giftboxtotalitem) +  parseInt(delivercharge);
-                   var totalpay = totalPriceitem + datatotal;
+                                        if (data.success == "1") {
+                                            $('#loadtotalprice').hide();
+                                            $('#loadgiftboxtotal').hide();
+                                            $('#loaddeliverycharge').hide();
+                                            $('#loadtotalpay').hide();
+
+
+                                            $('#ajaxtotalprice').show();
+                                            $('#ajaxgiftboxtotal').show();
+                                            $('#ajaxdeliverycharge').show();
+                                            $('#ajaxtotalpay').show();
+
+                                            var totalPriceitem = data.totalPrice;
+
+                                            var giftboxtotalitem = data.giftboxtotal;
+                                            var dilverycharge = data.dilverycharge;
+                                            var dilverychargevalue = Math.abs(dilverycharge);
+                                            var pricesing;
+                                            if (dilverychargevalue == 0) {
+                                                dilverychargevalue = "Free";
+                                                var delivercharge = 0;
+                                                pricesing = "";
+                                            } else {
+                                                dilverychargevalue = dilverychargevalue;
+                                                delivercharge = dilverychargevalue
+                                                pricesing = "$";
+                                            }
+                                            var datatotal = parseInt(giftboxtotalitem) + parseInt(delivercharge);
+                                            var totalpay = totalPriceitem + datatotal;
 //                   var totalpay= totalPriceitem +  giftboxtotalitem +  delivercharge;
 //                    alert(totalpay+'this is totoal account');
-                   $('#ajaxtotalprice').html('$'+totalPriceitem);
-                   $('#ajaxgiftboxtotal').html('$'+giftboxtotalitem);
-                   $('#ajaxdeliverycharge').html(pricesing+dilverychargevalue);
-                   $('#ajaxtotalpay').html('$'+totalpay);
+                                            $('#ajaxtotalprice').html('$' + totalPriceitem);
+                                            $('#ajaxgiftboxtotal').html('$' + giftboxtotalitem);
+                                            $('#ajaxdeliverycharge').html(pricesing + dilverychargevalue);
+                                            $('#ajaxtotalpay').html('$' + totalpay);
 //                    $.each(data.data, function (index, value) {
 //                     
 //                    });
 
-                } else {
-                     $('#ajaxtotalprice').hide();
-                     $('#ajaxgiftboxtotal').hide();
-                      $('#ajaxdeliverycharge').hide();
-                      $('#ajaxtotalpay').hide();
-                      
-                      
-                       
-                      $('#loadtotalprice').show();
-                     $('#loadgiftboxtotal').show();
-                     $('#loaddeliverycharge').show();
-                     $('#loadtotalpay').show();
-                }
-            }
-        });
-               $(".decermentitem").on('click');
-               $(".incermentitem").on('click');
-               $(".decermentitembtn").on('click');
-               $(".incermentitembtn").on('click');
-               $('#giftwrapmessage').html("");
-    
-         $(".guestCheckOutBtns").removeAttr("disabled");
-                        $('#incermentitem'+giftwrapvaluecheck).removeClass("incermentitemclick");
-                        $('#incermentitem'+giftwrapvaluecheck).addClass('incermentitem');
-              }
-              });                            
-                            
-                    
+                                        } else {
+                                            $('#ajaxtotalprice').hide();
+                                            $('#ajaxgiftboxtotal').hide();
+                                            $('#ajaxdeliverycharge').hide();
+                                            $('#ajaxtotalpay').hide();
+
+
+
+                                            $('#loadtotalprice').show();
+                                            $('#loadgiftboxtotal').show();
+                                            $('#loaddeliverycharge').show();
+                                            $('#loadtotalpay').show();
+                                        }
+                                    }
+                                });
+                                $(".decermentitem").on('click');
+                                $(".incermentitem").on('click');
+                                $(".decermentitembtn").on('click');
+                                $(".incermentitembtn").on('click');
+                                $('#giftwrapmessage').html("");
+
+                                $(".guestCheckOutBtns").removeAttr("disabled");
+                                $('#incermentitem' + giftwrapvaluecheck).removeClass("incermentitemclick");
+                                $('#incermentitem' + giftwrapvaluecheck).addClass('incermentitem');
+                            }
+                        });
+
+
 //                        $('#incermentitem'+giftwrapvaluecheck).on('click');
                     }
-                          // code for chek other chek qty valu and current cliek value not to greter than 3
+                    // code for chek other chek qty valu and current cliek value not to greter than 3
 //         var checkvalue = $("#qtyinc"+giftwrapvaluecheck).val();
 //             $('.cartBlockWrap label input[class="giftwrappingcheck"]:checked').not('#giftWrap'+giftwrapvalue).each(function() {
 //                var valueofcheck= this.value;
@@ -1764,31 +1777,31 @@ $(document).ready(function () {
 //
 //                }
 //             });
-             // end here
-        
-         
-        }
-             
-              
-         // $('#giftwrapmessage').html("");
-    
-        // $(".guestCheckOutBtns").removeAttr("disabled");
-            } 
+                    // end here
+
+
+                }
+
+
+                // $('#giftwrapmessage').html("");
+
+                // $(".guestCheckOutBtns").removeAttr("disabled");
+            }
         } else {
- 
-            var giftwrapvaluecheck= $(this).val();
-              if(countCheckedCheckboxes > 3){ 
-         $('#giftwrapmessage').html('<p style="color:red" >Gift wraspping more than 3 item not applicable</p>');   
-         $('.guestCheckOutBtns').attr("disabled", "disabled");
-         }else{
-             var eachval= $('#qtyinc'+giftwrapvaluecheck).val();
-              $('#incermentitem'+giftwrapvaluecheck).removeAttr("data-toggle");
-               $('#incermentitem'+giftwrapvaluecheck).removeAttr("data-placement");
-               $('#incermentitem'+giftwrapvaluecheck).removeAttr("title");
-              $('#incermentitem'+giftwrapvaluecheck).removeClass("incermentitemdisabled ");
-             $('#incermentitem'+giftwrapvaluecheck).removeClass("incermentitemclick");
-             $('#incermentitem'+giftwrapvaluecheck).addClass('incermentitem');
-            
+
+            var giftwrapvaluecheck = $(this).val();
+            if (countCheckedCheckboxes > 3) {
+                $('#giftwrapmessage').html('<p style="color:red" >Gift wraspping more than 3 item not applicable</p>');
+                $('.guestCheckOutBtns').attr("disabled", "disabled");
+            } else {
+                var eachval = $('#qtyinc' + giftwrapvaluecheck).val();
+                $('#incermentitem' + giftwrapvaluecheck).removeAttr("data-toggle");
+                $('#incermentitem' + giftwrapvaluecheck).removeAttr("data-placement");
+                $('#incermentitem' + giftwrapvaluecheck).removeAttr("title");
+                $('#incermentitem' + giftwrapvaluecheck).removeClass("incermentitemdisabled ");
+                $('#incermentitem' + giftwrapvaluecheck).removeClass("incermentitemclick");
+                $('#incermentitem' + giftwrapvaluecheck).addClass('incermentitem');
+
 //                 if(eachval == 3){ 
 //                    
 //                                 $('#incermentitem'+giftwrapvaluecheck).removeClass("incermentitem");
@@ -1798,597 +1811,618 @@ $(document).ready(function () {
 //                        $('#incermentitem'+giftwrapvaluecheck).removeClass("incermentitemclick");
 //                        $('#incermentitem'+giftwrapvaluecheck).addClass('incermentitem');
 //                   }
-             $.ajax({
-            url: '/removegiftbox',
-            type: "GET",
-            data: {brand: giftwrapvaluecheck},
-            // dataType:"JSON",
-            success: function (data) {
+                $.ajax({
+                    url: '/removegiftbox',
+                    type: "GET",
+                    data: {brand: giftwrapvaluecheck},
+                    // dataType:"JSON",
+                    success: function (data) {
 
-               
-                data = JSON.parse(data);
-                // alert(data);
-                if (data.success == "1") {
-                        $('#loadtotalprice').hide();
-                     $('#loadgiftboxtotal').hide();
-                     $('#loaddeliverycharge').hide();
-                     $('#loadtotalpay').hide();
-                     
-                     
-                     $('#ajaxtotalprice').show();
-                     $('#ajaxgiftboxtotal').show();
-                     $('#ajaxdeliverycharge').show();
-                      $('#ajaxtotalpay').show();
-                 
-                   var totalPriceitem= data.totalPrice;
-                    
-                   var giftboxtotalitem= data.giftboxtotal;
-                   var dilverycharge= data.dilverycharge;
-                   var dilverychargevalue = Math.abs(dilverycharge);
-                   var pricesing;
-                   if(dilverychargevalue == 0){
-                       dilverychargevalue="Free";
-                       var delivercharge=0;
-                       pricesing="";
-                   }else{
-                       dilverychargevalue=dilverychargevalue;
-                       delivercharge=dilverychargevalue
-                     pricesing="$";
-                    }
-                    var datatotal= parseInt(giftboxtotalitem) +  parseInt(delivercharge);
-                   var totalpay = totalPriceitem + datatotal;
+
+                        data = JSON.parse(data);
+                        // alert(data);
+                        if (data.success == "1") {
+                            $('#loadtotalprice').hide();
+                            $('#loadgiftboxtotal').hide();
+                            $('#loaddeliverycharge').hide();
+                            $('#loadtotalpay').hide();
+
+
+                            $('#ajaxtotalprice').show();
+                            $('#ajaxgiftboxtotal').show();
+                            $('#ajaxdeliverycharge').show();
+                            $('#ajaxtotalpay').show();
+
+                            var totalPriceitem = data.totalPrice;
+
+                            var giftboxtotalitem = data.giftboxtotal;
+                            var dilverycharge = data.dilverycharge;
+                            var dilverychargevalue = Math.abs(dilverycharge);
+                            var pricesing;
+                            if (dilverychargevalue == 0) {
+                                dilverychargevalue = "Free";
+                                var delivercharge = 0;
+                                pricesing = "";
+                            } else {
+                                dilverychargevalue = dilverychargevalue;
+                                delivercharge = dilverychargevalue
+                                pricesing = "$";
+                            }
+                            var datatotal = parseInt(giftboxtotalitem) + parseInt(delivercharge);
+                            var totalpay = totalPriceitem + datatotal;
 //                   var totalpay= totalPriceitem + giftboxtotalitem + delivercharge;
-                   
-                   $('#ajaxtotalprice').html('$'+totalPriceitem);
-                   $('#ajaxgiftboxtotal').html('$'+giftboxtotalitem);
-                   $('#ajaxdeliverycharge').html(pricesing+dilverychargevalue);
-                    $('#ajaxtotalpay').html('$'+totalpay);
-                    
 
-                } else {
-                     $('#ajaxtotalprice').hide();
-                     $('#ajaxgiftboxtotal').hide();
-                      $('#ajaxdeliverycharge').hide();
-                      $('#ajaxtotalpay').hide();
-                      
-                      
-                       
-                      $('#loadtotalprice').show();
-                     $('#loadgiftboxtotal').show();
-                     $('#loaddeliverycharge').show();
-                      $('#loadtotalpay').show();
-                  
-                }
+                            $('#ajaxtotalprice').html('$' + totalPriceitem);
+                            $('#ajaxgiftboxtotal').html('$' + giftboxtotalitem);
+                            $('#ajaxdeliverycharge').html(pricesing + dilverychargevalue);
+                            $('#ajaxtotalpay').html('$' + totalpay);
+
+
+                        } else {
+                            $('#ajaxtotalprice').hide();
+                            $('#ajaxgiftboxtotal').hide();
+                            $('#ajaxdeliverycharge').hide();
+                            $('#ajaxtotalpay').hide();
+
+
+
+                            $('#loadtotalprice').show();
+                            $('#loadgiftboxtotal').show();
+                            $('#loaddeliverycharge').show();
+                            $('#loadtotalpay').show();
+
+                        }
+                    }
+                });
+
+                $('#giftwrapmessage').html("");
+                //  $('.guestCheckOutBtns').attr("disabled", "disabled");
+                $(".guestCheckOutBtns").removeAttr("disabled");
             }
-        });
-             
-          $('#giftwrapmessage').html("");
-      //  $('.guestCheckOutBtns').attr("disabled", "disabled");
-         $(".guestCheckOutBtns").removeAttr("disabled");
-             }
             //alert("this is unchekc value"+giftwrapvaluecheck)
         }
-           
-              
-        
+
+
+
     });
     //end code for gift box add to click
 
-           $('.incermentitem').click(function(){
-               
-             var giftwrapvalue=$(this).attr("data-id");
-            
-             var eachval= $('#qtyinc'+giftwrapvalue).val();
-             var one=1;
+    $('.incermentitem').click(function () {
 
-             var eachvalinc = parseInt(one) + parseInt(eachval);
+        var giftwrapvalue = $(this).attr("data-id");
+
+        var eachval = $('#qtyinc' + giftwrapvalue).val();
+        var one = 1;
+
+        var eachvalinc = parseInt(one) + parseInt(eachval);
 
 //              alert(eachvalinc+'this is value on increm df');
-                 var categorycheck = $("#giftWrap"+giftwrapvalue).is(':checked')
+        var categorycheck = $("#giftWrap" + giftwrapvalue).is(':checked')
         var categoryvalue = JSON.stringify(categorycheck)
         if (categoryvalue == 'true') {
-                if(eachvalinc > 3){
-             $('#giftwrapmessage').html('<p style="color:red" >Gift wraspping more than 3 item not applicable</p>');   
+            if (eachvalinc > 3) {
+                $('#giftwrapmessage').html('<p style="color:red" >Gift wraspping more than 3 item not applicable</p>');
 //         $('.guestCheckOutBtns').attr("disabled", "disabled");
 //         $('#giftWrap'+giftwrapvalue).attr('checked', false); // Unchecks it
-        }else{
-             
-                 if(eachvalinc == 3){ 
-                           $('#incermentitem'+giftwrapvalue).attr("data-toggle","tooltip");
-                           $('#incermentitem'+giftwrapvalue).attr("data-placement","left");
-                           $('#incermentitem'+giftwrapvalue).attr("title","Gift wraspping more than 3 item not applicable");
-                          $('#incermentitem'+giftwrapvalue).removeClass("incermentitem");
-                          $('#incermentitem'+giftwrapvalue).addClass('incermentitemclick');
-                          $('label .giftwrappingcheck').not('#giftWrap'+giftwrapvalue).attr("disabled", "disabled");
-                        }else{
-                       
-                        $('#incermentitem'+giftwrapvalue).removeClass("incermentitemclick");
-                        $('#incermentitem'+giftwrapvalue).addClass('incermentitem');
- 
-                    }
-                           $.ajax({
-            url: '/incrementitem',
-            type: "GET",
-            data: {brand: giftwrapvalue},
-             
-            success: function (data) {
- 
-//                alert(JSON.parse(data));
-                data = JSON.parse(data);
-//                 alert(data.success);
-                if (data.success == "1") {
-                    $.each(data.data, function (index, value) {
- 
-//                                alert(JSON.stringify(value));
-                           if(value[giftwrapvalue]){
-                              
-                           // alert(value[giftwrapvalue].qty);
-                                var productitemqty =value[giftwrapvalue].qty;
-                                   var productitemprice =value[giftwrapvalue].price;
-                                   
-                                $('#qtyinc'+giftwrapvalue).val(value[giftwrapvalue].qty);
-                                     $('#loadtotalprice').hide();
-                     $('#loadgiftboxtotal').hide();
-                     $('#loaddeliverycharge').hide();
-                     $('#loadtotalpay').hide();
-                     $('#loaditemtotal'+giftwrapvalue).hide();
-                     
-                     
-                     $('#ajaxtotalprice').show();
-                     $('#ajaxgiftboxtotal').show();
-                     $('#ajaxdeliverycharge').show();
-                     $('#ajaxtotalpay').show();
-                     $('#ajaxitemtotal'+giftwrapvalue).show();
-                 
-                   var totalPriceitem = data.totalPrice;
-                    
-                   var giftboxtotalitem= data.giftboxtotal;
-                   var dilverycharge= data.dilverycharge;
-                   var dilverychargevalue = Math.abs(dilverycharge);
-                   var pricesing;
-                   if(dilverychargevalue == 0){
-                       dilverychargevalue="Free";
-                       var delivercharge=0;
-                       pricesing="";
-                   }else{
-                       dilverychargevalue=dilverychargevalue;
-                       delivercharge=dilverychargevalue
-                       pricesing="$";
-                   }
-                   if(value[giftwrapvalue].qty > 3){
- 
-                    $('#giftWrap'+giftwrapvalue).attr('checked', false);
-                    $('label .giftwrappingcheck').not('#giftWrap'+giftwrapvalue).attr("disabled", "disabled");
-                   }else{
-                       $('label .giftwrappingcheck').not('#giftWrap'+giftwrapvalue).removeAttr("disabled", "disabled");
-                   // $('#giftWrap'+giftwrapvalue).attr('checked', true);
- 
-                                }
-                   var totalitemamount =  productitemqty * productitemprice;
-                   var datatotal= parseInt(giftboxtotalitem) +  parseInt(delivercharge);
-                   var totalpay = totalPriceitem + datatotal;
-//                   var totalpay = totalPriceitem +  giftboxtotalitem +  delivercharge;
-                      
-//                    alert(totalpay+'this is totoal account');
-                   $('#ajaxitemtotal'+giftwrapvalue).html('$'+productitemprice);
-                   $('#ajaxtotalprice').html('$'+totalPriceitem);
-                   $('#ajaxgiftboxtotal').html('$'+giftboxtotalitem);
-                   $('#ajaxdeliverycharge').html(pricesing+dilverychargevalue);
-                   $('#ajaxtotalpay').html('$'+totalpay);
-                           }
-                                
- 
-                    });
-                } else {
-                     $('#ajaxtotalprice').hide();
-                     $('#ajaxgiftboxtotal').hide();
-                      $('#ajaxdeliverycharge').hide();
-                      $('#ajaxtotalpay').hide();
-                      $('.ajaxitemtotal').hide();
-                      
-                       
-                      $('#loadtotalprice').show();
-                     $('#loadgiftboxtotal').show();
-                     $('#loaddeliverycharge').show();
-                     $('#loadtotalpay').show();
-                     $('.loaditemtotal').show();
-                }
-            }
-         
-        });
-             }
-        }else{
-               $.ajax({
-            url: '/incrementitem',
-            type: "GET",
-            data: {brand: giftwrapvalue},
-             
-            success: function (data) {
- 
-//                alert(JSON.parse(data));
-                data = JSON.parse(data);
-//                 alert(data.success);
-                if (data.success == "1") {
-                    $.each(data.data, function (index, value) {
- 
-//                                alert(JSON.stringify(value));
-                           if(value[giftwrapvalue]){
-                              
-                           // alert(value[giftwrapvalue].qty);
-                                var productitemqty =value[giftwrapvalue].qty;
-                                   var productitemprice =value[giftwrapvalue].price;
-                                   
-                                $('#qtyinc'+giftwrapvalue).val(value[giftwrapvalue].qty);
-                                     $('#loadtotalprice').hide();
-                     $('#loadgiftboxtotal').hide();
-                     $('#loaddeliverycharge').hide();
-                     $('#loadtotalpay').hide();
-                     $('#loaditemtotal'+giftwrapvalue).hide();
-                     
-                     
-                     $('#ajaxtotalprice').show();
-                     $('#ajaxgiftboxtotal').show();
-                     $('#ajaxdeliverycharge').show();
-                     $('#ajaxtotalpay').show();
-                     $('#ajaxitemtotal'+giftwrapvalue).show();
-                 
-                   var totalPriceitem = data.totalPrice;
-                    
-                   var giftboxtotalitem= data.giftboxtotal;
-                   var dilverycharge= data.dilverycharge;
-                   var dilverychargevalue = Math.abs(dilverycharge);
-                   var pricesing;
-                   if(dilverychargevalue == 0){
-                       dilverychargevalue="Free";
-                       var delivercharge=0;
-                       pricesing="";
-                   }else{
-                       dilverychargevalue=dilverychargevalue;
-                       delivercharge=dilverychargevalue
-                       pricesing="$";
-                   }
-                   if(value[giftwrapvalue].qty > 3){
- 
-                    $('#giftWrap'+giftwrapvalue).attr('checked', false);
-                    $('label .giftwrappingcheck').not('#giftWrap'+giftwrapvalue).attr("disabled", "disabled");
-                   }else{
-                       $('label .giftwrappingcheck').not('#giftWrap'+giftwrapvalue).removeAttr("disabled", "disabled");
-                   // $('#giftWrap'+giftwrapvalue).attr('checked', true);
- 
-                                }
-                   var totalitemamount =  productitemqty * productitemprice;
-                   var datatotal= parseInt(giftboxtotalitem) +  parseInt(delivercharge);
-                   var totalpay = totalPriceitem + datatotal;
-//                   var totalpay = totalPriceitem +  giftboxtotalitem +  delivercharge;
-                      
-//                    alert(totalpay+'this is totoal account');
-                   $('#ajaxitemtotal'+giftwrapvalue).html('$'+productitemprice);
-                   $('#ajaxtotalprice').html('$'+totalPriceitem);
-                   $('#ajaxgiftboxtotal').html('$'+giftboxtotalitem);
-                   $('#ajaxdeliverycharge').html(pricesing+dilverychargevalue);
-                   $('#ajaxtotalpay').html('$'+totalpay);
-                           }
-                                
- 
-                    });
-                } else {
-                     $('#ajaxtotalprice').hide();
-                     $('#ajaxgiftboxtotal').hide();
-                      $('#ajaxdeliverycharge').hide();
-                      $('#ajaxtotalpay').hide();
-                      $('.ajaxitemtotal').hide();
-                      
-                       
-                      $('#loadtotalprice').show();
-                     $('#loadgiftboxtotal').show();
-                     $('#loaddeliverycharge').show();
-                     $('#loadtotalpay').show();
-                     $('.loaditemtotal').show();
-                }
-            }
-         
-        });
-        }
-  
-         
-           });
-           // code for decrment the quanity of item in shooping cart page
-            $('.decermentitem').click(function(){
-                
-             var giftwrapvalue=$(this).attr("data-id");
-                var eachval= $('#qtyinc'+giftwrapvalue).val();
-             var one=1;
+            } else {
 
-             var eachvalinc = parseInt(eachval) - parseInt(one)  ;
- 
-//              alert(eachvalinc+'this is value on increm df');
-                 var categorycheck = $("#giftWrap"+giftwrapvalue).is(':checked')
-        var categoryvalue = JSON.stringify(categorycheck)
-        if (categoryvalue == 'true') {
-                if(eachvalinc > 3){
-             $('#giftwrapmessage').html('<p style="color:red" >Gift wraspping more than 3 item not applicable</p>');   
-         $('.guestCheckOutBtns').attr("disabled", "disabled");
-//         $('#giftWrap'+giftwrapvalue).attr('checked', false); // Unchecks it
-        }else{
-                     if(eachvalinc == 3){ 
-                           $('#incermentitem'+giftwrapvalue).attr("data-toggle","tooltip");
-                           $('#incermentitem'+giftwrapvalue).attr("data-placement","left");
-                           $('#incermentitem'+giftwrapvalue).attr("title","Gift wraspping more than 3 item not applicable");
-                          $('#incermentitem'+giftwrapvalue).removeClass("incermentitem");
-                          $('#incermentitem'+giftwrapvalue).addClass('incermentitemclick');
-                          $('label .giftwrappingcheck').not('#giftWrap'+giftwrapvalue).attr("disabled", "disabled");
-                        }else{
-                       
-                        $('#incermentitem'+giftwrapvalue).removeClass("incermentitemclick");
-                        $('#incermentitem'+giftwrapvalue).addClass('incermentitem');
- 
-                    }
-                      if(eachvalinc < 3 ){
-                $('#incermentitem'+giftwrapvalue).removeAttr("data-toggle");
-                            $('#incermentitem'+giftwrapvalue).removeAttr("data-placement");
-                            $('#incermentitem'+giftwrapvalue).removeAttr("title");
-                           $('#incermentitem'+giftwrapvalue).removeClass("incermentitemdisabled ");
-                          $('#incermentitem'+giftwrapvalue).removeClass("incermentitemclick");
-                          $('#incermentitem'+giftwrapvalue).addClass('incermentitem');
-                   }
+                if (eachvalinc == 3) {
+                    $('#incermentitem' + giftwrapvalue).attr("data-toggle", "tooltip");
+                    $('#incermentitem' + giftwrapvalue).attr("data-placement", "left");
+                    $('#incermentitem' + giftwrapvalue).attr("title", "Gift wraspping more than 3 item not applicable");
+                    $('#incermentitem' + giftwrapvalue).removeClass("incermentitem");
+                    $('#incermentitem' + giftwrapvalue).addClass('incermentitemclick');
+                    $('label .giftwrappingcheck').not('#giftWrap' + giftwrapvalue).attr("disabled", "disabled");
+                } else {
+
+                    $('#incermentitem' + giftwrapvalue).removeClass("incermentitemclick");
+                    $('#incermentitem' + giftwrapvalue).addClass('incermentitem');
+
+                }
                 $.ajax({
-            url: '/decrementitem',
-            type: "GET",
-            data: {brand: giftwrapvalue},
-             
-            success: function (data) {
- 
-//                alert(JSON.parse(data));
-                data = JSON.parse(data);
-//                 alert(data.success);
-                if (data.success == "1") {
-                    $.each(data.data, function (index, value) {
- 
-//                                alert(JSON.stringify(value));
-                           if(value[giftwrapvalue]){
-                              
-                           // alert(value[giftwrapvalue].qty);
-                                var productitemqty =value[giftwrapvalue].qty;
-                                   var productitemprice =value[giftwrapvalue].price;
-                                   
-                                $('#qtyinc'+giftwrapvalue).val(value[giftwrapvalue].qty);
-                                     $('#loadtotalprice').hide();
-                     $('#loadgiftboxtotal').hide();
-                     $('#loaddeliverycharge').hide();
-                     $('#loadtotalpay').hide();
-                     $('#loaditemtotal'+giftwrapvalue).hide();
-                     
-                     
-                     $('#ajaxtotalprice').show();
-                     $('#ajaxgiftboxtotal').show();
-                     $('#ajaxdeliverycharge').show();
-                     $('#ajaxtotalpay').show();
-                     $('#ajaxitemtotal'+giftwrapvalue).show();
-                 
-                   var totalPriceitem = data.totalPrice;
-                    
-                   var giftboxtotalitem= data.giftboxtotal;
-                   var dilverycharge= data.dilverycharge;
-                   var dilverychargevalue = Math.abs(dilverycharge);
-                   var pricesing;
-                   if(dilverychargevalue == 0){
-                       dilverychargevalue="Free";
-                       var delivercharge=0;
-                       pricesing="";
-                   }else{
-                       dilverychargevalue=dilverychargevalue;
-                       delivercharge=dilverychargevalue
-                       pricesing="$";
-                   }
-                     if(value[giftwrapvalue].qty > 3){
- 		   $('#giftWrap'+giftwrapvalue).attr('checked', false);
-                    $('label .giftwrappingcheck').not('#giftWrap'+giftwrapvalue).attr("disabled", "disabled");
-                   }else{
-                       $('label .giftwrappingcheck').not('#giftWrap'+giftwrapvalue).removeAttr("disabled", "disabled");
-                   }
-                   var totalitemamount =  productitemqty * productitemprice;
-                   var datatotal= parseInt(giftboxtotalitem) +  parseInt(delivercharge);
-                   var totalpay = totalPriceitem + datatotal;
-//                   var totalpay = totalPriceitem +  giftboxtotalitem +  delivercharge;
-                      
-//                    alert(totalpay+'this is totoal account');
-                   $('#ajaxitemtotal'+giftwrapvalue).html('$'+productitemprice);
-                   $('#ajaxtotalprice').html('$'+totalPriceitem);
-                   $('#ajaxgiftboxtotal').html('$'+giftboxtotalitem);
-                   $('#ajaxdeliverycharge').html(pricesing+dilverychargevalue);
-                   $('#ajaxtotalpay').html('$'+totalpay);
-                           }
-                                
- 
-                    });
-                } else {
-                     setTimeout(function(){// wait for 5 secs(2)
-                                location.reload(); // then reload the page.(3)
-                           }, 1000); 
-                     $('#ajaxtotalprice').hide();
-                     $('#ajaxgiftboxtotal').hide();
-                      $('#ajaxdeliverycharge').hide();
-                      $('#ajaxtotalpay').hide();
-                      $('.ajaxitemtotal').hide();
-                      
-                       
-                      $('#loadtotalprice').show();
-                     $('#loadgiftboxtotal').show();
-                     $('#loaddeliverycharge').show();
-                     $('#loadtotalpay').show();
-                     $('.loaditemtotal').show();
-                }
-            }
-         
-            });
-        }
-        }else{
-              $.ajax({
-            url: '/decrementitem',
-            type: "GET",
-            data: {brand: giftwrapvalue},
-             
-            success: function (data) {
- 
-//                alert(JSON.parse(data));
-                data = JSON.parse(data);
-//                 alert(data.success);
-                if (data.success == "1") {
-                    $.each(data.data, function (index, value) {
- 
-//                                alert(JSON.stringify(value));
-                           if(value[giftwrapvalue]){
-                              
-                           // alert(value[giftwrapvalue].qty);
-                                var productitemqty =value[giftwrapvalue].qty;
-                                   var productitemprice =value[giftwrapvalue].price;
-                                   
-                                $('#qtyinc'+giftwrapvalue).val(value[giftwrapvalue].qty);
-                                     $('#loadtotalprice').hide();
-                     $('#loadgiftboxtotal').hide();
-                     $('#loaddeliverycharge').hide();
-                     $('#loadtotalpay').hide();
-                     $('#loaditemtotal'+giftwrapvalue).hide();
-                     
-                     
-                     $('#ajaxtotalprice').show();
-                     $('#ajaxgiftboxtotal').show();
-                     $('#ajaxdeliverycharge').show();
-                     $('#ajaxtotalpay').show();
-                     $('#ajaxitemtotal'+giftwrapvalue).show();
-                 
-                   var totalPriceitem = data.totalPrice;
-                    
-                   var giftboxtotalitem= data.giftboxtotal;
-                   var dilverycharge= data.dilverycharge;
-                   var dilverychargevalue = Math.abs(dilverycharge);
-                   var pricesing;
-                   if(dilverychargevalue == 0){
-                       dilverychargevalue="Free";
-                       var delivercharge=0;
-                       pricesing="";
-                   }else{
-                       dilverychargevalue=dilverychargevalue;
-                       delivercharge=dilverychargevalue
-                       pricesing="$";
-                   }
-                     if(value[giftwrapvalue].qty > 3){
- 		   $('#giftWrap'+giftwrapvalue).attr('checked', false);
-                    $('label .giftwrappingcheck').not('#giftWrap'+giftwrapvalue).attr("disabled", "disabled");
-                   }else{
-                       $('label .giftwrappingcheck').not('#giftWrap'+giftwrapvalue).removeAttr("disabled", "disabled");
-                   }
-                   var totalitemamount =  productitemqty * productitemprice;
-                   var datatotal= parseInt(giftboxtotalitem) +  parseInt(delivercharge);
-                   var totalpay = totalPriceitem + datatotal;
-//                   var totalpay = totalPriceitem +  giftboxtotalitem +  delivercharge;
-                      
-//                    alert(totalpay+'this is totoal account');
-                   $('#ajaxitemtotal'+giftwrapvalue).html('$'+productitemprice);
-                   $('#ajaxtotalprice').html('$'+totalPriceitem);
-                   $('#ajaxgiftboxtotal').html('$'+giftboxtotalitem);
-                   $('#ajaxdeliverycharge').html(pricesing+dilverychargevalue);
-                   $('#ajaxtotalpay').html('$'+totalpay);
-                           }
-                                
- 
-                    });
-                } else {
-                     setTimeout(function(){// wait for 5 secs(2)
-                                location.reload(); // then reload the page.(3)
-                           }, 1000); 
-                     $('#ajaxtotalprice').hide();
-                     $('#ajaxgiftboxtotal').hide();
-                      $('#ajaxdeliverycharge').hide();
-                      $('#ajaxtotalpay').hide();
-                      $('.ajaxitemtotal').hide();
-                      
-                       
-                      $('#loadtotalprice').show();
-                     $('#loadgiftboxtotal').show();
-                     $('#loaddeliverycharge').show();
-                     $('#loadtotalpay').show();
-                     $('.loaditemtotal').show();
-                }
-            }
-         
-            });
+                    url: '/incrementitem',
+                    type: "GET",
+                    data: {brand: giftwrapvalue},
 
+                    success: function (data) {
+
+//                alert(JSON.parse(data));
+                        data = JSON.parse(data);
+//                 alert(data.success);
+                        if (data.success == "1") {
+                            $.each(data.data, function (index, value) {
+
+//                                alert(JSON.stringify(value));
+                                if (value[giftwrapvalue]) {
+
+                                    // alert(value[giftwrapvalue].qty);
+                                    var productitemqty = value[giftwrapvalue].qty;
+                                    var productitemprice = value[giftwrapvalue].price;
+
+                                    $('#qtyinc' + giftwrapvalue).val(value[giftwrapvalue].qty);
+                                    $('#loadtotalprice').hide();
+                                    $('#loadgiftboxtotal').hide();
+                                    $('#loaddeliverycharge').hide();
+                                    $('#loadtotalpay').hide();
+                                    $('#loaditemtotal' + giftwrapvalue).hide();
+
+
+                                    $('#ajaxtotalprice').show();
+                                    $('#ajaxgiftboxtotal').show();
+                                    $('#ajaxdeliverycharge').show();
+                                    $('#ajaxtotalpay').show();
+                                    $('#ajaxitemtotal' + giftwrapvalue).show();
+
+                                    var totalPriceitem = data.totalPrice;
+
+                                    var giftboxtotalitem = data.giftboxtotal;
+                                    var dilverycharge = data.dilverycharge;
+                                    var dilverychargevalue = Math.abs(dilverycharge);
+                                    var pricesing;
+                                    if (dilverychargevalue == 0) {
+                                        dilverychargevalue = "Free";
+                                        var delivercharge = 0;
+                                        pricesing = "";
+                                    } else {
+                                        dilverychargevalue = dilverychargevalue;
+                                        delivercharge = dilverychargevalue
+                                        pricesing = "$";
+                                    }
+                                    if (value[giftwrapvalue].qty > 3) {
+
+                                        $('#giftWrap' + giftwrapvalue).attr('checked', false);
+                                        $('label .giftwrappingcheck').not('#giftWrap' + giftwrapvalue).attr("disabled", "disabled");
+                                    } else {
+                                        $('label .giftwrappingcheck').not('#giftWrap' + giftwrapvalue).removeAttr("disabled", "disabled");
+                                        // $('#giftWrap'+giftwrapvalue).attr('checked', true);
+
+                                    }
+                                    var totalitemamount = productitemqty * productitemprice;
+                                    var datatotal = parseInt(giftboxtotalitem) + parseInt(delivercharge);
+                                    var totalpay = totalPriceitem + datatotal;
+//                   var totalpay = totalPriceitem +  giftboxtotalitem +  delivercharge;
+
+//                    alert(totalpay+'this is totoal account');
+                                    $('#ajaxitemtotal' + giftwrapvalue).html('$' + productitemprice);
+                                    $('#ajaxtotalprice').html('$' + totalPriceitem);
+                                    $('#ajaxgiftboxtotal').html('$' + giftboxtotalitem);
+                                    $('#ajaxdeliverycharge').html(pricesing + dilverychargevalue);
+                                    $('#ajaxtotalpay').html('$' + totalpay);
+                                }
+
+
+                            });
+                        } else {
+                            $('#ajaxtotalprice').hide();
+                            $('#ajaxgiftboxtotal').hide();
+                            $('#ajaxdeliverycharge').hide();
+                            $('#ajaxtotalpay').hide();
+                            $('.ajaxitemtotal').hide();
+
+
+                            $('#loadtotalprice').show();
+                            $('#loadgiftboxtotal').show();
+                            $('#loaddeliverycharge').show();
+                            $('#loadtotalpay').show();
+                            $('.loaditemtotal').show();
+                        }
+                    }
+
+                });
+            }
+        } else {
+            $.ajax({
+                url: '/incrementitem',
+                type: "GET",
+                data: {brand: giftwrapvalue},
+
+                success: function (data) {
+
+//                alert(JSON.parse(data));
+                    data = JSON.parse(data);
+//                 alert(data.success);
+                    if (data.success == "1") {
+                        $.each(data.data, function (index, value) {
+
+//                                alert(JSON.stringify(value));
+                            if (value[giftwrapvalue]) {
+
+                                // alert(value[giftwrapvalue].qty);
+                                var productitemqty = value[giftwrapvalue].qty;
+                                var productitemprice = value[giftwrapvalue].price;
+
+                                $('#qtyinc' + giftwrapvalue).val(value[giftwrapvalue].qty);
+                                $('#loadtotalprice').hide();
+                                $('#loadgiftboxtotal').hide();
+                                $('#loaddeliverycharge').hide();
+                                $('#loadtotalpay').hide();
+                                $('#loaditemtotal' + giftwrapvalue).hide();
+
+
+                                $('#ajaxtotalprice').show();
+                                $('#ajaxgiftboxtotal').show();
+                                $('#ajaxdeliverycharge').show();
+                                $('#ajaxtotalpay').show();
+                                $('#ajaxitemtotal' + giftwrapvalue).show();
+
+                                var totalPriceitem = data.totalPrice;
+
+                                var giftboxtotalitem = data.giftboxtotal;
+                                var dilverycharge = data.dilverycharge;
+                                var dilverychargevalue = Math.abs(dilverycharge);
+                                var pricesing;
+                                if (dilverychargevalue == 0) {
+                                    dilverychargevalue = "Free";
+                                    var delivercharge = 0;
+                                    pricesing = "";
+                                } else {
+                                    dilverychargevalue = dilverychargevalue;
+                                    delivercharge = dilverychargevalue
+                                    pricesing = "$";
+                                }
+                                if (value[giftwrapvalue].qty > 3) {
+
+                                    $('#giftWrap' + giftwrapvalue).attr('checked', false);
+                                    $('label .giftwrappingcheck').not('#giftWrap' + giftwrapvalue).attr("disabled", "disabled");
+                                } else {
+                                    $('label .giftwrappingcheck').not('#giftWrap' + giftwrapvalue).removeAttr("disabled", "disabled");
+                                    // $('#giftWrap'+giftwrapvalue).attr('checked', true);
+
+                                }
+                                var totalitemamount = productitemqty * productitemprice;
+                                var datatotal = parseInt(giftboxtotalitem) + parseInt(delivercharge);
+                                var totalpay = totalPriceitem + datatotal;
+//                   var totalpay = totalPriceitem +  giftboxtotalitem +  delivercharge;
+
+//                    alert(totalpay+'this is totoal account');
+                                $('#ajaxitemtotal' + giftwrapvalue).html('$' + productitemprice);
+                                $('#ajaxtotalprice').html('$' + totalPriceitem);
+                                $('#ajaxgiftboxtotal').html('$' + giftboxtotalitem);
+                                $('#ajaxdeliverycharge').html(pricesing + dilverychargevalue);
+                                $('#ajaxtotalpay').html('$' + totalpay);
+                            }
+
+
+                        });
+                    } else {
+                        $('#ajaxtotalprice').hide();
+                        $('#ajaxgiftboxtotal').hide();
+                        $('#ajaxdeliverycharge').hide();
+                        $('#ajaxtotalpay').hide();
+                        $('.ajaxitemtotal').hide();
+
+
+                        $('#loadtotalprice').show();
+                        $('#loadgiftboxtotal').show();
+                        $('#loaddeliverycharge').show();
+                        $('#loadtotalpay').show();
+                        $('.loaditemtotal').show();
+                    }
+                }
+
+            });
         }
-        
-           });
-               // start code for send as gift 
-      $('.sendasgiftitem').change(function(){
-         
-         var categorycheck = $(this).is(':checked')
+
+
+    });
+    // code for decrment the quanity of item in shooping cart page
+    $('.decermentitem').click(function () {
+
+        var giftwrapvalue = $(this).attr("data-id");
+        var eachval = $('#qtyinc' + giftwrapvalue).val();
+        var one = 1;
+
+        var eachvalinc = parseInt(eachval) - parseInt(one);
+
+//              alert(eachvalinc+'this is value on increm df');
+        var categorycheck = $("#giftWrap" + giftwrapvalue).is(':checked')
         var categoryvalue = JSON.stringify(categorycheck)
         if (categoryvalue == 'true') {
-            var giftwrapvaluecheck= $(this).val();
-            
-                 $.ajax({
-            url: '/addsendasgift',
-            type: "GET",
-            data: {brand: giftwrapvaluecheck},
-          
-            success: function (data) {
-                data = JSON.parse(data);
-                if (data.success == "1") {
-                  
+            if (eachvalinc > 3) {
+                $('#giftwrapmessage').html('<p style="color:red" >Gift wraspping more than 3 item not applicable</p>');
+                $('.guestCheckOutBtns').attr("disabled", "disabled");
+//         $('#giftWrap'+giftwrapvalue).attr('checked', false); // Unchecks it
+            } else {
+                if (eachvalinc == 3) {
+                    $('#incermentitem' + giftwrapvalue).attr("data-toggle", "tooltip");
+                    $('#incermentitem' + giftwrapvalue).attr("data-placement", "left");
+                    $('#incermentitem' + giftwrapvalue).attr("title", "Gift wraspping more than 3 item not applicable");
+                    $('#incermentitem' + giftwrapvalue).removeClass("incermentitem");
+                    $('#incermentitem' + giftwrapvalue).addClass('incermentitemclick');
+                    $('label .giftwrappingcheck').not('#giftWrap' + giftwrapvalue).attr("disabled", "disabled");
                 } else {
-                  
-                }
-            }
-        });
-          $('#giftwrapmessage').html("");
-     } else {
-            var giftwrapvaluecheck= $(this).val();
-             
-             $.ajax({
-            url: '/removesendasgift',
-            type: "GET",
-            data: {brand: giftwrapvaluecheck},
-            success: function (data) {
 
-                data = JSON.parse(data);
-                if (data.success == "1") {
-                 
-                } else {
-                   
-                  
+                    $('#incermentitem' + giftwrapvalue).removeClass("incermentitemclick");
+                    $('#incermentitem' + giftwrapvalue).addClass('incermentitem');
+
                 }
+                if (eachvalinc < 3) {
+                    $('#incermentitem' + giftwrapvalue).removeAttr("data-toggle");
+                    $('#incermentitem' + giftwrapvalue).removeAttr("data-placement");
+                    $('#incermentitem' + giftwrapvalue).removeAttr("title");
+                    $('#incermentitem' + giftwrapvalue).removeClass("incermentitemdisabled ");
+                    $('#incermentitem' + giftwrapvalue).removeClass("incermentitemclick");
+                    $('#incermentitem' + giftwrapvalue).addClass('incermentitem');
+                }
+                $.ajax({
+                    url: '/decrementitem',
+                    type: "GET",
+                    data: {brand: giftwrapvalue},
+
+                    success: function (data) {
+
+//                alert(JSON.parse(data));
+                        data = JSON.parse(data);
+//                 alert(data.success);
+                        if (data.success == "1") {
+                            $.each(data.data, function (index, value) {
+
+//                                alert(JSON.stringify(value));
+                                if (value[giftwrapvalue]) {
+
+                                    // alert(value[giftwrapvalue].qty);
+                                    var productitemqty = value[giftwrapvalue].qty;
+                                    var productitemprice = value[giftwrapvalue].price;
+
+                                    $('#qtyinc' + giftwrapvalue).val(value[giftwrapvalue].qty);
+                                    $('#loadtotalprice').hide();
+                                    $('#loadgiftboxtotal').hide();
+                                    $('#loaddeliverycharge').hide();
+                                    $('#loadtotalpay').hide();
+                                    $('#loaditemtotal' + giftwrapvalue).hide();
+
+
+                                    $('#ajaxtotalprice').show();
+                                    $('#ajaxgiftboxtotal').show();
+                                    $('#ajaxdeliverycharge').show();
+                                    $('#ajaxtotalpay').show();
+                                    $('#ajaxitemtotal' + giftwrapvalue).show();
+
+                                    var totalPriceitem = data.totalPrice;
+
+                                    var giftboxtotalitem = data.giftboxtotal;
+                                    var dilverycharge = data.dilverycharge;
+                                    var dilverychargevalue = Math.abs(dilverycharge);
+                                    var pricesing;
+                                    if (dilverychargevalue == 0) {
+                                        dilverychargevalue = "Free";
+                                        var delivercharge = 0;
+                                        pricesing = "";
+                                    } else {
+                                        dilverychargevalue = dilverychargevalue;
+                                        delivercharge = dilverychargevalue
+                                        pricesing = "$";
+                                    }
+                                    if (value[giftwrapvalue].qty > 3) {
+                                        $('#giftWrap' + giftwrapvalue).attr('checked', false);
+                                        $('label .giftwrappingcheck').not('#giftWrap' + giftwrapvalue).attr("disabled", "disabled");
+                                    } else {
+                                        $('label .giftwrappingcheck').not('#giftWrap' + giftwrapvalue).removeAttr("disabled", "disabled");
+                                    }
+                                    var totalitemamount = productitemqty * productitemprice;
+                                    var datatotal = parseInt(giftboxtotalitem) + parseInt(delivercharge);
+                                    var totalpay = totalPriceitem + datatotal;
+//                   var totalpay = totalPriceitem +  giftboxtotalitem +  delivercharge;
+
+//                    alert(totalpay+'this is totoal account');
+                                    $('#ajaxitemtotal' + giftwrapvalue).html('$' + productitemprice);
+                                    $('#ajaxtotalprice').html('$' + totalPriceitem);
+                                    $('#ajaxgiftboxtotal').html('$' + giftboxtotalitem);
+                                    $('#ajaxdeliverycharge').html(pricesing + dilverychargevalue);
+                                    $('#ajaxtotalpay').html('$' + totalpay);
+                                }
+
+
+                            });
+                        } else {
+                            setTimeout(function () {// wait for 5 secs(2)
+                                location.reload(); // then reload the page.(3)
+                            }, 1000);
+                            $('#ajaxtotalprice').hide();
+                            $('#ajaxgiftboxtotal').hide();
+                            $('#ajaxdeliverycharge').hide();
+                            $('#ajaxtotalpay').hide();
+                            $('.ajaxitemtotal').hide();
+
+
+                            $('#loadtotalprice').show();
+                            $('#loadgiftboxtotal').show();
+                            $('#loaddeliverycharge').show();
+                            $('#loadtotalpay').show();
+                            $('.loaditemtotal').show();
+                        }
+                    }
+
+                });
             }
-        });
-             
-          $('#giftwrapmessage').html("");
-    
+        } else {
+            $.ajax({
+                url: '/decrementitem',
+                type: "GET",
+                data: {brand: giftwrapvalue},
+
+                success: function (data) {
+
+//                alert(JSON.parse(data));
+                    data = JSON.parse(data);
+//                 alert(data.success);
+                    if (data.success == "1") {
+                        $.each(data.data, function (index, value) {
+
+//                                alert(JSON.stringify(value));
+                            if (value[giftwrapvalue]) {
+
+                                // alert(value[giftwrapvalue].qty);
+                                var productitemqty = value[giftwrapvalue].qty;
+                                var productitemprice = value[giftwrapvalue].price;
+
+                                $('#qtyinc' + giftwrapvalue).val(value[giftwrapvalue].qty);
+                                $('#loadtotalprice').hide();
+                                $('#loadgiftboxtotal').hide();
+                                $('#loaddeliverycharge').hide();
+                                $('#loadtotalpay').hide();
+                                $('#loaditemtotal' + giftwrapvalue).hide();
+
+
+                                $('#ajaxtotalprice').show();
+                                $('#ajaxgiftboxtotal').show();
+                                $('#ajaxdeliverycharge').show();
+                                $('#ajaxtotalpay').show();
+                                $('#ajaxitemtotal' + giftwrapvalue).show();
+
+                                var totalPriceitem = data.totalPrice;
+
+                                var giftboxtotalitem = data.giftboxtotal;
+                                var dilverycharge = data.dilverycharge;
+                                var dilverychargevalue = Math.abs(dilverycharge);
+                                var pricesing;
+                                if (dilverychargevalue == 0) {
+                                    dilverychargevalue = "Free";
+                                    var delivercharge = 0;
+                                    pricesing = "";
+                                } else {
+                                    dilverychargevalue = dilverychargevalue;
+                                    delivercharge = dilverychargevalue
+                                    pricesing = "$";
+                                }
+                                if (value[giftwrapvalue].qty > 3) {
+                                    $('#giftWrap' + giftwrapvalue).attr('checked', false);
+                                    $('label .giftwrappingcheck').not('#giftWrap' + giftwrapvalue).attr("disabled", "disabled");
+                                } else {
+                                    $('label .giftwrappingcheck').not('#giftWrap' + giftwrapvalue).removeAttr("disabled", "disabled");
+                                }
+                                var totalitemamount = productitemqty * productitemprice;
+                                var datatotal = parseInt(giftboxtotalitem) + parseInt(delivercharge);
+                                var totalpay = totalPriceitem + datatotal;
+//                   var totalpay = totalPriceitem +  giftboxtotalitem +  delivercharge;
+
+//                    alert(totalpay+'this is totoal account');
+                                $('#ajaxitemtotal' + giftwrapvalue).html('$' + productitemprice);
+                                $('#ajaxtotalprice').html('$' + totalPriceitem);
+                                $('#ajaxgiftboxtotal').html('$' + giftboxtotalitem);
+                                $('#ajaxdeliverycharge').html(pricesing + dilverychargevalue);
+                                $('#ajaxtotalpay').html('$' + totalpay);
+                            }
+
+
+                        });
+                    } else {
+                        setTimeout(function () {// wait for 5 secs(2)
+                            location.reload(); // then reload the page.(3)
+                        }, 1000);
+                        $('#ajaxtotalprice').hide();
+                        $('#ajaxgiftboxtotal').hide();
+                        $('#ajaxdeliverycharge').hide();
+                        $('#ajaxtotalpay').hide();
+                        $('.ajaxitemtotal').hide();
+
+
+                        $('#loadtotalprice').show();
+                        $('#loadgiftboxtotal').show();
+                        $('#loaddeliverycharge').show();
+                        $('#loadtotalpay').show();
+                        $('.loaditemtotal').show();
+                    }
+                }
+
+            });
+
         }
-           
-    });
-     $('.cartBlockWrap label input[class="giftwrappingcheck"]:checked').each(function() {
-    var valueofcheck= this.value;
-     var giftwrapvaluecheck= $("#qtyinc"+valueofcheck).val();
-//   var giftwrapvaluecheck++=giftwrapvaluecheck;
-   if(giftwrapvaluecheck==3){
-         $('label .giftwrappingcheck').not('#giftWrap'+valueofcheck).attr("disabled", "disabled");
-         $('label .giftwrappingcheck').not('#giftWrap'+valueofcheck).attr("data-toggle","tooltip");
-         $('label .giftwrappingcheck').not('#giftWrap'+valueofcheck).attr("data-placement","left");
-         $('label .giftwrappingcheck').not('#giftWrap'+valueofcheck).attr("title","Gift wraspping more than 3 item not applicable");
-         }else{
-       
-   }
-});
-    $(function () {
-  $('[data-toggle="tooltip"]').tooltip()
-})
 
-$( "#shoppingcartbtn" ).click(function() {
-        $( "#shoppingcartpage" ).submit();
     });
-   
-   $(".thanksVideoBlock > .closeThanksVideo").click(function() {
-	$(".thanksVideoBlock").hide();
+    // start code for send as gift 
+    $('.sendasgiftitem').change(function () {
+
+        var categorycheck = $(this).is(':checked')
+        var categoryvalue = JSON.stringify(categorycheck)
+        if (categoryvalue == 'true') {
+            var giftwrapvaluecheck = $(this).val();
+
+            $.ajax({
+                url: '/addsendasgift',
+                type: "GET",
+                data: {brand: giftwrapvaluecheck},
+
+                success: function (data) {
+                    data = JSON.parse(data);
+                    if (data.success == "1") {
+
+                    } else {
+
+                    }
+                }
+            });
+            $('#giftwrapmessage').html("");
+        } else {
+            var giftwrapvaluecheck = $(this).val();
+
+            $.ajax({
+                url: '/removesendasgift',
+                type: "GET",
+                data: {brand: giftwrapvaluecheck},
+                success: function (data) {
+
+                    data = JSON.parse(data);
+                    if (data.success === "1") {
+
+                    } else {
+
+
+                    }
+                }
+            });
+
+            $('#giftwrapmessage').html("");
+
+        }
+
     });
-  $(".thanksVideoBlock").delay(10000).hide("medium");
- 
+    $('.cartBlockWrap label input[class="giftwrappingcheck"]:checked').each(function () {
+        var valueofcheck = this.value;
+        var giftwrapvaluecheck = $("#qtyinc" + valueofcheck).val();
+//   var giftwrapvaluecheck++=giftwrapvaluecheck;
+        if (giftwrapvaluecheck === 3) {
+            $('label .giftwrappingcheck').not('#giftWrap' + valueofcheck).attr("disabled", "disabled");
+            $('label .giftwrappingcheck').not('#giftWrap' + valueofcheck).attr("data-toggle", "tooltip");
+            $('label .giftwrappingcheck').not('#giftWrap' + valueofcheck).attr("data-placement", "left");
+            $('label .giftwrappingcheck').not('#giftWrap' + valueofcheck).attr("title", "Gift wraspping more than 3 item not applicable");
+        } else {
+
+        }
+    });
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
+    $("#shoppingcartbtn").click(function () {
+        $("#shoppingcartpage").submit();
+    });
+
+    $(".thanksVideoBlock").click(function () {
+        console.log('test video 1')
+        $(".thanksVideoBlock").hide();
+    });
+    //$(".thanksVideoBlock").delay(10000).hide("medium").attr('src', 'youtube.com');
+    $(".thanksVideoBlock").delay(10000).queue(function () {
+        $(this).addClass("thanksVideoBlockTOBEHIDDEN");
+        setTimeout(
+          function() 
+          {
+            $("#thanksVideoBlock").css("display","none");
+            $('#thanksVideoBlock').remove();
+          }, 10000);
+    });
+    //$(".thanksVideoBlockTOBEHIDDEN iframe").attr('src', 'youtube.com');
+
+    document.getElementById("thanksVideoBlock").onclick = function () {
+       
+        //document.getElementById('player').src = "https://www.youtube.com/embed/bo2KQer1KNM";
+        document.getElementById('player').src = "https://www.youtube.com";
+        
+        
+    };
+    
+
+
 
 });
