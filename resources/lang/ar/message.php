@@ -7,7 +7,7 @@ return [
 	'Register' => 'تسجيل',
 	'Welcome' => 'أهلا بك',
 	'E-Mail Address' => 'عنوان بريد الكتروني',
-	'Password' => 'كلمة سر جديدة',
+	'Password' => 'پاس ورڈ',
         'Old Password' => 'كلمة المرور الحالية',
 	'Remember Me' => 'تذكرنى',
 	'Forgot Your Password?' => 'نسيت رقمك السري؟',
@@ -422,6 +422,7 @@ return [
         'Edit Discount'=>'تحرير الخصم',
         'Edit Discount Voucher'=>'تحرير قسيمة الخصم',
         'Please Select Auto Generated'=>'يرجى اختيار السيارات التي تم إنشاؤها',
+        'sign up in our newsletter'=>'Sign up in our newsletter',
     ]
 
 ?>

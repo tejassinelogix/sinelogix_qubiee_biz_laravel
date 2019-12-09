@@ -58,6 +58,7 @@
         <!--style-->
         <link href="{{ URL::to('public/assets/css/normalize.css') }}" rel="stylesheet">
         <link href="{{ URL::to('public/assets/css/style.css') }}" rel="stylesheet">
+        <link href="{{ URL::to('public/assets/css/custom_style.css') }}" rel="stylesheet">
         <link href="{{ URL::to('public/assets/css/starratings.css') }}" rel="stylesheet">
 
         <!-- Fancybox CSS -->

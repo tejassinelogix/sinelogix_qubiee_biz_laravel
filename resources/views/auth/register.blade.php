@@ -102,6 +102,14 @@
                         <div class="form-group row">
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right"></label>
                             <div class="regisCheckboxCol"> 
+                                <input type="checkbox" name="checkbox" value="1"  required><h6>{{ __('message.sign up in our newsletter') }}</h6>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right"></label>
+                            <div class="regisCheckboxCol"> 
                                 <input type="checkbox" name="checkbox" value="1"  required><h6>{{ __('message.Agree with the terms and conditions') }}</h6>
 
                             </div>

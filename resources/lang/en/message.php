@@ -7,7 +7,7 @@ return [
 	'Register' => 'Register',
 	'Welcome' => 'Welcome',
 	'E-Mail Address' => 'E-Mail Address',
-	'Password' => 'New Password',
+	'Password' => 'Password',
         'Old Password' => 'Current Password',
 	'Remember Me' => 'Remember Me',
 	'Forgot Your Password?' => 'Forgot Your Password?',
@@ -423,6 +423,7 @@ return [
         'Edit Discount'=>'Edit Discount',
         'Edit Discount Voucher'=>'Edit Discount Voucher',
         'Please Select Auto Generated'=>'Please Select Auto Generated',
+        'sign up in our newsletter'=>'Sign up in our newsletter',
              
     ];      
 

@@ -19,6 +19,7 @@
 
         <!--Font-Awesome-->
         <link rel="stylesheet" href="{{ URL::to('public/assets/font-awesome/css/font-awesome.min.css') }}">
+        <link href="{{ URL::to('public/assets/css/custom_style.css') }}" rel="stylesheet">
 
         <!-- Ionicons -->
         <script src="https://unpkg.com/ionicons@4.4.6/dist/ionicons.js"></script>
