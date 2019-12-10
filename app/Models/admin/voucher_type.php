@@ -28,4 +28,9 @@ class voucher_type extends Model
       return $data;
     }
 
+      public static function getvoucher_type_id($voucher_id) {
+       // $brands = DB::select('select * from category  where category_parent_id = ?', [0]);
+        $voucher_type_id = DB::select('select * from voucher_type where voucher_id = $voucher_id');    
+        return $voucher_type_id;
 }
+      }

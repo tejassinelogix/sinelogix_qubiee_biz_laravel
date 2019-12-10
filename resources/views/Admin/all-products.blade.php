@@ -109,9 +109,9 @@
                                                    <a href="/admin/add-stock/{{ $user->id }}" data-toggle="tooltip" title="Manage Stock">
                                                       <i class="fa fa-archive"></i>
                                                   </a> 
-<!--                                                <a href="deleteproduct/{{ $user->id }}" id="productdelete" data-toggle="tooltip" title="Delete" onclick="return confirm('Are you sure to Delete Products?');">
+													<a href="deleteproduct/{{ $user->id }}" id="productdelete" data-toggle="tooltip" title="Delete" onclick="return confirm('Are you sure to Delete Products?');">
                                                     <i class="fa fa-trash-o"></i>
-                                                </a>-->
+                                                </a>
                                                 <?php
                                                 if($product_status == 1) { ?>
                                                 <a href="deleteproduct/{{ $user->id }}" id="productapprove" data-toggle="tooltip" title="Not Approved" onclick="return confirm('Are you sure to Not Approved Products?');">

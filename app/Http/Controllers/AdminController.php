@@ -607,6 +607,8 @@ class AdminController extends Controller {
         } else {
             $menu_cat_data = $this->get_menu_tree($sub_menu_id);
         }
+		$category_parent_id = Category::getMainCategory();          
+        $subcategory = Category::getSubCategory();  
 //        echo "<pre>";
 //        print_r($menu_cat_data);
         //die;
@@ -1105,11 +1107,10 @@ class AdminController extends Controller {
     }
 
     //code for delete product
-    public function deleteproduct($id) {
+    public function deleteproduct($id) {		
         //DB::delete('delete from student where id = ?',[$id]);
         DB::table('products')
-        ->where('id', $id)
-        ->update(['status' => 0]);
+        ->where('id', $id)->delete();        
         return redirect()->back()->with('success', 'Product Deleted successfully');
     }
     //code for status  product
@@ -5245,4 +5246,7 @@ return $pdf->download('Qubieepayabletransaction.pdf');
         return redirect()->back()->with('message','Discount Voucher is Deleted successfully');
         
        }
+	   
+	   
+	  
 }

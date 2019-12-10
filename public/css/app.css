@@ -130,3 +130,12 @@ button.btn-primary{
     top: 2px;
     left: 0;
 }
+span.countrycode{
+    position: absolute!important;
+    max-width: 100px!important;
+}
+select.custom-select {
+    max-width: 74px;
+    border-bottom: 1px solid #8c98a3;
+    border-top: none;border-left: none;
+}
