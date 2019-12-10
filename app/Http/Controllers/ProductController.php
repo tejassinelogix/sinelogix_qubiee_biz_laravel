@@ -1329,6 +1329,9 @@ public function cart_update(Request $request){
         $getMainCategory = Category::getMainCategory();
         $getSubCategory = Category::getSubCategory();
 
+        if(!Session::has('cart')){
+            return view('shopping-cart');
+        }
         $oldCart = Session::get('cart');
         // echo "<pre> test";
        // print_r($oldCart->items);

@@ -165,7 +165,7 @@
                             <strong>Invalid credentials. Please enter valid email or Password</strong>
                         </span>
                         @endif
-                        <div class="col-md-2 col-sm-2">
+                        <div class="col-md-3 col-sm-3">
                             <?php
                             if (Session::has('locale')) {
                                 $language = $this->language = Session::get('locale');
@@ -181,7 +181,7 @@
 
 
                         </div>
-                        <div class="col-sm-5 searchboxCol">
+                        <div class="col-sm-4 searchboxCol">
                             <div class="searchbox">
                                 <form action="<?php echo url('/search') ?>" method="POST" class="headerSearch">
                                     {{ csrf_field() }}
@@ -359,6 +359,7 @@
                                                     <!--<i class="fa fa-angle-down"></i>-->
                                                 </a>
                                                 <ul>
+												
                                                     <?php
                                                     foreach ($getSubCategory as $maincat) {
                                                         $lang_typea = explode(',', $getMainCatego->category_id);
@@ -369,7 +370,8 @@
                                                             ?>
                                                             <li>
                                                                 <a href="<?php echo url('/categoryproduct'); ?>/{{ $urlcat_name[$language] }}/{{ $maincat->category_id }}"><?php echo $sub_cat_name[$language]; ?></a>
-                                                                <ul>
+                                                                
+																<ul>
                                                                     <?php
                                                                     foreach ($getSubCategory as $key => $mainsubsumenu) {
                                                                         if ($maincat->category_id == $mainsubsumenu->category_parent_id) {
@@ -391,6 +393,7 @@
                                                                     }
                                                                     ?>
                                                                 </ul>
+																
                                                             </li>
                                                             <?php
                                                         }
@@ -399,6 +402,7 @@
                                             </li>
                                         <?php } ?>
                                     </ul>
+									
                                 </li>
                                 <?php
 //echo "<pre>";

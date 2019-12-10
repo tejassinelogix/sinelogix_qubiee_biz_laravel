@@ -295,6 +295,7 @@
     ?>
                                         </select>
                                     </div>
+									
                                     <div class="form-group col-sm-3">
                                         <label for="select" class=" form-control-label">{{ __('message.Offer') }}</label>
                                         <input type="text" class="form-control" value="<?php echo $produc->offer; ?>" id="offer" name="offer" placeholder="" disabled>

@@ -67,7 +67,17 @@
                             <label for="phoneno" class="col-md-4 col-form-label text-md-right">{{ __('message.Mobile') }}</label>
 
                             <div class="col-md-6">
-                                <input id="phoneno" type="text" class="form-control{{ $errors->has('phoneno') ? ' is-invalid' : '' }}" name="phoneno" value="{{ old('phoneno') }}" required>
+							    <div class="form-group input-group">    	
+								<select class="custom-select" style="max-width: 74px;border-bottom: 1px solid #8c98a3; border-top: none;border-left: none;">
+									<option selected="">+971</option>
+									<option value="1">+961</option>
+									<option value="2">+198</option>
+									<option value="3">+701</option>
+								</select>
+								<input id="phoneno" type="text" class="form-control{{ $errors->has('phoneno') ? ' is-invalid' : '' }}" name="phoneno" value="{{ old('phoneno') }}" required>
+							</div>
+							
+								
 
                                 @if ($errors->has('phoneno'))
                                 <span class="invalid-feedback" role="alert">

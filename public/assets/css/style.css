@@ -133,7 +133,7 @@ button:target {
     margin: 0 0 8px 0;
 }
 .logo img {
-    height: 63px;
+    height: 86px;
     width: auto;
 }
 .topHeader {
@@ -646,7 +646,7 @@ button:target {
     position: relative;
 }
 .navbar-collapse > ul > li:first-child > ul > li {
-    width: 20%;
+    width: 25%;
     float: left;
     margin-bottom: 20px;
 }
@@ -661,7 +661,7 @@ button:target {
 .navbar-collapse > ul > li:first-child > ul > li > a {
     margin: 0 30px 0 0;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 15px;
 }
 .navbar-collapse > ul > li > ul > li:hover {
     background: #FFEA3A;
@@ -719,7 +719,8 @@ button:target {
 .navbar-collapse > ul > li:first-child > ul > li > ul > li {
     list-style-type: disc !important;
     color: #2e3192;
-    margin-bottom: 20px;
+    /*margin-bottom: 20px;*/
+	margin-bottom: 0px;
     border-bottom: none;
 }
 .navbar-collapse > ul > li > ul > li > ul > li > a {
@@ -4600,3 +4601,7 @@ body.backgroundimage {
 .error_red{
     color: red;   
 }
+ul.nav.navbar-nav {
+    padding-left: 65px!important;
+}
+

@@ -1,0 +1,14 @@
+.logo img{
+    height: 80px !important;
+}
+
+.bannerSection{
+    height: 250px !important;
+}
+
+.newsletterCheckboxCol{
+    display: block;
+    position: relative;
+    padding: 0 0 0 20px;
+    margin: 0 0 0 15px;
+}
