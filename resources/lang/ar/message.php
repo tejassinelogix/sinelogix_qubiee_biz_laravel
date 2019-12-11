@@ -423,6 +423,7 @@ return [
         'Edit Discount Voucher'=>'تحرير قسيمة الخصم',
         'Please Select Auto Generated'=>'يرجى اختيار السيارات التي تم إنشاؤها',
         'sign up in our newsletter'=>'Sign up in our newsletter',
+        'Brand'=>'برانڈ',
     ]
 
 ?>

@@ -35,10 +35,6 @@ service = {
 			},
 			success: function(resp_data,status,xhr){
 
-				console.log('resp_data')
-				console.log(resp_data)
-				return 0;
-
 				if(resp_data.status){
 					// console.log('Session cart updated')
 				}else{ // no records found

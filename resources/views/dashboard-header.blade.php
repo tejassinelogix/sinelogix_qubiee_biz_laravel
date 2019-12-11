@@ -360,7 +360,6 @@
                                                     <!--<i class="fa fa-angle-down"></i>-->
                                                 </a>
                                                 <ul>
-												
                                                     <?php
                                                     foreach ($getSubCategory as $maincat) {
                                                         $lang_typea = explode(',', $getMainCatego->category_id);

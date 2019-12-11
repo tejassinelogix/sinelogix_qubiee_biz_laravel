@@ -114,6 +114,30 @@
 
                                     </div>
                                 </div>
+
+                            
+                            <div class="sidebar-filter-box">
+                                <h4 class="sidebar-heading"><i class="fa fa-plus"></i>{{ __('message.Brand') }}</h4>
+                                <div>
+                                    <!--<form action="#" class="checkbox-radio-style1 active-sidebar-box">-->
+                                        <?php 
+                                        
+                                    //foreach (array_slice($getParentSubCategorycate,0,1) as $parentmaincat) {
+                                        
+                                    // $mcat_Name = json_decode($maincat->category_name, true);
+                                    
+                                    ?>
+                                        <p>
+                                            <input type="radio" checked value="<?php echo $id; ?>" name="chechkbrandfilter" class="common_subseleing_selector brandseling" />&nbsp;&nbsp;<?php echo ucwords($name) ?> - <?php echo ucwords($pro_name[$language]) ?>
+                                            <label>
+                                                <span class="checkmark"></span>
+                                                        </label> 
+                                        </p>
+                                    <?php //} ?>
+
+                                </div>
+                            </div>
+                                
                     </div>
                 </div>
                 <div class="col-md-9 col-sm-12">

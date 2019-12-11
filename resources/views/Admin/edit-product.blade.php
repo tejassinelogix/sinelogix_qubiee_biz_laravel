@@ -295,7 +295,6 @@
     ?>
                                         </select>
                                     </div>
-									
                                     <div class="form-group col-sm-3">
                                         <label for="select" class=" form-control-label">{{ __('message.Offer') }}</label>
                                         <input type="text" class="form-control" value="<?php echo $produc->offer; ?>" id="offer" name="offer" placeholder="" disabled>
@@ -372,7 +371,7 @@
                                                 <!--<input type="checkbox" name="gift_wrapping" value="1" >-->
                                                  <?php
                                                 if($produc->gift_wrapping==1) { ?>
-                                                    <input type="checkbox" checked="checked" name="gift_wrapping" value="<?php echo $produc->gift_wrapping; ?>" >
+                                                    <input type="checkbox" checked="checked" name="gift_wrapping" value="<?php echo $produc->gift_wrapping; ?>"> &nbsp;<small>This product is eligible for gift box</small>
                                                         <?php }  else { ?>
                                                     <input type="checkbox" name="gift_wrapping" value="1">
                                                            <?php } ?>

@@ -424,7 +424,7 @@ return [
         'Edit Discount Voucher'=>'Edit Discount Voucher',
         'Please Select Auto Generated'=>'Please Select Auto Generated',
         'sign up in our newsletter'=>'Sign up in our newsletter',
-             
+        'Brand'=>'Brand',             
     ];      
 
 ?>
