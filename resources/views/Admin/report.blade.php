@@ -74,8 +74,11 @@
                                 </thead>
                                 <tbody>
                                     <?php
+									
+									//if($admin_status==1){
                                     $index =1;
                                     foreach ($research as $researchdata ) {
+									if($researchdata->admin_status ==1){
                                          foreach($order as $orders) {
                                            foreach($orders->cart->items as $item) {
                                       if( $item['item']['role_id']==$orderrole_id && $item['item']['id'] == $product_id){
@@ -174,7 +177,7 @@
                                                     </div>
                                                 </td>
                                             </tr>
-                                           <?php }}}}?>
+									<?php }}}} }?>
                            
                                 </tbody>
                             </table>

@@ -44,8 +44,8 @@
                             <thead>
                                 <tr>
                                     <th>{{ __('message.Sr. No') }}</th>
-                                    <th>{{ __('message.Product Name') }}</th>
-<!--                                    <th>Product id</th>-->
+                                    <th>{{ __('message.Product Name') }}</th>									
+									<th>{{ __('message.SKU') }}</th>
                                     <th>{{ __('message.Original Quantity') }}</th>
                                     <th>{{ __('message.Sale Quantity') }}</th>
                                     <th>{{ __('message.Remained Quantity') }}</th>
@@ -66,7 +66,7 @@
                                         </td>
                                         <td><?php if ($language === 'en') { ?>
                                                     {{ $product_name[$language] }} / {{ $product_name['ar'] }}<?php }if ($language === 'ar') {?>{{ $product_name[$language] }} / {{ $product_name['en'] }}<?php } ?></td>
-<!--                                        <td>{{ $stock->product_id }}</td>-->
+										<td>{{ $stock->sku }}</td>
                                         <td>{{ $stock->original_qty }}</td>
                                         <td>{{ $stock->sale_qty }}</td>
                                         <td>{{ $stock->remained_qty }}</td>

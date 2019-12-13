@@ -243,7 +243,7 @@
                                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i> {{ Auth::user()->name }} <span class="caret"></span></a>
                                             <ul class="dropdown-menu">
                                                 <li><a href="{{ url('/dashboard') }}">{{ __('message.My Account') }}</a></li>
-                                                <li><a href="{{ url('/order') }}">{{ __('message.Order History') }}</a></li>
+                                                <li><a href="{{ url('/order') }}">{{ __('message.My Order') }}</a></li>
                                                 <!--<li><a href="{{ url('/wallet') }}">{{ __('message.Wallet') }}</a></li>-->
                                                 <!--                                    <li><a href="#">Return & Refund</a></li>-->
                                                 <li><a class="dropdown-item" href="{{ route('users.logout') }}"

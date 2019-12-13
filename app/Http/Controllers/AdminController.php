@@ -2468,25 +2468,30 @@ public function allpages() {
         if ($usertype == 'superadmin') {
 
             $research = order_product::where('status', '=',1)->with('admins')->get();
+			
+			
             // $productdetaildata= $research->admins()->paginate(2);
             //$countproduct = count($research);
 
         } else {
 
            $research = order_product::with('admins')->where('status', '=',1)->where('role_id', '=', Auth::user()->id)->get();
-       }
+		//print_r($research);
+	   }
        $countnumber=count($research);
 
     $order=array();
     if($countnumber>0){
        foreach ($research as $value) {
-
+		
         $order = Order::with('user')->where('id', '=',$value->order_id)->get(); 
         $orderrole_id=$value->role_id;
         $product_id=$value->product_id;
         $vendorname=$value->admins->name;
-        $admin_status=$value->admin_status;
+        $admin_status=$value->admin_status;	
+		//dd($admin_status);
             }
+
 
             $order->map(function($order, $key) {
                 $order->cart = unserialize($order->cart);
@@ -3163,8 +3168,7 @@ public function getShowreport($id){
     }
 
     $orderdata = order_product::with('admins')->where('status', '=',1)->where('id', '=',$id)->get();
-    $countnumber=count($orderdata);
-
+	$countnumber=count($orderdata);
     $order=array();
     if($countnumber>0){
        foreach ($orderdata as $value) {
@@ -3188,7 +3192,7 @@ public function getShowreport($id){
         if($add_id !=0){
             $order_add = Category::getUserAddressID($add_id);
         }   
-//    $shipping = DB::table('users_address')->find($add_id);
+     $shipping = DB::table('users_address')->find($add_id);
 //    echo "<pre>";
 //    print_r($order);
 //    echo "<pre>";
@@ -3498,10 +3502,10 @@ Excel::create('Order_Customer_Data', function($excel) use ($customer_array){
            $usertype = (Auth::user()->job_title);
            $role_id = Auth::user()->id;
                 if ($usertype == 'superadmin') {
-$stocks = DB::select('SELECT * FROM stocks LEFT JOIN products p ON stocks.product_id = p.id WHERE stocks.id IN(SELECT MAX(stocks.id) FROM `stocks` Group by product_id)'); //for get data
+			$stocks = DB::select('SELECT * FROM stocks LEFT JOIN products p ON stocks.product_id = p.id WHERE stocks.id IN(SELECT MAX(stocks.id) FROM `stocks` Group by product_id)'); //for get data
                 }else{
-$stocks = DB::select('SELECT * FROM stocks s LEFT JOIN products p ON s.product_id = p.id WHERE s.role_id='.$role_id.' AND s.id IN(SELECT MAX(s.id) FROM stocks Group by s.product_id)'); //for get data
-                      
+			$stocks = DB::select('SELECT * FROM stocks s LEFT JOIN products p ON s.product_id = p.id WHERE s.role_id='.$role_id.' AND s.id IN(SELECT MAX(s.id) FROM stocks Group by s.product_id)'); //for get data
+               
                 }
         
 

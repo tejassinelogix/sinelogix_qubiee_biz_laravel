@@ -51,7 +51,7 @@
                                             <th>{{ __('message.Order Id') }}</th>
                                             <th>{{ __('message.Order Date') }}</th>
                                             <!--<th>{{ __('message.Invoice') }}</th>-->
-                                            <th>{{ __('message.Item Description') }}</th>
+                                            <!--th>{{ __('message.Item Description') }}</th-->
                                             <th>{{ __('message.Product Image') }}</th>
                                             <th>{{ __('message.Order Status') }}</th>
                                             <th>{{ __('message.Total') }}</th>
@@ -63,12 +63,12 @@
                                             <td>{{ __('message.Order Id') }}- {{ $order['id'] }} </td>
                                             <td>{{ __('message.Created') }}- {{ $order['created_at'] }}</td>
 <!--                                            <td><center><a href="orderinvoice/{{ $order['id'] }}" ><i class="fa fa-download"></i></a></center></td>-->
-                                            <td>
+                                            <!--td>
                                                 @foreach($order->cart->items as $item)
-                                                <ul class="list-group">
+                                                <!--ul class="list-group">
                                                     <li class="list-group-item">
                                                       
-<!--                                                        <a href="public/images/{{ $item['item']['product_image'] }}" data-lightbox="roadtrip"> {{ $item['item']['product_name'][$language] }} </a>| {{ $item['qty'] }} {{ __('message.Units') }} -->
+<!--                                                        <a href="public/images/{{ $item['item']['product_image'] }}" data-lightbox="roadtrip"> {{ $item['item']['product_name'][$language] }} </a>| {{ $item['qty'] }} {{ __('message.Units') }}->
                                                     {{ $item['item']['product_name'][$language] }} | {{ $item['qty'] }} {{ __('message.Units') }}    
                                                     <div class="clear"></div>
                                                         <span class="badge">
@@ -76,9 +76,9 @@
                                                         </span> 
                                                     </li>
 
-                                                </ul>
+                                                </ul->
                                                 @endforeach
-                                            </td>
+                                            </td-->
                                               <td>
                                                   <?php // if($order['over_img']) { ?>
                                                   <!--<img src="public/images/order_img/{{ $order['over_img'] }}"  height="90px" width="90px" alt="">-->
