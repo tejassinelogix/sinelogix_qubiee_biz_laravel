@@ -74,7 +74,8 @@
                                         <label for="title">{{ __('message.Title') }}</label><span class="required" style="color: red">*</span>
                                         <input type="text" name="title" class="form-control" id="title" placeholder="" value="<?php if(isset( $product_name[$language] )){ echo $product_name[$language];}  else {} ?>">
                                         <input type="hidden" name="product_id" id="product_id" value="<?php echo $produc->id; ?>">
-                                    </div>
+										
+									</div>
                                     
                                    <div class="form-group col-sm-6">
                                         <label for="title">{{ __('message.Original Price') }}</label><span class="required" style="color: red">*</span>
@@ -270,7 +271,34 @@
                                         </div>
 
                                         <?php } } $cnt1++; } }  ?>
-                                    
+										<div class="col-sm-6">
+										       <div class="main_category_form">
+											   <label for="select" class=" form-control-label">Select Category</label>
+                                        <select id="main_category_select" name="main_category_select" class="form-control">
+                                          <option value="0">{{ __('message.Select Category') }}</option>
+                                           <?php                                     
+                                        foreach ($products_category as $category) {											
+                                            ?>
+											<option value="<?php echo $category->id; ?>" <?php echo (isset($category->id) && $category->id == $category->id)?'selected':''; ?>>{{ $category->product_name }}</option>
+											
+                                            <a href="#" class="remove_field" data-id="{{ $category->id }}">{{ __('message.Remove') }}</a>
+                                             <input type="hidden" name="main_category_hidden" id="main_category_hidden" value="<?php echo $category->id; ?>">
+											<?php 
+											} ?>
+											
+                                        </select>
+                                        
+                                    </div>
+										</div>
+										<div class="col-md-6">
+										 <div class="sub_category_form">
+										  <label for="select" class=" form-control-label">Select Sub Category</label>
+                                        <select id="sub_category_select" name="sub_category_select" class="form-control">
+                                          <option value="0">{{ __('message.Select Sub-Category') }}</option>
+                                        </select>
+                                        <input type="hidden" name="sub_category_hidden" id="sub_category_hidden" value="">
+                                    </div>  
+										</div>
                                     <div class="form-group col-sm-3">
                                         <label for="select" class=" form-control-label">{{ __('message.Select Section') }}</label>
                                         <select  id="section" name="section" class="form-control">
@@ -295,6 +323,7 @@
     ?>
                                         </select>
                                     </div>
+									
                                     <div class="form-group col-sm-3">
                                         <label for="select" class=" form-control-label">{{ __('message.Offer') }}</label>
                                         <input type="text" class="form-control" value="<?php echo $produc->offer; ?>" id="offer" name="offer" placeholder="" disabled>
@@ -371,7 +400,7 @@
                                                 <!--<input type="checkbox" name="gift_wrapping" value="1" >-->
                                                  <?php
                                                 if($produc->gift_wrapping==1) { ?>
-                                                    <input type="checkbox" checked="checked" name="gift_wrapping" value="<?php echo $produc->gift_wrapping; ?>"> &nbsp;<small>This product is eligible for gift box</small>
+                                                    <input type="checkbox" checked="checked" name="gift_wrapping" value="<?php echo $produc->gift_wrapping; ?>" >
                                                         <?php }  else { ?>
                                                     <input type="checkbox" name="gift_wrapping" value="1">
                                                            <?php } ?>
@@ -397,6 +426,7 @@
 </div><!-- /#right-panel -->
 
 <!-- Right Panel -->
+<script type="text/javascript" src="{{ URL::asset('/js/view_discount_service.js') }}"></script> 
 <script src="{{ asset('/admin/assets/js/vendor/jquery-2.1.4.min.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
 <script src="{{ asset('/admin/assets/js/plugins.js')}}"></script>

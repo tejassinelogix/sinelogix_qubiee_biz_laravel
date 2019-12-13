@@ -584,11 +584,13 @@ class AdminController extends Controller {
         $category_parent_id = DB::select('select * from category where status= 1 and  category_parent_id = 0'); //get main categry
         //$category_parent_id = json_decode(json_encode($category_parent), true);
         $productlist = DB::select('select id,product_name from products  where status= 1');
-        $subcategory = DB::select('select * from category where status= 1 and category_parent_id NOT IN (0) '); //get main sub categry
+		//dd($productlist);
+		$subcategory = DB::select('select * from category where status= 1 and category_parent_id NOT IN (0) '); //get main sub categry
 
         $products_addonce = DB::select('select * from products_addonce a, products p where a.product_id = p.id and a.id= ' . $id);
+		$products_category = DB::select('select * from category a, products p where a.category_id = p.id and a.category_id= ' . $id);
 //        echo "<pre>";
-//        print_r($products_addonce);
+       //print_r($products_category);
 //        die;
 
         $users = DB::select('select * from products where id = ?', [$id]); //for get data
@@ -607,7 +609,7 @@ class AdminController extends Controller {
         } else {
             $menu_cat_data = $this->get_menu_tree($sub_menu_id);
         }
-		$category_parent_id = Category::getMainCategory();          
+		$category_parent_id = Category::getMainCategory();		
         $subcategory = Category::getSubCategory();  
 //        echo "<pre>";
 //        print_r($menu_cat_data);
@@ -624,7 +626,7 @@ class AdminController extends Controller {
 //            $all_cat = Category::getAllsubmenuparent($sub_parent_id);
 //        }
         //echo View::make('Admin.header')->render();
-        return view('Admin.edit-product', ['language' => $this->language, 'productlist' => $productlist, 'users' => $users, 'category_parent_id' => $category_parent_id, 'subcategory' => $subcategory, 'getAllsubmenuparent' => $getAllsubmenuparent, 'getProductimagedetails' => $getProductimagedetails, 'product_addonce' => $products_addonce, 'menu_all_category' => $menu_cat_data, 'all_cat' => $all_cat]);
+        return view('Admin.edit-product', ['language' => $this->language, 'productlist' => $productlist, 'users' => $users, 'category_parent_id' => $category_parent_id, 'subcategory' => $subcategory, 'getAllsubmenuparent' => $getAllsubmenuparent, 'getProductimagedetails' => $getProductimagedetails, 'product_addonce' => $products_addonce, 'products_category'=>$products_category,'menu_all_category' => $menu_cat_data, 'all_cat' => $all_cat]);
     }
 
     //code for submit product  edit form 
