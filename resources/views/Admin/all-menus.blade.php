@@ -68,6 +68,10 @@
                                             </div>
                                             <div class="col col-md-3">
                                                 <div class="operationsblok">
+                                                
+                                                <img src="https://qbe.demosoftwares.biz/public/images/<?php echo '/'.$user->category_image; ?>" width="35" height="35"/>
+
+                                                
                                                     <!--                                                <a href="editmenu/{{ $user->category_id }}" data-toggle="tooltip" title="Edit">
                                                                                                         <i class="fa fa-pencil"></i>
                                                                                                     </a>-->

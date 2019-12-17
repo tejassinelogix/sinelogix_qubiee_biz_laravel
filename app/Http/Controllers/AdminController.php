@@ -1115,6 +1115,26 @@ class AdminController extends Controller {
         ->where('id', $id)->delete();        
         return redirect()->back()->with('success', 'Product Deleted successfully');
     }
+
+    public function delete_multi_product(Request $request) {	
+
+        $post_params = $request->all();
+        if(isset($post_params['product_ids']) && 
+            !empty($post_params['product_ids'])){        
+                //DB::delete('delete from student where id = ?',[$id]);
+                DB::table('products')
+                ->whereIn('id', $post_params['product_ids'])->delete();                        
+                $res['status'] = true;
+                $res['data'] = '';
+                $res['message'] = 'Product are deleted successully';            
+         }else{
+            $res['status'] = false;
+            $res['data'] = '';
+            $res['message'] = 'Product are not deleted';            
+         }
+         return json_encode($res);       
+    }
+
     //code for status  product
     public function approvproduct($id) {
         //DB::delete('delete from student where id = ?',[$id]);
@@ -1123,6 +1143,33 @@ class AdminController extends Controller {
         ->update(['status' => 1]);
         return redirect()->back()->with('success', 'Product Approv successfully');
     }
+
+    //code for status  product
+    public function approve_multi_prod(Request $request) {
+
+        $post_params = $request->all();
+        if(isset($post_params['product_ids']) &&
+             !empty($post_params['product_ids'])){
+
+                // DB::enableQueryLog();
+
+                DB::table('products')
+                ->whereIn('id', $post_params['product_ids'])
+                ->update(['status' => 1]);
+
+                // dd(DB::getQueryLog());
+
+                $res['status'] = true;
+                $res['data'] = '';
+                $res['message'] = 'Product are approved successully'; 
+        }else{
+            $res['status'] = false;
+            $res['data'] = '';
+            $res['message'] = 'Product are not approved'; 
+        }
+        return $res;      
+    }
+
     // code for add banner slider page
     //code for status banner product
     public function approvbannproduct($id) {
@@ -2466,6 +2513,7 @@ public function allpages() {
         $vendorId=(Auth::user()->id);
 
         if ($usertype == 'superadmin') {
+            
 
             $research = order_product::where('status', '=',1)->with('admins')->get();
 			
@@ -2476,23 +2524,22 @@ public function allpages() {
         } else {
 
            $research = order_product::with('admins')->where('status', '=',1)->where('role_id', '=', Auth::user()->id)->get();
-		//print_r($research);
-	   }
+       }
+       
        $countnumber=count($research);
 
     $order=array();
     if($countnumber>0){
+        
        foreach ($research as $value) {
-		
+
         $order = Order::with('user')->where('id', '=',$value->order_id)->get(); 
         $orderrole_id=$value->role_id;
         $product_id=$value->product_id;
         $vendorname=$value->admins->name;
-        $admin_status=$value->admin_status;	
-		//dd($admin_status);
+        $admin_status=$value->admin_status;
             }
-
-
+            
             $order->map(function($order, $key) {
                 $order->cart = unserialize($order->cart);
                 return $order;
@@ -2509,7 +2556,7 @@ public function allpages() {
               //   echo $valuesec->admins->name;
               //   die;
               //  }
-
+                
        echo view('Admin.report', compact('language','research','usertype','vendorId','add_id','order_add','order','orderrole_id','product_id'));
    }
        function invoice() {

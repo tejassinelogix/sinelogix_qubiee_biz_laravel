@@ -7,7 +7,7 @@ return [
 	'Register' => 'تسجيل',
 	'Welcome' => 'أهلا بك',
 	'E-Mail Address' => 'عنوان بريد الكتروني',
-	'Password' => 'كلمة سر جديدة',
+	'Password' => 'پاس ورڈ',
         'Old Password' => 'كلمة المرور الحالية',
 	'Remember Me' => 'تذكرنى',
 	'Forgot Your Password?' => 'نسيت رقمك السري؟',

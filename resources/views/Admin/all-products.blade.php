@@ -31,6 +31,8 @@
 
 <div class="content mt-3">
     <div class="animated fadeIn">
+        <form name="edit_product" id="edit_product" method="POST">
+        <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
         <div class="row">
 
             <div class="col-md-12">
@@ -38,11 +40,13 @@
                     <div class="card-header">
                         <strong class="card-title">Data Table</strong>
                     </div>
+
                     <div class="card-body">
                         <table id="bootstrap-data-table" class="table table-striped table-bordered">
 
                             <thead>
                                 <tr>
+                                    <th><input type="checkbox" name="all_prod_chk" class="all_prod_chk" value="" unchecked="unchecked"></th>
                                     <th>Sr. No.</th>
                                     <th>Title</th>
                                     <th>Vendor Name</th>
@@ -63,6 +67,9 @@
                                     $cntr++;
                                     ?>
                                     <tr>
+                                        <td class="chkbox">
+                                            <input type="checkbox" class="prod_chk" name="prod_chk" value="{{ $user->id }}">
+                                        </td>
                                         <td class="srNo">
                                             <?php echo $cntr; //echo $user->product_id ;?>
                                         </td>
@@ -114,7 +121,7 @@
                                                 </a>-->
                                                 <?php
                                                 if($product_status == 1) { ?>
-                                                <a href="deleteproduct/{{ $user->id }}" id="productapprove" data-toggle="tooltip" title="Not Approved" onclick="return confirm('Are you sure to Not Approved Products?');">
+                                                <a href="#" id="productapprove" data-toggle="tooltip" title="Not Approved" ">
                                                     <i class="fa fa-times"></i>
                                                 </a>
                                                      
@@ -122,11 +129,11 @@
                                                       $usertype = (Auth::user()->job_title);
                                              if($usertype=='superadmin'){ ?>
                                                       
-                                             <a href="approvproduct/{{ $user->id }}" id="productapprove" data-toggle="tooltip" title="Approved" onclick="return confirm('Are you sure to Approved Products?');">
+                                                <a href="#" id="productapprove_check" data-toggle="tooltip" title="Approved">
                                                     <i class="fa fa-check"></i>
                                                 </a>
                                              <?php } else { ?>
-                                            <a href="#" id="productapprove" data-toggle="tooltip" title="Disapproved">
+                                            <a href="" id="productapprove" data-toggle="tooltip" title="Disapproved">
                                                     <i class="fa fa-times"></i>
                                                 </a>
                                                <!--<span class="badge badge-success">Only <br>Superadmin <br>Can<br> Approved</span>-->
@@ -146,6 +153,7 @@
 
 
         </div>
+</form> 
     </div><!-- .animated -->
 </div><!-- .content -->
 <!-- All Product -->
@@ -155,7 +163,8 @@
 </div><!-- /#right-panel -->
 
 <!-- Right Panel -->
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script type="text/javascript" src="{{ URL::asset('/js/view_product_service.js') }}"></script>
 
 @endsection
 

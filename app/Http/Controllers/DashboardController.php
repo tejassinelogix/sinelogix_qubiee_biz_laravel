@@ -1086,7 +1086,11 @@ class DashboardController extends Controller {
             $language = $this->language = app()->getLocale();
         }
    $productname  = $Request->input('searchproduct');  
-  $q   = str_replace(' ', '-', $productname);
+    $q   = str_replace(' ', '-', $productname);    
+    if(strlen($q) >= 5){            
+        $q = substr_replace($q ,"", -2);            
+    }
+    
     $user = product::with('reviews')->where ( 'url', 'LIKE', '%' . $q . '%' )->where('status', 1)->get();
 $getSubCategory = Category::getSubCategory();
 $getMainCategory = Category::getMainCategory();
