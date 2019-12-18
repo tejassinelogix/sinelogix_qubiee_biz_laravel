@@ -54,6 +54,7 @@ class ProductController extends Controller
     	$oldCart = Session::has('cart') ? Session::get('cart') : null;
 
     	$cart = new Cart($oldCart);
+		//dd($cart);
         
 //        if($request->input('send_gift')){
 //            $send_as_gift = $request->input('send_gift');
@@ -82,6 +83,7 @@ class ProductController extends Controller
                 DB::table('orders_img')->insert(['user_id' => $user_id,'v_id' => $v_id,'order_img' => $nameimage,'id' => $pro_id]);
                 $image->move($destinationPath, $nameimage);
                 Session::put('over_img', $nameimage);
+				
                 Session::save();
         }
         else{

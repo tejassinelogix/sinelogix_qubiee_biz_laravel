@@ -125,6 +125,7 @@ class AdminController extends Controller {
     }
     $all_cat = DB::select("select category_id,category_name from category where status= 1 and category_parent_id=0");
     
+	
         /* print_r($users);
         die; */
 
@@ -1995,11 +1996,11 @@ public function allpages() {
 
     public function ajax(Request $Request) {
         $productname = $Request->input('id');
-
+		
         //$getProductdetails = Category::getAjaxproductdetails($productname);
         $users = DB::select("select id,product_name from product_details  where product_name  like  '%$productname%' OR category_name  like  '%$productname%'");
         $userss = DB::select("select id,product_name from products  where product_name  like  '%$productname%'");
-
+		
 //return response()->json($users);
         foreach ($users as $s) {
             $urlnewname = trim($s->product_name);

@@ -1,4 +1,32 @@
-       <?php
+<style>
+#loaders {
+ border: 16px solid #f3f3f3;
+   border-radius: 50%;
+   border-top: 16px solid blue;  
+   border-bottom: 16px solid blue;   
+   width: 90px;
+   height: 90px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+  position: absolute;
+  z-index: 99;
+  display: none;
+  margin-left: 40%;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+</style>
+<div id="loaders"></div>      
+	  <?php
 //                    foreach (array_slice($getParentCategoryproduct, 0, 8) as $catproduct) {
                         foreach ($poductdata as $catproduct) {
                        // $pro_name = json_decode($catproduct->product_name, true);
@@ -54,7 +82,7 @@
                                     </ul>-->
                                        <div class="loaderWrapperAjax loader-wrapper<?php echo $catproduct->id;?>" style="display: none;"><img src="{{ URL::to('public/assets/images/ajax-loader.gif') }}"></div>
                                     <div class="productInfoMsgAlert addtowishmessage<?php echo $catproduct->id;?>" ></div>
-                    <button  data-id="<?php echo $catproduct->id;?>" class="wishlist-btn addtowishlist"> {{ __('message.Add to Wishlist') }}  </button>
+									<button  data-id="<?php echo $catproduct->id;?>" class="wishlist-btn addtowishlist"> {{ __('message.Add to Wishlist') }}  </button>
                                     <h2 class="propricing">
                                         $ {{ $catproduct->product_price }} 
                                          <?php
@@ -71,7 +99,7 @@
                                 </div>
                                 <div class="productBlockViewDtl">
                                     <a href="<?php echo url('/productdetails'); ?>/{{$catproduct->url }}" class="btn1">{{ __('message.view details') }}<i class="fa fa-arrow-circle-right"></i></a>
-                                    <a href="{{ url("/add-to-cart/{$catproduct->id}") }}" class="btn2">{{ __('message.Add To Cart') }}<i class="fa fa-shopping-cart"></i></a>
+                                    <a href="{{ url("/add-to-cart/{$catproduct->id}") }}" class="btn2" onClick="AddToCart()">{{ __('message.Add To Cart') }}<i class="fa fa-shopping-cart"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -84,6 +112,11 @@
 //                        $abc = 0;
 //                    }
                     ?>
+					<script>
+					function AddToCart(){
+						document.getElementById('loaders').style.display="block";
+					}
+					</script>
 <!--                    <div class="filter_data"> 
 
 

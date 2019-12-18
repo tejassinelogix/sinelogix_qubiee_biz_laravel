@@ -1,3 +1,36 @@
+  <style>
+#loaderss{
+ border: 16px solid #f3f3f3;
+   border-radius: 50%;
+   border-top: 16px solid blue;
+  
+   border-bottom: 16px solid blue;
+   
+   width: 90px;
+   height: 90px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+  position: absolute;
+  z-index: 99;
+  display: none;
+  margin-left: 40%;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.pagination {
+    margin-top: 31%;
+}
+</style>
+<div id="loaderss"></div>         
   <?php foreach ($poductdata as $catproduct) { ?>
                             <div class="col-sm-3 product-box-class">
                                 <div class="productBlock productBlockCat">
@@ -72,8 +105,13 @@
                                     </div>
                                     <div class="productBlockViewDtl">
                                         <a href="<?php echo url('/productdetails'); ?>/{{$catproduct->url }}" class="btn1">{{ __('message.view details') }} <i class="fa fa-arrow-circle-right"></i></a>
-                                        <a href="{{ url("/add-to-cart/{$catproduct->id}") }}" class="btn2">{{ __('message.Add To Cart') }} <i class="fa fa-shopping-cart"></i></a>
+                                        <a href="{{ url("/add-to-cart/{$catproduct->id}") }}" class="btn2" onClick="cart()">{{ __('message.Add To Cart') }} <i class="fa fa-shopping-cart"></i></a>
                                     </div>
                                 </div>
                             </div>
                         <?php } ?>
+						<script>
+						function cart(){
+							document.getElementById('loaderss').style.display="block";
+						}
+						</script>
