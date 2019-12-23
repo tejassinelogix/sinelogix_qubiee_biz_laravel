@@ -125,7 +125,6 @@ class AdminController extends Controller {
     }
     $all_cat = DB::select("select category_id,category_name from category where status= 1 and category_parent_id=0");
     
-	
         /* print_r($users);
         die; */
 
@@ -650,8 +649,8 @@ class AdminController extends Controller {
         //$shortdescription = $Request->input('shortdescription');
         $url = $Request->input('url');
         $discountvalue = $Request->input('discount');
-        $maincategory = $Request->input('maincategory');
-        $subcategory = $Request->input('subcategory');
+        $maincategory = $Request->input('main_category_select');
+        $subcategory = $Request->input('sub_category_select');
         $offer = $Request->input('offer');
         //$country = $Request->input('country');
         $section = $Request->input('section');
@@ -1169,6 +1168,51 @@ class AdminController extends Controller {
             $res['message'] = 'Product are not approved'; 
         }
         return $res;      
+    }
+
+
+     //code for status  product
+     public function approve_multi_orders(Request $request) {
+
+        $post_params = $request->all();
+        if(isset($post_params['order_ids']) &&
+             !empty($post_params['order_ids'])){
+
+                DB::table('order_products')
+                ->whereIn('order_id', $post_params['order_ids'])
+                ->update(['admin_status' => 1]);
+
+                $res['status'] = true;
+                $res['data'] = '';
+                $res['message'] = 'Orders are approved successully'; 
+        }else{
+            $res['status'] = false;
+            $res['data'] = '';
+            $res['message'] = 'Orders are not approved'; 
+        }
+        return $res;      
+    }
+
+
+    public function disapprove_multi_order(Request $request) {	     
+
+        $post_params = $request->all();
+        if(isset($post_params['order_ids']) && 
+            !empty($post_params['order_ids'])){        
+                                
+                DB::table('order_products')
+                ->whereIn('order_id', $post_params['order_ids'])
+                ->update(['admin_status' => 0]);
+
+                $res['status'] = true;
+                $res['data'] = '';
+                $res['message'] = 'Orders are deleted successully';            
+         }else{
+            $res['status'] = false;
+            $res['data'] = '';
+            $res['message'] = 'Orders are not deleted';            
+         }
+         return json_encode($res);       
     }
 
     // code for add banner slider page
@@ -1996,11 +2040,11 @@ public function allpages() {
 
     public function ajax(Request $Request) {
         $productname = $Request->input('id');
-		
+
         //$getProductdetails = Category::getAjaxproductdetails($productname);
         $users = DB::select("select id,product_name from product_details  where product_name  like  '%$productname%' OR category_name  like  '%$productname%'");
         $userss = DB::select("select id,product_name from products  where product_name  like  '%$productname%'");
-		
+
 //return response()->json($users);
         foreach ($users as $s) {
             $urlnewname = trim($s->product_name);

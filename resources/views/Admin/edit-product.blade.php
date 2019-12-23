@@ -2,6 +2,7 @@
 <head>
    @include('Admin.layouts.head')
 </head>
+
 <body>
 <div class="wrapper">
 	@include('Admin.layouts.header')
@@ -51,10 +52,12 @@
                         </div>
                         @endif
                         <form action="<?php echo url('/admin/updateproduct') ?>" method="post" enctype="multipart/form-data">
-                            {{csrf_field()}} 
+                             
+                            <input type="hidden" name="_token" id="csrf-token" value='{{csrf_token()}}' />
                             <p><span class="required" style="color: red">Enter all required fields marked as *</span>
                             <div class="row">
                                 <?php
+                                
                                 foreach ($users as $produc) {
                                    
                                   
@@ -144,161 +147,37 @@
                                         <?php $cnt++;
                                     } ?>
                                     </div>
-                                <?php if($menu_all_category == 0){?>
-                                    <div class="form-group col-sm-2">
-                                            <label for="select" class=" form-control-label">{{ __('message.Select Category') }}</label>
-                                            <select  id="maincategory" name="maincategory" class="form-control">
-                                                <option value="0">{{ __('message.Please select') }}</option>
-                                                <?php
-                                                foreach ($category_parent_id as $sn) {
-                                                     $cat_name = json_decode($sn->category_name, true);
-                                                    if ($sn->category_id == $produc->main_category) {
-                                                        ?>
-                                                        <option value="<?php echo $sn->category_id; ?>" selected><?php echo $cat_name[$language];; ?></option><?php } else { ?>
-                                                        <option value="<?php echo $sn->category_id; ?>"><?php echo $cat_name[$language]; ?></option>
-                                            <?php }
-                                        } ?>
-                                            </select>
-                                        </div>
-                                        <div class="form-group col-sm-2">
-                                            <label for="select" class=" form-control-label">{{ __('message.Select Sub Category') }}</label>
-                                            <select  id="subcategory" name="subcategory" class="form-control">
-                                                <option value="0">{{ __('message.Please select') }}</option>
-                   
-                                            </select>
-                                        </div>
-
-                                        <div class="form-group col-sm-2">
-                                            <label for="select" class=" form-control-label">{{ __('message.Select Sub Category') }}</label>
-                                            <select id="sub_cat" name="sub_cat" class="form-control">
-                                                <option value="0">{{ __('message.Please Select Sub Category') }}</option>
-                                          
-                                            </select>
-                                        </div> 
-                                <?php } else{
-//                                echo "<pre>";
-//                                print_r($all_cat);
-//                                die;
-                                //if($menu_all_category > 0){
-                                   $cnt_arr = count($menu_all_category);
-                                    $cnt1 = 1;
-                                foreach($menu_all_category as $cat_data){
-//                                    echo $cat_data['id'];
-                                   // echo $cat_data['name'];
-                                    //echo $cnt1;
-                                    
-                                    if($cnt_arr == $cnt1){
-                                       //echo $cat_data['name']."<br>"; ?>
-                                       
-                                        <div class="form-group col-sm-2">
-                                            <label for="select" class=" form-control-label">{{ __('message.Select Sub Category') }}</label>
-                                            <select id="maincategory" name="maincategory" class="form-control">
-                                                <option value="0">{{ __('message.Please select') }}</option>
-                                                <?php 
-                                                foreach ($category_parent_id as $cat) {
-                                                   
-                                                       $cat_name = json_decode($cat->category_name, true);
-                                                 //  echo $cat_data['id'];
-                                                if($cat->category_id == $cat_data['id']){?>
-                                                <option value="<?php echo $cat->category_id; ?>" selected><?php echo $cat_name[$language]; ?></option><?php } else { ?>
-                                                <option value="<?php echo $cat->category_id; ?>"><?php echo $cat_name[$language]; ?></option>
-                                            
-                                                <?php } } ?>
-                                            </select>
-                                        </div>
-                                       
-                                    <?php } else{
-                                               if($cnt1 == 1){
-                                                if($cnt_arr == 2){ ?>
-                                
-                                        <div class="form-group col-sm-2">
-                                            <label for="select" class=" form-control-label">{{ __('message.Select Sub Category') }}</label>
-                                            <select id="sub_cat" name="sub_cat" class="form-control">
-                                                <option value="0">{{ __('message.Please select') }}</option>
-                                                
-                                            </select>
-                                        </div>
-                                                
-                                        <div class="form-group col-sm-2">
-                                            <label for="select" class=" form-control-label">{{ __('message.Select Sub Category') }}</label>
-                                            <select id="subcategory" name="subcategory" class="form-control">
-                                                <option value="0">{{ __('message.Please select') }}</option>
-                                                <?php 
-                                                foreach ($all_cat as $cat) {
-                                                    $cat_name = json_decode($cat->category_name, true);
-                                                 //  echo $cat_data['id'];
-                                                if($cat->category_id == $cat_data['id']){?>
-                                                <option value="<?php echo $cat->category_id; ?>" selected><?php echo $cat_name[$language]; ?></option><?php } else { ?>
-                                                <!--<option value="<?php //echo $cat->category_id; ?>"><?php //echo $cat->category_name; ?></option>-->
-                                            
-                                                <?php } } ?>
-                                            </select>
-                                        </div>
-                                        <?php } else {?>
-                                                    
-                                            <div class="form-group col-sm-2">
-                                            <label for="select" class=" form-control-label">{{ __('message.Select Sub Category') }}</label>
-                                            <select id="sub_cat" name="sub_cat" class="form-control">
-                                                <option value="0">{{ __('message.Please select') }}</option>
-                                                <?php 
-                                                foreach ($all_cat as $cat) {
-                                                     $cat_name = json_decode($cat->category_name, true);
-                                                 //  echo $cat_data['id'];
-                                                if($cat->category_id == $cat_data['id']){?>
-                                                <option value="<?php echo $cat->category_id; ?>" selected><?php echo $cat_name[$language]; ?></option><?php } else { ?>
-                                                <!--<option value="<?php //echo $cat->category_id; ?>"><?php //echo $cat->category_name; ?></option>-->
-                                            
-                                                <?php } } ?>
-                                            </select>
-                                        </div>
-                                
-                                        <?php } } else { ?>
-                                
-                                         <div class="form-group col-sm-2">
-                                            <label for="select" class=" form-control-label">{{ __('message.Select Sub Category') }}</label>
-                                            <select id="subcategory" name="subcategory" class="form-control">
-                                                <option value="0">{{ __('message.Please select') }}</option>
-                                                <?php 
-                                                foreach ($all_cat as $cat) {
-                                                        $cat_name = json_decode($cat->category_name, true);
-                                                 //  echo $cat_data['id'];
-                                                if($cat->category_id == $cat_data['id']){?>
-                                                <option value="<?php echo $cat->category_id; ?>" selected><?php echo $cat_name[$language]; ?></option><?php } else { ?>
-                                                <!--<option value="<?php //echo $cat->category_id; ?>"><?php //echo $cat->category_name; ?></option>-->
-                                            
-                                                <?php } } ?>
-                                            </select>
-                                        </div>
-
-                                        <?php } } $cnt1++; } }  ?>
-										<div class="col-sm-6">
-										       <div class="main_category_form">
-											   <label for="select" class=" form-control-label">Select Category</label>
+                                    <!-- TDS category & sub category-->
+                                    <div class="form-group col-sm-3"> 
+                                    <div class="main_category_form">
                                         <select id="main_category_select" name="main_category_select" class="form-control">
                                           <option value="0">{{ __('message.Select Category') }}</option>
-                                           <?php                                     
-                                        foreach ($products_category as $category) {											
-                                            ?>
-											<option value="<?php echo $category->id; ?>" <?php echo (isset($category->id) && $category->id == $category->id)?'selected':''; ?>>{{ $category->product_name }}</option>
-											
-                                            <a href="#" class="remove_field" data-id="{{ $category->id }}">{{ __('message.Remove') }}</a>
-                                             <input type="hidden" name="main_category_hidden" id="main_category_hidden" value="<?php echo $category->id; ?>">
-											<?php 
-											} ?>
-											
+                                          <?php 
+                                          if(isset($category_parent_id) && !empty($category_parent_id)){
+                                          foreach($category_parent_id as $key => $main_cat) { 
+                                            $cat_name = json_decode($main_cat->category_name, true);
+                                            $cat_name_display = (isset($language) && $language == 'en')?$cat_name['en']:$cat_name['ar'];
+                                            //dd($cat_name);
+                                            ?>                                            
+                                            <option value="<?php echo $main_cat->category_id; ?>" <?php echo (isset($produc->main_category,$main_cat->category_id) && $produc->main_category == $main_cat->category_id)?'selected':''; ?>><?php echo $cat_name_display; ?></option>
+                                           
+                                         
+                                            <?php } } else { ?>
+                                              <option value="0">{{ __('message.No Category Found') }}</option>
+                                            <?php } ?>
                                         </select>
-                                        
+                                        <input type="hidden" name="main_category_hidden" id="main_category_hidden" value="{{ $produc->main_category }}">
                                     </div>
-										</div>
-										<div class="col-md-6">
-										 <div class="sub_category_form">
-										  <label for="select" class=" form-control-label">Select Sub Category</label>
+                                    </div>
+                                    <div class="form-group col-sm-3">        
+                                    <div class="sub_category_form">
                                         <select id="sub_category_select" name="sub_category_select" class="form-control">
                                           <option value="0">{{ __('message.Select Sub-Category') }}</option>
                                         </select>
-                                        <input type="hidden" name="sub_category_hidden" id="sub_category_hidden" value="">
-                                    </div>  
-										</div>
+                                        <input type="hidden" name="sub_category_hidden" id="sub_category_hidden" value="{{ $produc->sub_category }}">                                       
+                                    </div> 
+                                    </div>
+
                                     <div class="form-group col-sm-3">
                                         <label for="select" class=" form-control-label">{{ __('message.Select Section') }}</label>
                                         <select  id="section" name="section" class="form-control">
@@ -426,7 +305,7 @@
 </div><!-- /#right-panel -->
 
 <!-- Right Panel -->
-<script type="text/javascript" src="{{ URL::asset('/js/view_discount_service.js') }}"></script> 
+<script type="text/javascript" src="{{ URL::asset('/js/view_edit_product_service.js') }}"></script> 
 <script src="{{ asset('/admin/assets/js/vendor/jquery-2.1.4.min.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
 <script src="{{ asset('/admin/assets/js/plugins.js')}}"></script>

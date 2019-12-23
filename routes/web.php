@@ -205,6 +205,8 @@ Route::post('/addAddress','HomeController@add_address')->name('addAddress');
     Route::post('/disapprovemultiproduct', 'AdminController@delete_multi_product');
     Route::get('/approvproduct/{id}', 'AdminController@approvproduct');
     Route::post('/approvproduct_multi', 'AdminController@approve_multi_prod');
+    Route::post('/approvorder_multi', 'AdminController@approve_multi_orders');
+    Route::post('/disapprovemultiorder', 'AdminController@disapprove_multi_order');
     Route::get('/approvbannproduct/{id}', 'AdminController@approvbannproduct');
     Route::get('/deactivatelayout/{id}', 'AdminController@deactivatelayout');
     Route::get('/activatelayout/{id}', 'AdminController@activatelayout');

@@ -211,7 +211,7 @@ class DashboardController extends Controller {
             $getNewproduct= product::with('reviews')->where('section', 'New')
                     ->where('status',1)
                     ->orderBy('id', 'desc')
-                    ->paginate(15);
+                    ->paginate(12);
 //            $getAddsectionProduct= product::where('addvertise_seciton', 1)
 //                    ->where('status',1)
 //                    ->orderBy('id', 'desc')

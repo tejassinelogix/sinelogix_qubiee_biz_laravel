@@ -34,6 +34,8 @@
 
     <div class="content mt-3">
         <div class="animated fadeIn">
+        <form name="all_orders" id="all_orders" method="POST">
+                <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
@@ -54,6 +56,7 @@
                             <table id="bootstrap-data-table" class="table table-striped table-bordered">
                                 <thead>
                                     <tr>
+                                    <th><input type="checkbox" name="all_order_chk" class="all_order_chk" value="" unchecked="unchecked"></th>
                                         <th>{{ __('message.Sr. No') }}</th>
                                         <?php //if($usertype == 'superadmin') {?>
                                        
@@ -69,7 +72,9 @@
                                         <th>{{ __('message.Offer ID') }}</th>
                                         <th>{{ __('message.Product Reference No') }}</th>
                                         <th>{{ __('message.Date') }}</th>
+                                        <th>Order Status</th>
                                         <th>{{ __('message.View Order') }}</th>
+                                                                           
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -84,6 +89,9 @@
                                       if( $item['item']['role_id']==$orderrole_id && $item['item']['id'] == $product_id){
                                        ?>
                                        <tr>
+                                       <td class="chkbox">
+                                            <input type="checkbox" class="order_chk" name="order_chk" value="{{ $researchdata->order_id  }}">
+                                        </td>
                                         <td class="srNo">
                                             <?php echo $index++; ?>
                                         </td>
@@ -164,6 +172,18 @@
                                                     ?> 
                                                 </td>
                                                 <td>
+                                                <?php                                                 
+                                                        if($researchdata->admin_status==1){ ?>
+                                                        <span class="badge badge-success">Approved</span> 
+                                                        <?php }else if($researchdata->admin_status==2){ ?>
+                                                            <span class="badge badge-danger">Hold</span>  
+                                                        <?php }else{ ?>
+                                                            <span class="badge badge-warning">Approval Pending</span>
+                                                    <?php  } ?> 
+                                                </center> </td>
+                                                            <!--for order date-->
+                                                
+                                                <td>
                                                     <div class="operationsblok">
                                                        <!--  <a href="edit-product.html" data-toggle="tooltip" title="Edit">
                                                             <i class="fa fa-pencil"></i>
@@ -174,7 +194,18 @@
                                                        <!--  <a href="edit-product.html" data-toggle="tooltip" title="Delete">
                                                             <i class="fa  fa-trash-o"></i>
                                                         </a> -->
+                                                        <?php                                                 
+                                                        if($researchdata->admin_status!=1){ ?>
+                                                        <a href="#" id="orderapprove_check" data-toggle="tooltip" title="Approve Order">
+                                                            <i class="fa fa-check"></i>
+                                                        </a>
+                                                        <?php } else{ ?>
+                                                            <a href="#" id="orderdisapprove_check" data-toggle="tooltip" title="Disapprove Order">
+                                                                <i class="fa fa-close"></i>
+                                                            </a>
+                                                        <?php } ?>
                                                     </div>
+                                                   
                                                 </td>
                                             </tr>
 									<?php }}}} }?>
@@ -185,12 +216,14 @@
                     </div>
                 </div>
             </div>
+        </form>
         </div><!-- .animated -->
     </div>
 </div><!-- /#right-panel -->
     <!-- Right Panel -->
 
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script type="text/javascript" src="{{ URL::asset('/js/view_order_service.js') }}"></script>
 @endsection
 
 @section('footerSection')
