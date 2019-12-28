@@ -39,7 +39,7 @@
                   $newproductfullname=str_replace(' ', '-',$urlnewname);
 				
                   $pro_name = $newproduct->product_name;
-                  $shortdescription = $newproduct->short_description;
+                  $shortdescription = $newproduct->short_description;			  
 				
                 ?>
             <div class="col-sm-3 product-box-class">
@@ -121,6 +121,6 @@
 					document.getElementById('loaders').style.display="block";
 					}
 					</script>
-					View All -->
-					<div class="pagination">{{ $getNewproduct->links() }}</div>
+					
+					<!--<div class="pagination">{{ $getNewproduct->links() }}</div>-->
 					

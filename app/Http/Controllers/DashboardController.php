@@ -288,16 +288,18 @@ class DashboardController extends Controller {
  
            $poductdata= product::with('reviews')->where('status',1)
                     ->paginate(8);
+			
        } 
         else {
              
             $getParentCategoryproduct = Category::getParentCategoryproduct($categoryname);
             $getParentSubCategorycate = Category::getParentSubCategorycate($categoryname);
                 $array = json_decode(json_encode($getParentCategoryproduct), true);
- 
+		   $poductdata1= product::with('reviews')->where('main_category', $array)->where('status',1)->get();			
+				
            $poductdata= product::with('reviews')->where('main_category', $array)
                     ->where('status',1)
-                    ->paginate(12);
+                    ->paginate(7);
             }
        
            
@@ -308,6 +310,8 @@ class DashboardController extends Controller {
         }
 
         $countProduct=count($poductdata);
+		$totalcount = count($poductdata1);
+		//print_r($totalcount); 
         //get the parent category sub cat here
         
         $getCategorymainseo = Category::getCategorymainseo($categoryname);
@@ -341,7 +345,7 @@ class DashboardController extends Controller {
        
 
         echo View::make('dashboard-header', ['backgroundStatus'=>$backgroundStatus,'background_color' => $background_color,'layoutbackground_image' => $layoutbackground_image,'layoutclass_name' => $layoutclass_name,'language' => $this->language, 'getSubCategory' => $getSubCategory, 'getMainCategory' => $getMainCategory, 'getSubCategorycate' => $getSubCategorycate, 'getSubBlogs' => $getSubBlogs, 'homedata' => $homedata])->render();
-        echo view('main-category-page', ['poductdata'=>$poductdata,'language' => $this->language, 'getParentSubCategorycate' => $getParentSubCategorycate, 'categoryname' => $categoryname, 'catName' => $catName, 'catNameurl' => $catNameurl,'countProduct'=>$countProduct]);
+        echo view('main-category-page', ['poductdata'=>$poductdata,'language' => $this->language, 'getParentSubCategorycate' => $getParentSubCategorycate, 'categoryname' => $categoryname, 'catName' => $catName, 'catNameurl' => $catNameurl,'countProduct'=>$countProduct,'poductdata1'=>$poductdata1]);
         echo View::make('dashboard-footer', ['language' => $this->language, 'getSubCategory' => $getSubCategory, 'getMainCategory' => $getMainCategory, 'getPagesdetails' => $getPagesdetails])->render();
     }
 
@@ -1086,12 +1090,14 @@ class DashboardController extends Controller {
             $language = $this->language = app()->getLocale();
         }
    $productname  = $Request->input('searchproduct');  
+  
     $q   = str_replace(' ', '-', $productname);    
     if(strlen($q) >= 5){            
         $q = substr_replace($q ,"", -2);            
     }
     
-    $user = product::with('reviews')->where ( 'url', 'LIKE', '%' . $q . '%' )->where('status', 1)->get();
+$user = product::with('reviews')->where ( 'url', 'LIKE', '%' . $q . '%' )->where('status', 1)->paginate(10)->setPath('');
+
 $getSubCategory = Category::getSubCategory();
 $getMainCategory = Category::getMainCategory();
  $getSubCategorycate = Category::getSubCategorycate();

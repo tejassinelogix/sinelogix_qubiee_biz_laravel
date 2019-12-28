@@ -24,13 +24,15 @@
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+.container.margin {
+    margin-top: 81%;
+}
 </style>
 <div id="loaders"></div>      
 	  <?php
 //                    foreach (array_slice($getParentCategoryproduct, 0, 8) as $catproduct) {
                         foreach ($poductdata as $catproduct) {
-                       // $pro_name = json_decode($catproduct->product_name, true);
-                        
+                       // $pro_name = json_decode($catproduct->product_name, true);                        
                         $urlname = $catproduct->product_name;
                         $productfullname = str_replace(' ', '-', $urlname);
                         ?>
@@ -121,8 +123,21 @@
 
 
                     </div>-->
-<!--                    ajax load 
+<!--                    ajax load
+
+
+
+ 
                     <div id="remove-row">
                         <button id="btn-more" data-id="<?php //echo $abc; ?>" class="nounderline btn-block mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent pricesidebarbtn" >{{ __('message.Load More') }}  </button>
                     </div>-->
                     <!--ajax load -->
+					<?php
+						
+						//exit;
+					?>
+					<div class="container margin">
+					<div class="row">					
+					<div class="pagination">{{ $poductdata->links() }}</div>
+					</div>
+					</div>

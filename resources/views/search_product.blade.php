@@ -144,3 +144,21 @@ $abc;
 
 
 
+
+<div class="container margin">
+					<div class="row">	
+					
+					<div class="pagination">{{ $details->links() }}</div>
+					</div>
+					</div>
+				
+
+
+
+
+
+
+
+
+
+

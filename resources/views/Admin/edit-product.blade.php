@@ -2,7 +2,6 @@
 <head>
    @include('Admin.layouts.head')
 </head>
-
 <body>
 <div class="wrapper">
 	@include('Admin.layouts.header')
@@ -57,7 +56,6 @@
                             <p><span class="required" style="color: red">Enter all required fields marked as *</span>
                             <div class="row">
                                 <?php
-                                
                                 foreach ($users as $produc) {
                                    
                                   
