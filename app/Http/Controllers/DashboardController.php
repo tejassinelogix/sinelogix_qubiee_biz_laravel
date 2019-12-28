@@ -288,7 +288,6 @@ class DashboardController extends Controller {
  
            $poductdata= product::with('reviews')->where('status',1)
                     ->paginate(8);
-			
        } 
         else {
              
@@ -436,7 +435,6 @@ class DashboardController extends Controller {
         //$getSubCategorycateparentid = Category::getSubCategorycateparentid($id);
         // $getCategoryproduct = Category::getCategoryproduct($id);
         $getProductdetails = Category::getProductdetailsall($name);
-
         $homedata = json_decode(json_encode($getProductdetails), true);
         $product_id = $homedata[0]['product_id'];
         $roleIdSeller = $homedata[0]['role_id'];

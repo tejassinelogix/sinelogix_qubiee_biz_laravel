@@ -146,7 +146,7 @@
                         $checked="";    
                            }
                              ?>
-              <label for="giftWrap<?php echo $product['item']['id']; ?>" class="giftWrap"><input class="giftwrappingcheck" type="checkbox" name="giftwrapping[{{$index-1}}]" id="giftWrap<?php echo $product['item']['id']; ?>" value="<?php echo $product['item']['id']; //echo 'giftwrap'.'-'.$product['item']['id']; ?>" data-toggle="tooltip" data-placement="left" title="Click to add up to 3 items in box" <?php echo $checked; ?> ><i class="fa fa-gift"></i></label>
+              <label for="giftWrap<?php echo $product['item']['id']; ?>" class="giftWrap"><input class="giftwrappingcheck" type="checkbox" name="giftwrapping[{{$index-1}}]" id="giftWrap<?php echo $product['item']['id']; ?>" value="<?php echo $product['item']['wraping_charage']; //echo 'giftwrap'.'-'.$product['item']['id']; ?>" data-toggle="tooltip" data-placement="left" title="Click to add up to 3 items in box" <?php echo $checked; ?> product_id="<?php echo $product['item']['id']; ?>" unchecked='unchecked'><i class="fa fa-gift"></i></label>
           <!--<input type="checkbox" class="giftwrappingcheck"  name="giftwrapping[{{$index-1}}]" id="giftwrapping<?php //echo $product['item']['id']; ?>" value="<?php //echo 'giftwrap'.'-'.$product['item']['id']; ?>" checked>-->
                               <?php  
                               }else{?>
