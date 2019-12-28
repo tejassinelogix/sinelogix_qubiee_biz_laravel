@@ -443,7 +443,7 @@ Route::resource('mainmenu', 'MenuController');
 Route::resource('product', 'BannerController');
 //Route::resource('page', 'PageController');
 Route::get('/ajax', 'DashboardController@ajax');
-Route::post('/search', 'DashboardController@search');
+Route::any('/search/{page?}', 'DashboardController@search');
 Route::get('/categoryfilter', 'DashboardController@categoryfilter');
 Route::get('/mostsellingfilter', 'DashboardController@mostsellingfilter');
 Route::get('/mostsubsellingfilter', 'DashboardController@mostsubsellingfilter');

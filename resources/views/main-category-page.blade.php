@@ -210,7 +210,8 @@ $abc;
                 <div class="item-list-tophead">				
 					<?php
 				    $total_pagination = $poductdata->lastPage();
-					$current_page = app('request')->input('page');					
+					$current_page = app('request')->input('page');
+					
 					$default_page = 1;
 					$product_count_right = $poductdata->count();
 					$product_count_last = $product_count_right + 1;

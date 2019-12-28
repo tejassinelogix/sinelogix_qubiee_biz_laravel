@@ -286,8 +286,8 @@ class DashboardController extends Controller {
             $getParentSubCategorycate = Category::getParentAllSubCategorycate($categoryname);
                 //$array = json_decode(json_encode($getParentCategoryproduct), true);
  
-           $poductdata= product::with('reviews')->where('status',1)
-                    ->paginate(8);
+           $poductdata= product::with('reviews')->where('status',1)->paginate(8);
+			
        } 
         else {
              
@@ -395,9 +395,17 @@ class DashboardController extends Controller {
                $background_color = '';
                $backgroundStatus='';
              }
+			 
+			$poductdata1= product::with('reviews')->where('sub_category', $id)->where('status',1)->get();			 
+			 
             $poductdata= product::with('reviews')->where('sub_category', $id)
                     ->where('status',1)
-                    ->paginate(12);
+                    ->paginate(8);	
+ $countProduct=count($poductdata);
+ $totalcount = count($poductdata1);
+ //dd($countProduct);
+		//$totalcount = count($poductdata1);					
+					
  if ($request->ajax()) {
     		$view = view('sub-cat-product-ajax',compact('id','poductdata','language'))->render();
             return response()->json(['html'=>$view]);
@@ -406,12 +414,13 @@ class DashboardController extends Controller {
         $product_name = $array[0]['category_name'];
         $product_id = $array[0]['category_id'];
         $product_url = $array[0]['url'];
+		
 //        echo '<pre>';
 //        print_r($getSubCategorycateparentid);
 //        die;
 //        echo View::make('dashboard-header', ['language' => $this->language, 'getSubCategory' => $getSubCategory, 'getMainCategory' => $getMainCategory, 'getSubCategorycate' => $getSubCategorycate, 'getSubBlogs' => $getSubBlogs, 'homedata' => $homedata,'getMainCategory' => $getMainCategory])->render();
         echo View::make('dashboard-header', ['backgroundStatus'=>$backgroundStatus,'background_color' => $background_color,'layoutbackground_image' => $layoutbackground_image,'layoutclass_name' => $layoutclass_name,'language' => $this->language, 'getSubCategory' => $getSubCategory, 'getMainCategory' => $getMainCategory, 'getSubCategorycate' => $getSubCategorycate, 'getSubBlogs' => $getSubBlogs, 'homedata' => $homedata])->render();
-        echo View('sub-category-page', ['id'=>$id,'poductdata'=>$poductdata,'language' => $this->language, 'name' => $name,'product_url'=>$product_url, 'product_name' => $product_name, 'getCategoryproduct' => $getCategoryproduct, 'getSubCategorycateparentid' => $getSubCategorycateparentid,'getMainCategory' => $getMainCategory]);
+        echo View('sub-category-page', ['id'=>$id,'poductdata'=>$poductdata,'language' => $this->language, 'name' => $name,'product_url'=>$product_url, 'product_name' => $product_name, 'getCategoryproduct' => $getCategoryproduct, 'getSubCategorycateparentid' => $getSubCategorycateparentid,'getMainCategory' => $getMainCategory,'countProduct'=>$countProduct,'poductdata1'=>$poductdata1]);
 //        echo View::make('dashboard-footer', ['language' => $this->language, 'getPagesdetails' => $getPagesdetails,'getMainCategory' => $getMainCategory])->render();
         echo View::make('dashboard-footer', ['language' => $this->language, 'getSubCategory' => $getSubCategory, 'getMainCategory' => $getMainCategory, 'getPagesdetails' => $getPagesdetails])->render();
         
@@ -435,6 +444,7 @@ class DashboardController extends Controller {
         //$getSubCategorycateparentid = Category::getSubCategorycateparentid($id);
         // $getCategoryproduct = Category::getCategoryproduct($id);
         $getProductdetails = Category::getProductdetailsall($name);
+
         $homedata = json_decode(json_encode($getProductdetails), true);
         $product_id = $homedata[0]['product_id'];
         $roleIdSeller = $homedata[0]['role_id'];
@@ -1094,7 +1104,7 @@ class DashboardController extends Controller {
         $q = substr_replace($q ,"", -2);            
     }
     
-$user = product::with('reviews')->where ( 'url', 'LIKE', '%' . $q . '%' )->where('status', 1)->paginate(10)->setPath('');
+$user = product::with('reviews')->where ( 'url', 'LIKE', '%' . $q . '%' )->where('status', 1)->paginate(10);
 
 $getSubCategory = Category::getSubCategory();
 $getMainCategory = Category::getMainCategory();

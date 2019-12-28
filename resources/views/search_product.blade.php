@@ -135,16 +135,6 @@ $abc;
     </div>
 </div>
 
-
-
-
-
-
-
-
-
-
-
 <div class="container margin">
 					<div class="row">	
 					

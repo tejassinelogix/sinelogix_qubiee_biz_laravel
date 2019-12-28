@@ -124,3 +124,8 @@
 					
 					<!--<div class="pagination">{{ $getNewproduct->links() }}</div>-->
 					
+					<div class="container margin">
+					<div class="row">					
+					<div class="pagination">{{ $getNewproduct->links() }}</div>
+					</div>
+					</div>
