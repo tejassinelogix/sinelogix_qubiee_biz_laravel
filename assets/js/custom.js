@@ -436,6 +436,7 @@ $(document).ready(function () {
 
     function filter_data()
     {
+        console.log('filter calls')
         $('.filter_data').show();
         $('.filter_data').html('<div id="loading" style="" ></div>');
         var action = 'fetch_data';
@@ -452,6 +453,8 @@ $(document).ready(function () {
             data: {brand: brand},
             // dataType:"JSON",
             success: function (data) {
+                console.log('data')
+                console.log(data)
 //                 data = JSON.parse(data);
 //                
 //            var text = "";
@@ -475,12 +478,12 @@ $(document).ready(function () {
                 //alert(JSON.parse(data));
                 data = JSON.parse(data);
                 // alert(data);
-                if (data.success == "1") {
-
+                if (data.success == 1) {
+                    console.log('success')
                     $.each(data.data, function (index, value) {
 
                         $('.product-box-class').hide();
-                        text += '<div class="col-sm-3">' +
+                        text += '<div class="col-sm-3 new_products_added">' +
                                 '<div class="productBlock">' +
                                 '<a href="/productdetails/' + value.url + '" class="productBlockImg">' +
 //        '<div style="background: url('+"'/public/images/"+value.product_image+"') no-repeat;"+'></div>'+
@@ -488,23 +491,20 @@ $(document).ready(function () {
                                 '</a>' +
                                 '<div class="productBlockInfo">' +
                                 '<h3 class="protitle">' + value.name + '</h3>' +
-                                '<ul class="proRating">' +
-                                '<li><i class="fa fa-star"></i></li>' +
-                                '<li><i class="fa fa-star"></i></li>' +
-                                '<li><i class="fa fa-star"></i></li>' +
-                                '<li><i class="fa fa-star"></i></li>' +
-                                '<li><i class="fa fa-star-half-o"></i></li>' +
+                                '<ul class="ratings">' +
+                                '<li><i class="fa fa-star-o"></i></li>' +
+                                '<li><i class="fa fa-star-o"></i></li>' +
+                                '<li><i class="fa fa-star-o"></i></li>' +
+                                '<li><i class="fa fa-star-o"></i></li>' +
+                                '<li><i class="fa fa-star-o"></i></li>' +
                                 '</ul>' +
-                                '<span class="discountoffer">' +
-                                '<a href="/add-to-wishlist/' + value.id + '" class="wishlist-btn" title="wishlist"><i class="fa fa-heart"></i> Add to Wishlist</a>' +
-                                '</span>' +
+                                '<a href="/add-to-wishlist/' + value.id + '" class="wishlist-btn" title="wishlist">Add to Wishlist</a>' +
                                 '<h2 class="propricing">$' + value.price +
                                 '<small><strike> $' + value.original_price + '</strike></small></h2>' +
-                                '<p class="proinfo">Earliest Delivery: Today</p>' +
                                 '</div>' +
                                 '<div class="productBlockViewDtl">' +
                                 '<a href="/productdetails/' + value.url + '" class="btn1">View details <i class="fa fa-arrow-circle-right"></i></a>' +
-                                '<a href="/add-to-cart/' + value.id + '" class="btn2">Buy Now <i class="fa fa-shopping-cart"></i></a>' +
+                                '<a href="/add-to-cart/' + value.id + '" class="btn2">ADD TO CART <i class="fa fa-shopping-cart"></i></a>' +
                                 '</div>' +
                                 '</div>' +
                                 '</div>';
@@ -557,7 +557,7 @@ $(document).ready(function () {
                     $('#remove-row').remove();
                     $('.filter_data').html(text);
                 } else {
-
+                    console.log('else')
                     //$('.filter_data').html('<div class="NoCar"><i class="fa fa-exclamation-triangle"></i> <br> No Product Added!</div>');
                 }
             }
@@ -2403,24 +2403,28 @@ $(document).ready(function () {
         $(".thanksVideoBlock").hide();
     });
     //$(".thanksVideoBlock").delay(10000).hide("medium").attr('src', 'youtube.com');
-    $(".thanksVideoBlock").delay(10000).queue(function () {
+    $(".thanksVideoBlock").delay(12000).queue(function () {
         $(this).addClass("thanksVideoBlockTOBEHIDDEN");
         setTimeout(
           function() 
           {
             $("#thanksVideoBlock").css("display","none");
             $('#thanksVideoBlock').remove();
-          }, 10000);
+          }, 12000);
     });
     //$(".thanksVideoBlockTOBEHIDDEN iframe").attr('src', 'youtube.com');
 
-    document.getElementById("thanksVideoBlock").onclick = function () {
+   /* document.getElementById("thanksVideoBlock").onclick = function () {
        
         //document.getElementById('player').src = "https://www.youtube.com/embed/bo2KQer1KNM";
         document.getElementById('player').src = "https://www.youtube.com";
         
         
-    };
+    }; */
+    
+     $("#thanksVideoBlock").click(function () {
+        document.getElementById('player').src = "https://www.youtube.com";
+    });
     
 
 
