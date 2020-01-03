@@ -193,9 +193,13 @@ public static function getBannerslider() {
         // shwo the product seller name 
   public static function getproductseller($nameproduct) {
          
-        $users = DB::select("select name from admins  where id = '".$nameproduct."' ");
-        
+        $users = DB::select("select name from admins  where id = '".$nameproduct."' ");        
         return $users; 
+    }
+	public static function getproductsellerData($nameproduct) {
+         
+        $usersData = DB::select("select * from product_details  where role_id = '".$nameproduct."' ");        
+        return $usersData; 
     }
     // shwo the product addones 
   public static function getaddonesproduct($nameproduct) {

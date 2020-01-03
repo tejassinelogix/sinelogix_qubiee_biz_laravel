@@ -31,7 +31,7 @@
                            
                             <div class="leftmenuList">
                                 <ul>
-                                 <?php foreach ($getNewproduct as $maincat){
+                                 <?php foreach ($getNewproduct as $maincat){									
                                       
                                                 $urlnewname=trim($maincat->product_name); 
                                                 $newproductfullname=str_replace(' ', '-',$urlnewname);

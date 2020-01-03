@@ -60,10 +60,10 @@
 //                        $abc = 0;
 //                    }
                     ?>
-                    <!-- <div class="filter_data"> 
+<!--                    <div class="filter_data"> 
 
 
-                    </div> -->
+                    </div>-->
 <!--                    ajax load 
                     <div id="remove-row">
                         <button id="btn-more" data-id="<?php //echo $abc; ?>" class="nounderline btn-block mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent pricesidebarbtn" >Load More  </button>

@@ -18,7 +18,6 @@ $p_id;
                 foreach ($getProductdetails as $sn) {
 //                    echo $sn->custmization;
                     $pro_name = json_decode($sn->product_name, true);
-
                     foreach ($getSubCategory as $row) {
                         $lang_typea = explode(',', $row->category_id);
                         $lang_invitee = explode(',', $sn->sub_category);
@@ -56,7 +55,7 @@ $p_id;
                             <div id="small-img-roll">
                                 <?php
                                 foreach ($getProductimagedetails as $image) {
-                                    $lang_invitee = explode('|', $image->images_name);
+									 $lang_invitee = explode('|', $image->images_name);
                                     foreach ($lang_invitee as $key => $value) {
                                         ?>  
                                         <img src="{{ asset('/') }}public/images/{{ $value}}" class="show-small-img" alt="">
@@ -115,7 +114,10 @@ $p_id;
 
                                 <div class="ratings-review-details">
                                     <?php
+									//dd($getproductsellerDataBy);
+									
                                     if($getProductSoldBy){
+										
                                         echo 'Sold By : '. $getProductSoldBy[0]['name'];
                                     }
                                     $countofdate = number_format($productdetailreview->reviews()->avg('rating'), 2);
@@ -457,7 +459,81 @@ $p_id;
 
     <div class="space15"><hr /></div>
 
-    <div class="container">
+	<?php 
+
+	
+	
+	?>
+	
+	<div class="container">
+        <!-- relatedProductsSection -->
+        <div class="relatedProductsSection">
+            <h3 class="heading-center"><span> Seller Products </span></h3>
+            <div class="row relatedProducts">
+                <div class="owl-carousel" id="relatedProductsSlider">
+					    <?php
+						
+                    foreach ($getproductsellerDataBy as $newproduct) {					
+                        $urlnewname = $newproduct['product_name'];	
+						
+                        $newproductfullname = str_replace(' ', '-', $urlnewname);
+                       $rel_pro_name = json_decode($newproduct['product_name'], true);
+                        $rel_pro_name = $newproduct['product_name'];
+						
+					
+                        ?>
+                        <div class="item">
+                            <div class="productBlock">
+                                <a href="<?php echo url('/productdetails'); ?>/{{$newproduct['url'] }}" class="productBlockImg">
+                                    <div style="background: url('{{ asset('/') }}/public/images/{{ $newproduct['product_image'] }}') no-repeat;"></div>
+                                </a>
+                                <div class="productBlockInfo">
+                               
+                                    <!--                                    <ul class="proRating">
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star-half-o"></i></li>
+                                    </ul>-->
+                                    
+                                    <h2 class="propricing">$ {{ $newproduct['product_price'] }} 
+                                         <?php if (!empty($newproduct['discount'] || $newproduct['discount'] != 0 || $newproduct['product_price'] != $newproduct['original_price'])) { ?>
+                                        <small><strike>$<?php echo $newproduct['original_price']; ?></strike></small>
+                                           
+                                            <?php
+                                        } else {
+                                            
+                                        }
+                                        ?>
+                                         
+<!--                                    <p class="proinfo">{{ __('message.Earliest Delivery: Today') }}</p>-->
+                                    <?php if (!empty($newproduct['discount'])) { ?>
+                                        <span class="discountoffer">
+                                            <?php echo $newproduct['discount']; ?> % {{ __('message.Off') }}
+                                        </span>
+                                        <?php
+                                    } else {
+                                        
+                                    }
+                                    ?>
+                                    <a href="{{ url("/add-to-wishlist/{$newproduct['product_id']}") }}" class="wishlist-btn" title="{{ __('message.Add to Wishlist') }}"><i class="fa fa-heart"></i>{{ __('message.Add to Wishlist') }} </a>
+                                </div>
+                                <div class="productBlockViewDtl">
+                                    <a href="<?php echo url('/productdetails'); ?>/{{$newproduct['url'] }}" class="btn1">{{ __('message.view details') }} <i class="fa fa-arrow-circle-right"></i></a>
+                                    <a href="{{ url("/add-to-cart/{$newproduct['product_id']}") }}" class="btn2">{{ __('message.Buy Now') }}<i class="fa fa-shopping-cart"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    <?php } ?> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+<div class="container">
         <!-- relatedProductsSection -->
         <div class="relatedProductsSection">
             <h3 class="heading-center"><span>{{ __('message.Related products') }}</span></h3>
@@ -465,10 +541,12 @@ $p_id;
                 <div class="owl-carousel" id="relatedProductsSlider">
                     <?php
                     foreach ($getAllRelatedproduct as $newproduct) {
-                        $urlnewname = $newproduct->product_name;
+                        $urlnewname = $newproduct->product_name;	
+						
                         $newproductfullname = str_replace(' ', '-', $urlnewname);
                        //$rel_pro_name = json_decode($newproduct->product_name, true);
                         $rel_pro_name = $newproduct->product_name;
+						
                         ?>
                         <div class="item">
                             <div class="productBlock">
@@ -544,7 +622,6 @@ $p_id;
         </div>
     </div>
 </div>
-
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog modal-lg" role="document">

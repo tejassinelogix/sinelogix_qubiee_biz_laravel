@@ -36,7 +36,29 @@ $abc;
                         <div class="sidebar-list-content">
                             <div class="inner-sidebar-list">
                                 <h3>{{ __('message.Filter By') }}:</h3> 
-                              
+                                <!--old category filter code here-->
+                                <div class="sidebar-filter-box">
+                                    <h4 class="sidebar-heading"><i class="fa fa-plus"></i>{{ __('message.Category') }}</h4>
+                                    <div>
+                                        
+                                        <?php 
+                                        
+                                        foreach ($getParentSubCategorycate as $maincat) {
+     
+                                        $mcat_Name = json_decode($maincat->category_name, true);
+                                        
+                                        ?>
+                                            <p>
+                                                <input type="checkbox" value="<?php echo base64_encode($maincat->category_id); ?>" name="chechkcategory" class="common_selector brand" />
+                                                <label>
+                                                    <span class="checkmark"></span>
+                                                        <?php echo strtoupper($mcat_Name[$language]); ?></label> 
+                                            </p>
+                                        <?php } ?>
+                                       
+                                    </div>
+                                </div>
+                                                         <!--end old category filter code here-->
                                                           <!--proice filter higer lower code here-->
                               <div class="sidebar-filter-box">
                                     <h4 class="sidebar-heading"><i class="fa fa-plus"></i>{{ __('message.Sort Price By') }}</h4>
@@ -96,30 +118,6 @@ $abc;
                                         <!--</form>-->
                                     </div>
                                 </div>
-
-                                  <!--old category filter code here-->
-                                  <div class="sidebar-filter-box">
-                                    <h4 class="sidebar-heading"><i class="fa fa-plus"></i>{{ __('message.Brand') }}</h4>
-                                    <div>
-                                        
-                                        <?php 
-                                        
-                                        foreach ($getParentSubCategorycate as $maincat) {
-     
-                                        $mcat_Name = json_decode($maincat->category_name, true);
-                                        
-                                        ?>
-                                            <p>
-                                                <input type="checkbox" value="<?php echo base64_encode($maincat->category_id); ?>" name="chechkcategory" class="common_selector brand" />
-                                                <label>
-                                                    <span class="checkmark"></span>
-                                                        <?php echo strtoupper($mcat_Name[$language]); ?></label> 
-                                            </p>
-                                        <?php } ?>
-                                       
-                                    </div>
-                                </div>
-                                                         <!--end old category filter code here-->
                                 
                                 
                                 
@@ -211,14 +209,18 @@ $abc;
             <div class="col-md-9 col-sm-9" id="loading">
                 <div class="item-list-tophead">				
 					<?php
-				    $total_pagination = $poductdata->lastPage();
+				   $total_pagination = $poductdata->lastPage();
 					$current_page = app('request')->input('page');
 					
 					$default_page = 1;
 					$product_count_right = $poductdata->count();
 					$product_count_last = $product_count_right + 1;
-					$product_count_last_right = $product_count_last + $product_count_right;
 					
+					$product_count_last_right = $product_count_last + $product_count_right;
+					if(!isset($current_page))
+					     $current_page = 1;
+					     
+				
 					if($default_page != $current_page){
 						$default_page = $product_count_last;
 					}
@@ -232,7 +234,6 @@ $abc;
 						$default_page = $temp_tot + 1;
 						$product_count_right = $poductdata1->count();
 					}
-									
 					?>
                     <h4><?php echo $cat_Name[$language]; ?> <span>(<?php echo $default_page; ?> - <?php echo $product_count_right; ?> of <?php echo $poductdata1->count();?> {{ __('message.Items') }})</span></h4>
                     <!--		            <div class="sorting-order">

@@ -448,9 +448,11 @@ class DashboardController extends Controller {
         $homedata = json_decode(json_encode($getProductdetails), true);
         $product_id = $homedata[0]['product_id'];
         $roleIdSeller = $homedata[0]['role_id'];
-        $getProductSeller = Category::getproductseller($roleIdSeller);
-         
-          $getProductSoldBy = json_decode(json_encode($getProductSeller), true);
+        $getProductSeller = Category::getproductseller($roleIdSeller);     
+		$getproductsellerData = Category::getproductsellerData($roleIdSeller);
+		//dd($getproductsellerData);
+		$getproductsellerDataBy = json_decode(json_encode($getproductsellerData),true);
+        $getProductSoldBy = json_decode(json_encode($getProductSeller), true);
         
         $getProductimagedetails = Category::getProductimagedetails($product_id);
         //for assine addones get selecte prduct
@@ -472,6 +474,13 @@ class DashboardController extends Controller {
                              ->where('status',1)
                              ->where('as_gift_wrap',0)
                              ->get();
+					 
+		$getAllRelatedproductBy = product::with('reviews')
+                            ->where('sub_category', $sub_cat)
+                             ->where('status',1)
+                             ->where('as_gift_wrap',0)
+                             ->get();
+		 
         $getMainCategory = Category::getMainCategory();
 
         $getPagesdetails = Category::getPagesdetails();
@@ -545,7 +554,7 @@ class DashboardController extends Controller {
         
 
         echo View::make('dashboard-header', ['backgroundStatus'=>$backgroundStatus,'background_color' => $background_color,'layoutbackground_image' => $layoutbackground_image,'layoutclass_name' => $layoutclass_name,'language' => $this->language, 'getSubCategory' => $getSubCategory, 'getMainCategory' => $getMainCategory, 'getSubCategorycate' => $getSubCategorycate, 'getSubBlogs' => $getSubBlogs, 'homedata' => $homedata])->render();
-        echo View('product-details', ['reviewaccess'=>$reviewaccess,'getProductSoldBy'=>$getProductSoldBy,'pro_quantity' => $p_qty,'stocklevel' => $stocklevel, 'language' => $this->language, 'productdetailsaddones' => $productdetailsaddones, 'getaddonesproduct' => $getaddonesproduct, 'getProductdetails' => $getProductdetails, 'getSubCategory' => $getSubCategory, 'getMainCategory' => $getMainCategory, 'getProductimagedetails' => $getProductimagedetails, 'getAllRelatedproduct' => $getAllRelatedproduct,'productdetaildata'=>$productdetaildata,'productdetailreview'=>$productdetailreview])->render();
+        echo View('product-details', ['reviewaccess'=>$reviewaccess,'getProductSoldBy'=>$getProductSoldBy,'pro_quantity' => $p_qty,'stocklevel' => $stocklevel, 'language' => $this->language, 'productdetailsaddones' => $productdetailsaddones, 'getaddonesproduct' => $getaddonesproduct, 'getProductdetails' => $getProductdetails, 'getSubCategory' => $getSubCategory, 'getMainCategory' => $getMainCategory, 'getProductimagedetails' => $getProductimagedetails, 'getAllRelatedproduct' => $getAllRelatedproduct,'productdetaildata'=>$productdetaildata,'productdetailreview'=>$productdetailreview,'getproductsellerDataBy'=>$getproductsellerDataBy,'getAllRelatedproductBy'=>$getAllRelatedproductBy])->render();
         echo View::make('dashboard-footer', ['language' => $this->language, 'getMainCategory' => $getMainCategory, 'getPagesdetails' => $getPagesdetails])->render();
     }
     
