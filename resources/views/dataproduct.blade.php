@@ -118,7 +118,9 @@
 					function AddToCart(){
 						document.getElementById('loaders').style.display="block";
 					}
-					</script>
+                    </script>
+                    <div class="load_ajax_filter_data"> 
+                    </div>
 <!--                    <div class="filter_data"> 
 
 

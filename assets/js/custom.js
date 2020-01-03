@@ -555,7 +555,7 @@ $(document).ready(function () {
 //                            '<button id="btn-more" data-id="' + valueid + '" class="nounderline btn-block mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent pricesidebarbtn" > Load More </button>' +
 //                            '</div>';
                     $('#remove-row').remove();
-                    $('.filter_data').html(text);
+                    $('.load_ajax_filter_data').html(text);
                 } else {
                     console.log('else')
                     //$('.filter_data').html('<div class="NoCar"><i class="fa fa-exclamation-triangle"></i> <br> No Product Added!</div>');
