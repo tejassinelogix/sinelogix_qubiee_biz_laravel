@@ -1091,7 +1091,7 @@ class DashboardController extends Controller {
         echo json_encode($response);
     }
        // code for search result
-       public function search(Request $Request) {
+      public function search(Request $Request) {
                 if (Session::has('locale')) {
             $language = $this->language = Session::get('locale');
         } else {
@@ -1099,13 +1099,24 @@ class DashboardController extends Controller {
         }
    $productname  = $Request->input('searchproduct');  
   
-    $q   = str_replace(' ', '-', $productname);    
+    $q   = str_replace(' ', '-', $productname);      
+    if(isset($q) && empty($q)){          
+            $Request->session()->save('searchproduct',$q);	
+            $q = $Request->session()->get('searchproduct');		
+       }else{ // 
+            $Request->session()->forget('searchproduct');	 
+            $Request->session()->put('searchproduct',$q);
+            $Request->session()->save('searchproduct',$q);	
+            $q = $Request->session()->get('searchproduct');		        
+        } 
+    
     if(strlen($q) >= 5){            
         $q = substr_replace($q ,"", -2);            
     }
     
 $user = product::with('reviews')->where ( 'url', 'LIKE', '%' . $q . '%' )->where('status', 1)->paginate(10);
-
+/* $user = product::with('reviews')->where ( 'url', 'LIKE', '%' . $q . '%' )->where('status', 1)->paginate(10); */
+$poductdata1= product::with('reviews')->where('url', 'LIKE', '%' . $q . '%' )->where('status',1)->get();	
 $getSubCategory = Category::getSubCategory();
 $getMainCategory = Category::getMainCategory();
  $getSubCategorycate = Category::getSubCategorycate();
@@ -1130,7 +1141,7 @@ $homedata = json_decode(json_encode($getHome), true);
              }
     if (count ( $user ) > 0){
        echo View('dashboard-header', ['backgroundStatus'=>$backgroundStatus,'background_color' => $background_color,'layoutbackground_image' => $layoutbackground_image,'layoutclass_name' => $layoutclass_name,'language' => $language, 'getSubCategory' => $getSubCategory, 'getMainCategory' => $getMainCategory, 'getSubCategorycate' => $getSubCategorycate, 'getSubBlogs' => $getSubBlogs, 'homedata' => $homedata])->render();
-        echo View ( 'search_product',['language' => $language])->withDetails ( $user )->withQuery ( $q );
+        echo View ( 'search_product',['language' => $language,'poductdata1'=>$poductdata1])->withDetails ( $user )->withQuery ( $q );
         echo View('dashboard-footer', ['language' => $language, 'getSubCategory' => $getSubCategory, 'getMainCategory' => $getMainCategory, 'getPagesdetails' => $getPagesdetails])->render();
 }else{
     echo View('dashboard-header', ['backgroundStatus'=>$backgroundStatus,'background_color' => $background_color,'layoutbackground_image' => $layoutbackground_image,'layoutclass_name' => $layoutclass_name,'language' => $language, 'getSubCategory' => $getSubCategory, 'getMainCategory' => $getMainCategory, 'getSubCategorycate' => $getSubCategorycate, 'getSubBlogs' => $getSubBlogs, 'homedata' => $homedata])->render();

@@ -37,27 +37,27 @@ $abc;
                             <div class="inner-sidebar-list">
                                 <h3>{{ __('message.Filter By') }}:</h3> 
                                 <!--old category filter code here-->
-<!--                                <div class="sidebar-filter-box">
+                                <div class="sidebar-filter-box">
                                     <h4 class="sidebar-heading"><i class="fa fa-plus"></i>{{ __('message.Category') }}</h4>
                                     <div>
                                         
                                         <?php 
                                         
-                                        //foreach ($getParentSubCategorycate as $maincat) {
+                                        foreach ($getParentSubCategorycate as $maincat) {
      
-                                        //$mcat_Name = json_decode($maincat->category_name, true);
+                                        $mcat_Name = json_decode($maincat->category_name, true);
                                         
                                         ?>
                                             <p>
-                                                <input type="checkbox" value="<?php //echo base64_encode($maincat->category_id); ?>" name="chechkcategory" class="common_selector brand" />
+                                                <input type="checkbox" value="<?php echo base64_encode($maincat->category_id); ?>" name="chechkcategory" class="common_selector brand" />
                                                 <label>
                                                     <span class="checkmark"></span>
-                                                        <?php //echo strtoupper($mcat_Name[$language]); ?></label> 
+                                                        <?php echo strtoupper($mcat_Name[$language]); ?></label> 
                                             </p>
-                                        <?php //} ?>
+                                        <?php } ?>
                                        
                                     </div>
-                                </div>-->
+                                </div>
                                                          <!--end old category filter code here-->
                                                           <!--proice filter higer lower code here-->
                               <div class="sidebar-filter-box">

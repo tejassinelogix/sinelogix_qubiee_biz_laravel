@@ -121,7 +121,7 @@
                                                 </a>-->
                                                 <?php
                                                 if($product_status == 1) { ?>
-                                                <a href="#" id="productapprove" data-toggle="tooltip" title="Not Approved" ">
+                                                <a href="#" id="productapprove" data-toggle="tooltip" title="Delete" ">
                                                     <i class="fa fa-times"></i>
                                                 </a>
                                                      
@@ -133,7 +133,7 @@
                                                     <i class="fa fa-check"></i>
                                                 </a>
                                              <?php } else { ?>
-                                            <a href="" id="productapprove" data-toggle="tooltip" title="Disapproved">
+                                            <a href="" id="productapprove" data-toggle="tooltip" title="Delete">
                                                     <i class="fa fa-times"></i>
                                                 </a>
                                                <!--<span class="badge badge-success">Only <br>Superadmin <br>Can<br> Approved</span>-->

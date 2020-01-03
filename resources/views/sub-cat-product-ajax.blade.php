@@ -30,7 +30,7 @@
     margin-top: 31%;
 }
 .container.margin {
-    margin-top: 42%;
+    margin-top: 90%;
 }
 </style>
 <div id="loaderss"></div>         

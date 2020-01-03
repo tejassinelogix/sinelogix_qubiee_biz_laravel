@@ -1,9 +1,38 @@
+<style>
+#searchloaders{
+ border: 16px solid #f3f3f3;
+   border-radius: 50%;
+   border-top: 16px solid blue;
+  
+   border-bottom: 16px solid blue;
+   
+   width: 90px;
+   height: 90px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+  position: absolute;
+  z-index: 99;
+  display: none;
+  margin-left: 40%;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+</style>
 <?php
 $abc;
 //echo "<pre>";
 // print_r($getParentSubCategorycate);
 ?>
-
+<div id="searchloaders"></div>
 <div class="innerPageSection">
     <div class="containerWrapper">
         <div class="breadcrumbs">
@@ -28,6 +57,34 @@ $abc;
                      
                     <?php
                     if(isset($details)){
+                    $total_pagination = $details->lastPage();
+					$total_pagination = $details->lastPage();
+					$current_page = app('request')->input('page');					
+					$default_page = 1;		
+				    $product_count_right = $details->count();
+					$product_count_last = $product_count_right + 0;
+					$product_count_last_right = $product_count_last;
+				
+					if($default_page != $current_page){
+					$default_page = $product_count_last;
+					$temp_tot = $poductdata1->count() - $details->count();
+					$default_page = $temp_tot - 4;
+					$product_count_right = $poductdata1->count();
+					}
+					
+					if($default_page != $current_page){
+						$product_count_right = $product_count_last_right;
+					}
+					
+					if($default_page != $current_page && $current_page == $total_pagination){
+						$temp_tot = $poductdata1->count() - $details->count();
+						$default_page = $temp_tot + 1;
+						$product_count_right = $poductdata1->count();
+					}
+                    ?>
+                    <div class="item-list-tophead"><h4> <span><?php echo $default_page; ?> - <?php echo $product_count_right; ?> of <?php echo $poductdata1->count();?> {{ __('message.Items') }}</span></h4></div>
+                    <?php 
+                        
                     foreach ( $details as $catproduct) {
 //                        echo '<pre>';
 //                        print_r($catproduct);
@@ -100,7 +157,7 @@ $abc;
                                 </div>
                                 <div class="productBlockViewDtl">
                                     <a href="<?php echo url('/productdetails'); ?>/<?php echo $catproduct->url; ?>" class="btn1"><?php echo __('message.view details'); ?><i class="fa fa-arrow-circle-right"></i></a>
-                                    <a href="<?php echo url('/add-to-cart'); ?>/<?php echo $catproduct->id; ?>" class="btn2"><?php echo __('message.Buy Now'); ?><i class="fa fa-shopping-cart"></i></a>
+                                    <a href="<?php echo url('/add-to-cart'); ?>/<?php echo $catproduct->id; ?>" class="btn2" onclick="searchCart()"><?php echo __('message.Buy Now'); ?><i class="fa fa-shopping-cart"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -141,6 +198,11 @@ $abc;
 					<div class="pagination">{{ $details->links() }}</div>
 					</div>
 					</div>
+					<script>
+				function searchCart(){
+					document.getElementById('searchloaders').style.display="block";
+				}
+				</script>
 				
 
 

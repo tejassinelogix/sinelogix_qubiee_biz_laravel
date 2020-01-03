@@ -1,11 +1,39 @@
 <style>
+#loaderss{
+ border: 16px solid #f3f3f3;
+   border-radius: 50%;
+   border-top: 16px solid blue;
+  
+   border-bottom: 16px solid blue;
+   
+   width: 90px;
+   height: 90px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+  position: absolute;
+  z-index: 99;
+  display: none;
+  margin-left: 40%;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 .container.margin {
-    margin-top: 42%;
+    margin-top: 90%;
 }
 </style>
 <!-- End of navigationBar -->
 <!-- category page section -->
 <?php //dd($countProduct);?>
+<div id="loaderss"></div>         
 <div class="categoryInner">
     <div class="innerBannerSection productSubPageBanner">
 
@@ -151,6 +179,7 @@
 					$current_page = app('request')->input('page');						
 					$default_page = 1;					
 					$product_count_right = $poductdata->count();
+					
 					$product_count_last = $product_count_right + 1;
 					$product_count_last_right = $product_count_last + $product_count_right;
 				

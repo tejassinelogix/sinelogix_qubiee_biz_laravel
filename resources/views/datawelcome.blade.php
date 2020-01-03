@@ -29,6 +29,9 @@
 .pagination {
     margin-top: 31%;
 }
+.container.margin {
+    margin-top: 51%;
+}
 </style>
 <div id="loader"></div>         
 

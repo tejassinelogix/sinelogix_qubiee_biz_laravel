@@ -1,5 +1,5 @@
 $(document).ready(function () {
-
+console.log('custom calls')
     //container replace
     /*$(".containerWrapper").addClass("container");
      $(".containerWrapper.container").removeClass("containerWrapper");*/

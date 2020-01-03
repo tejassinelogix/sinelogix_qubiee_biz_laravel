@@ -1,5 +1,5 @@
 <html class="no-js" lang="">
-<head>
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
    @include('Admin.layouts.head')
 </head>
 <body>
@@ -277,7 +277,7 @@
                                                 <!--<input type="checkbox" name="gift_wrapping" value="1" >-->
                                                  <?php
                                                 if($produc->gift_wrapping==1) { ?>
-                                                    <input type="checkbox" checked="checked" name="gift_wrapping" value="<?php echo $produc->gift_wrapping; ?>" >
+                                                    <input type="checkbox" checked="checked" name="gift_wrapping" value="<?php echo $produc->gift_wrapping; ?>" > &nbsp;<small>This product is eligible for gift box.</small>
                                                         <?php }  else { ?>
                                                     <input type="checkbox" name="gift_wrapping" value="1">
                                                            <?php } ?>
