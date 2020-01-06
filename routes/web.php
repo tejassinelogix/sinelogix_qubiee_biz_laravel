@@ -486,6 +486,7 @@ Route::post('editmenu/{id}', 'MenuController@posteditmenupage');
 
 Route::get('categoryproduct/{id}/{name}', 'DashboardController@getCategoryproduct');
 Route::get('productdetails/{name}', 'DashboardController@getProductdetails');
+Route::get('sellerproductdetails/{role_id}', 'DashboardController@getProductdetailsByid');
 Route::get('product/productdetails/{name}', 'BannerController@getProductdetails');
 
 

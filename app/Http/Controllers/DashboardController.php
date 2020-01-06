@@ -436,6 +436,7 @@ class DashboardController extends Controller {
 //                     echo $name.'this name of caegory';
         $product = trim($name);
         $nameproduct = str_replace('-', ' ', $product);
+		
         $getMainCategory = Category::getMainCategory();
         $getSubCategory = Category::getSubCategory();
 
@@ -557,6 +558,7 @@ class DashboardController extends Controller {
         echo View('product-details', ['reviewaccess'=>$reviewaccess,'getProductSoldBy'=>$getProductSoldBy,'pro_quantity' => $p_qty,'stocklevel' => $stocklevel, 'language' => $this->language, 'productdetailsaddones' => $productdetailsaddones, 'getaddonesproduct' => $getaddonesproduct, 'getProductdetails' => $getProductdetails, 'getSubCategory' => $getSubCategory, 'getMainCategory' => $getMainCategory, 'getProductimagedetails' => $getProductimagedetails, 'getAllRelatedproduct' => $getAllRelatedproduct,'productdetaildata'=>$productdetaildata,'productdetailreview'=>$productdetailreview,'getproductsellerDataBy'=>$getproductsellerDataBy,'getAllRelatedproductBy'=>$getAllRelatedproductBy])->render();
         echo View::make('dashboard-footer', ['language' => $this->language, 'getMainCategory' => $getMainCategory, 'getPagesdetails' => $getPagesdetails])->render();
     }
+	
     
     public function get_stocklevel($r_qty){
         
@@ -1385,5 +1387,17 @@ $homedata = json_decode(json_encode($getHome), true);
         //echo json_encode(array("success" => 1, 'data' => $response));
         //return response()->json($response);
     }
+	
+	
+	public function getProductdetailsByid($role_id){		
+		if (Session::has('locale')) {
+            $this->language = Session::get('locale');
+        } else {
+            $this->language = app()->getLocale();
+        }
+		$getData =  DB::select("select * from product_details  where role_id = '".$role_id."' ");
+       //dd($getData);
+		echo View('sellerproductdetails',['getData'=>$getData])->render();
+	}
 
 }

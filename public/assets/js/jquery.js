@@ -125,6 +125,12 @@ $(document).ready(function () {
     // });
 
     //relatedProductsSlider
+	 $("#relatedProductsSlider_seller").owlCarousel({
+        autoPlay: 7000, //Set AutoPlay to 3 seconds         
+        items: 4,
+        itemsDesktop: [1199, 4],
+        itemsDesktopSmall: [979, 3]
+    });
     $("#relatedProductsSlider").owlCarousel({
         autoPlay: 7000, //Set AutoPlay to 3 seconds         
         items: 4,

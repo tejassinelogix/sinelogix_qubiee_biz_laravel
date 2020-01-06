@@ -116,10 +116,11 @@ $p_id;
                                     <?php
 									//dd($getproductsellerDataBy);
 									
-                                    if($getProductSoldBy){
+                                    if($getProductSoldBy){	?>										
 										
-                                        echo 'Sold By : '. $getProductSoldBy[0]['name'];
-                                    }
+                                        <a href="{{ url("/sellerproductdetails/{$getProductSoldBy[0]['id']}") }}"><?php echo 'Sold By : '. $getProductSoldBy[0]['name'];?></a>
+										
+                                   <?php }
                                     $countofdate = number_format($productdetailreview->reviews()->avg('rating'), 2);
                                     ?>
                                     <ul class="ratings">
@@ -470,7 +471,7 @@ $p_id;
         <div class="relatedProductsSection">
             <h3 class="heading-center"><span> Seller Products </span></h3>
             <div class="row relatedProducts">
-                <div class="owl-carousel" id="relatedProductsSlider">
+                <div class="owl-carousel" id="relatedProductsSlider_seller">
 					    <?php
 						
                     foreach ($getproductsellerDataBy as $newproduct) {					
