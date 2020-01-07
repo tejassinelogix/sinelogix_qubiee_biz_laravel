@@ -46,8 +46,108 @@ $abc;
 
             </ul>
         </div>
+		<div class="container">
+        <div class="row">
+            <div class="col-md-12">
+               
+            </div>
+        </div>
+        <div class="proListView">
+			<div class="rightView">
+				<p>Change view:</p>
+				<ul>
+				    <li><a class="proListViewBtns gridColViewBtn" href="#"><i class="fa fa-th-large"></i></a></li>	
+                    <li><a class="proListViewBtns rowColViewBtn" href="#"><i class="fa fa-list"></i></a></li>
+					
+				</ul>
+			</div>
+		</div>
+    </div>
+    
         <div class="space10"></div>
         <div class="row">
+		<div class="col-md-3 col-sm-3">
+		 <div class="inner-sidebar-list sidebarNew">
+                        <h3>{{ __('message.Filter By') }}:</h3> 
+                        <div class="sidebar-filter-box">
+                                    <h4 class="sidebar-heading"><i class="fa fa-plus"></i>{{ __('message.Sort Price By') }}</h4>
+                                     <div class="price-ranger">
+                                         <div class="extra-controls-max">
+                                             <input type="radio" value="#" name="chechkhigherprice" class="common_sub_selector-higher" /> <label>Higher to Lower</label>
+                                         </div>
+                                         <div class="extra-controls-lower">
+                                             <input type="radio" value="#" name="chechkhigherprice" class="common_sub_selector-lawer" /> <label>Lower to  Higher</label>
+                                         </div>
+                                    </div>
+                                </div>
+                          <div class="sidebar-filter-box">
+                                    <h4 class="sidebar-heading"><i class="fa fa-plus"></i>{{ __('message.Price') }}</h4>
+                                    <div class="price-ranger">
+                                        <input type="hidden" id="hidden_minimum_price" value="0" />
+                                        <input type="hidden" id="cateoryname" value="<?php //echo $id; ?>" />
+                                        <input type="hidden" id="pagename" value="<?php //echo 'subcat'; ?>" />
+                                        <p id="price_show"></p>
+                                        <div class="price-ranger range-slide" id="price_range">
+                                            <input type="text" class="js-range-slider" id="pricerange1" name="example_name" value="" />
+                                        </div>
+                                        <div class="extra-controls">
+                                            <button class="js-get-values pricesidebarbtn">{{ __('message.Price Search') }}</button>
+                                        </div>
+                                        
+                                        
+<!--                                        <div class="price-ranger">
+                                            <p><strong>Price</strong></p>
+                                            <input type="text" id="pricerange1" name="example_name" value="" />
+                                        </div>-->
+                                    </div>
+                                </div>
+                        <div class="sidebar-filter-box">
+                                    <h4 class="sidebar-heading"><i class="fa fa-plus"></i>{{ __('message.Most Selling') }}</h4>
+                                    <div>
+                                        <!--<form action="#" class="checkbox-radio-style1 active-sidebar-box">-->
+                                            <?php 
+                                           
+                                        //foreach (array_slice($getParentSubCategorycate,0,1) as $parentmaincat) {
+                                           
+                                       // $mcat_Name = json_decode($maincat->category_name, true);
+                                        
+                                        ?>
+                                            <p>
+                                                <input type="checkbox" value="<?php //echo $id; ?>" name="chechkmostselling" class="common_subseleing_selector brandseling" />
+                                                <label>
+                                                    <span class="checkmark"></span>
+                                                         </label> 
+                                            </p>
+                                        <?php //} ?>
+
+                                    </div>
+                                </div>
+
+                            
+                            <div class="sidebar-filter-box">
+                                <h4 class="sidebar-heading"><i class="fa fa-plus"></i>{{ __('message.Brand') }}</h4>
+                                <div>
+                                    <!--<form action="#" class="checkbox-radio-style1 active-sidebar-box">-->
+                                        <?php 
+                                        
+                                    //foreach (array_slice($getParentSubCategorycate,0,1) as $parentmaincat) {
+                                        
+                                    // $mcat_Name = json_decode($maincat->category_name, true);
+                                    
+                                    ?>
+                                        <p>
+                                            <input type="radio" checked value="<?php //echo $id; ?>" name="chechkbrandfilter" class="common_subseleing_selector brandseling" />&nbsp;&nbsp;<?php //echo ucwords($name) ?> - <?php //echo ucwords($pro_name[$language]) ?>
+                                            <label>
+                                                <span class="checkmark"></span>
+                                                        </label> 
+                                        </p>
+                                    <?php //} ?>
+
+                                </div>
+                            </div>
+                                
+                    </div>
+		</div>
              <div class="col-md-9 col-sm-9" id="loading">
                 <div class="item-list-tophead">
                     <!--<h4><?php //echo $cat_Name[$language]; ?> <span>(60 Items)</span></h4>-->

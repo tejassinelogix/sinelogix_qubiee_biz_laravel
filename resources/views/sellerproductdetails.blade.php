@@ -1,4 +1,16 @@
+<html>
+<head>
+<title>Seller Product</title>
+<link rel="stylesheet" href="{{URL::asset('assets/css/bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{URL::asset('assets/css/custom_style.css') }}">
+<link rel="stylesheet" href="{{URL::asset('assets/css/starratings.css') }}">
+<link rel="stylesheet" href="{{URL::asset('assets/css/style.css') }}">
+<link rel="stylesheet" href="{{URL::asset('assets/css/styles.css') }}">
+<link rel="stylesheet" href="{{URL::asset('assets/font-awesome/css/font-awesome.min.css') }}">
+<link rel="stylesheet" href="{{URL::asset('assets/animatecss/animate.css') }}">
 
+
+</head>
 <style>
 #loaderss{
  border: 16px solid #f3f3f3;
@@ -4638,8 +4650,7 @@ ul.nav.navbar-nav {
 }
 
 </style>
-<link rel="stylesheet" href="{{URL::asset('assets/css/style.css') }}">
-<link rel="stylesheet" href="{{URL::asset('assets/css/styles.css') }}">
+<body>
 <!-- End of navigationBar -->
 <!-- category page section -->
 <?php //dd($getdata);?>
@@ -4661,17 +4672,19 @@ ul.nav.navbar-nav {
                 <div class="breadcrumbs">
 
                     <ul>
-                        <li><a href="<?php echo url('/'); ?>"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i> </li>
-                        <?php
+                        <li><a href="<?php echo url('/'); ?>"><i class="fa fa-home"></i></a>  </li>
+                        
+						<?php
 						foreach($getData as $data){							
                         $pro_name = json_decode($data->product_name, true);						
 						$product_url = $data->url;
 						//print_r($product_url);exit;
 						
                         ?>
+						<?php }?>
                         <li><a href="<?php echo url('/'); ?>/<?php echo strtolower($product_url); ?>"><?php //echo ucwords($pro_name[$en]) ?></a> <i class="fa fa-angle-right"></i> </li>
                         <li><b><?php //echo strtoupper($pro_name)?></b></li>
-						<?php }?>
+						
                     </ul>
                 </div>
             </div>
@@ -4893,4 +4906,299 @@ ul.nav.navbar-nav {
     </div>
 </div>
 
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="{{ asset('assets/js/jquery.min.js') }}"></script>
+<script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>    
 
+<!-- jQuery -->
+<script type="text/javascript" src="{{ asset('assets/js/modernizr.custom.js') }}"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+$(function() {
+// $( "#dragimage" ).draggable();
+// $('#dragimage').resizable();
+$('#uploadImgPreviewDesign').draggable({
+appendTo: 'body',
+        start: function(event, ui) {
+        isDraggingMedia = true;
+        },
+        stop: function(event, ui) {
+        isDraggingMedia = false;
+        // blah
+        }
+});
+});
+$(".uploadImgPreviewDesign").on("click", function() {
+croppie.rotate(parseInt($(this).data('deg')));
+});</script>
+
+<!-- Fancybox jQuery -->
+<script src="{{ asset('assets/fancybox/jquery.mousewheel-3.0.6.pack.js') }}"></script>
+<script src="https://localhost/sinelogix_qubiee_biz_laravel/public/assets/fancybox/jquery.fancybox.js?v=2.1.4"></script>
+
+<!--animatecss-->
+<script src="https://localhost/sinelogix_qubiee_biz_laravel/public/assets/animatecss/viewportchecker.js"></script>
+
+<!-- FlexSlider -->
+<script defer src="https://localhost/sinelogix_qubiee_biz_laravel/public/assets/flexslider/jquery.flexslider.js"></script>
+
+<script type="text/javascript" src="https://localhost/sinelogix_qubiee_biz_laravel/public/assets/owl/owl.carousel.js"></script>
+
+<script type="text/javascript" src="https://localhost/sinelogix_qubiee_biz_laravel/public/assets/js/jquery.transit.min.js"></script>
+
+<!-- price-range -->
+<script type="text/javascript" src="https://localhost/sinelogix_qubiee_biz_laravel/public/assets/range-slider/ion.rangeSlider.min.js"></script>
+
+<!-- image zoom slider feature -->
+<script src="https://localhost/sinelogix_qubiee_biz_laravel/public/assets/zoomimage/zoom-image.js"></script>
+<script src="https://localhost/sinelogix_qubiee_biz_laravel/public/assets/zoomimage/main.js"></script>
+<script src="{{ asset('public/assets/js/jquery.js') }}"></script> 
+<script src="https://localhost/sinelogix_qubiee_biz_laravel/assets/js/custom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.js"></script>
+
+<!--script image editor-->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.6.7/fabric.js"></script>
+<script type="text/javascript" src="https://uicdn.toast.com/tui.code-snippet/v1.5.0/tui-code-snippet.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.3/FileSaver.min.js"></script>
+<script type="text/javascript" src="https://uicdn.toast.com/tui-color-picker/v2.2.0/tui-color-picker.js"></script>
+<script type="text/javascript" src="https://localhost/sinelogix_qubiee_biz_laravel/public/assets/dist/tui-image-editor.js"></script>
+<script type="text/javascript" src="https://localhost/sinelogix_qubiee_biz_laravel/public/assets/js/theme/white-theme.js"></script>
+<script type="text/javascript" src="https://localhost/sinelogix_qubiee_biz_laravel/public/assets/js/theme/black-theme.js"></script>
+
+<!--script image editor end-->
+
+
+<!-- <script type="text/javascript">
+$("#Locale").on('change', function () {
+var val = $(this).val();
+  var baseurl = "https:\/\/localhost\/sinelogix_qubiee_biz_laravel";
+var r_url = baseurl + "/locale/" + val;
+// alert(r_url);
+$.ajax({
+type: 'get',
+url: r_url,
+success: function (data) {
+  location.reload();
+},
+error: function () {
+}
+});
+});
+</script> -->
+
+
+
+<script type="text/javascript">
+$("#Locale").on('change', function(){
+var val = $(this).val();
+$.ajax({
+type:'get',
+        url:"/locale/" + val,
+        success:function(data){
+        location.reload();
+        },
+        error:function(){
+        }
+});
+});</script>
+
+
+<script>
+    function addtocart(producid, productname, price, categoryname) {
+    //alert(client_id);
+    $("#productid").val(producid);
+    $("#productname").val(productname);
+    $("#price").val(price);
+    $("#subject").val(categoryname);
+    $('#mycart-modal').modal('toggle');
+    $('#mycart-modal').modal('show');
+    }
+
+
+
+</script>
+<script>
+    $(document).ready(function () {
+    $('.tui-image-editor-header-logo').hide();
+    $('.tui-image-editor-menu-filter').hide();
+    $('.uploadImgPreview img').click(function () {
+
+    imagelink = ($(this).attr('src'));
+    var imageEditor = new tui.ImageEditor('#tui-image-editor-container', {
+    includeUI: {
+    loadImage: {
+    path: imagelink,
+            name: 'SampleImage'
+    },
+            theme: blackTheme, // or whiteTheme
+            // initMenu: 'filter',
+            menuBarPosition: 'bottom'
+    },
+            cssMaxWidth: 700,
+            cssMaxHeight: 300
+    });
+    window.onresize = function() {
+    imageEditor.ui.resizeEditor();
+    }
+    });
+    $('#summernote').summernote({
+    height: "10px",
+            width:"250px",
+            placeholder: 'Enter Your Text Here',
+            tabsize: 2,
+            height: 100,
+            toolbar: [
+                    // [groupName, [list of button]]
+                    ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['fontsize', ['fontsize']],
+            ['color', ['color']],
+            ]
+    });
+    });</script>
+
+
+
+
+<script>
+    //  var msg = '';
+//  var exist = '';
+//  if(exist){
+//    alert(msg);
+//  }
+</script>
+<script>
+    function f1(clicked_id){
+//        alert(clicked_id);
+            $('#selected_address').val(clicked_id);
+            }
+    $(".chb").change(function()
+    {
+    $(".chb").prop('checked', false);
+    $(this).prop('checked', true);
+    });
+    
+    function f2(clicked_id){
+        //alert(clicked_id);
+        $('#send_gift').val(clicked_id);
+                }
+        $(".chb").change(function()
+        {
+        $(".chb").prop('checked', false);
+        $(this).prop('checked', true);
+    });
+    
+    $("#nextreview").click(function() {
+//        alert("nextreview");
+        $(".checkOutTablayout .checkOutTabs > ul > li > a").parent().removeClass("active");
+        $(".checkOutTablayout .checkOutTabs > ul > li > a[aria-controls='ReviewOrder']").parent().addClass("active");
+    });  
+      $("#nextreviewnogift").click(function() {
+//        alert("nextreview");
+        $(".checkOutTablayout .checkOutTabs > ul > li > a").parent().removeClass("active");
+        $(".checkOutTablayout .checkOutTabs > ul > li > a[aria-controls='ReviewOrder']").parent().addClass("active");
+    });  
+    
+    $("#backreview").click(function() { 
+//        alert("backreview");
+        $(".checkOutTablayout .checkOutTabs > ul > li > a").parent().removeClass("active");
+        $(".checkOutTablayout .checkOutTabs > ul > li > a[aria-controls='ConfirmAddress']").parent().addClass("active");
+    });
+    
+    $("#nextpayment").click(function() {
+//        alert("nextpayment");
+        $(".checkOutTablayout .checkOutTabs > ul > li > a").parent().removeClass("active");
+        $(".checkOutTablayout .checkOutTabs > ul > li > a[aria-controls='MakePayment']").parent().addClass("active");
+    });
+    $("#nextConfirmAddress").click(function() {
+//        alert("nextpayment");
+        $(".checkOutTablayout .checkOutTabs > ul > li > a").parent().removeClass("active");
+        $(".checkOutTablayout .checkOutTabs > ul > li > a[aria-controls='ConfirmAddress']").parent().addClass("active");
+    });
+     $("#backsenderDetailsModal").click(function() { 
+//        alert("backreview");
+        $(".checkOutTablayout .checkOutTabs > ul > li > a").parent().removeClass("active");
+        $(".checkOutTablayout .checkOutTabs > ul > li > a[aria-controls='senderDetailsModal']").parent().addClass("active");
+    });
+    
+    $("#backpayment").click(function() { 
+//        alert("backpayment");
+        $(".checkOutTablayout .checkOutTabs > ul > li > a").parent().removeClass("active");
+        $(".checkOutTablayout .checkOutTabs > ul > li > a[aria-controls='ReviewOrder']").parent().addClass("active");
+    });
+    
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4y42DfJUNmx6YzlPWFdbhwj4m-6XEIg8&libraries=places&callback=initialize" async defer></script>
+<script type="text/javascript" src="https://localhost/sinelogix_qubiee_biz_laravel/public/js/mapInput.js"></script>
+<script type="text/javascript" src="https://localhost/sinelogix_qubiee_biz_laravel/public/js/coupon_code.js"></script>
+<script type="text/javascript" src="https://localhost/sinelogix_qubiee_biz_laravel/public/assets/rate/star-rating.js"></script>
+<!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4y42DfJUNmx6YzlPWFdbhwj4m-6XEIg8&libraries=places&callback=initialize" async defer></script>-->
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/5d2036427a48df6da2433b20/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+
+
+$('.rdCheck').dblclick(function(){
+   if($(this).is(':checked'))
+    {
+        $(this).removeAttr('checked');
+    }       
+});
+
+</script>
+<script type="text/javascript">
+	var page = 1;
+	$(window).scroll(function() {
+	    if($(window).scrollTop() + $(window).height() >= $(document).height()) {
+	        page++;
+	        loadMoreData(page);
+	    }
+	});
+
+
+	function loadMoreData(page){
+             var id = $('.proListViewBtnsActive').data('id');
+              
+	  $.ajax(
+	        {
+	            url: '?page=' + page,
+	            type: "get",
+	            beforeSend: function()
+	            {
+	                $('.ajax-load').show();
+	            }
+	        })
+	        .done(function(data)
+	        {
+	            if(data.html == " "){
+	                $('.ajax-load').html("No more records found");
+	                return;
+	            }
+	            $('.ajax-load').hide();
+	            $("#post-data").append(data.html);
+                    if(id==2){
+                   $(".innerproductCol .col-sm-3.product-box-class").addClass("rowCol1ProductBoxClass");
+                $(".categoryMainSection .col-sm-3.product-box-class").addClass("rowCol1ProductBoxClass");
+              }else{
+                  $(".innerproductCol .col-sm-3.product-box-class").removeClass("rowCol1ProductBoxClass");
+                $(".categoryMainSection .col-sm-3.product-box-class").removeClass("rowCol1ProductBoxClass");
+              }
+	        })
+	        .fail(function(jqXHR, ajaxOptions, thrownError)
+	        {
+	              alert('server not responding...');
+	        });
+	}
+</script>
+
+</body>
+</html>
