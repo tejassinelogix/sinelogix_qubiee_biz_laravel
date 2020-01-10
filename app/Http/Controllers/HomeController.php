@@ -992,7 +992,7 @@ $getlayoutinfo = Category::getlayoutdetails();
         $resp['status'] = false;
         $resp['message'] = 'Voucher validation error';
         
-      if(isset($voucher_data['voucher_validity']) && $voucher_data['voucher_validity']){
+      if(isset($voucher_data['voucher_validity']) && $voucher_data['voucher_validity'] == 'yes'){
           
           $paymentDate = date('Y-m-d');
           $paymentDate=date('Y-m-d', strtotime($paymentDate));          

@@ -32,7 +32,6 @@
 	  <?php
 //                    foreach (array_slice($getParentCategoryproduct, 0, 8) as $catproduct) {
                         foreach ($poductdata as $catproduct) {
-							/* dd($catproduct); */
                        // $pro_name = json_decode($catproduct->product_name, true);                        
                         $urlname = $catproduct->product_name;
                         $productfullname = str_replace(' ', '-', $urlname);
@@ -120,10 +119,15 @@
 						document.getElementById('loaders').style.display="block";
 					}
 					</script>
-<!--                    <div class="filter_data"> 
+					
+					 <!--<div class="load_ajax_filter_data"> -->
 
 
-                    </div>-->
+      <!--              </div>-->
+           <!--         <div class="filter_data"> 
+
+
+                    </div> -->
 <!--                    ajax load
 
 

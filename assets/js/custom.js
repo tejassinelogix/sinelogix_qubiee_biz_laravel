@@ -1,5 +1,5 @@
 $(document).ready(function () {
-console.log('custom calls')
+    
     //container replace
     /*$(".containerWrapper").addClass("container");
      $(".containerWrapper.container").removeClass("containerWrapper");*/
@@ -386,6 +386,7 @@ console.log('custom calls')
 //                            '<button id="btn-more" data-id="' + valueid + '" class="nounderline btn-block mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent pricesidebarbtn" > Load More </button>' +
 //                            '</div>';
                     $('#remove-row').remove();
+                    $("#post-data").hide();
                     $('#postfilterdata').html(text);
                 } else {
 

@@ -16,8 +16,8 @@ service = {
 		REQ  =  ser_obj.req_data;
 		var url = APP_URL+'get_subcategory_details';
 		/* TDS :: Server Changes requires */
-		// var url_app = '/admin/get_subcategory_details';
-		var url_app = '/admin_2/get_subcategory_details';
+		 var url_app = '/admin/get_subcategory_details';
+		// var url_app = '/admin_2/get_subcategory_details';
 		REQ.data['category_id'] = $("#main_category_select").val();
 		// Setup X-CSRF-Token
 		$.ajaxSetup({
@@ -74,8 +74,8 @@ service = {
 		REQ  =  ser_obj.req_data;
 		var url = APP_URL+'get_products_details';
 		/* TDS :: Server Changes requires */
-		// var url_app = '/admin/get_products_details';
-		var url_app = '/admin_2/get_products_details';
+		var url_app = '/admin/get_products_details';
+		// var url_app = '/admin_2/get_products_details';
 		REQ.data['category_id'] = $("#main_category_select").val();
 		if(is_init_load){
 			REQ.data['sub_category_id'] = $("#sub_category_hidden").val();
@@ -139,8 +139,8 @@ service = {
 
 		REQ  =  ser_obj.req_data;
 		/* TDS :: Server Changes requires */
-		// var url_app = '/admin/view_discount_voucher';
-		var url_app = '/admin_2/view_discount_voucher';
+		var url_app = '/admin/view_discount_voucher';
+		// var url_app = '/admin_2/view_discount_voucher';
 		// Setup X-CSRF-Token
 		$.ajaxSetup({
 			  headers: {

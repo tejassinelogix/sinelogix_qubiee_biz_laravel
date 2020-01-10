@@ -7,7 +7,7 @@
             <ul><li><a href="{{ url('/profile') }}"><i class="fa fa-user"></i>{{ __('message.Profile') }}</a></li> </ul>
         </li>
         <li>
-            <ul><li><a href="{{ url('/order') }}"><i class="fa fa-shopping-cart"></i>{{ __('message.Order History') }}</a></li> </ul>
+            <ul><li><a href="{{ url('/order') }}"><i class="fa fa-shopping-cart"></i>{{ __('message.My Order') }}</a></li> </ul>
         </li>       
 <!--        <li>
             <ul><li><a href="{{ url('/wallet') }}"><i class="fa fa-money"></i>Wallet</a></li> </ul>

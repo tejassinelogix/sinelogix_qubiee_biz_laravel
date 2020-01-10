@@ -13,8 +13,8 @@ service = {
 		REQ  =  ser_obj.req_data;
 		var url = APP_URL+'get_subcategory_details';
 		/* TDS :: Server Changes requires */
-	//	var url_app = '/admin/get_subcategory_details';
-		var url_app = '/admin_2/get_subcategory_details';
+		var url_app = '/admin/get_subcategory_details';
+		// var url_app = '/admin_2/get_subcategory_details';
 		REQ.data['category_id'] = $("#main_category_select").val();
 		// Setup X-CSRF-Token
 		$.ajaxSetup({
@@ -62,8 +62,8 @@ service = {
 		REQ  =  ser_obj.req_data;
 		var url = APP_URL+'get_products_details';
 		/* TDS :: Server Changes requires */
-		// var url_app = '/admin/get_products_details';
-		var url_app = '/admin_2/get_products_details';
+		var url_app = '/admin/get_products_details';
+		// var url_app = '/admin_2/get_products_details';
 		REQ.data['category_id'] = $("#main_category_select").val();
 		REQ.data['sub_category_id'] = $("#sub_category_select").val();
 		// Setup X-CSRF-Token
@@ -137,7 +137,8 @@ service.init();
 			$(document).on('click', '#orderdisapprove_check', function() {
 				
 				confirm('Are you sure you want to Disapprove this product ?')
-				var url_app = '/admin_2/disapprovemultiorder';
+				var url_app = '/admin/disapprovemultiorder';
+				// var url_app = '/admin_2/disapprovemultiorder';
 
 				var check_box_details = [];
 				$.each($("input[name='order_chk']:checked"), function(){
@@ -180,7 +181,8 @@ service.init();
 			$(document).on('click', '#orderapprove_check', function() {
 				
 				confirm('Are you sure you want to Approve this product ?')
-				var url_app = '/admin_2/approvorder_multi';
+				var url_app = '/admin/approvorder_multi';
+				// var url_app = '/admin_2/approvorder_multi';
 
 				var check_box_details = [];
 				$.each($("input[name='order_chk']:checked"), function(){

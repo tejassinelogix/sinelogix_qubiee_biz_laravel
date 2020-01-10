@@ -129,7 +129,7 @@
         <!-- TDS : Coupan Starts -->
         <div class="cartBlockCoupon" >
           <p><input type="text" name="coupon_code" id="coupon_code_<?php echo $product['item']['id']; ?>" class="coupon_code" value="" style="width: 60%;"><button type="button" class="btn btn-success btn-sm coupon_apply" product_id="<?php echo $product['item']['id']; ?>" id="coupon_apply_<?php echo $product['item']['id']; ?>"><i class="fa fa-check"></i></button><button type="button" class="btn btn-danger btn-sm coupon_cancel" id="coupon_cancel_<?php echo $product['item']['id']; ?>" product_id="<?php echo $product['item']['id']; ?>"><i class="fa fa-times"></i></button></p>
-          <span class="success_green" id="success_green_<?php echo $product['item']['id']; ?>">Coupan code applied successfully..!</span>
+          <span class="success_green" 	style='display:none;'  id="success_green_<?php echo $product['item']['id']; ?>">Coupan code applied successfully..!</span>
           <span class="error_red one_time_error" id="one_time_error_<?php echo $product['item']['id']; ?>"></span>
           <span class="error_red is_validity_error" id="is_validity_error_<?php echo $product['item']['id']; ?>"></span>
           <span class="error_red is_minimum_error" id="is_minimum_error_<?php echo $product['item']['id']; ?>"></span>
