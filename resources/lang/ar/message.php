@@ -424,6 +424,11 @@ return [
         'Please Select Auto Generated'=>'يرجى اختيار السيارات التي تم إنشاؤها',
         'sign up in our newsletter'=>'Sign up in our newsletter',
         'Brand'=>'برانڈ',
+        'Enter Minimum Amount'=>'کم سے کم رقم درج کریں',
+        'Enter Discount'=>'ڈسکاؤنٹ درج کریں',
+        'Enter Coupan Code'=>'کوپن کوڈ درج کریں',  
+        'One time use'=>'ایک وقت استعمال کریں',
+        'Fixed Code'=>'فکسڈ کوڈ',  
     ]
 
 ?>

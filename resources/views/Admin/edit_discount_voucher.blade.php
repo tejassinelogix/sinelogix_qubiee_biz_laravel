@@ -78,7 +78,7 @@
                                     
                                     <div class="form-group manual_coupan_form">
                                         <label for="name">{{ __('message.Coupan Code') }}</label>
-                                        <input type="text" class="form-control"  name="manual_coupan" placeholder="Enter Coupan Code" value="{{ old('manual_coupan') }}" maxlength="6" minlength="6">
+                                        <input type="text" class="form-control"  name="manual_coupan" placeholder="{{ __('message.Enter Coupan Code') }}" value="{{ old('manual_coupan') }}" maxlength="6" minlength="6">
                                     </div>                                
                                    
                                     <div class="is_fixed_select_form">
@@ -145,7 +145,7 @@
                                          @if($discount->is_minimum_order == 'yes')
                                         <div class="form-group minimum_amount_form">
                                           <label for="name">{{ __('message.Minimum Amount') }}</label>
-                                          <input type="text" class="form-control" id="minimum_amount" name="minimum_amount" placeholder="Enter Minimum Amount" value="{{$discount->minimum_amount }}">
+                                          <input type="text" class="form-control" id="minimum_amount" name="minimum_amount" placeholder="{{ __('message.Enter Minimum Amount') }}" value="{{$discount->minimum_amount }}">
                                         </div> 
                                         @endif
                                         <br>
@@ -168,13 +168,13 @@
                                        @if($discount->discount_type == 'percentage')
                                       <div class="form-group discount_type_input_form">
                                           <label for="name">{{ __('message.Discount') }}</label>
-                                          <input type="text" class="form-control" id="discount_type_input" name="discount_type_input" placeholder="Enter Discount" value="{{ $discount->discount_type_amount }}">
+                                          <input type="text" class="form-control" id="discount_type_input" name="discount_type_input" placeholder="{{ __('message.Enter Discount') }}" value="{{ $discount->discount_type_amount }}">
                                         </div>
                                         @endif
                                          @if($discount->discount_type == 'rupees')
                                       <div class="form-group discount_type_input_form">
                                           <label for="name">{{ __('message.Discount') }}</label>
-                                          <input type="text" class="form-control" id="discount_type_input" name="discount_type_input" placeholder="Enter Discount" value="{{ $discount->discount_type_amount }}">
+                                          <input type="text" class="form-control" id="discount_type_input" name="discount_type_input" placeholder="{{ __('message.Enter Discount') }}" value="{{ $discount->discount_type_amount }}">
                                         </div>
                                         @endif
                                     <br>

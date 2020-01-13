@@ -66,7 +66,7 @@
 
                                     <div class="form-group default_manual_gen_coupan <?php echo (isset($old_value['is_auto_generated']) && $old_value['is_auto_generated'] == 'no')?'':'manual_coupan_form'; ?>">
                                         <label for="name">{{ __('message.Coupan Code') }}</label>
-                                        <input type="text" class="form-control" id="manual_coupan" name="manual_coupan" placeholder="Enter Coupan Code" value="{{ old('manual_coupan') }}" maxlength="6" minlength="6">
+                                        <input type="text" class="form-control" id="manual_coupan" name="manual_coupan" placeholder="{{ __('message.Enter Coupan Code') }}" value="{{ old('manual_coupan') }}" maxlength="6" minlength="6">
                                     </div>                                
 
                                     <div class="is_fixed_select_form">
@@ -75,8 +75,10 @@
                                           <?php 
                                           
                                           if(isset($list_voucher) && !empty($list_voucher)){
-                                          foreach($list_voucher as $key => $voucher) { ?>
-                                            <option value="<?php echo $voucher['voucher_id'] ?>" <?php echo (isset($old_value['is_fixed_select']) && $old_value['is_fixed_select'] == $voucher['voucher_id'])?'selected':''; ?>><?php echo $voucher['voucher_name'] ?></option>
+                                          foreach($list_voucher as $key => $voucher) { 
+                                            $v_name = $voucher['voucher_name'];
+                                              ?>
+                                            <option value="<?php echo $voucher['voucher_id'] ?>" <?php echo (isset($old_value['is_fixed_select']) && $old_value['is_fixed_select'] == $voucher['voucher_id'])?'selected':''; ?>><?php echo __('message.'.$v_name.''); ?></option>
                                             <?php } } else { ?>
                                               <option value="">{{ __('message.No Voucher Found') }}</option>
                                           <?php } ?>                                            
@@ -112,7 +114,7 @@
                                          <br>
                                         <div class="form-group default_minimum_amount_form <?php echo (isset($old_value['is_minamt_select']) && $old_value['is_minamt_select'] == 'yes')?'':'minimum_amount_form'; ?>">
                                           <label for="name">{{ __('message.Minimum Amount') }}</label>
-                                          <input type="text" class="form-control" id="minimum_amount" name="minimum_amount" placeholder="Enter Minimum Amount" value="{{ old('minimum_amount') }}">
+                                          <input type="text" class="form-control" id="minimum_amount" name="minimum_amount" placeholder="{{ __('message.Enter Minimum Amount') }}" value="{{ old('minimum_amount') }}">
                                         </div> 
                                         <br>
 
@@ -127,7 +129,7 @@
 
                                       <div class="form-group <?php echo (isset($old_value['is_discount_by_select']) && ($old_value['is_discount_by_select'] == 'percentage' || $old_value['is_discount_by_select'] == 'dollar'))?'':'discount_type_input_form'; ?>">
                                           <label for="name">{{ __('message.Discount') }}</label>
-                                          <input type="text" class="form-control" id="discount_type_input" name="discount_type_input" placeholder="Enter Discount" value="{{ old('discount_type_input') }}">
+                                          <input type="text" class="form-control" id="discount_type_input" name="discount_type_input" placeholder="{{ __('message.Enter Discount') }}" value="{{ old('discount_type_input') }}">
                                         </div>
                                     <br>
                                     <div class="main_category_form">

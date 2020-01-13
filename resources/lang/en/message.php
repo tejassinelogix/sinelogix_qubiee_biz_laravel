@@ -424,7 +424,12 @@ return [
         'Edit Discount Voucher'=>'Edit Discount Voucher',
         'Please Select Auto Generated'=>'Please Select Auto Generated',
         'sign up in our newsletter'=>'Sign up in our newsletter',
-        'Brand'=>'Brand',             
+        'Brand'=>'Brand',  
+        'Enter Minimum Amount'=>'Enter Minimum Amount',
+        'Enter Discount'=>'Enter Discount',
+        'Enter Coupan Code'=>'Enter Coupan Code',   
+        'One time use'=>'One time use',
+        'Fixed Code'=>'Fixed Code',        
     ];      
 
 ?>
