@@ -407,7 +407,7 @@ return [
         'Select Category'=>'Select Category',
         'Select Sub-Category'=>'Select Sub-Category',
         'Select Products'=>'Select Products',
-        'Coupan Code'=>'Coupan Code',
+        'Coupan Code'=>'Coupon Code',
         'From Date'=>'From Date',
         'To Date'=>'To Date',
         'Minimum Amount'=>'Minimum Amount',

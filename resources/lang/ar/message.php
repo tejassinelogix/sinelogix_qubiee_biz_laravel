@@ -406,7 +406,7 @@ return [
         'Select Category'=>'اختر الفئة',
         'Select Sub-Category'=>'اختر الفئة الفرعية',
         'Select Products'=>'اختر المنتجات',
-        'Coupan Code'=>'كود القسيمة',
+        'Coupan Code'=>'کوپن کوڈ',
         'From Date'=>'من التاريخ',
         'To Date'=>'حتي اليوم',
         'Minimum Amount'=>'اقل مبلغ',
