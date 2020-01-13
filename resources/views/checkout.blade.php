@@ -20,7 +20,7 @@
                             <li>Checkout</li>
                         </ul>-->
         </div>
-        <div class="space10"></div>     
+        <div class="space10"></div>
 
         <!--        <form action="{{ route('checkout') }}" method="post" id="checkout-form">
                     {{ csrf_field() }}-->
@@ -36,8 +36,8 @@
                             <strong>Login / Register</strong>
                         </a>
                     </li> -->
-                    <?php 
-                    if($giftcart){ 
+                    <?php
+                    if($giftcart){
                         $senderactive="active";
                         $reciver="";
                         $activeclass="class='active'";
@@ -53,12 +53,12 @@
                      <?php }  else {
                          $senderactive="";
                         $reciver="active";
-                        
+
                         $activeclass="";
                          $activeclassforaddess="class='active'";
                     }
                     ?>
-                    
+
                     <li role="presentation" <?php echo $activeclassforaddess; ?>>
                         <a href="#ConfirmAddress" aria-controls="ConfirmAddress" role="tab" data-toggle="tab">
                             <span>1</span>
@@ -88,7 +88,7 @@
                             <div class="row">
                              <div class="space15"></div>
                                 <div class="col-sm-12 text-center">
-                                    
+
                                     <?php if ($giftcart == 1 ) { ?>
                                      <!--<a href="#ReviewOrder" id="nextreview" class="btn btn-primary btn-lg btn-rounded" aria-controls="ReviewOrder" role="tab" data-toggle="tab" aria-expanded="false">{{ __('message.Continue') }} <i class="fa fa-arrow-circle-right"></i>
                                         </a>-->
@@ -100,11 +100,11 @@
                                           <button type="button" data-toggle="modal" data-target="#senderDetailsModalOpen" class="btn btn-default2 btn-lg btn-rounded">Addd Sender Address <i class="fa fa-arrow-circle-right"></i></button>
                                       <?php }
                                      } else {   ?>
-                                   
+
         <!--                                        <a href="#ReviewOrder" id="nextreviewnogift" class="btn btn-primary btn-lg btn-rounded" aria-controls="ReviewOrder" role="tab" data-toggle="tab" aria-expanded="false">{{ __('message.Continue') }} <i class="fa fa-arrow-circle-right"></i>
                                         </a>-->
                                     <?php } ?>
-                                     
+
                                 </div>
                             </div>
                         </div>
@@ -118,7 +118,7 @@
                                 <p>We will send order details to this email address</p>
                                 <button class="btn btn-default2 btn-lg btn-rounded" data-toggle="modal" data-target="#myModal"><i class="fa fa-sign-in"></i> Register Now!</button>
                             </div>
-                            <div class="col-sm-6">                    
+                            <div class="col-sm-6">
                                 <div class="login-block">
                                     <h4 class="heading-center"><span>Login</span></h4>
                                     <label>Username</label>
@@ -128,7 +128,7 @@
                                     <div class="space5"></div>
                                     <a href="#" class="btn btn-primary btn-lg btn-rounded btn-full">Sign In  <i class="fa fa-arrow-circle-right"></i></a>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -151,7 +151,7 @@
                                                     <img class="svg" src="{{ asset('/') }}public/assets/images/task.svg">
                                                     <label>{{ __('message.Select this address') }}</label>
                                                 </div>
-                                            </div>   
+                                            </div>
                                         <?php } else { ?>
                                             <p>{{ __('message.Please update your profile and proceed to checkout') }}</p>
                                         <?php } ?>
@@ -185,11 +185,11 @@
                                                 <img class="svg" src="{{ asset('/') }}public/assets/images/task.svg">
                                                 <label>{{ __('message.Select this address') }}</label>
                                             </div>
-                                        </div> 
+                                        </div>
                                         <?php if ($giftcart == 1 && $totalQty > 1) { ?>
                                             <label>{{ __('message.Send As Gift') }}</label>
-                                            <input type="radio" class="rdCheck" name="send_as_gift" id="1" value="1" onclick='f2(this.id)'>   
-                                        <?php } else { ?> 
+                                            <input type="radio" class="rdCheck" name="send_as_gift" id="1" value="1" onclick='f2(this.id)'>
+                                        <?php } else { ?>
 
                                         <?php } ?>
                                         <!--                                        <div class="pretty p-default p-curve">
@@ -231,6 +231,7 @@
 
                                 <div class="space15"></div>
                                 <div class="col-sm-12 text-center">
+                                    <a href="{{ url('/shopping-cart') }}" class="btn btn-default btn-lg btn-rounded">{{ __('message.Back') }} <i class="fa fa-arrow-circle-left"></i></a>
                                     <?php  if ($giftcart == 1) { ?>
                                     <a href="#senderDetailsModal" id="backsenderDetailsModal" class="btn btn-default btn-lg btn-rounded" aria-controls="senderDetailsModal" role="tab" data-toggle="tab" aria-expanded="false">{{ __('message.Back') }} <i class="fa fa-arrow-circle-left"></i></a>
                                     <?php } ?>
@@ -242,7 +243,7 @@
                                         <a href="#ReviewOrder" id="nextreviewnogift" class="btn btn-primary btn-lg btn-rounded" aria-controls="ReviewOrder" role="tab" data-toggle="tab" aria-expanded="false">{{ __('message.Continue') }} <i class="fa fa-arrow-circle-right"></i>
                                         </a>
                                     <?php } ?>
-                                     
+
                                 </div>
                             </div>
                         </div>
@@ -294,13 +295,13 @@
                             <?php if ($product['item']['as_gift_wrap'] == 0) { ?>
                                 <div id="myform2" class="qty-spinner">
                                     <a href="{{ url('/reduce/'.$product['item']['id'].'') }}">
-                                        <button class="minus"><i class="fa fa-minus"></i></button> 
+                                        <button class="minus"><i class="fa fa-minus"></i></button>
                                        <!--<input type="button" value="-" class="qtyminus" field="quantity2">-->
                                     </a>
 
                                     <input type="text" name="quantity2" value="{{ $product['qty'] }}" class="qty">
                                     <a href="{{ url('/increase/'.$product['item']['id'].'') }}">
-                                        <button class="plus"><i class="fa fa-plus"></i></button> 
+                                        <button class="plus"><i class="fa fa-plus"></i></button>
                                        <!--<input type="button" value="+" class="qtyplus" field="quantity2">-->
                                     </a>
                                 </div>
@@ -320,7 +321,7 @@
                     </div>
                     @endif
                     <div class="cartBlockRowFooter">
-                        <div class="cartBlockRowFooterMargin">                
+                        <div class="cartBlockRowFooterMargin">
                             <!--<p>{{ __('message.Delivery and payment options can be selected later.') }}</p>-->
                         </div>
                         @if(Session::has('cart'))
@@ -356,22 +357,22 @@
                 <div role="tabpanel" class="tab-pane" id="MakePayment">
                     <div class="row">
                         <div class="col-md-offset-2 col-md-8">
-                            <!--makepaymentSection--> 
+                            <!--makepaymentSection-->
                             <div class="makepaymentSection">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 bhoechie-tab-container">
                                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 bhoechie-tab-menu">
                                         <div class="list-group">
                                             <a href="make-payment.php" class="list-group-item active">
-                                                <h4 class="fa fa-credit-card"></h4> {{ __('message.Credit/Debit Card') }} 
+                                                <h4 class="fa fa-credit-card"></h4> {{ __('message.Credit/Debit Card') }}
                                             </a>
                                             <a href="make-payment.php#" class="list-group-item">
-                                                <h4 class="fa fa-globe"></h4>{{ __('message.Net Banking') }}  
+                                                <h4 class="fa fa-globe"></h4>{{ __('message.Net Banking') }}
                                             </a>
                                             <!--                                                <a href="make-payment.php#" class="list-group-item">
-                                                                                                <h4 class="fa fa-credit-card"></h4>{{ __('message.Debit Card') }}   
+                                                                                                <h4 class="fa fa-credit-card"></h4>{{ __('message.Debit Card') }}
                                                                                             </a>-->
                                             <a href="make-payment.php#" class="list-group-item">
-                                                <h4 class="fa fa-home"></h4>{{ __('message.COD') }}   
+                                                <h4 class="fa fa-home"></h4>{{ __('message.COD') }}
                                             </a>
                                         </div>
                                     </div>
@@ -397,7 +398,7 @@
                                                 </div>
                                                 <div class="col-md-12">
                                                     <div class="row">
-                                                        <label class="control-label col-md-12">{{ __('message.Expiration Date') }}</label> 
+                                                        <label class="control-label col-md-12">{{ __('message.Expiration Date') }}</label>
                                                         <div class="col-md-6">
                                                             <div class="select-dropdown1">
                                                                 <select class="month" name="expiry-month2" id="expiry-month2">
@@ -489,47 +490,47 @@
                                                     <label>{{ __('message.Name on Card') }}</label>
                                                     <input type="text" >
                                                 </div>
-                                            </div> 
+                                            </div>
                                             <!-- end login box  -->
                                         </div>
 
-                                        <!--Net Banking--> 
+                                        <!--Net Banking-->
                                         <div class="bhoechie-tab-content">
                                             <h3 class="headingFull"><span>{{ __('message.Pay using Net Banking') }}</span></h3>
                                             <div class="net-banking row">
                                                 <div class="form-group">
                                                     <label class="col-md-12 control-label" for="radios">{{ __('message.Select Bank') }}</label>
-                                                    <div class="col-md-4 sbi"> 
+                                                    <div class="col-md-4 sbi">
                                                         <label class="radio-inline" for="radios-0">
                                                             <input name="radios" id="radios-0" value="1" checked="checked" type="radio">
                                                             <img src="assets/images/net_bank_logos.png">
-                                                        </label> 
+                                                        </label>
                                                     </div>
-                                                    <div class="col-md-4 hdfc"> 
+                                                    <div class="col-md-4 hdfc">
                                                         <label class="radio-inline" for="radios-1">
                                                             <input name="radios" id="radios-1" value="2" type="radio">
                                                             <img src="assets/images/net_bank_logos.png">
-                                                        </label> 
+                                                        </label>
                                                     </div>
-                                                    <div class="col-md-4 icici"> 
+                                                    <div class="col-md-4 icici">
                                                         <label class="radio-inline" for="radios-2">
                                                             <input name="radios" id="radios-2" value="3" type="radio">
                                                             <img src="assets/images/net_bank_logos.png">
                                                         </label>
-                                                    </div>    
-                                                    <div class="col-md-4 citibank">     
+                                                    </div>
+                                                    <div class="col-md-4 citibank">
                                                         <label class="radio-inline" for="radios-3">
                                                             <input name="radios" id="radios-3" value="4" type="radio">
                                                             <img src="assets/images/net_bank_logos.png">
                                                         </label>
                                                     </div>
-                                                    <div class="col-md-4 axis">     
+                                                    <div class="col-md-4 axis">
                                                         <label class="radio-inline" for="radios-4">
                                                             <input name="radios" id="radios-4" value="5" type="radio">
                                                             <img src="assets/images/net_bank_logos.png">
                                                         </label>
                                                     </div>
-                                                    <div class="col-md-4 kotak">     
+                                                    <div class="col-md-4 kotak">
                                                         <label class="radio-inline" for="radios-5">
                                                             <input name="radios" id="radios-5" value="6" type="radio">
                                                             <img src="assets/images/net_bank_logos.png">
@@ -538,10 +539,10 @@
                                                     <div class="clear"></div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="control-label col-md-12">{{ __('message.Other Bank') }}</label> 
+                                                    <label class="control-label col-md-12">{{ __('message.Other Bank') }}</label>
                                                     <div class="col-md-6">
                                                         <div class="select-dropdown1">
-                                                            <select name="expiry-year" class="year">     
+                                                            <select name="expiry-year" class="year">
                                                                 <option>Select Bank</option>
                                                                 <!--                                                                    <option rel="ABN_N" class="">ABN AMRO Bank</option>
                                                                                                                                     <option rel="AND_N" class="">Andhra Bank</option>
@@ -611,7 +612,7 @@
                                                                                             </div>
                                                                                             <div class="col-md-12">
                                                                                                 <div class="row">
-                                                                                                    <label class="control-label col-md-12">{{ __('message.Expiration Date') }}</label> 
+                                                                                                    <label class="control-label col-md-12">{{ __('message.Expiration Date') }}</label>
                                                                                                     <div class="col-md-6">
                                                                                                         <div class="select-dropdown1">
                                                                                                             <select class="month" name="expiry-month1" id="expiry-month1">
@@ -649,15 +650,15 @@
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 </div>
-                                        
+
                                                                                             </div>
                                                                                             <div class="col-md-12">
                                                                                                 <label>Name on Card</label>
                                                                                                 <input type="text" >
                                                                                             </div>
-                                        
-                                                                                        </div> 
-                                                                                         end login box  
+
+                                                                                        </div>
+                                                                                         end login box
                                                                                     </div>-->
                                         <div class="bhoechie-tab-content">
                                             <h3 class="headingFull"><span>{{ __('message.Pay using Cash On Delivery') }}</span></h3>
@@ -712,20 +713,20 @@
 
 
 
-                    <div class="modal-form-block"> 
+                    <div class="modal-form-block">
                         <div class="col-sm-6">
                             <!-- Text input-->
-                            <div class="form-group">                    
-                                <label class="control-label" for="textinput">Address Name</label>              
-                                <input class="p-r-25" name="name" required="" placeholder="Work / Home" type="text">                  
+                            <div class="form-group">
+                                <label class="control-label" for="textinput">Address Name</label>
+                                <input class="p-r-25" name="name" required="" placeholder="Work / Home" type="text">
                             </div>
                             <div class="form-group">
-                                <label class="control-label" for="textinput">Street Name/No.</label> 
+                                <label class="control-label" for="textinput">Street Name/No.</label>
                                 <input class="p-r-25" name="streetname" id="streetname" required="" placeholder="Street Name/No." type="text">
                             </div>
                             <!-- Text input-->
-                            <!--                        <div class="form-group">                  
-                                                        <label class="control-label" for="textinput">Pincode</label> 
+                            <!--                        <div class="form-group">
+                                                        <label class="control-label" for="textinput">Pincode</label>
                                                         <input class="p-r-25" name="pin_code" required="" placeholder="Pincode" type="text">
                                                     </div>-->
 
@@ -735,14 +736,14 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label" for="textinput">Phone</label>
-                                <input class="p-r-25" name="phone" required="" placeholder="Phone" type="number">  
+                                <input class="p-r-25" name="phone" required="" placeholder="Phone" type="number">
                             </div>
                         </div>
 
                         <div class="col-sm-6">
                             <!-- Text input-->
                             <div class="form-group">
-                                <label class="control-label" for="textinput">Building Name/No.</label> 
+                                <label class="control-label" for="textinput">Building Name/No.</label>
                                 <input class="p-r-25" name="address" required="" placeholder="Building Name/No."  type="text">
                             </div>
                             <!-- Text input-->
@@ -778,7 +779,7 @@
 
 
                         <!--                    <div id="googleMap" style="width:100%;height:400px;"></div>
-                        
+
                         <script>
                         function myMap() {
                         var mapProp= {
@@ -799,7 +800,7 @@
                     <!-- <a href="#" class="btn btn-primary btn-lg btn-rounded">Register</a> -->
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
-            </form>    
+            </form>
         </div><!-- end modal content -->
     </div>
 </div><!-- end modal -->
@@ -813,12 +814,12 @@
                 <h4 class="modal-title" id="myModalLabel">Update Address</h4>
             </div>
             <div class="modal-body">
-                <div class="modal-form-block"> 
+                <div class="modal-form-block">
                     <div class="col-sm-6">
                         <!-- Text input-->
-                        <div class="form-group">                    
-                            <label class="control-label" for="textinput">Name</label>              
-                            <input class="p-r-25" name="textinput" required="" type="text" value="John Elton">                  
+                        <div class="form-group">
+                            <label class="control-label" for="textinput">Name</label>
+                            <input class="p-r-25" name="textinput" required="" type="text" value="John Elton">
                         </div>
                         <!-- Text input-->
                         <div class="form-group">
@@ -826,8 +827,8 @@
                             <input class="p-r-25" name="textinput" required="" type="text" value="19, Somewhere in New York">
                         </div>
                         <!-- Text input-->
-                        <div class="form-group">                  
-                            <label class="control-label" for="textinput">Pincode</label> 
+                        <div class="form-group">
+                            <label class="control-label" for="textinput">Pincode</label>
                             <input class="p-r-25" name="textinput" required="" type="text" value="000002">
                         </div>
 
@@ -840,7 +841,7 @@
                     <div class="col-sm-6">
                         <!-- Text input-->
                         <div class="form-group">
-                            <label class="control-label" for="textinput">Address</label> 
+                            <label class="control-label" for="textinput">Address</label>
                             <input class="p-r-25" name="textinput" required="" type="text" value="Some address near in New York City New York">
                         </div>
                         <!-- Text input-->
@@ -855,14 +856,14 @@
 
                         <div class="form-group">
                             <label class="control-label" for="textinput">Phone</label>
-                            <input class="p-r-25" name="textinput" required="" type="number" value="97655 97655">  
+                            <input class="p-r-25" name="textinput" required="" type="number" value="97655 97655">
                         </div>
                     </div>
                     <div class="clear"></div>
                 </div>
             </div><!-- end modal body -->
             <div class="modal-footer">
-                <input type="submit" class="btn btn-primary btn-lg btn-rounded" value="Update"/>          
+                <input type="submit" class="btn btn-primary btn-lg btn-rounded" value="Update"/>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div><!-- end modal content -->
@@ -894,7 +895,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label" for="textinput">Phone</label>
-                                <input class="p-r-25" name="senderphone" required="" type="text" value="<?php if(isset($profile[0]->contact)){ ?> {{ $profile[0]->contact }} <?php }else{   echo 'call now';  } ?>">  
+                                <input class="p-r-25" name="senderphone" required="" type="text" value="<?php if(isset($profile[0]->contact)){ ?> {{ $profile[0]->contact }} <?php }else{   echo 'call now';  } ?>">
                             </div>
                             <!-- Text input-->
                             <div class="form-group">
@@ -907,10 +908,10 @@
                             </div>
                             <!-- Text input-->
                             <div class="form-group">
-                                <label class="control-label" for="textinput">Address</label> 
+                                <label class="control-label" for="textinput">Address</label>
                                 <input class="p-r-25" name="senderaddress" required="" type="text" value="<?php if(isset($profile[0]->address)){ ?>{{ $profile[0]->address }} <?php }else{ } ?>">
                             </div>
-                             
+
                             <button type="submit" class="btn btn-primary btn-rounded">Submit <i class="fa fa-arrow-circle-right"></i></button>
                         </div>
                     </form>
@@ -927,7 +928,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label" for="textinput">Phone</label>
-                                <input class="p-r-25" name="reciverphone" required="" type="number" value="">  
+                                <input class="p-r-25" name="reciverphone" required="" type="number" value="">
                             </div>
                             <!-- Text input-->
                             <div class="form-group">
@@ -940,7 +941,7 @@
                             </div>
                             <!-- Text input-->
                             <div class="form-group">
-                                <label class="control-label" for="textinput">Address</label> 
+                                <label class="control-label" for="textinput">Address</label>
                                 <input class="p-r-25" name="reciveraddress" required="" type="text" value="">
                             </div>
                             <!--<button type="submit" class="btn btn-primary btn-rounded">Submit <i class="fa fa-arrow-circle-right"></i></button>-->
