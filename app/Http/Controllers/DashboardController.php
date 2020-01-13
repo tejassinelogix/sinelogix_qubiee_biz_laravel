@@ -1396,8 +1396,38 @@ $homedata = json_decode(json_encode($getHome), true);
             $this->language = app()->getLocale();
         }
 		$getData =  DB::select("select * from product_details  where role_id = '".$role_id."' ");
-       //dd($getData);
-		echo View('sellerproductdetails',['getData'=>$getData])->render();
+        if (Session::has('locale')) {
+            $this->language = Session::get('locale');
+        } else {
+            $this->language = app()->getLocale();
+        }
+
+        $getMainCategory = Category::getMainCategory();
+        $getSubCategoryWordpress = Category::getSubCategoryWordpress();
+        $getSubCategorycate = Category::getSubCategorycate();
+        $getSubCategory = Category::getSubCategory();
+        $getPagesdetails = Category::getPagesdetails();
+        $getSubBlogs = Category::getSubBlogs();
+        $getHome = Category::getHome();
+        $homedata = json_decode(json_encode($getHome), true);
+        $getlayoutinfo = Category::getlayoutdetails();
+              $layoutdata = json_decode(json_encode($getlayoutinfo), true);
+               if($layoutdata){
+                   $layoutclass_name = $layoutdata[0]['class_name'];
+               $layoutbackground_image = $layoutdata[0]['background_image'];
+               $background_color = $layoutdata[0]['background_color'];
+                $backgroundStatus = $layoutdata[0]['status'];
+                 
+             }else{
+                  $layoutclass_name = '';
+               $layoutbackground_image = '';
+               $background_color = '';
+               $backgroundStatus='';
+             }
+       
+       echo View('dashboard-header', ['backgroundStatus'=>$backgroundStatus,'background_color' => $background_color,'layoutbackground_image' => $layoutbackground_image,'layoutclass_name' => $layoutclass_name,'language' => $this->language, 'getSubCategory' => $getSubCategory, 'getMainCategory' => $getMainCategory, 'getSubCategorycate' => $getSubCategorycate, 'getSubBlogs' => $getSubBlogs, 'homedata' => $homedata])->render();
+        echo View('sellerproductdetails',['getData'=>$getData,'language' => $this->language])->render();
+        echo View('dashboard-footer', ['language' => $this->language, 'getSubCategory' => $getSubCategory, 'getMainCategory' => $getMainCategory, 'getPagesdetails' => $getPagesdetails])->render();
 	}
 
 }

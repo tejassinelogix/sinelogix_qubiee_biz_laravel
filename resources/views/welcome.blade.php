@@ -105,7 +105,7 @@
 
 
 
-<div class="thanksVideoBlock">
+<div class="thanksVideoBlock" 	style='display:none;'>
     <div class="closeThanksVideo"><i class="fa fa-close"></i></div>
     <div class="thanksVideoBlockInner">
         <video width="100%" autoplay="autoplay" loop="true" muted="true">

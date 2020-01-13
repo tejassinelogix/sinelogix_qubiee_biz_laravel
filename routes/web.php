@@ -11,7 +11,7 @@
 |
 */
 Auth::routes();
-
+// dd(Auth::routes());
 
 Route::get('locale/{locale}', function ($locale) {
       Session::put('locale',$locale);
@@ -121,8 +121,8 @@ Route::post('/addAddress','HomeController@add_address')->name('addAddress');
 //Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
 //{
     /* TDS :: Server Changes requires */
-    Route::prefix('admin',['namespace'=>'admin'])->group(function(){
-    // Route::prefix('admin_2',['namespace'=>'admin_2'])->group(function(){
+    // Route::prefix('admin',['namespace'=>'admin'])->group(function(){
+    Route::prefix('admin_2',['namespace'=>'admin_2'])->group(function(){
       Route::get('/','Auth\AdminLoginController@showLoginForm');
 
       Route::get('/login','Auth\AdminLoginController@showLoginForm')->name('admin.login');
@@ -441,6 +441,7 @@ Route::prefix('vendor')->group(function(){
 
 Route::resource('mainmenu', 'MenuController');
 Route::resource('product', 'BannerController');
+Route::get('/get_session', 'ProductController@get_session_values');
 //Route::resource('page', 'PageController');
 Route::get('/ajax', 'DashboardController@ajax');
 Route::any('/search/{page?}', 'DashboardController@search');

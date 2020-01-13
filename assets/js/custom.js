@@ -5,14 +5,14 @@ $(document).ready(function () {
      $(".containerWrapper.container").removeClass("containerWrapper");*/
 
     //zoom slider
-//    $('#etalage').etalage({
-//
-//      
-//        show_hint: true,
-//        click_callback: function (image_anchor, instance_id) {
-//            alert('Callback example:\nYou clicked on an image with the anchor: "' + image_anchor + '"\n(in Etalage instance: "' + instance_id + '")');
-//        }
-//    });
+    //    $('#etalage').etalage({
+    //
+    //      
+    //        show_hint: true,
+    //        click_callback: function (image_anchor, instance_id) {
+    //            alert('Callback example:\nYou clicked on an image with the anchor: "' + image_anchor + '"\n(in Etalage instance: "' + instance_id + '")');
+    //        }
+    //    });
     // bhoechie-tab-menu
     $("div.bhoechie-tab-menu>div.list-group>a").click(function (e) {
         e.preventDefault();
@@ -93,6 +93,35 @@ $(document).ready(function () {
         parallax();
     });
 
+    get_session_youtube();
+    function get_session_youtube() {
+        // Setup X-CSRF-Token
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            type: 'GET', // Default GET
+            url: APP_URL + 'get_session',
+            dataType: 'json', // text , XML, HTML
+            beforeSend: function () { // Before ajax send operation 
+            },
+            success: function (data_resp, textStatus, jqXHR) { 
+                if (!data_resp.status) {
+                    $('.thanksVideoBlock').show();
+                }
+                else {
+                    $(".thanksVideoBlock").css("display", "none");
+                    $('.thanksVideoBlock').remove();
+                }
+            }, error: function (jqXHR, textStatus, errorThrown) { // On ajax error operation                 
+            }, complete: function () { // On ajax complete operation                    
+            }
+        });
+    }
+    
     //popularProductsSlider
     $("#newproductslider").owlCarousel({
         autoPlay: 1000000, //Set AutoPlay to 3 seconds         
@@ -153,11 +182,11 @@ $(document).ready(function () {
 
     };
     var $range = $(".js-range-slider"),
-            $result = $(".js-result"),
-            $price_show = $("#price_show"),
-            $getvalues = $(".js-get-values"),
-            from = 0,
-            to = 0;
+        $result = $(".js-result"),
+        $price_show = $("#price_show"),
+        $getvalues = $(".js-get-values"),
+        from = 0,
+        to = 0;
 
     var saveResult = function (data) {
         from = data.from;
@@ -182,7 +211,7 @@ $(document).ready(function () {
         event.preventDefault();
         $(".menuOverlay").fadeToggle("slow");
         $(".menuBtn > div").toggleClass("menuBtnAbsPosition");
-//        $(".menuSection").fadeToggle("slow");
+        //        $(".menuSection").fadeToggle("slow");
         $(".menuSection").toggleClass("meniSectionTable");
     });
 
@@ -202,7 +231,7 @@ $(document).ready(function () {
     });
 
     $('.scrollup').click(function () {
-        $("html, body").animate({scrollTop: 0}, 600);
+        $("html, body").animate({ scrollTop: 0 }, 600);
         return false;
     });
 
@@ -234,13 +263,12 @@ $(document).ready(function () {
             $.ajax({
                 url: '/ajax',
                 type: 'GET',
-                data: {id: value},
+                data: { id: value },
                 dataType: "JSON",
-                success: function (response)
-                {
+                success: function (response) {
 
                     // $('#something').html(response);
-//                   var abc=response.length;
+                    //                   var abc=response.length;
                     var guestfamilyName = response.product;
                     //alert(JSON.stringify(guestfamilyName));
                     if (response) {
@@ -267,26 +295,25 @@ $(document).ready(function () {
             $('#finalResult').hide();
             $('#finalResult').empty();
             // $('#country').empty();
-//                               $('#state').empty();
-//                                $("#Address input[type='text']").val("");
+            //                               $('#state').empty();
+            //                                $("#Address input[type='text']").val("");
         }
 
     });
-    function filter_data_price(minimum_price, maximum_price)
-    {
+    function filter_data_price(minimum_price, maximum_price) {
         $('.filter_data').show();
         $('.filter_data').html('<div id="loading" style="" ></div>');
         var action = 'fetch_data';
         // var minimum_price = $('#hidden_minimum_price').val();
         var categoryname = $('#cateoryname').val();
         var pagename = $('#pagename').val();
-//       alert(categoryname);
-//       alert(maximum_price);
-//       alert(minimum_price);
+        //       alert(categoryname);
+        //       alert(maximum_price);
+        //       alert(minimum_price);
         $.ajax({
             url: '/categoryfilterprice',
             type: "GET",
-            data: {minimum_price: minimum_price, maximum_price: maximum_price, categoryname: categoryname, pagename: pagename},
+            data: { minimum_price: minimum_price, maximum_price: maximum_price, categoryname: categoryname, pagename: pagename },
             // data:{brand:brand},
             // dataType:"JSON",
             success: function (data) {
@@ -295,10 +322,10 @@ $(document).ready(function () {
                 var valueid;
                 //alert(JSON.parse(data));
                 data = JSON.parse(data);
-//             alert(data);
-//             var myJSON = JSON.stringify(data);
-//             alert(myJSON);
-//             alert(data.success);
+                //             alert(data);
+                //             var myJSON = JSON.stringify(data);
+                //             alert(myJSON);
+                //             alert(data.success);
                 if (data.success == "1") {
 
                     $.each(data.data, function (index, value) {
@@ -319,72 +346,72 @@ $(document).ready(function () {
 
 
                         text += '<div class="col-sm-3 product-box-class filter">' +
-                                '<div class="productBlock">' +
-                                '<a href="/productdetails/' + value.url + '" class="productBlockImg">' +
-                                '<div style="background: url(' + "/public/images/" + value.product_image + "" + ') no-repeat;"></div>' +
-                                '</a>' +
-                                '<span class="discountoffer" style="' + hideclass + '"> % Offer ' + value.discount + '</span>' +
-                                '<div class="productBlockInfo">' +
-                                '<h3 class="protitle">' + value.name + '</h3>' +
-                                '<ul class="proRating">' +
-                                '<li><i class="fa fa-star"></i></li>' +
-                                '<li><i class="fa fa-star"></i></li>' +
-                                '<li><i class="fa fa-star"></i></li>' +
-                                '<li><i class="fa fa-star"></i></li>' +
-                                '<li><i class="fa fa-star-half-o"></i></li>' +
-                                '</ul>' +
-                                '<div class="loaderWrapperAjax loader-wrapper' + value.id + '" style="display: none;"><img src="public/assets/images/ajax-loader.gif"></div>' +
-                                '<div class="productInfoMsgAlert addtowishmessage' + value.id + '" ></div>' +
-                                '<button  data-id="' + value.id + '" class="wishlist-btn addtowishlist">Add to Wishlist</button>' +
-                                '<h2 class="propricing">$' + value.price +
-                                '<small><strike>$' + value.original_price + '</strike></small></h2>' +
-                                '</div>' +
-                                '<div class="productBlockViewDtl">' +
-                                '<a href="/productdetails/' + value.url + '" class="btn1">View details <i class="fa fa-arrow-circle-right"></i></a>' +
-                                '<a href="/add-to-cart/' + value.id + '" class="btn2">Buy Now <i class="fa fa-shopping-cart"></i></a>' +
-                                '</div>' +
-                                '</div>' +
-                                '</div>';
+                            '<div class="productBlock">' +
+                            '<a href="/productdetails/' + value.url + '" class="productBlockImg">' +
+                            '<div style="background: url(' + "/public/images/" + value.product_image + "" + ') no-repeat;"></div>' +
+                            '</a>' +
+                            '<span class="discountoffer" style="' + hideclass + '"> % Offer ' + value.discount + '</span>' +
+                            '<div class="productBlockInfo">' +
+                            '<h3 class="protitle">' + value.name + '</h3>' +
+                            '<ul class="proRating">' +
+                            '<li><i class="fa fa-star"></i></li>' +
+                            '<li><i class="fa fa-star"></i></li>' +
+                            '<li><i class="fa fa-star"></i></li>' +
+                            '<li><i class="fa fa-star"></i></li>' +
+                            '<li><i class="fa fa-star-half-o"></i></li>' +
+                            '</ul>' +
+                            '<div class="loaderWrapperAjax loader-wrapper' + value.id + '" style="display: none;"><img src="public/assets/images/ajax-loader.gif"></div>' +
+                            '<div class="productInfoMsgAlert addtowishmessage' + value.id + '" ></div>' +
+                            '<button  data-id="' + value.id + '" class="wishlist-btn addtowishlist">Add to Wishlist</button>' +
+                            '<h2 class="propricing">$' + value.price +
+                            '<small><strike>$' + value.original_price + '</strike></small></h2>' +
+                            '</div>' +
+                            '<div class="productBlockViewDtl">' +
+                            '<a href="/productdetails/' + value.url + '" class="btn1">View details <i class="fa fa-arrow-circle-right"></i></a>' +
+                            '<a href="/add-to-cart/' + value.id + '" class="btn2">Buy Now <i class="fa fa-shopping-cart"></i></a>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>';
 
 
 
 
-//                    text +='<div class="col-md-4 col-sm-6">'+
-//                            '<div class="product-box">'+
-//                            '<a href="/productdetails/'+value.url+'" class="productImgBlock imglink">'+
-//                            '<span>'+
-//                            '<i class="fa fa-search"></i>'+
-//                            '</span>';
-//                    if(value.discount != null){
-//                           text +='<span class="discountoffer">'+value.discount+'% Off</span>';
-//                   
-//                         }else{
-//                            text +='<span class=""></span>';
-//                         }
-//                            //'<span class="discountoffer">'+value.discount+'% Off</span>'+
-//                    text +='<div class="productImg" style="background: url('+"'/public/images/"+value.product_image+"') top no-repeat;"+'>'+
-//                            '</div>'+
-//                            '<div class="clear"></div></a>'+
-//                            '<div class="productDisc">'+
-//                            '<a href="/productdetails/'+value.url+'" class="titlelink">'+value.name+'</a>'+
-//                            '<strong class="ServiceCost">'+
-//                            '<strike>$'+value.original_price+'</strike></strong>'+
-//                            '<h3>$'+value.price+'</h3>'+  
-//                            '<span class="services-btns">'+
-//                            '<a href="/productdetails/'+value.url+'" class="addtocart-btn"><ion-icon name="eye"></ion-icon>View Details</a>'+
-//                            '<a class="addtocart-btn" href="/add-to-cart/'+value.id+'"><ion-icon name="cart"></ion-icon>Add To Cart</a>'+
-//                            '</span>'+
-//                            '</div>'+
-//                            '</div>'+
-//                            '</div>';
+                        //                    text +='<div class="col-md-4 col-sm-6">'+
+                        //                            '<div class="product-box">'+
+                        //                            '<a href="/productdetails/'+value.url+'" class="productImgBlock imglink">'+
+                        //                            '<span>'+
+                        //                            '<i class="fa fa-search"></i>'+
+                        //                            '</span>';
+                        //                    if(value.discount != null){
+                        //                           text +='<span class="discountoffer">'+value.discount+'% Off</span>';
+                        //                   
+                        //                         }else{
+                        //                            text +='<span class=""></span>';
+                        //                         }
+                        //                            //'<span class="discountoffer">'+value.discount+'% Off</span>'+
+                        //                    text +='<div class="productImg" style="background: url('+"'/public/images/"+value.product_image+"') top no-repeat;"+'>'+
+                        //                            '</div>'+
+                        //                            '<div class="clear"></div></a>'+
+                        //                            '<div class="productDisc">'+
+                        //                            '<a href="/productdetails/'+value.url+'" class="titlelink">'+value.name+'</a>'+
+                        //                            '<strong class="ServiceCost">'+
+                        //                            '<strike>$'+value.original_price+'</strike></strong>'+
+                        //                            '<h3>$'+value.price+'</h3>'+  
+                        //                            '<span class="services-btns">'+
+                        //                            '<a href="/productdetails/'+value.url+'" class="addtocart-btn"><ion-icon name="eye"></ion-icon>View Details</a>'+
+                        //                            '<a class="addtocart-btn" href="/add-to-cart/'+value.id+'"><ion-icon name="cart"></ion-icon>Add To Cart</a>'+
+                        //                            '</span>'+
+                        //                            '</div>'+
+                        //                            '</div>'+
+                        //                            '</div>';
 
                         valueid = value.id;
                     });
 
 
-//                    text += '<div id="remove-row">' +
-//                            '<button id="btn-more" data-id="' + valueid + '" class="nounderline btn-block mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent pricesidebarbtn" > Load More </button>' +
-//                            '</div>';
+                    //                    text += '<div id="remove-row">' +
+                    //                            '<button id="btn-more" data-id="' + valueid + '" class="nounderline btn-block mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent pricesidebarbtn" > Load More </button>' +
+                    //                            '</div>';
                     $('#remove-row').remove();
                     $("#post-data").hide();
                     $('#postfilterdata').html(text);
@@ -435,8 +462,7 @@ $(document).ready(function () {
     });
 
 
-    function filter_data()
-    {
+    function filter_data() {
         console.log('filter calls')
         $('.filter_data').show();
         $('.filter_data').html('<div id="loading" style="" ></div>');
@@ -450,30 +476,30 @@ $(document).ready(function () {
         $.ajax({
             url: '/categoryfilter',
             type: "GET",
-//            data:{action:action, minimum_price:minimum_price, maximum_price:maximum_price, brand:brand, ram:ram, storage:storage},
-            data: {brand: brand},
+            //            data:{action:action, minimum_price:minimum_price, maximum_price:maximum_price, brand:brand, ram:ram, storage:storage},
+            data: { brand: brand },
             // dataType:"JSON",
             success: function (data) {
                 console.log('data')
                 console.log(data)
-//                 data = JSON.parse(data);
-//                
-//            var text = "";
-//                 if (data.success == "1") {
-//                      alert("call now function if");
-//                $.each(data.data, function (index, value) {
-//                    text += '<a href="#" class="imageSlideBlock preownedCarIcon" data-id="' + value.product_name + '">' +
-//                            '<img src="' + value.product_name + '" alt="" />' +
-//                            '<p><strong>' + value.product_name + '</strong></p>' +
-//                            //'<small><i class="fa fa-rupee"></i>' + value.price + ' <i class="fa fa-tachometer"></i>' + value.kmDriven + '</small>' +
-//                            '<small><i class="fa fa-rupee"></i>' + value.product_name + '</small>' +
-//                            '</a>';
-//                });
-//                $('#filter_data').html(text);
-//            } else if (data.success == "0")
-//            {
-//                $('#filter_data').html('<div class="NoCar"><i class="fa fa-exclamation-triangle"></i> <br> No Cars Found</div>');
-//            }
+                //                 data = JSON.parse(data);
+                //                
+                //            var text = "";
+                //                 if (data.success == "1") {
+                //                      alert("call now function if");
+                //                $.each(data.data, function (index, value) {
+                //                    text += '<a href="#" class="imageSlideBlock preownedCarIcon" data-id="' + value.product_name + '">' +
+                //                            '<img src="' + value.product_name + '" alt="" />' +
+                //                            '<p><strong>' + value.product_name + '</strong></p>' +
+                //                            //'<small><i class="fa fa-rupee"></i>' + value.price + ' <i class="fa fa-tachometer"></i>' + value.kmDriven + '</small>' +
+                //                            '<small><i class="fa fa-rupee"></i>' + value.product_name + '</small>' +
+                //                            '</a>';
+                //                });
+                //                $('#filter_data').html(text);
+                //            } else if (data.success == "0")
+                //            {
+                //                $('#filter_data').html('<div class="NoCar"><i class="fa fa-exclamation-triangle"></i> <br> No Cars Found</div>');
+                //            }
                 var text = "";
                 var valueid;
                 //alert(JSON.parse(data));
@@ -485,30 +511,30 @@ $(document).ready(function () {
 
                         $('.product-box-class').hide();
                         text += '<div class="col-sm-3 new_products_added">' +
-                                '<div class="productBlock">' +
-                                '<a href="/productdetails/' + value.url + '" class="productBlockImg">' +
-//        '<div style="background: url('+"'/public/images/"+value.product_image+"') no-repeat;"+'></div>'+
-                                '<div style="background: url(' + "/public/images/" + value.product_image + "" + ') no-repeat;"></div>' +
-                                '</a>' +
-                                '<div class="productBlockInfo">' +
-                                '<h3 class="protitle">' + value.name + '</h3>' +
-                                '<ul class="ratings">' +
-                                '<li><i class="fa fa-star-o"></i></li>' +
-                                '<li><i class="fa fa-star-o"></i></li>' +
-                                '<li><i class="fa fa-star-o"></i></li>' +
-                                '<li><i class="fa fa-star-o"></i></li>' +
-                                '<li><i class="fa fa-star-o"></i></li>' +
-                                '</ul>' +
-                                '<a href="/add-to-wishlist/' + value.id + '" class="wishlist-btn" title="wishlist">Add to Wishlist</a>' +
-                                '<h2 class="propricing">$' + value.price +
-                                '<small><strike> $' + value.original_price + '</strike></small></h2>' +
-                                '</div>' +
-                                '<div class="productBlockViewDtl">' +
-                                '<a href="/productdetails/' + value.url + '" class="btn1">View details <i class="fa fa-arrow-circle-right"></i></a>' +
-                                '<a href="/add-to-cart/' + value.id + '" class="btn2">ADD TO CART <i class="fa fa-shopping-cart"></i></a>' +
-                                '</div>' +
-                                '</div>' +
-                                '</div>';
+                            '<div class="productBlock">' +
+                            '<a href="/productdetails/' + value.url + '" class="productBlockImg">' +
+                            //        '<div style="background: url('+"'/public/images/"+value.product_image+"') no-repeat;"+'></div>'+
+                            '<div style="background: url(' + "/public/images/" + value.product_image + "" + ') no-repeat;"></div>' +
+                            '</a>' +
+                            '<div class="productBlockInfo">' +
+                            '<h3 class="protitle">' + value.name + '</h3>' +
+                            '<ul class="ratings">' +
+                            '<li><i class="fa fa-star-o"></i></li>' +
+                            '<li><i class="fa fa-star-o"></i></li>' +
+                            '<li><i class="fa fa-star-o"></i></li>' +
+                            '<li><i class="fa fa-star-o"></i></li>' +
+                            '<li><i class="fa fa-star-o"></i></li>' +
+                            '</ul>' +
+                            '<a href="/add-to-wishlist/' + value.id + '" class="wishlist-btn" title="wishlist">Add to Wishlist</a>' +
+                            '<h2 class="propricing">$' + value.price +
+                            '<small><strike> $' + value.original_price + '</strike></small></h2>' +
+                            '</div>' +
+                            '<div class="productBlockViewDtl">' +
+                            '<a href="/productdetails/' + value.url + '" class="btn1">View details <i class="fa fa-arrow-circle-right"></i></a>' +
+                            '<a href="/add-to-cart/' + value.id + '" class="btn2">ADD TO CART <i class="fa fa-shopping-cart"></i></a>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>';
 
 
 
@@ -521,40 +547,40 @@ $(document).ready(function () {
 
 
 
-//                    text +='<div class="col-md-4 col-sm-6">'+
-//                            '<div class="product-box">'+
-//                            '<a href="/productdetails/'+value.url+'" class="productImgBlock imglink">'+
-//                            '<span>'+
-//                            '<i class="fa fa-search"></i>'+
-//                            '</span>';
-//                    //if(value.discount=='null'){
-//                    if (value.discount != null){
-//                      
-//                             //alert("cal not emapty");
-//                           text +='<span class="discountoffer">'+value.discount+'% Off</span>';
-//                         }else{
-//                             //alert("call emapty");
-//                        text +='<span class=""></span>';
-//                         }
-//                    text += '<div class="productImg" style="background: url('+"'/public/images/"+value.product_image+"') top no-repeat;"+'></div>'+
-//                            '<div class="clear"></div></a> '+
-//                            '<div class="productDisc">'+
-//                            '<a href="/productdetails/'+value.url+'" class="titlelink">'+value.name+'</a>'+
-//                            '<strong class="ServiceCost">'+
-//                            '<strike>$'+value.original_price+'</strike></strong>'+
-//                            '<h3>$'+value.price+'</h3>'+  
-//                            '<span class="services-btns">'+
-//                            '<a href="/productdetails/'+value.url+'" class="addtocart-btn"><ion-icon name="eye"></ion-icon>View Details</a>'+
-//                            '<a class="addtocart-btn" href="/add-to-cart/'+value.id+'"><ion-icon name="cart"></ion-icon>Add To Cart</a>'+
-//                            '</span>'+
-//                            '</div>'+
-//                            '</div>'+
-//                            '</div>';
+                        //                    text +='<div class="col-md-4 col-sm-6">'+
+                        //                            '<div class="product-box">'+
+                        //                            '<a href="/productdetails/'+value.url+'" class="productImgBlock imglink">'+
+                        //                            '<span>'+
+                        //                            '<i class="fa fa-search"></i>'+
+                        //                            '</span>';
+                        //                    //if(value.discount=='null'){
+                        //                    if (value.discount != null){
+                        //                      
+                        //                             //alert("cal not emapty");
+                        //                           text +='<span class="discountoffer">'+value.discount+'% Off</span>';
+                        //                         }else{
+                        //                             //alert("call emapty");
+                        //                        text +='<span class=""></span>';
+                        //                         }
+                        //                    text += '<div class="productImg" style="background: url('+"'/public/images/"+value.product_image+"') top no-repeat;"+'></div>'+
+                        //                            '<div class="clear"></div></a> '+
+                        //                            '<div class="productDisc">'+
+                        //                            '<a href="/productdetails/'+value.url+'" class="titlelink">'+value.name+'</a>'+
+                        //                            '<strong class="ServiceCost">'+
+                        //                            '<strike>$'+value.original_price+'</strike></strong>'+
+                        //                            '<h3>$'+value.price+'</h3>'+  
+                        //                            '<span class="services-btns">'+
+                        //                            '<a href="/productdetails/'+value.url+'" class="addtocart-btn"><ion-icon name="eye"></ion-icon>View Details</a>'+
+                        //                            '<a class="addtocart-btn" href="/add-to-cart/'+value.id+'"><ion-icon name="cart"></ion-icon>Add To Cart</a>'+
+                        //                            '</span>'+
+                        //                            '</div>'+
+                        //                            '</div>'+
+                        //                            '</div>';
                         valueid = value.id;
                     });
-//                    text += '<div id="remove-row">' +
-//                            '<button id="btn-more" data-id="' + valueid + '" class="nounderline btn-block mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent pricesidebarbtn" > Load More </button>' +
-//                            '</div>';
+                    //                    text += '<div id="remove-row">' +
+                    //                            '<button id="btn-more" data-id="' + valueid + '" class="nounderline btn-block mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent pricesidebarbtn" > Load More </button>' +
+                    //                            '</div>';
                     $('#remove-row').remove();
                     $('.load_ajax_filter_data').html(text);
                 } else {
@@ -564,8 +590,7 @@ $(document).ready(function () {
             }
         });
     }
-    function get_filter(class_name)
-    {
+    function get_filter(class_name) {
         var filter = [];
         $('.' + class_name + ':checked').each(function () {
             filter.push($(this).val());
@@ -586,8 +611,7 @@ $(document).ready(function () {
     });
     //code for most selling
 
-    function get_filter_sel(class_name)
-    {
+    function get_filter_sel(class_name) {
         var filter = [];
         $('.' + class_name + ':checked').each(function () {
             filter.push($(this).val());
@@ -609,8 +633,7 @@ $(document).ready(function () {
     });
 
 
-    function filter_data_sel()
-    {
+    function filter_data_sel() {
         $('.filter_data').show();
 
         $('.filter_data').html('<div id="loading" style="" ></div>');
@@ -620,7 +643,7 @@ $(document).ready(function () {
         $.ajax({
             url: '/mostsellingfilter',
             type: "GET",
-            data: {brand: brand},
+            data: { brand: brand },
             // dataType:"JSON",
             success: function (data) {
 
@@ -633,7 +656,7 @@ $(document).ready(function () {
 
                     $.each(data.data, function (index, value) {
                         var valuediscount = value.discount;
-//                        alert(value.discount);
+                        //                        alert(value.discount);
                         var hideclass
                         if (!valuediscount || value.discount == 0) {
                             // $('.discountoffer').hide();
@@ -647,39 +670,39 @@ $(document).ready(function () {
                         }
                         $('.product-box-class').hide();
                         text += '<div class="col-sm-3 product-box-class filter">' +
-                                '<div class="productBlock">' +
-                                '<a href="/productdetails/' + value.url + '" class="productBlockImg">' +
-                                '<div style="background: url(' + "/public/images/" + value.product_image + "" + ') no-repeat;"></div>' +
-                                '</a>' +
-                                '<span class="discountoffer" style="' + hideclass + '"> % Offer ' + value.discount + '</span>' +
-                                '<div class="productBlockInfo">' +
-                                '<h3 class="protitle">' + value.name + '</h3>' +
-                                '<ul class="proRating">' +
-                                '<li><i class="fa fa-star"></i></li>' +
-                                '<li><i class="fa fa-star"></i></li>' +
-                                '<li><i class="fa fa-star"></i></li>' +
-                                '<li><i class="fa fa-star"></i></li>' +
-                                '<li><i class="fa fa-star-half-o"></i></li>' +
-                                '</ul>' +
-                                '<div class="loaderWrapperAjax loader-wrapper' + value.id + '" style="display: none;"><img src="public/assets/images/ajax-loader.gif"></div>' +
-                                '<div class="productInfoMsgAlert addtowishmessage' + value.id + '" ></div>' +
-                                '<button  data-id="' + value.id + '" class="wishlist-btn addtowishlist">Add to Wishlist</button>' +
-                                '<h2 class="propricing">$' + value.price +
-                                '<small><strike>$' + value.original_price + '</strike></small></h2>' +
-                                '</div>' +
-                                '<div class="productBlockViewDtl">' +
-                                '<a href="/productdetails/' + value.url + '" class="btn1">View details <i class="fa fa-arrow-circle-right"></i></a>' +
-                                '<a href="/add-to-cart/' + value.id + '" class="btn2">Buy Now <i class="fa fa-shopping-cart"></i></a>' +
-                                '</div>' +
-                                '</div>' +
-                                '</div>';
+                            '<div class="productBlock">' +
+                            '<a href="/productdetails/' + value.url + '" class="productBlockImg">' +
+                            '<div style="background: url(' + "/public/images/" + value.product_image + "" + ') no-repeat;"></div>' +
+                            '</a>' +
+                            '<span class="discountoffer" style="' + hideclass + '"> % Offer ' + value.discount + '</span>' +
+                            '<div class="productBlockInfo">' +
+                            '<h3 class="protitle">' + value.name + '</h3>' +
+                            '<ul class="proRating">' +
+                            '<li><i class="fa fa-star"></i></li>' +
+                            '<li><i class="fa fa-star"></i></li>' +
+                            '<li><i class="fa fa-star"></i></li>' +
+                            '<li><i class="fa fa-star"></i></li>' +
+                            '<li><i class="fa fa-star-half-o"></i></li>' +
+                            '</ul>' +
+                            '<div class="loaderWrapperAjax loader-wrapper' + value.id + '" style="display: none;"><img src="public/assets/images/ajax-loader.gif"></div>' +
+                            '<div class="productInfoMsgAlert addtowishmessage' + value.id + '" ></div>' +
+                            '<button  data-id="' + value.id + '" class="wishlist-btn addtowishlist">Add to Wishlist</button>' +
+                            '<h2 class="propricing">$' + value.price +
+                            '<small><strike>$' + value.original_price + '</strike></small></h2>' +
+                            '</div>' +
+                            '<div class="productBlockViewDtl">' +
+                            '<a href="/productdetails/' + value.url + '" class="btn1">View details <i class="fa fa-arrow-circle-right"></i></a>' +
+                            '<a href="/add-to-cart/' + value.id + '" class="btn2">Buy Now <i class="fa fa-shopping-cart"></i></a>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>';
 
 
                         valueid = value.id;
                     });
-//                text += '<div id="remove-row">' +
-//                            '<button id="btn-more" data-id="' + valueid + '" class="nounderline btn-block mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent pricesidebarbtn" > Load More </button>' +
-//                            '</div>';
+                    //                text += '<div id="remove-row">' +
+                    //                            '<button id="btn-more" data-id="' + valueid + '" class="nounderline btn-block mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent pricesidebarbtn" > Load More </button>' +
+                    //                            '</div>';
                     $('#remove-row').remove();
                     $('#postfilterdata').html(text);
                 } else {
@@ -701,10 +724,9 @@ $(document).ready(function () {
             //url : '{{ url("demos/loaddata") }}',
             url: '/loaddata',
             method: "get",
-            data: {id: id, categoryname: categoryname},
+            data: { id: id, categoryname: categoryname },
             //dataType : "text",
-            success: function (data)
-            {
+            success: function (data) {
                 var text = "";
                 var valueid;
 
@@ -723,74 +745,74 @@ $(document).ready(function () {
                         }
 
                         text += '<div class="col-sm-3">' +
-                                '<div class="productBlock">' +
-                                '<a href="/productdetails/' + value.url + '" class="productBlockImg">' +
-//        '<div style="background: url('+"'/public/images/"+value.product_image+"') no-repeat;"+'></div>'+
-                                '<div style="background: url(' + "/public/images/" + value.product_image + "" + ') no-repeat;"></div>' +
-                                '</a>' +
-                                '<div class="productBlockInfo">' +
-                                '<h3 class="protitle">' + value.name + '</h3>' +
-                                '<ul class="proRating">' +
-                                '<li><i class="fa fa-star"></i></li>' +
-                                '<li><i class="fa fa-star"></i></li>' +
-                                '<li><i class="fa fa-star"></i></li>' +
-                                '<li><i class="fa fa-star"></i></li>' +
-                                '<li><i class="fa fa-star-half-o"></i></li>' +
-                                '</ul>' +
-                                '<span class="discountoffer">&nbsp;</span>' +
-                                '<h2 class="propricing">$' + value.price +
-                                '<small><strike> $' + value.original_price + '</strike><small></h2>' +
-                                '<p class="proinfo">Earliest Delivery: Today</p>' +
-                                '</div>' +
-                                '<div class="productBlockViewDtl">' +
-                                '<a href="/productdetails/' + value.url + '" class="btn1">View details <i class="fa fa-arrow-circle-right"></i></a>' +
-                                '<a href="/add-to-cart/' + value.id + '" class="btn2">Buy Now <i class="fa fa-shopping-cart"></i></a>' +
-                                '</div>' +
-                                '</div>' +
-                                '</div>';
+                            '<div class="productBlock">' +
+                            '<a href="/productdetails/' + value.url + '" class="productBlockImg">' +
+                            //        '<div style="background: url('+"'/public/images/"+value.product_image+"') no-repeat;"+'></div>'+
+                            '<div style="background: url(' + "/public/images/" + value.product_image + "" + ') no-repeat;"></div>' +
+                            '</a>' +
+                            '<div class="productBlockInfo">' +
+                            '<h3 class="protitle">' + value.name + '</h3>' +
+                            '<ul class="proRating">' +
+                            '<li><i class="fa fa-star"></i></li>' +
+                            '<li><i class="fa fa-star"></i></li>' +
+                            '<li><i class="fa fa-star"></i></li>' +
+                            '<li><i class="fa fa-star"></i></li>' +
+                            '<li><i class="fa fa-star-half-o"></i></li>' +
+                            '</ul>' +
+                            '<span class="discountoffer">&nbsp;</span>' +
+                            '<h2 class="propricing">$' + value.price +
+                            '<small><strike> $' + value.original_price + '</strike><small></h2>' +
+                            '<p class="proinfo">Earliest Delivery: Today</p>' +
+                            '</div>' +
+                            '<div class="productBlockViewDtl">' +
+                            '<a href="/productdetails/' + value.url + '" class="btn1">View details <i class="fa fa-arrow-circle-right"></i></a>' +
+                            '<a href="/add-to-cart/' + value.id + '" class="btn2">Buy Now <i class="fa fa-shopping-cart"></i></a>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>';
 
 
 
 
                         // $('.product-box-class').hide();
-//                    text +='<div class="col-md-4 col-sm-6">'+
-//                            '<div class="product-box">'+
-//                            '<a href="/productdetails/'+value.url+'" class="productImgBlock imglink">'+
-//                            '<span>'+
-//                            '<i class="fa fa-search"></i>'+
-//                            '</span>';
-//                    if(value.discount != null){
-//                                text +='<span class="discountoffer">'+value.discount+'% Off</span>';
-//                   
-//                         }else{
-//                              text +='<span class=""></span>';
-//                 
-//                         }
-//                            //'<span class="discountoffer">'+value.discount+'% Off</span>'+
-//                    text +='<div class="productImg" style="background: url('+"'/public/images/"+value.product_image+"') top no-repeat;"+'>'+
-//                            '</div>'+
-//                            '<div class="clear"></div></a>'+
-//                            '<div class="productDisc">'+
-//                            '<a href="/productdetails/'+value.url+'" class="titlelink">'+value.name+'</a>'+
-//                            '<strong class="ServiceCost">'+
-//                            '<strike>$'+value.original_price+'</strike></strong>'+
-//                            '<h3>$'+value.price+'</h3>'+  
-//                            '<span class="services-btns">'+
-//                            '<a href="/productdetails/'+value.url+'" class="addtocart-btn"><ion-icon name="eye"></ion-icon>View Details</a>'+
-//                            '<a class="addtocart-btn" href="/add-to-cart/'+value.id+'"><ion-icon name="cart"></ion-icon>Add To Cart</a>'+
-//                            '</span>'+
-//                            '</div>'+
-//                            '</div>'+
-//                            '</div>';
+                        //                    text +='<div class="col-md-4 col-sm-6">'+
+                        //                            '<div class="product-box">'+
+                        //                            '<a href="/productdetails/'+value.url+'" class="productImgBlock imglink">'+
+                        //                            '<span>'+
+                        //                            '<i class="fa fa-search"></i>'+
+                        //                            '</span>';
+                        //                    if(value.discount != null){
+                        //                                text +='<span class="discountoffer">'+value.discount+'% Off</span>';
+                        //                   
+                        //                         }else{
+                        //                              text +='<span class=""></span>';
+                        //                 
+                        //                         }
+                        //                            //'<span class="discountoffer">'+value.discount+'% Off</span>'+
+                        //                    text +='<div class="productImg" style="background: url('+"'/public/images/"+value.product_image+"') top no-repeat;"+'>'+
+                        //                            '</div>'+
+                        //                            '<div class="clear"></div></a>'+
+                        //                            '<div class="productDisc">'+
+                        //                            '<a href="/productdetails/'+value.url+'" class="titlelink">'+value.name+'</a>'+
+                        //                            '<strong class="ServiceCost">'+
+                        //                            '<strike>$'+value.original_price+'</strike></strong>'+
+                        //                            '<h3>$'+value.price+'</h3>'+  
+                        //                            '<span class="services-btns">'+
+                        //                            '<a href="/productdetails/'+value.url+'" class="addtocart-btn"><ion-icon name="eye"></ion-icon>View Details</a>'+
+                        //                            '<a class="addtocart-btn" href="/add-to-cart/'+value.id+'"><ion-icon name="cart"></ion-icon>Add To Cart</a>'+
+                        //                            '</span>'+
+                        //                            '</div>'+
+                        //                            '</div>'+
+                        //                            '</div>';
 
 
                         valueid = value.id;
 
 
                     });
-//                    text += '<div id="remove-row">' +
-//                            '<button id="btn-more" data-id="' + valueid + '" class="nounderline btn-block mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent pricesidebarbtn" > Load More </button>' +
-//                            '</div>';
+                    //                    text += '<div id="remove-row">' +
+                    //                            '<button id="btn-more" data-id="' + valueid + '" class="nounderline btn-block mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent pricesidebarbtn" > Load More </button>' +
+                    //                            '</div>';
                     $('#remove-row').remove();
                     //$('.filter_data-ajax').append(text);
                     $('.filter_data').append(text);
@@ -801,16 +823,16 @@ $(document).ready(function () {
                     $('#btn-more').prop("disabled", true);
                     $('#btn-more').hide();
                 }
-//              if(data != '') 
-//              {
-//                  $('#remove-row').remove();
-//                  $('#filter_data').append(data);
-//                  
-//              }
-//              else
-//              {
-//                  $('#btn-more').html("No Data");
-//              }
+                //              if(data != '') 
+                //              {
+                //                  $('#remove-row').remove();
+                //                  $('#filter_data').append(data);
+                //                  
+                //              }
+                //              else
+                //              {
+                //                  $('#btn-more').html("No Data");
+                //              }
             }
         });
     });
@@ -838,9 +860,9 @@ $(document).ready(function () {
         event.preventDefault();
         jQuery.noConflict();
         $("#senderDetailsModalOpen").modal("show");
-//       if(shippingmark !=1){
-//           
-//       }
+        //       if(shippingmark !=1){
+        //           
+        //       }
         $(".ConfirmAddress").attr("href", "#");
     } else if (sendergiftmark == 1 && shippingmark == 1) {
 
@@ -852,7 +874,7 @@ $(document).ready(function () {
 
         $(".ConfirmAddress").attr("href", "#");
     }
-//    $('.chb').click(function() { 
+    //    $('.chb').click(function() { 
     $(".chb").click(function (e) {
         $('#nextreviewnogift').attr("enabled", "enabled");
         $("#nextreviewnogift").removeAttr("disabled");
@@ -904,10 +926,9 @@ $(document).ready(function () {
             //url : '{{ url("demos/loaddata") }}',
             url: '/add-to-wishlist',
             method: "get",
-            data: {id: id},
+            data: { id: id },
             //dataType : "text",
-            success: function (data)
-            { //alert(JSON.parse(data));
+            success: function (data) { //alert(JSON.parse(data));
                 jQuery('.loader-wrapper' + id).hide();
                 data = JSON.parse(data);
                 event.preventDefault();
@@ -916,8 +937,8 @@ $(document).ready(function () {
                     $("#myModalajax").modal("show");
                     $('.addtowishmessage' + id).html('<span class="addtoWishMsg">Product added in wishlist </span>');
                     $('.modal-body-addtowish').html('<span class="addtoWishMsg">Product added in wishlist <span>');
-//                    $.each(data.data, function (index, value) {
-//                        });
+                    //                    $.each(data.data, function (index, value) {
+                    //                        });
                 } else if (data.success == "2") {
 
                     $('.addtowishmessage' + id).html('<span class="addtoWishMsg">Product already added in wishlist <span>');
@@ -949,8 +970,7 @@ $(document).ready(function () {
 
     });
     //start code for main category higher and lower filters
-    function filter_data_higher()
-    {
+    function filter_data_higher() {
 
         $('.filter_data').show();
 
@@ -961,7 +981,7 @@ $(document).ready(function () {
         $.ajax({
             url: '/higherpricefilter',
             type: "GET",
-            data: {brand: brand},
+            data: { brand: brand },
             // dataType:"JSON",
             success: function (data) {
 
@@ -974,7 +994,7 @@ $(document).ready(function () {
 
                     $.each(data.data, function (index, value) {
                         var valuediscount = value.discount;
-//                        alert(value.discount);
+                        //                        alert(value.discount);
                         var hideclass
                         if (!valuediscount || value.discount == 0) {
                             // $('.discountoffer').hide();
@@ -988,39 +1008,39 @@ $(document).ready(function () {
                         }
                         $('.product-box-class').hide();
                         text += '<div class="col-sm-3 product-box-class filter">' +
-                                '<div class="productBlock">' +
-                                '<a href="/productdetails/' + value.url + '" class="productBlockImg">' +
-                                '<div style="background: url(' + "/public/images/" + value.product_image + "" + ') no-repeat;"></div>' +
-                                '</a>' +
-                                '<span class="discountoffer" style="' + hideclass + '"> % Offer ' + value.discount + '</span>' +
-                                '<div class="productBlockInfo">' +
-                                '<h3 class="protitle">' + value.name + '</h3>' +
-                                '<ul class="proRating">' +
-                                '<li><i class="fa fa-star"></i></li>' +
-                                '<li><i class="fa fa-star"></i></li>' +
-                                '<li><i class="fa fa-star"></i></li>' +
-                                '<li><i class="fa fa-star"></i></li>' +
-                                '<li><i class="fa fa-star-half-o"></i></li>' +
-                                '</ul>' +
-                                '<div class="loaderWrapperAjax loader-wrapper' + value.id + '" style="display: none;"><img src="public/assets/images/ajax-loader.gif"></div>' +
-                                '<div class="productInfoMsgAlert addtowishmessage' + value.id + '" ></div>' +
-                                '<button  data-id="' + value.id + '" class="wishlist-btn addtowishlist">Add to Wishlist</button>' +
-                                '<h2 class="propricing">$' + value.price +
-                                '<small><strike>$' + value.original_price + '</strike></small></h2>' +
-                                '</div>' +
-                                '<div class="productBlockViewDtl">' +
-                                '<a href="/productdetails/' + value.url + '" class="btn1">View details <i class="fa fa-arrow-circle-right"></i></a>' +
-                                '<a href="/add-to-cart/' + value.id + '" class="btn2">Buy Now <i class="fa fa-shopping-cart"></i></a>' +
-                                '</div>' +
-                                '</div>' +
-                                '</div>';
+                            '<div class="productBlock">' +
+                            '<a href="/productdetails/' + value.url + '" class="productBlockImg">' +
+                            '<div style="background: url(' + "/public/images/" + value.product_image + "" + ') no-repeat;"></div>' +
+                            '</a>' +
+                            '<span class="discountoffer" style="' + hideclass + '"> % Offer ' + value.discount + '</span>' +
+                            '<div class="productBlockInfo">' +
+                            '<h3 class="protitle">' + value.name + '</h3>' +
+                            '<ul class="proRating">' +
+                            '<li><i class="fa fa-star"></i></li>' +
+                            '<li><i class="fa fa-star"></i></li>' +
+                            '<li><i class="fa fa-star"></i></li>' +
+                            '<li><i class="fa fa-star"></i></li>' +
+                            '<li><i class="fa fa-star-half-o"></i></li>' +
+                            '</ul>' +
+                            '<div class="loaderWrapperAjax loader-wrapper' + value.id + '" style="display: none;"><img src="public/assets/images/ajax-loader.gif"></div>' +
+                            '<div class="productInfoMsgAlert addtowishmessage' + value.id + '" ></div>' +
+                            '<button  data-id="' + value.id + '" class="wishlist-btn addtowishlist">Add to Wishlist</button>' +
+                            '<h2 class="propricing">$' + value.price +
+                            '<small><strike>$' + value.original_price + '</strike></small></h2>' +
+                            '</div>' +
+                            '<div class="productBlockViewDtl">' +
+                            '<a href="/productdetails/' + value.url + '" class="btn1">View details <i class="fa fa-arrow-circle-right"></i></a>' +
+                            '<a href="/add-to-cart/' + value.id + '" class="btn2">Buy Now <i class="fa fa-shopping-cart"></i></a>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>';
 
 
                         valueid = value.id;
                     });
-//                text += '<div id="remove-row">' +
-//                            '<button id="btn-more" data-id="' + valueid + '" class="nounderline btn-block mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent pricesidebarbtn" > Load More </button>' +
-//                            '</div>';
+                    //                text += '<div id="remove-row">' +
+                    //                            '<button id="btn-more" data-id="' + valueid + '" class="nounderline btn-block mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent pricesidebarbtn" > Load More </button>' +
+                    //                            '</div>';
                     $('#remove-row').remove();
                     $('#postfilterdata').html(text);
                 } else {
@@ -1043,8 +1063,7 @@ $(document).ready(function () {
         }
 
     });
-    function filter_data_lower()
-    {
+    function filter_data_lower() {
 
         $('.filter_data').show();
 
@@ -1055,7 +1074,7 @@ $(document).ready(function () {
         $.ajax({
             url: '/lowerpricefilter',
             type: "GET",
-            data: {brand: brand},
+            data: { brand: brand },
             // dataType:"JSON",
             success: function (data) {
 
@@ -1068,7 +1087,7 @@ $(document).ready(function () {
 
                     $.each(data.data, function (index, value) {
                         var valuediscount = value.discount;
-//                        alert(value.discount);
+                        //                        alert(value.discount);
                         var hideclass
                         if (!valuediscount || value.discount == 0) {
                             // $('.discountoffer').hide();
@@ -1082,39 +1101,39 @@ $(document).ready(function () {
                         }
                         $('.product-box-class').hide();
                         text += '<div class="col-sm-3 product-box-class filter">' +
-                                '<div class="productBlock">' +
-                                '<a href="/productdetails/' + value.url + '" class="productBlockImg">' +
-                                '<div style="background: url(' + "/public/images/" + value.product_image + "" + ') no-repeat;"></div>' +
-                                '</a>' +
-                                '<span class="discountoffer" style="' + hideclass + '"> % Offer ' + value.discount + '</span>' +
-                                '<div class="productBlockInfo">' +
-                                '<h3 class="protitle">' + value.name + '</h3>' +
-                                '<ul class="proRating">' +
-                                '<li><i class="fa fa-star"></i></li>' +
-                                '<li><i class="fa fa-star"></i></li>' +
-                                '<li><i class="fa fa-star"></i></li>' +
-                                '<li><i class="fa fa-star"></i></li>' +
-                                '<li><i class="fa fa-star-half-o"></i></li>' +
-                                '</ul>' +
-                                '<div class="loaderWrapperAjax loader-wrapper' + value.id + '" style="display: none;"><img src="public/assets/images/ajax-loader.gif"></div>' +
-                                '<div class="productInfoMsgAlert addtowishmessage' + value.id + '" ></div>' +
-                                '<button  data-id="' + value.id + '" class="wishlist-btn addtowishlist">Add to Wishlist</button>' +
-                                '<h2 class="propricing">$' + value.price +
-                                '<small><strike>$' + value.original_price + '</strike></small></h2>' +
-                                '</div>' +
-                                '<div class="productBlockViewDtl">' +
-                                '<a href="/productdetails/' + value.url + '" class="btn1">View details <i class="fa fa-arrow-circle-right"></i></a>' +
-                                '<a href="/add-to-cart/' + value.id + '" class="btn2">Buy Now <i class="fa fa-shopping-cart"></i></a>' +
-                                '</div>' +
-                                '</div>' +
-                                '</div>';
+                            '<div class="productBlock">' +
+                            '<a href="/productdetails/' + value.url + '" class="productBlockImg">' +
+                            '<div style="background: url(' + "/public/images/" + value.product_image + "" + ') no-repeat;"></div>' +
+                            '</a>' +
+                            '<span class="discountoffer" style="' + hideclass + '"> % Offer ' + value.discount + '</span>' +
+                            '<div class="productBlockInfo">' +
+                            '<h3 class="protitle">' + value.name + '</h3>' +
+                            '<ul class="proRating">' +
+                            '<li><i class="fa fa-star"></i></li>' +
+                            '<li><i class="fa fa-star"></i></li>' +
+                            '<li><i class="fa fa-star"></i></li>' +
+                            '<li><i class="fa fa-star"></i></li>' +
+                            '<li><i class="fa fa-star-half-o"></i></li>' +
+                            '</ul>' +
+                            '<div class="loaderWrapperAjax loader-wrapper' + value.id + '" style="display: none;"><img src="public/assets/images/ajax-loader.gif"></div>' +
+                            '<div class="productInfoMsgAlert addtowishmessage' + value.id + '" ></div>' +
+                            '<button  data-id="' + value.id + '" class="wishlist-btn addtowishlist">Add to Wishlist</button>' +
+                            '<h2 class="propricing">$' + value.price +
+                            '<small><strike>$' + value.original_price + '</strike></small></h2>' +
+                            '</div>' +
+                            '<div class="productBlockViewDtl">' +
+                            '<a href="/productdetails/' + value.url + '" class="btn1">View details <i class="fa fa-arrow-circle-right"></i></a>' +
+                            '<a href="/add-to-cart/' + value.id + '" class="btn2">Buy Now <i class="fa fa-shopping-cart"></i></a>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>';
 
 
                         valueid = value.id;
                     });
-//                text += '<div id="remove-row">' +
-//                            '<button id="btn-more" data-id="' + valueid + '" class="nounderline btn-block mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent pricesidebarbtn" > Load More </button>' +
-//                            '</div>';
+                    //                text += '<div id="remove-row">' +
+                    //                            '<button id="btn-more" data-id="' + valueid + '" class="nounderline btn-block mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent pricesidebarbtn" > Load More </button>' +
+                    //                            '</div>';
                     $('#remove-row').remove();
                     $('#postfilterdata').html(text);
                 } else {
@@ -1140,8 +1159,7 @@ $(document).ready(function () {
 
     });
 
-    function filter_subdata_lower()
-    {
+    function filter_subdata_lower() {
 
         $('.filter_data').show();
 
@@ -1152,7 +1170,7 @@ $(document).ready(function () {
         $.ajax({
             url: '/lowersubpricefilter',
             type: "GET",
-            data: {brand: brand},
+            data: { brand: brand },
             // dataType:"JSON",
             success: function (data) {
 
@@ -1165,7 +1183,7 @@ $(document).ready(function () {
 
                     $.each(data.data, function (index, value) {
                         var valuediscount = value.discount;
-//                        alert(value.discount);
+                        //                        alert(value.discount);
                         var hideclass
                         if (!valuediscount || value.discount == 0) {
                             // $('.discountoffer').hide();
@@ -1179,39 +1197,39 @@ $(document).ready(function () {
                         }
                         $('.product-box-class').hide();
                         text += '<div class="col-sm-3 product-box-class filter">' +
-                                '<div class="productBlock">' +
-                                '<a href="/productdetails/' + value.url + '" class="productBlockImg">' +
-                                '<div style="background: url(' + "/public/images/" + value.product_image + "" + ') no-repeat;"></div>' +
-                                '</a>' +
-                                '<span class="discountoffer" style="' + hideclass + '"> % Offer ' + value.discount + '</span>' +
-                                '<div class="productBlockInfo">' +
-                                '<h3 class="protitle">' + value.name + '</h3>' +
-                                '<ul class="proRating">' +
-                                '<li><i class="fa fa-star"></i></li>' +
-                                '<li><i class="fa fa-star"></i></li>' +
-                                '<li><i class="fa fa-star"></i></li>' +
-                                '<li><i class="fa fa-star"></i></li>' +
-                                '<li><i class="fa fa-star-half-o"></i></li>' +
-                                '</ul>' +
-                                '<div class="loaderWrapperAjax loader-wrapper' + value.id + '" style="display: none;"><img src="public/assets/images/ajax-loader.gif"></div>' +
-                                '<div class="productInfoMsgAlert addtowishmessage' + value.id + '" ></div>' +
-                                '<button  data-id="' + value.id + '" class="wishlist-btn addtowishlist">Add to Wishlist</button>' +
-                                '<h2 class="propricing">$' + value.price +
-                                '<small><strike>$' + value.original_price + '</strike></small></h2>' +
-                                '</div>' +
-                                '<div class="productBlockViewDtl">' +
-                                '<a href="/productdetails/' + value.url + '" class="btn1">View details <i class="fa fa-arrow-circle-right"></i></a>' +
-                                '<a href="/add-to-cart/' + value.id + '" class="btn2">Buy Now <i class="fa fa-shopping-cart"></i></a>' +
-                                '</div>' +
-                                '</div>' +
-                                '</div>';
+                            '<div class="productBlock">' +
+                            '<a href="/productdetails/' + value.url + '" class="productBlockImg">' +
+                            '<div style="background: url(' + "/public/images/" + value.product_image + "" + ') no-repeat;"></div>' +
+                            '</a>' +
+                            '<span class="discountoffer" style="' + hideclass + '"> % Offer ' + value.discount + '</span>' +
+                            '<div class="productBlockInfo">' +
+                            '<h3 class="protitle">' + value.name + '</h3>' +
+                            '<ul class="proRating">' +
+                            '<li><i class="fa fa-star"></i></li>' +
+                            '<li><i class="fa fa-star"></i></li>' +
+                            '<li><i class="fa fa-star"></i></li>' +
+                            '<li><i class="fa fa-star"></i></li>' +
+                            '<li><i class="fa fa-star-half-o"></i></li>' +
+                            '</ul>' +
+                            '<div class="loaderWrapperAjax loader-wrapper' + value.id + '" style="display: none;"><img src="public/assets/images/ajax-loader.gif"></div>' +
+                            '<div class="productInfoMsgAlert addtowishmessage' + value.id + '" ></div>' +
+                            '<button  data-id="' + value.id + '" class="wishlist-btn addtowishlist">Add to Wishlist</button>' +
+                            '<h2 class="propricing">$' + value.price +
+                            '<small><strike>$' + value.original_price + '</strike></small></h2>' +
+                            '</div>' +
+                            '<div class="productBlockViewDtl">' +
+                            '<a href="/productdetails/' + value.url + '" class="btn1">View details <i class="fa fa-arrow-circle-right"></i></a>' +
+                            '<a href="/add-to-cart/' + value.id + '" class="btn2">Buy Now <i class="fa fa-shopping-cart"></i></a>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>';
 
 
                         valueid = value.id;
                     });
-//                text += '<div id="remove-row">' +
-//                            '<button id="btn-more" data-id="' + valueid + '" class="nounderline btn-block mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent pricesidebarbtn" > Load More </button>' +
-//                            '</div>';
+                    //                text += '<div id="remove-row">' +
+                    //                            '<button id="btn-more" data-id="' + valueid + '" class="nounderline btn-block mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent pricesidebarbtn" > Load More </button>' +
+                    //                            '</div>';
                     $('#remove-row').remove();
                     $('#postfilterdata').html(text);
                 } else {
@@ -1236,8 +1254,7 @@ $(document).ready(function () {
 
     });
 
-    function filter_subdata_higher()
-    {
+    function filter_subdata_higher() {
 
         $('.filter_data').show();
 
@@ -1248,7 +1265,7 @@ $(document).ready(function () {
         $.ajax({
             url: '/highersubpricefilter',
             type: "GET",
-            data: {brand: brand},
+            data: { brand: brand },
             // dataType:"JSON",
             success: function (data) {
 
@@ -1261,7 +1278,7 @@ $(document).ready(function () {
 
                     $.each(data.data, function (index, value) {
                         var valuediscount = value.discount;
-//                        alert(value.discount);
+                        //                        alert(value.discount);
                         var hideclass
                         if (!valuediscount || value.discount == 0) {
                             // $('.discountoffer').hide();
@@ -1275,39 +1292,39 @@ $(document).ready(function () {
                         }
                         $('.product-box-class').hide();
                         text += '<div class="col-sm-3 product-box-class filter">' +
-                                '<div class="productBlock">' +
-                                '<a href="/productdetails/' + value.url + '" class="productBlockImg">' +
-                                '<div style="background: url(' + "/public/images/" + value.product_image + "" + ') no-repeat;"></div>' +
-                                '</a>' +
-                                '<span class="discountoffer" style="' + hideclass + '"> % Offer ' + value.discount + '</span>' +
-                                '<div class="productBlockInfo">' +
-                                '<h3 class="protitle">' + value.name + '</h3>' +
-                                '<ul class="proRating">' +
-                                '<li><i class="fa fa-star"></i></li>' +
-                                '<li><i class="fa fa-star"></i></li>' +
-                                '<li><i class="fa fa-star"></i></li>' +
-                                '<li><i class="fa fa-star"></i></li>' +
-                                '<li><i class="fa fa-star-half-o"></i></li>' +
-                                '</ul>' +
-                                '<div class="loaderWrapperAjax loader-wrapper' + value.id + '" style="display: none;"><img src="public/assets/images/ajax-loader.gif"></div>' +
-                                '<div class="productInfoMsgAlert addtowishmessage' + value.id + '" ></div>' +
-                                '<button  data-id="' + value.id + '" class="wishlist-btn addtowishlist">Add to Wishlist</button>' +
-                                '<h2 class="propricing">$' + value.price +
-                                '<small><strike>$' + value.original_price + '</strike></small></h2>' +
-                                '</div>' +
-                                '<div class="productBlockViewDtl">' +
-                                '<a href="/productdetails/' + value.url + '" class="btn1">View details <i class="fa fa-arrow-circle-right"></i></a>' +
-                                '<a href="/add-to-cart/' + value.id + '" class="btn2">Buy Now <i class="fa fa-shopping-cart"></i></a>' +
-                                '</div>' +
-                                '</div>' +
-                                '</div>';
+                            '<div class="productBlock">' +
+                            '<a href="/productdetails/' + value.url + '" class="productBlockImg">' +
+                            '<div style="background: url(' + "/public/images/" + value.product_image + "" + ') no-repeat;"></div>' +
+                            '</a>' +
+                            '<span class="discountoffer" style="' + hideclass + '"> % Offer ' + value.discount + '</span>' +
+                            '<div class="productBlockInfo">' +
+                            '<h3 class="protitle">' + value.name + '</h3>' +
+                            '<ul class="proRating">' +
+                            '<li><i class="fa fa-star"></i></li>' +
+                            '<li><i class="fa fa-star"></i></li>' +
+                            '<li><i class="fa fa-star"></i></li>' +
+                            '<li><i class="fa fa-star"></i></li>' +
+                            '<li><i class="fa fa-star-half-o"></i></li>' +
+                            '</ul>' +
+                            '<div class="loaderWrapperAjax loader-wrapper' + value.id + '" style="display: none;"><img src="public/assets/images/ajax-loader.gif"></div>' +
+                            '<div class="productInfoMsgAlert addtowishmessage' + value.id + '" ></div>' +
+                            '<button  data-id="' + value.id + '" class="wishlist-btn addtowishlist">Add to Wishlist</button>' +
+                            '<h2 class="propricing">$' + value.price +
+                            '<small><strike>$' + value.original_price + '</strike></small></h2>' +
+                            '</div>' +
+                            '<div class="productBlockViewDtl">' +
+                            '<a href="/productdetails/' + value.url + '" class="btn1">View details <i class="fa fa-arrow-circle-right"></i></a>' +
+                            '<a href="/add-to-cart/' + value.id + '" class="btn2">Buy Now <i class="fa fa-shopping-cart"></i></a>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>';
 
 
                         valueid = value.id;
                     });
-//                text += '<div id="remove-row">' +
-//                            '<button id="btn-more" data-id="' + valueid + '" class="nounderline btn-block mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent pricesidebarbtn" > Load More </button>' +
-//                            '</div>';
+                    //                text += '<div id="remove-row">' +
+                    //                            '<button id="btn-more" data-id="' + valueid + '" class="nounderline btn-block mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent pricesidebarbtn" > Load More </button>' +
+                    //                            '</div>';
                     $('#remove-row').remove();
                     $('#postfilterdata').html(text);
                 } else {
@@ -1331,8 +1348,7 @@ $(document).ready(function () {
     });
 
 
-    function filter_subdata_sel()
-    {
+    function filter_subdata_sel() {
         $('.filter_data').show();
 
         $('.filter_data').html('<div id="loading" style="" ></div>');
@@ -1342,7 +1358,7 @@ $(document).ready(function () {
         $.ajax({
             url: '/mostsubsellingfilter',
             type: "GET",
-            data: {brand: brand},
+            data: { brand: brand },
             // dataType:"JSON",
             success: function (data) {
 
@@ -1355,7 +1371,7 @@ $(document).ready(function () {
 
                     $.each(data.data, function (index, value) {
                         var valuediscount = value.discount;
-//                        alert(value.discount);
+                        //                        alert(value.discount);
                         var hideclass
                         if (!valuediscount || value.discount == 0) {
                             // $('.discountoffer').hide();
@@ -1369,39 +1385,39 @@ $(document).ready(function () {
                         }
                         $('.product-box-class').hide();
                         text += '<div class="col-sm-3 product-box-class filter">' +
-                                '<div class="productBlock">' +
-                                '<a href="/productdetails/' + value.url + '" class="productBlockImg">' +
-                                '<div style="background: url(' + "/public/images/" + value.product_image + "" + ') no-repeat;"></div>' +
-                                '</a>' +
-                                '<span class="discountoffer" style="' + hideclass + '"> % Offer ' + value.discount + '</span>' +
-                                '<div class="productBlockInfo">' +
-                                '<h3 class="protitle">' + value.name + '</h3>' +
-                                '<ul class="proRating">' +
-                                '<li><i class="fa fa-star"></i></li>' +
-                                '<li><i class="fa fa-star"></i></li>' +
-                                '<li><i class="fa fa-star"></i></li>' +
-                                '<li><i class="fa fa-star"></i></li>' +
-                                '<li><i class="fa fa-star-half-o"></i></li>' +
-                                '</ul>' +
-                                '<div class="loaderWrapperAjax loader-wrapper' + value.id + '" style="display: none;"><img src="public/assets/images/ajax-loader.gif"></div>' +
-                                '<div class="productInfoMsgAlert addtowishmessage' + value.id + '" ></div>' +
-                                '<button  data-id="' + value.id + '" class="wishlist-btn addtowishlist">Add to Wishlist</button>' +
-                                '<h2 class="propricing">$' + value.price +
-                                '<small><strike>$' + value.original_price + '</strike></small></h2>' +
-                                '</div>' +
-                                '<div class="productBlockViewDtl">' +
-                                '<a href="/productdetails/' + value.url + '" class="btn1">View details <i class="fa fa-arrow-circle-right"></i></a>' +
-                                '<a href="/add-to-cart/' + value.id + '" class="btn2">Buy Now <i class="fa fa-shopping-cart"></i></a>' +
-                                '</div>' +
-                                '</div>' +
-                                '</div>';
+                            '<div class="productBlock">' +
+                            '<a href="/productdetails/' + value.url + '" class="productBlockImg">' +
+                            '<div style="background: url(' + "/public/images/" + value.product_image + "" + ') no-repeat;"></div>' +
+                            '</a>' +
+                            '<span class="discountoffer" style="' + hideclass + '"> % Offer ' + value.discount + '</span>' +
+                            '<div class="productBlockInfo">' +
+                            '<h3 class="protitle">' + value.name + '</h3>' +
+                            '<ul class="proRating">' +
+                            '<li><i class="fa fa-star"></i></li>' +
+                            '<li><i class="fa fa-star"></i></li>' +
+                            '<li><i class="fa fa-star"></i></li>' +
+                            '<li><i class="fa fa-star"></i></li>' +
+                            '<li><i class="fa fa-star-half-o"></i></li>' +
+                            '</ul>' +
+                            '<div class="loaderWrapperAjax loader-wrapper' + value.id + '" style="display: none;"><img src="public/assets/images/ajax-loader.gif"></div>' +
+                            '<div class="productInfoMsgAlert addtowishmessage' + value.id + '" ></div>' +
+                            '<button  data-id="' + value.id + '" class="wishlist-btn addtowishlist">Add to Wishlist</button>' +
+                            '<h2 class="propricing">$' + value.price +
+                            '<small><strike>$' + value.original_price + '</strike></small></h2>' +
+                            '</div>' +
+                            '<div class="productBlockViewDtl">' +
+                            '<a href="/productdetails/' + value.url + '" class="btn1">View details <i class="fa fa-arrow-circle-right"></i></a>' +
+                            '<a href="/add-to-cart/' + value.id + '" class="btn2">Buy Now <i class="fa fa-shopping-cart"></i></a>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>';
 
 
                         valueid = value.id;
                     });
-//                text += '<div id="remove-row">' +
-//                            '<button id="btn-more" data-id="' + valueid + '" class="nounderline btn-block mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent pricesidebarbtn" > Load More </button>' +
-//                            '</div>';
+                    //                text += '<div id="remove-row">' +
+                    //                            '<button id="btn-more" data-id="' + valueid + '" class="nounderline btn-block mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent pricesidebarbtn" > Load More </button>' +
+                    //                            '</div>';
                     $('#remove-row').remove();
                     $('#postfilterdata').html(text);
                 } else {
@@ -1453,26 +1469,26 @@ $(document).ready(function () {
             closeOnCancel: false,
             timer: 10000
         },
-                function (isConfirm) {
-                    if (isConfirm) {
+            function (isConfirm) {
+                if (isConfirm) {
 
-                        $.ajax({
-                            url: '/removeAll',
-                            type: "GET",
-                            //url: '/removeAll/',
-                            // type: 'DELETE',
-                            error: function () {
-                                alert('Something is wrong');
-                            },
-                            success: function (data) {
-                                swal("Deleted!", "Your Cart has been Empty.", "success");
-                            }
-                        });
-                    } else {
+                    $.ajax({
+                        url: '/removeAll',
+                        type: "GET",
+                        //url: '/removeAll/',
+                        // type: 'DELETE',
+                        error: function () {
+                            alert('Something is wrong');
+                        },
+                        success: function (data) {
+                            swal("Deleted!", "Your Cart has been Empty.", "success");
+                        }
+                    });
+                } else {
 
-                        swal("Cancelled", "Your Cart is safe :)", "error");
-                    }
-                });
+                    swal("Cancelled", "Your Cart is safe :)", "error");
+                }
+            });
 
     });
     $('#ajaxtotalprice').hide();
@@ -1505,7 +1521,7 @@ $(document).ready(function () {
 
                     //$('.decermentitem').on('click');
 
-//             $('#decermentitem'+giftwrapvaluecheck).off('click');
+                    //             $('#decermentitem'+giftwrapvaluecheck).off('click');
                     //$('.decermentitembtn').on('click');
                     $('#giftwrapmessage').html('<p style="color:red" >Gift wraspping more than 3 item not applicable</p>');
                     $('.guestCheckOutBtns').attr("disabled", "disabled");
@@ -1516,13 +1532,13 @@ $(document).ready(function () {
                         $.ajax({
                             url: '/addgiftbox',
                             type: "GET",
-                            data: {brand: giftwrapvaluecheck},
+                            data: { brand: giftwrapvaluecheck },
                             // dataType:"JSON",
                             success: function (data) {
 
-//                alert(JSON.parse(data));
+                                //                alert(JSON.parse(data));
                                 data = JSON.parse(data);
-//                 alert(data.success);
+                                //                 alert(data.success);
                                 if (data.success == "1") {
                                     $('#loadtotalprice').hide();
                                     $('#loadgiftboxtotal').hide();
@@ -1552,14 +1568,14 @@ $(document).ready(function () {
                                     }
                                     var datatotal = parseInt(giftboxtotalitem) + parseInt(delivercharge);
                                     var totalpay = totalPriceitem + datatotal;
-//                    alert(totalpay+'this is totoal account');
+                                    //                    alert(totalpay+'this is totoal account');
                                     $('#ajaxtotalprice').html('$' + totalPriceitem);
                                     $('#ajaxgiftboxtotal').html('$' + giftboxtotalitem);
                                     $('#ajaxdeliverycharge').html(pricesing + dilverychargevalue);
                                     $('#ajaxtotalpay').html('$' + totalpay);
-//                    $.each(data.data, function (index, value) {
-//                     
-//                    });
+                                    //                    $.each(data.data, function (index, value) {
+                                    //                     
+                                    //                    });
 
                                 } else {
                                     $('#ajaxtotalprice').hide();
@@ -1593,13 +1609,13 @@ $(document).ready(function () {
                         $.ajax({
                             url: '/addgiftbox',
                             type: "GET",
-                            data: {brand: giftwrapvaluecheck},
+                            data: { brand: giftwrapvaluecheck },
                             // dataType:"JSON",
                             success: function (data) {
 
-//                alert(JSON.parse(data));
+                                //                alert(JSON.parse(data));
                                 data = JSON.parse(data);
-//                 alert(data.success);
+                                //                 alert(data.success);
                                 if (data.success == "1") {
                                     $('#loadtotalprice').hide();
                                     $('#loadgiftboxtotal').hide();
@@ -1629,16 +1645,16 @@ $(document).ready(function () {
                                     }
                                     var datatotal = parseInt(giftboxtotalitem) + parseInt(delivercharge);
                                     var totalpay = totalPriceitem + datatotal;
-//                    alert(giftboxtotalitem+'this is giftboxtotalitem account');
-//                     alert(datatotal+'this is delivercharge account');
-//                    alert(totalpay+'this is totoal account');
+                                    //                    alert(giftboxtotalitem+'this is giftboxtotalitem account');
+                                    //                     alert(datatotal+'this is delivercharge account');
+                                    //                    alert(totalpay+'this is totoal account');
                                     $('#ajaxtotalprice').html('$' + totalPriceitem);
                                     $('#ajaxgiftboxtotal').html('$' + giftboxtotalitem);
                                     $('#ajaxdeliverycharge').html(pricesing + dilverychargevalue);
                                     $('#ajaxtotalpay').html('$' + totalpay);
-//                    $.each(data.data, function (index, value) {
-//                     
-//                    });
+                                    //                    $.each(data.data, function (index, value) {
+                                    //                     
+                                    //                    });
 
                                 } else {
                                     $('#ajaxtotalprice').hide();
@@ -1664,9 +1680,9 @@ $(document).ready(function () {
                         $(".guestCheckOutBtns").removeAttr("disabled");
                     } else {
                         var checkvalue = $("#qtyinc" + giftwrapvaluecheck).val();
-//                            alert("call now each 1 or 2");
-//                              alert(giftwrapvalue+'id of click');
-//                            alert(checkvalue+'value of click');
+                        //                            alert("call now each 1 or 2");
+                        //                              alert(giftwrapvalue+'id of click');
+                        //                            alert(checkvalue+'value of click');
                         //alert(eachval+'this ech val click');
 
                         $('.cartBlockWrap label input[class="giftwrappingcheck"]:checked').not('#giftWrap' + giftwrapvalue).each(function () {
@@ -1676,7 +1692,7 @@ $(document).ready(function () {
                             //alert(balanccheck+'thsi balacne value now');
                             if (eachval != 3 && balanccheck > 3) {
                                 $('#giftWrap' + giftwrapvalue).attr('checked', false); // Unchecks it
-//                    $('label .giftwrappingcheck').not('#giftWrap'+valueofcheck).attr("disabled", "disabled");
+                                //                    $('label .giftwrappingcheck').not('#giftWrap'+valueofcheck).attr("disabled", "disabled");
                                 $('label .giftwrappingcheck').not('#giftWrap' + valueofcheck).attr("data-toggle", "tooltip");
                                 $('label .giftwrappingcheck').not('#giftWrap' + valueofcheck).attr("data-placement", "left");
                                 $('label .giftwrappingcheck').not('#giftWrap' + valueofcheck).attr("title", "Gift wraspping more than 3 item not applicable");
@@ -1686,13 +1702,13 @@ $(document).ready(function () {
                                 $.ajax({
                                     url: '/addgiftbox',
                                     type: "GET",
-                                    data: {brand: giftwrapvaluecheck},
+                                    data: { brand: giftwrapvaluecheck },
                                     // dataType:"JSON",
                                     success: function (data) {
 
-//                alert(JSON.parse(data));
+                                        //                alert(JSON.parse(data));
                                         data = JSON.parse(data);
-//                 alert(data.success);
+                                        //                 alert(data.success);
                                         if (data.success == "1") {
                                             $('#loadtotalprice').hide();
                                             $('#loadgiftboxtotal').hide();
@@ -1722,15 +1738,15 @@ $(document).ready(function () {
                                             }
                                             var datatotal = parseInt(giftboxtotalitem) + parseInt(delivercharge);
                                             var totalpay = totalPriceitem + datatotal;
-//                   var totalpay= totalPriceitem +  giftboxtotalitem +  delivercharge;
-//                    alert(totalpay+'this is totoal account');
+                                            //                   var totalpay= totalPriceitem +  giftboxtotalitem +  delivercharge;
+                                            //                    alert(totalpay+'this is totoal account');
                                             $('#ajaxtotalprice').html('$' + totalPriceitem);
                                             $('#ajaxgiftboxtotal').html('$' + giftboxtotalitem);
                                             $('#ajaxdeliverycharge').html(pricesing + dilverychargevalue);
                                             $('#ajaxtotalpay').html('$' + totalpay);
-//                    $.each(data.data, function (index, value) {
-//                     
-//                    });
+                                            //                    $.each(data.data, function (index, value) {
+                                            //                     
+                                            //                    });
 
                                         } else {
                                             $('#ajaxtotalprice').hide();
@@ -1760,24 +1776,24 @@ $(document).ready(function () {
                         });
 
 
-//                        $('#incermentitem'+giftwrapvaluecheck).on('click');
+                        //                        $('#incermentitem'+giftwrapvaluecheck).on('click');
                     }
                     // code for chek other chek qty valu and current cliek value not to greter than 3
-//         var checkvalue = $("#qtyinc"+giftwrapvaluecheck).val();
-//             $('.cartBlockWrap label input[class="giftwrappingcheck"]:checked').not('#giftWrap'+giftwrapvalue).each(function() {
-//                var valueofcheck= this.value;
-//                 var giftwrapvaluecheck= $("#qtyinc"+valueofcheck).val();
-//               var balanccheck = parseInt(checkvalue) + parseInt(giftwrapvaluecheck);
-//                
-//                if(balanccheck==3){
-//                      $('label .giftwrappingcheck').not('#giftWrap'+valueofcheck).attr("disabled", "disabled");
-//                      $('label .giftwrappingcheck').not('#giftWrap'+valueofcheck).attr("data-toggle","tooltip");
-//                      $('label .giftwrappingcheck').not('#giftWrap'+valueofcheck).attr("data-placement","left");
-//                      $('label .giftwrappingcheck').not('#giftWrap'+valueofcheck).attr("title","Gift wraspping more than 3 item not applicable");
-//                      }else{
-//
-//                }
-//             });
+                    //         var checkvalue = $("#qtyinc"+giftwrapvaluecheck).val();
+                    //             $('.cartBlockWrap label input[class="giftwrappingcheck"]:checked').not('#giftWrap'+giftwrapvalue).each(function() {
+                    //                var valueofcheck= this.value;
+                    //                 var giftwrapvaluecheck= $("#qtyinc"+valueofcheck).val();
+                    //               var balanccheck = parseInt(checkvalue) + parseInt(giftwrapvaluecheck);
+                    //                
+                    //                if(balanccheck==3){
+                    //                      $('label .giftwrappingcheck').not('#giftWrap'+valueofcheck).attr("disabled", "disabled");
+                    //                      $('label .giftwrappingcheck').not('#giftWrap'+valueofcheck).attr("data-toggle","tooltip");
+                    //                      $('label .giftwrappingcheck').not('#giftWrap'+valueofcheck).attr("data-placement","left");
+                    //                      $('label .giftwrappingcheck').not('#giftWrap'+valueofcheck).attr("title","Gift wraspping more than 3 item not applicable");
+                    //                      }else{
+                    //
+                    //                }
+                    //             });
                     // end here
 
 
@@ -1803,19 +1819,19 @@ $(document).ready(function () {
                 $('#incermentitem' + giftwrapvaluecheck).removeClass("incermentitemclick");
                 $('#incermentitem' + giftwrapvaluecheck).addClass('incermentitem');
 
-//                 if(eachval == 3){ 
-//                    
-//                                 $('#incermentitem'+giftwrapvaluecheck).removeClass("incermentitem");
-//                          $('#incermentitem'+giftwrapvaluecheck).addClass('incermentitemclick');
-//                          $('label .giftwrappingcheck').not('#giftWrap'+giftwrapvaluecheck).attr("disabled", "disabled");
-//                        }else{
-//                        $('#incermentitem'+giftwrapvaluecheck).removeClass("incermentitemclick");
-//                        $('#incermentitem'+giftwrapvaluecheck).addClass('incermentitem');
-//                   }
+                //                 if(eachval == 3){ 
+                //                    
+                //                                 $('#incermentitem'+giftwrapvaluecheck).removeClass("incermentitem");
+                //                          $('#incermentitem'+giftwrapvaluecheck).addClass('incermentitemclick');
+                //                          $('label .giftwrappingcheck').not('#giftWrap'+giftwrapvaluecheck).attr("disabled", "disabled");
+                //                        }else{
+                //                        $('#incermentitem'+giftwrapvaluecheck).removeClass("incermentitemclick");
+                //                        $('#incermentitem'+giftwrapvaluecheck).addClass('incermentitem');
+                //                   }
                 $.ajax({
                     url: '/removegiftbox',
                     type: "GET",
-                    data: {brand: giftwrapvaluecheck},
+                    data: { brand: giftwrapvaluecheck },
                     // dataType:"JSON",
                     success: function (data) {
 
@@ -1851,7 +1867,7 @@ $(document).ready(function () {
                             }
                             var datatotal = parseInt(giftboxtotalitem) + parseInt(delivercharge);
                             var totalpay = totalPriceitem + datatotal;
-//                   var totalpay= totalPriceitem + giftboxtotalitem + delivercharge;
+                            //                   var totalpay= totalPriceitem + giftboxtotalitem + delivercharge;
 
                             $('#ajaxtotalprice').html('$' + totalPriceitem);
                             $('#ajaxgiftboxtotal').html('$' + giftboxtotalitem);
@@ -1897,14 +1913,14 @@ $(document).ready(function () {
 
         var eachvalinc = parseInt(one) + parseInt(eachval);
 
-//              alert(eachvalinc+'this is value on increm df');
+        //              alert(eachvalinc+'this is value on increm df');
         var categorycheck = $("#giftWrap" + giftwrapvalue).is(':checked')
         var categoryvalue = JSON.stringify(categorycheck)
         if (categoryvalue == 'true') {
             if (eachvalinc > 3) {
                 $('#giftwrapmessage').html('<p style="color:red" >Gift wraspping more than 3 item not applicable</p>');
-//         $('.guestCheckOutBtns').attr("disabled", "disabled");
-//         $('#giftWrap'+giftwrapvalue).attr('checked', false); // Unchecks it
+                //         $('.guestCheckOutBtns').attr("disabled", "disabled");
+                //         $('#giftWrap'+giftwrapvalue).attr('checked', false); // Unchecks it
             } else {
 
                 if (eachvalinc == 3) {
@@ -1923,17 +1939,17 @@ $(document).ready(function () {
                 $.ajax({
                     url: '/incrementitem',
                     type: "GET",
-                    data: {brand: giftwrapvalue},
+                    data: { brand: giftwrapvalue },
 
                     success: function (data) {
 
-//                alert(JSON.parse(data));
+                        //                alert(JSON.parse(data));
                         data = JSON.parse(data);
-//                 alert(data.success);
+                        //                 alert(data.success);
                         if (data.success == "1") {
                             $.each(data.data, function (index, value) {
 
-//                                alert(JSON.stringify(value));
+                                //                                alert(JSON.stringify(value));
                                 if (value[giftwrapvalue]) {
 
                                     // alert(value[giftwrapvalue].qty);
@@ -1981,9 +1997,9 @@ $(document).ready(function () {
                                     var totalitemamount = productitemqty * productitemprice;
                                     var datatotal = parseInt(giftboxtotalitem) + parseInt(delivercharge);
                                     var totalpay = totalPriceitem + datatotal;
-//                   var totalpay = totalPriceitem +  giftboxtotalitem +  delivercharge;
+                                    //                   var totalpay = totalPriceitem +  giftboxtotalitem +  delivercharge;
 
-//                    alert(totalpay+'this is totoal account');
+                                    //                    alert(totalpay+'this is totoal account');
                                     $('#ajaxitemtotal' + giftwrapvalue).html('$' + productitemprice);
                                     $('#ajaxtotalprice').html('$' + totalPriceitem);
                                     $('#ajaxgiftboxtotal').html('$' + giftboxtotalitem);
@@ -2015,17 +2031,17 @@ $(document).ready(function () {
             $.ajax({
                 url: '/incrementitem',
                 type: "GET",
-                data: {brand: giftwrapvalue},
+                data: { brand: giftwrapvalue },
 
                 success: function (data) {
 
-//                alert(JSON.parse(data));
+                    //                alert(JSON.parse(data));
                     data = JSON.parse(data);
-//                 alert(data.success);
+                    //                 alert(data.success);
                     if (data.success == "1") {
                         $.each(data.data, function (index, value) {
 
-//                                alert(JSON.stringify(value));
+                            //                                alert(JSON.stringify(value));
                             if (value[giftwrapvalue]) {
 
                                 // alert(value[giftwrapvalue].qty);
@@ -2073,9 +2089,9 @@ $(document).ready(function () {
                                 var totalitemamount = productitemqty * productitemprice;
                                 var datatotal = parseInt(giftboxtotalitem) + parseInt(delivercharge);
                                 var totalpay = totalPriceitem + datatotal;
-//                   var totalpay = totalPriceitem +  giftboxtotalitem +  delivercharge;
+                                //                   var totalpay = totalPriceitem +  giftboxtotalitem +  delivercharge;
 
-//                    alert(totalpay+'this is totoal account');
+                                //                    alert(totalpay+'this is totoal account');
                                 $('#ajaxitemtotal' + giftwrapvalue).html('$' + productitemprice);
                                 $('#ajaxtotalprice').html('$' + totalPriceitem);
                                 $('#ajaxgiftboxtotal').html('$' + giftboxtotalitem);
@@ -2115,14 +2131,14 @@ $(document).ready(function () {
 
         var eachvalinc = parseInt(eachval) - parseInt(one);
 
-//              alert(eachvalinc+'this is value on increm df');
+        //              alert(eachvalinc+'this is value on increm df');
         var categorycheck = $("#giftWrap" + giftwrapvalue).is(':checked')
         var categoryvalue = JSON.stringify(categorycheck)
         if (categoryvalue == 'true') {
             if (eachvalinc > 3) {
                 $('#giftwrapmessage').html('<p style="color:red" >Gift wraspping more than 3 item not applicable</p>');
                 $('.guestCheckOutBtns').attr("disabled", "disabled");
-//         $('#giftWrap'+giftwrapvalue).attr('checked', false); // Unchecks it
+                //         $('#giftWrap'+giftwrapvalue).attr('checked', false); // Unchecks it
             } else {
                 if (eachvalinc == 3) {
                     $('#incermentitem' + giftwrapvalue).attr("data-toggle", "tooltip");
@@ -2148,17 +2164,17 @@ $(document).ready(function () {
                 $.ajax({
                     url: '/decrementitem',
                     type: "GET",
-                    data: {brand: giftwrapvalue},
+                    data: { brand: giftwrapvalue },
 
                     success: function (data) {
 
-//                alert(JSON.parse(data));
+                        //                alert(JSON.parse(data));
                         data = JSON.parse(data);
-//                 alert(data.success);
+                        //                 alert(data.success);
                         if (data.success == "1") {
                             $.each(data.data, function (index, value) {
 
-//                                alert(JSON.stringify(value));
+                                //                                alert(JSON.stringify(value));
                                 if (value[giftwrapvalue]) {
 
                                     // alert(value[giftwrapvalue].qty);
@@ -2203,9 +2219,9 @@ $(document).ready(function () {
                                     var totalitemamount = productitemqty * productitemprice;
                                     var datatotal = parseInt(giftboxtotalitem) + parseInt(delivercharge);
                                     var totalpay = totalPriceitem + datatotal;
-//                   var totalpay = totalPriceitem +  giftboxtotalitem +  delivercharge;
+                                    //                   var totalpay = totalPriceitem +  giftboxtotalitem +  delivercharge;
 
-//                    alert(totalpay+'this is totoal account');
+                                    //                    alert(totalpay+'this is totoal account');
                                     $('#ajaxitemtotal' + giftwrapvalue).html('$' + productitemprice);
                                     $('#ajaxtotalprice').html('$' + totalPriceitem);
                                     $('#ajaxgiftboxtotal').html('$' + giftboxtotalitem);
@@ -2240,17 +2256,17 @@ $(document).ready(function () {
             $.ajax({
                 url: '/decrementitem',
                 type: "GET",
-                data: {brand: giftwrapvalue},
+                data: { brand: giftwrapvalue },
 
                 success: function (data) {
 
-//                alert(JSON.parse(data));
+                    //                alert(JSON.parse(data));
                     data = JSON.parse(data);
-//                 alert(data.success);
+                    //                 alert(data.success);
                     if (data.success == "1") {
                         $.each(data.data, function (index, value) {
 
-//                                alert(JSON.stringify(value));
+                            //                                alert(JSON.stringify(value));
                             if (value[giftwrapvalue]) {
 
                                 // alert(value[giftwrapvalue].qty);
@@ -2295,9 +2311,9 @@ $(document).ready(function () {
                                 var totalitemamount = productitemqty * productitemprice;
                                 var datatotal = parseInt(giftboxtotalitem) + parseInt(delivercharge);
                                 var totalpay = totalPriceitem + datatotal;
-//                   var totalpay = totalPriceitem +  giftboxtotalitem +  delivercharge;
+                                //                   var totalpay = totalPriceitem +  giftboxtotalitem +  delivercharge;
 
-//                    alert(totalpay+'this is totoal account');
+                                //                    alert(totalpay+'this is totoal account');
                                 $('#ajaxitemtotal' + giftwrapvalue).html('$' + productitemprice);
                                 $('#ajaxtotalprice').html('$' + totalPriceitem);
                                 $('#ajaxgiftboxtotal').html('$' + giftboxtotalitem);
@@ -2342,7 +2358,7 @@ $(document).ready(function () {
             $.ajax({
                 url: '/addsendasgift',
                 type: "GET",
-                data: {brand: giftwrapvaluecheck},
+                data: { brand: giftwrapvaluecheck },
 
                 success: function (data) {
                     data = JSON.parse(data);
@@ -2360,7 +2376,7 @@ $(document).ready(function () {
             $.ajax({
                 url: '/removesendasgift',
                 type: "GET",
-                data: {brand: giftwrapvaluecheck},
+                data: { brand: giftwrapvaluecheck },
                 success: function (data) {
 
                     data = JSON.parse(data);
@@ -2381,7 +2397,7 @@ $(document).ready(function () {
     $('.cartBlockWrap label input[class="giftwrappingcheck"]:checked').each(function () {
         var valueofcheck = this.value;
         var giftwrapvaluecheck = $("#qtyinc" + valueofcheck).val();
-//   var giftwrapvaluecheck++=giftwrapvaluecheck;
+        //   var giftwrapvaluecheck++=giftwrapvaluecheck;
         if (giftwrapvaluecheck === 3) {
             $('label .giftwrappingcheck').not('#giftWrap' + valueofcheck).attr("disabled", "disabled");
             $('label .giftwrappingcheck').not('#giftWrap' + valueofcheck).attr("data-toggle", "tooltip");
@@ -2405,28 +2421,31 @@ $(document).ready(function () {
     });
     //$(".thanksVideoBlock").delay(10000).hide("medium").attr('src', 'youtube.com');
     $(".thanksVideoBlock").delay(12000).queue(function () {
+        console.log('Test :: 1 ::');
+        // return false;
         $(this).addClass("thanksVideoBlockTOBEHIDDEN");
         setTimeout(
-          function() 
-          {
-            $("#thanksVideoBlock").css("display","none");
-            $('#thanksVideoBlock').remove();
-          }, 12000);
+            function () {
+                $("#thanksVideoBlock").css("display", "none");
+                $('#thanksVideoBlock').remove();
+            }, 12000);
     });
     //$(".thanksVideoBlockTOBEHIDDEN iframe").attr('src', 'youtube.com');
 
-   /* document.getElementById("thanksVideoBlock").onclick = function () {
-       
-        //document.getElementById('player').src = "https://www.youtube.com/embed/bo2KQer1KNM";
-        document.getElementById('player').src = "https://www.youtube.com";
+    /* document.getElementById("thanksVideoBlock").onclick = function () {
         
-        
-    }; */
-    
-     $("#thanksVideoBlock").click(function () {
+         //document.getElementById('player').src = "https://www.youtube.com/embed/bo2KQer1KNM";
+         document.getElementById('player').src = "https://www.youtube.com";
+         
+         
+     }; */
+
+    $("#thanksVideoBlock").click(function () {
+        console.log('Test :: 2 ::');
+        //  return false;
         document.getElementById('player').src = "https://www.youtube.com";
     });
-    
+
 
 
 
