@@ -1,6 +1,6 @@
 <div class="innerPageSection cartPageSection">
   <div class="containerWrapper">
-      
+
     <div class="breadcrumbs">
           <ul>
               <li><a href="{{ url('/') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i> </li>
@@ -12,12 +12,12 @@
          <?php if($cart->items){?>
        @if(Session::has('cart'))
       <!--<a href="{{ url('/removeAll') }}" class="totalCartRemoveBtn pull-right"><i class="fa fa-trash-o"></i> Empty </a>-->
-       <button class="wave-effect btn btn-danger btn-bordred wave-light  pull-right remove"><i class="fa fa-trash-o"></i> Empty</button> 
+       <button class="wave-effect btn btn-danger btn-bordred wave-light  pull-right remove"><i class="fa fa-trash-o"></i> Empty</button>
 
          @endif
          <?php } ?>
       <div class="space10"></div>
-     
+
        @if (\Session::has('subscribe_success_guest'))
                             <div class="alert alert-success">
                                 <ul>
@@ -48,9 +48,9 @@
       </div>
    <?php if($cart->items){?>
       @if(Session::has('cart'))
- <?php $index=0; ?> 
+ <?php $index=0; ?>
     @foreach($products as $product)
-    
+
     <?php
 //    $index+=0;
      $index++;
@@ -65,47 +65,47 @@
 //    print_r($product['item']);
 //    print_r($product);
 //    die;
-    
+
     ?>
 <!--       <form action="" method="post">
             {{ csrf_field() }}-->
-       <!--cartBlockRow--> 
+       <!--cartBlockRow-->
       <div class="cartBlockRow" id="cartBlockRow_{{ $product['item']['id'] }}">
         <div class="cartBlockDesc" style="width: 30%;">
           <div class="cartBlockImg">
             <img src="public/images/{{ $product['item']['product_image'] }}" alt="">
 
           </div>
-         
+
                       <h3>
                   <a href="<?php echo url('/productdetails'); ?>/{{$product['item']['url'] }}"><?php echo $product['item']['product_name'][$language]; ?>
                                   </a>
-          
+
                                 </h3>
-            
+
           <!--<small>Color: Light Grey</small>-->
         </div>
-          
+
         <div class="cartBlockRate">
           <p>$ {{ $product['item']['product_price'] }}</p>
         </div>
         <div class="cartBlockQty">
             <?php if($product['item']['as_gift_wrap']== 0){
-                if($product['giftwraping']==1){ 
-                      
+                if($product['giftwraping']==1){
+
                     if($product['qty'] == 3){
-                        $disabled="disabled"; 
+                        $disabled="disabled";
                       $tollketvalue="data-toggle='tooltip' data-placement='left' title='Gift wraspping more than 3 item not applicable'";
                     }else{
-                      $disabled=""; 
-                      $tollketvalue="data-toggle='tooltip' data-placement='left' title='Gift wraspping more than 3 item not applicable'";  
+                      $disabled="";
+                      $tollketvalue="data-toggle='tooltip' data-placement='left' title='Gift wraspping more than 3 item not applicable'";
                     }
                 }  else {
                         $disabled="";
                         $tollketvalue="";
                            }
-                             
-                
+
+
                 ?>
           <div id="myform2" class="qty-spinner">
                     <!--<a href="{{ url('/reduce/'.$product['item']['id'].'') }}">-->
@@ -113,7 +113,7 @@
                         <button class="minus decermentitembtn"><i class="fa fa-minus"></i></button>
                         <!--<input type="button" value="-" class="qtyminus" field="quantity2">-->
                     </a>
-                 
+
                     <input type="text"  name="quantity2" value="{{ $product['qty'] }}" class="qty cart_quantity_input" id="qtyinc{{$product['item']['id']}}">
                     <!--<a href="javascript:void(0)" data-route="{{url('/increase/'.$product['item']['id'].'')}}" class="cart_quantity_up" >-->
                     <!--<a href="{{ url('/increase/'.$product['item']['id'].'') }}" class="plus">-->
@@ -123,7 +123,7 @@
                     </a>
                 </div>
             <?php } ?>
-            
+
         </div>
 
         <!-- TDS : Coupan Starts -->
@@ -140,15 +140,15 @@
         <!-- TDS : Coupan Ends -->
           <div class="cartBlockWrap" id="cartBlockWrap<?php echo $product['item']['id']; ?>" >
                <?php if($product['item']['gift_wrapping']==1){
-                    if($product['giftwraping']==1){ 
-                      $checked="checked";    
+                    if($product['giftwraping']==1){
+                      $checked="checked";
                     }  else {
-                        $checked="";    
+                        $checked="";
                            }
                              ?>
               <label for="giftWrap<?php echo $product['item']['id']; ?>" class="giftWrap"><input class="giftwrappingcheck" type="checkbox" name="giftwrapping[{{$index-1}}]" id="giftWrap<?php echo $product['item']['id']; ?>" value="<?php echo $product['item']['wraping_charage']; //echo 'giftwrap'.'-'.$product['item']['id']; ?>" data-toggle="tooltip" data-placement="left" title="Click to add up to 3 items in box" <?php echo $checked; ?> product_id="<?php echo $product['item']['id']; ?>" unchecked='unchecked'><i class="fa fa-gift"></i></label>
           <!--<input type="checkbox" class="giftwrappingcheck"  name="giftwrapping[{{$index-1}}]" id="giftwrapping<?php //echo $product['item']['id']; ?>" value="<?php //echo 'giftwrap'.'-'.$product['item']['id']; ?>" checked>-->
-                              <?php  
+                              <?php
                               }else{?>
                   <label for="giftWrapHidden" class="giftWrapHidden" style="disply:none"></label>
           <!--<input type="checkbox" class="giftwrappingcheck" name="giftwrapping[{{$index-1}}]" id="giftwrapping<?php //echo $product['item']['id']; ?>" value="<?php //echo 'giftwrap'.'-'.$product['item']['id']; ?>">-->
@@ -159,7 +159,7 @@
             <p class="ajaxitemtotal" id="ajaxitemtotal{{$product['item']['id']}}"></p>
           <a href="{{ url('/remove/'.$product['item']['id'].'') }}" class="totalCartRemoveBtn"><i class="fa fa-close"></i></a>
         </div>
-         
+
       </div>
        @endforeach
       @else
@@ -172,28 +172,31 @@
       @endif
       <span id="giftwrapmessage" style="color: red"></span>
    <?php }?>
-      
+
         <div class="cartBlockRowFooter">
-            <div class="cartBlockRowFooterMargin">                
+            <div class="cartBlockRowFooterMargin">
                 <!--<p>Delivery and payment options can be selected later.</p>-->
             </div>
                <?php if($cart->items) { ?>
             @if(Session::has('cart'))
             <div class="cartBlockRowFooterLastCol">
                 <div class="cartBlockRowFooterSendgift">
+                    <label for="add_notes" class="sendasgift" id="add_notes_label">
+                    <input type="checkbox" name="add_notes" id="add_notes" data-notes="{{ $cart->order_notes }}" {{ ($cart->is_note_enable) ? "checked" : ""}}                    ><p>Add Notes</p> <i class="fa fa-file" aria-hidden="true"></i><span class="checkmark"></span>
+                    ></label>
                     <label for="sendasgift" class="sendasgift">
-                        <?php 
+                        <?php
                         if($giftcart==0)
                             {
                            $checked="";
                             }else{
-                              
+
                             $checked="checked";
                                }
                         ?>
                         <input type="checkbox" name="sendasgift" id="sendasgift" value="1" class="sendasgiftitem" <?php echo $checked; ?>><p>Send as Gift</p> <i class="fa fa-gift" aria-hidden="true"></i><span class="checkmark"></span>
                      </label>
-                     
+
                 </div>
                 <div class="cartBlockRowFooterInfo">
                     <p>{{ __('message.Total') }}</p>
@@ -205,12 +208,12 @@
                     <p id="ajaxtotalprice"> </p>
                     <p id="loadgiftboxtotal">$ <?php echo abs($giftboxtotal); ?></p>
                     <p id="ajaxgiftboxtotal"> </p>
-                    <p id="loaddeliverycharge"><?php 
+                    <p id="loaddeliverycharge"><?php
                     $dilverychargeitem=0;
                     if($dilverycharge ==0){?>
                         {{ __('message.Free') }}
                     <?php }else{?>
-                        $ <?php echo $dilverychargeitem=abs($dilverycharge); ?>                       
+                        $ <?php echo $dilverychargeitem=abs($dilverycharge); ?>
                     <?php } ?>
                     </p>
                     <p id="ajaxdeliverycharge">
@@ -224,29 +227,29 @@
                     <h4 id="loadtotalpay"><strong>$ {{ $totalPrice+$dilverychargeitem+$giftboxtotal }}</strong></h4>
                     <h4 id="ajaxtotalpay"><strong>$ {{ $totalPrice+$dilverychargeitem+$giftboxtotal }}</strong></h4>
                 </div>
-                
-               
+
+
                 <div class="space10"></div>
-                 <?php 
-                if (Auth::user()) { ?>  
+                 <?php
+                if (Auth::user()) { ?>
                 <!--<button type="submit" class="btn btn-primary btn-rounded btn-lg guestCheckOutBtns">{{ __('message.Checkout') }} <i class="fa fa-arrow-circle-right"></i></button>-->
                  <a href="{{ route('checkout') }}" class="btn btn-primary btn-rounded btn-lg guestCheckOutBtns">{{ __('message.Checkout') }} <i class="fa fa-arrow-circle-right"></i></a>
                  <?php  } else {?>
-                   <a href="#" data-toggle="modal" data-target="#userLoginModal" class="btn btn-primary btn-rounded btn-lg guestCheckOutBtns">{{ __('message.Checkout') }} <i class="fa fa-arrow-circle-right"></i></a>   
+                   <a href="#" data-toggle="modal" data-target="#userLoginModal" class="btn btn-primary btn-rounded btn-lg guestCheckOutBtns">{{ __('message.Checkout') }} <i class="fa fa-arrow-circle-right"></i></a>
              <?php    } ?>
-                  
+
                 <br>
-                <?php 
-                if (Auth::user()) { ?>    
-         
+                <?php
+                if (Auth::user()) { ?>
+
             <?php  } else { ?>
                 <a href="{{ route('guest-checkout') }}" class="btn btn-primary btn-rounded btn-lg guestCheckOutBtns">{{ __('message.Guest Checkout') }} <i class="fa fa-arrow-circle-right"></i></a>
                          <?php } ?>
-                  
+
                 <!--<a href="{{ url("/add-to-cart/91") }}" class="btn btn-primary btn-rounded btn-lg"> {{ __('message.as Gift Wrapping') }} <i class="fa fa-shopping-cart"></i></a>-->
                 <br>
                 <a href="{{ route('home') }}" class="btn btn-primary btn-rounded btn-lg">{{ __('message.Continue Shopping') }} </a>
-                
+
             </div>
              <!--</form>-->
             @endif
@@ -254,8 +257,4 @@
         </div>
   </div>
 </div>
-
-
-
 <?php //die; ?>
-

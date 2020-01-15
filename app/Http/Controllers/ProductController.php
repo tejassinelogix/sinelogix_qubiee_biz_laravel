@@ -56,7 +56,6 @@ class ProductController extends Controller
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
 
         $cart = new Cart($oldCart);
-
 //        if($request->input('send_gift')){
         //            $send_as_gift = $request->input('send_gift');
         //            Session::put('send_as_gift', $send_as_gift);
@@ -200,6 +199,40 @@ class ProductController extends Controller
         //dd($request->session()->get('cart'));
         // return back();
     }
+
+    public function addCartNotes(Request $request){
+        $res = ['status'=>false,'data'=>""];
+
+        if (!Session::has('cart')) {
+            echo json_encode($res); die;
+        }
+
+        $cart = Session::get('cart');
+        $cart->is_note_enable = true;
+        $cart->order_notes = $request->get("notes");
+        Session::put('cart', $cart);
+        Session::save();
+        $res['status'] = true;
+        echo json_encode($res); die;
+    }
+
+    public function removeCartNotes(Request $request){
+        $res = ['status'=>false,'data'=>""];
+
+        if (!Session::has('cart')) {
+            echo json_encode($res); die;
+        }
+
+        $cart = Session::get('cart');
+        $cart->is_note_enable = false;
+        $cart->order_notes = "";
+        Session::put('cart', $cart);
+        Session::save();
+        $res['status'] = true;
+
+        echo json_encode($res); die;
+    }
+
     // end add to cart gift
     public function getAddToCartPost(Request $request)
     {
@@ -378,6 +411,8 @@ class ProductController extends Controller
         }
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
+
+
 //        echo "<pre>";
         //            print_r($cart);
         echo View::make('dashboard-header', ['backgroundStatus' => $backgroundStatus, 'background_color' => $background_color, 'layoutbackground_image' => $layoutbackground_image, 'layoutclass_name' => $layoutclass_name, 'language' => $this->language, 'getSubCategoryWordpress' => $getSubCategoryWordpress, 'getSubCategory' => $getSubCategory, 'getMainCategory' => $getMainCategory, 'getSubCategoryWebsite' => $getSubCategoryWebsite, 'getSubCategorywoocomer' => $getSubCategorywoocomer, 'getSubCategorypresta' => $getSubCategorypresta, 'getSubCategorymagento' => $getSubCategorymagento, 'getSubCategoryjoomala' => $getSubCategoryjoomala, 'getSubCategorycate' => $getSubCategorycate, 'getSubBlogs' => $getSubBlogs, 'homedata' => $homedata])->render();
@@ -501,7 +536,7 @@ class ProductController extends Controller
         // echo "<pre>  test";
         // print_r($cart->items);
         // exit;
-        echo View::make('checkout', ['language' => $this->language, 'products' => $cart->items, 'shippingmark' => $shippingmark, 'giftcart' => $giftcart, 'giftboxtotal' => $cart->giftboxtotal, 'dilverycharge' => $cart->dilverycharge, 'totalQty' => $totalQty, 'total' => $total, 'address' => $getUserAddress, 'profile' => $getProfileInfo])->render();
+        echo View::make('checkout', ['language' => $this->language, 'products' => $cart->items, 'shippingmark' => $shippingmark, 'giftcart' => $giftcart, 'giftboxtotal' => $cart->giftboxtotal, 'dilverycharge' => $cart->dilverycharge, 'totalQty' => $totalQty, 'total' => $total, 'address' => $getUserAddress, 'profile' => $getProfileInfo,'cart'=>$cart])->render();
         echo View::make('dashboard-footer', ['language' => $this->language, 'getMainCategory' => $getMainCategory, 'getPagesdetails' => $getPagesdetails])->render();
     }
 
@@ -1267,7 +1302,7 @@ class ProductController extends Controller
     @params    ::
      */
     public function get_session_values(Request $request)
-    {   
+    {
         // dd($request->session());
         if ($request->session()->has('youtube')) {
             $resp['status'] = true;

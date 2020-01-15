@@ -1,9 +1,3 @@
-<?php
-// echo "<pre>";
-//     print_r($address);
-// print_r($profile);
-?>
-
 <div class="innerPageSection">
     <div class="containerWrapper">
         <div class="breadcrumbs">
@@ -321,10 +315,18 @@
                     </div>
                     @endif
                     <div class="cartBlockRowFooter">
-                        <div class="cartBlockRowFooterMargin">
-                            <!--<p>{{ __('message.Delivery and payment options can be selected later.') }}</p>-->
-                        </div>
                         @if(Session::has('cart'))
+                        <div class="cartBlockRowFooterMargin">
+                            @if($cart->is_note_enable)
+                            <div class="cartBlockRowFooterInfo">
+                                <p>Cart Note</p>
+                            </div>
+                            <div class="cartBlockRowFooterTotal">
+                                <p>{{ $cart->order_notes }}</p>
+                            </div>
+                            @endIf
+                        </div>
+                        
                         <div class="cartBlockRowFooterLastCol">
                             <div class="cartBlockRowFooterInfo">
                                 <p>{{ __('message.Total') }}</p>

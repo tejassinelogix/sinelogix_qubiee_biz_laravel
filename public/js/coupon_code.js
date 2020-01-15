@@ -1,4 +1,4 @@
-/* 
+/*
  Page Name: coupon code apply
  Module Name: customer
 */
@@ -14,8 +14,8 @@ $('.is_validity_error').hide();
 $('.is_minimum_error').hide();
 service = {
 	req_data : {"data": {}},
-	product_old_data : {"data": {"Total": 0,"Gift_Box": 0,"Delivery_Charges":"Free","You_Pay":0,"Product_id":0,"Product_Price":0,"coupon_name":{}}},		
-	product_new_data : {"data": {"Total": 0,"Gift_Box": 0,"Delivery_Charges":"Free","You_Pay":0,"Product_id":0,"Product_Price":0,"coupon_name":{}}},		
+	product_old_data : {"data": {"Total": 0,"Gift_Box": 0,"Delivery_Charges":"Free","You_Pay":0,"Product_id":0,"Product_Price":0,"coupon_name":{}}},
+	product_new_data : {"data": {"Total": 0,"Gift_Box": 0,"Delivery_Charges":"Free","You_Pay":0,"Product_id":0,"Product_Price":0,"coupon_name":{}}},
 	render_db: {'filter_dlr_code':''},
 	update_session_details: function(){
 		REQ  =  ser_obj.product_new_data;
@@ -44,11 +44,11 @@ service = {
 				}
 
 			},
-			error : function(jqXhr, textStatus, errorMessage){	
-				// console.log('Error Ajax')				
+			error : function(jqXhr, textStatus, errorMessage){
+				// console.log('Error Ajax')
 			}
 		}).done(function(){
-			// console.log('Done Ajax')				
+			// console.log('Done Ajax')
 		});
 
 	},reset_coupon_details: function(){
@@ -84,7 +84,7 @@ service = {
   				__this = $(this).attr('id');
   				__this_product = $(this).attr('product_id');
 
-  				if($("#coupon_code_"+__this_product).val() != ""){  					
+  				if($("#coupon_code_"+__this_product).val() != ""){
   						// TDS : changes minimum amount validation
   						var price_min_amt_string = $("#loaditemtotal"+__this_product).text();
 						var price_min_amt = price_min_amt_string.replace('$ ','');
@@ -123,7 +123,7 @@ service = {
 								if(resp_data.status){
 								// pre set data starts
 								is_coupon_set = true;
-								var product_total_price = $("#loaditemtotal"+__this_product).attr('id');															
+								var product_total_price = $("#loaditemtotal"+__this_product).attr('id');
 								var total_string = $("#"+product_total_price).text();
 								var total_amt = total_string.replace('$ ','');
 								var delivery_string = $("#loaddeliverycharge").text();
@@ -131,7 +131,7 @@ service = {
 								var youpay_string = $("#loadtotalpay").text();
 								var youpay_amt = youpay_string.replace('$ ','');
 								var org_total_price_string = $("#loadtotalprice").text();
-								var org_total_price = org_total_price_string.replace('$ ','');								
+								var org_total_price = org_total_price_string.replace('$ ','');
 								var gift_string = $("#loadgiftboxtotal").text();
 								var gift_amt = gift_string.replace('$ ','');
 								// pre set data ends
@@ -143,8 +143,8 @@ service = {
 								}else{
 									REQ_OLD.data['Delivery_Charges'] = $.trim(delivery_amt);
 								}
-								REQ_OLD.data['Gift_Box'] = gift_amt;									
-								REQ_OLD.data['Total'] = org_total_price;									
+								REQ_OLD.data['Gift_Box'] = gift_amt;
+								REQ_OLD.data['Total'] = org_total_price;
 								REQ_OLD.data['You_Pay'] = $.trim(youpay_amt);
 								REQ_OLD.data['Product_id'] = __this_product;
 								REQ_OLD.data['Product_Price'] = total_amt;
@@ -160,12 +160,12 @@ service = {
 									total_discount_new = $.trim(total_amt) - resp_data.data[0].discount_type_amount;
 									total_amt_new = org_total_price - resp_data.data[0].discount_type_amount;
 									total_youpay_new = youpay_amt - resp_data.data[0].discount_type_amount;
-									product_price_new = total_discount_new;									
-								}else if(resp_data.data[0].discount_type == "percentage"){								
-									  total_discount_new = total_amt * resp_data.data[0].discount_type_amount / 100;								
-									  total_amt_new = org_total_price - total_discount_new;	
+									product_price_new = total_discount_new;
+								}else if(resp_data.data[0].discount_type == "percentage"){
+									  total_discount_new = total_amt * resp_data.data[0].discount_type_amount / 100;
+									  total_amt_new = org_total_price - total_discount_new;
 									  total_youpay_new = youpay_amt - total_discount_new;
-									  product_price_new = total_amt - total_discount_new;								  		
+									  product_price_new = total_amt - total_discount_new;
 								}
 
 								// set new discount value into view
@@ -175,31 +175,31 @@ service = {
 								REQ  =  ser_obj.product_new_data;
 								REQ.data['Total'] = total_amt_new;
 								if($.trim(delivery_amt) == "Free"){
-									REQ.data['Delivery_Charges'] = "Free";	
+									REQ.data['Delivery_Charges'] = "Free";
 								}else{
-									REQ.data['Delivery_Charges'] = $.trim(delivery_amt);	
+									REQ.data['Delivery_Charges'] = $.trim(delivery_amt);
 								}
 								var COUPON_NAME = [];
-								REQ.data['Gift_Box'] = gift_amt;								
+								REQ.data['Gift_Box'] = gift_amt;
 								REQ.data['You_Pay'] = total_youpay_new;
 								REQ.data['Product_id'] = __this_product;
 								REQ.data['Product_Price'] = product_price_new;
 								REQ.data['coupon_name'] = [$('#coupon_code_'+__this_product).val()];
 								// console.log('prod new price')
 								// console.log(REQ)
-															
+
 								$('#success_green_'+__this_product).show();
 								$('#one_time_error_'+__this_product).hide();
 								$('#is_validity_error_'+__this_product).hide();
 								$('#is_minimum_error_'+__this_product).hide();
 								$('#is_specific_error_'+__this_product).hide();
-								$('#coupon_code_'+__this_product).attr('disabled','disabled');									
+								$('#coupon_code_'+__this_product).attr('disabled','disabled');
 								$('#coupon_apply_'+__this_product).attr('disabled','disabled');
-								// set ajax updated value ends	
+								// set ajax updated value ends
 								ser_obj.update_session_details();
 
 								}else if(resp_data.is_onetime.status){
-									
+
 									$('#success_green_'+__this_product).hide();
 									$('#one_time_error_'+__this_product).show();
 									$('#is_validity_error_'+__this_product).hide();
@@ -238,12 +238,12 @@ service = {
 									$('#is_specific_error_'+__this_product).text(resp_data.message.error);
 								}
 							},
-							error : function(jqXhr, textStatus, errorMessage){												
+							error : function(jqXhr, textStatus, errorMessage){
 							}
-						}).done(function(){							
-						});	
+						}).done(function(){
+						});
   				}
-  				
+
 		});
 		// apply coupan code ends
 
@@ -256,7 +256,7 @@ service = {
   		// 	// 	// console.log('__this_product')
 				// 	// // console.log(__this_product)
 				// 	// return 0;
-				// if($("#coupon_code_"+__this_product).val() != ""){  
+				// if($("#coupon_code_"+__this_product).val() != ""){
 				// 	$('#coupon_code_'+__this_product).removeAttr('disabled','disabled');
 				// 	$('#coupon_apply_'+__this_product).removeAttr('disabled','disabled');
 				// 	$('#coupon_code_'+__this_product).val('');
@@ -269,8 +269,8 @@ service = {
 				// 	$('#is_validity_error_'+__this_product).text('');
 				// 	$('#is_minimum_error_'+__this_product).text('');
 				// 	$('#is_specific_error_'+__this_product).text('');
-					
-				// 	if(is_coupon_set){ // revert with old value						
+
+				// 	if(is_coupon_set){ // revert with old value
 				// 		REQ_OLD  =  ser_obj.product_old_data;
 				// 		// console.log('old value')
 				// 		// console.log(REQ_OLD)
@@ -278,11 +278,11 @@ service = {
 				// 		$("#loadtotalpay").html("<strong>$ "+REQ_OLD.data.You_Pay+"</strong>");
 				// 		$("#loadtotalprice").html("$ "+REQ_OLD.data.Total);
 				// 	}
-				// }	
-  					
+				// }
+
 
 		  });
-		  
+
 		  	// apply gift code starts
 		$(".giftwrappingcheck").click(function(){
 			gift_counter = gift_counter + 1;
@@ -292,21 +292,21 @@ service = {
 			__this = $(this).attr('id');
 			__this_product = $(this).attr('product_id');
 
-			var checked_attr = $(this).attr('checked');			    
+			var checked_attr = $(this).attr('checked');
 
-  				if($("#giftWrap"+__this_product).val() != ""){  	
+  				if($("#giftWrap"+__this_product).val() != ""){
 						  // TDS : changes minimum amount validation
-					    if (typeof checked_attr !== typeof undefined && checked_attr !== false) { 
+					    if (typeof checked_attr !== typeof undefined && checked_attr !== false) {
 							// set Old request urls
 						//   console.log('unchecked calls')
 						  $(this).attr('unchecked','unchecked');
 						  $(this).removeAttr('checked','checked');
-						  
+
 						  is_gift_set = true;
 
 							var COUPON_NAME = [];
-							REQ.data['Delivery_Charges'] = REQ_OLD.data['Delivery_Charges'];	
-							REQ.data['Gift_Box'] = REQ_OLD.data['Gift_Box'];								
+							REQ.data['Delivery_Charges'] = REQ_OLD.data['Delivery_Charges'];
+							REQ.data['Gift_Box'] = REQ_OLD.data['Gift_Box'];
 							REQ.data['You_Pay'] = REQ_OLD.data['You_Pay'];
 							REQ.data['Product_id'] = REQ_OLD.data['Product_id'];
 							REQ.data['Product_Price'] = REQ_OLD.data['Product_Price'];
@@ -317,13 +317,13 @@ service = {
 
 							// set new discount value into view
 							// Main Total
-							$("#loadtotalpay").html("<strong>$ "+REQ.data['You_Pay']+"</strong>");						
+							$("#loadtotalpay").html("<strong>$ "+REQ.data['You_Pay']+"</strong>");
 							$("#loadgiftboxtotal").text("$ "+ $(this).val());
 							// return false;
 							// set ajax updated value ends
-							ser_obj.update_session_details();	
+							ser_obj.update_session_details();
 
-						} else { 
+						} else {
 							// set New request urls
 						//   console.log('check calls')
 						  $(this).attr('checked','checked');
@@ -331,7 +331,7 @@ service = {
 
 						  	// pre set data starts
 							is_gift_set = true;
-							var product_total_price = $("#loaditemtotal"+__this_product).attr('id');															
+							var product_total_price = $("#loaditemtotal"+__this_product).attr('id');
 							var total_string = $("#"+product_total_price).text();
 							var total_amt = total_string.replace('$ ','');
 							var delivery_string = $("#loaddeliverycharge").text();
@@ -339,7 +339,7 @@ service = {
 							var youpay_string = $("#loadtotalpay").text();
 							var youpay_amt = youpay_string.replace('$ ','');
 							var org_total_price_string = $("#loadtotalprice").text();
-							var org_total_price = org_total_price_string.replace('$ ','');								
+							var org_total_price = org_total_price_string.replace('$ ','');
 							var gift_string = $("#loadgiftboxtotal").text();
 							var gift_amt = gift_string.replace('$ ','');
 							// pre set data ends
@@ -351,26 +351,26 @@ service = {
 							}else{
 								REQ_OLD.data['Delivery_Charges'] = $.trim(delivery_amt);
 							}
-							REQ_OLD.data['Gift_Box'] = gift_amt;									
-							REQ_OLD.data['Total'] = org_total_price;									
+							REQ_OLD.data['Gift_Box'] = gift_amt;
+							REQ_OLD.data['Total'] = org_total_price;
 							REQ_OLD.data['You_Pay'] = $.trim(youpay_amt);
 							REQ_OLD.data['Product_id'] = __this_product;
 							REQ_OLD.data['Product_Price'] = total_amt;
 							// console.log('REQ_OLD')
 							// console.log(REQ_OLD)
 							// return false;
-							
+
 							REQ  =  ser_obj.product_new_data;
 							REQ.data['Total'] = REQ_OLD.data['Total'];
 							var main_you_pay_tot = parseInt(REQ_OLD.data['You_Pay']) + parseInt($(this).val())
 
 							if($.trim(delivery_amt) == "Free"){
-								REQ.data['Delivery_Charges'] = "Free";	
+								REQ.data['Delivery_Charges'] = "Free";
 							}else{
-								REQ.data['Delivery_Charges'] = $.trim(delivery_amt);	
+								REQ.data['Delivery_Charges'] = $.trim(delivery_amt);
 							}
 							var COUPON_NAME = [];
-							REQ.data['Gift_Box'] = $(this).val();								
+							REQ.data['Gift_Box'] = $(this).val();
 							REQ.data['You_Pay'] = main_you_pay_tot.toString();
 							REQ.data['Product_id'] = REQ_OLD.data['Product_id'];
 							REQ.data['Product_Price'] = REQ_OLD.data['Product_Price'];
@@ -381,16 +381,102 @@ service = {
 
 							// set new discount value into view
 							// Main Total
-							$("#loadtotalpay").html("<strong>$ "+REQ.data['You_Pay']+"</strong>");						
+							$("#loadtotalpay").html("<strong>$ "+REQ.data['You_Pay']+"</strong>");
 							$("#loadgiftboxtotal").text("$ "+ $(this).val());
 							// return false;
 							// set ajax updated value ends
-							ser_obj.update_session_details();						  
-						} 
-						
+							ser_obj.update_session_details();
+						}
+
 				} // main if ends
 		}); // gift click ends
 
 	}
 }
 service.init();
+// code Shopping cart
+$(document).ready(function(){
+	var textarea = document.createElement("textarea");
+	var ajax_config = {
+
+	}
+	textarea.setAttribute("id","notes_input");
+
+
+	function addNotes(checkbox){
+		 var onConfirm = function(value){
+        	var onFailed = function(){
+				$(checkbox).removeAttr("checked");
+				return false;
+			}
+
+			if(!value){
+				return onFailed();
+			}
+			
+			let text = $("#notes_input").val(); 
+			if(text.trim() == ""){
+				swal("","sorry !! you didn't enter any notes","error");
+				return onFailed();
+			}
+
+			$.ajax({
+				type: 'POST',
+				url: APP_URL+"add-cart-notes",
+				data: {notes:text},
+				dataType: "json",
+				success: function(resp_data,status,xhr){
+					if(!resp_data.status){
+						swal("","please try again","error");
+						return onFailed();
+					}
+					swal("","notes added successfully","success");					
+				}
+			});
+        }
+
+         swal({
+           	title : "Enter Notes",
+           	content : textarea,
+			  buttons: {
+			    cancel: true,
+			    confirm: "Confirm",
+			  },
+		}).then(onConfirm);
+
+        delete onConfirm;
+	}
+
+	function removeNotes(checkbox){
+		var onFailed = function(){
+			$(checkbox).addAttr("checked");
+			return false;
+		}
+
+		$.ajax({
+			type: 'POST',
+			url: APP_URL+"remove-cart-notes",
+			data: {},
+			dataType: "json",
+			success: function(resp_data,status,xhr){
+				if(!resp_data.status){
+					swal("","please try again","error");
+					return onFailed();
+				}
+				swal("","notes remove successfully","success");					
+			}
+		});
+	}
+
+    $("#add_notes").change(function(e){
+    	var checkbox = this;
+        var is_checked = $(this).is(':checked');
+
+        if(!is_checked){
+        	return removeNotes();
+        }
+       
+        return addNotes(checkbox);
+    });
+})
+// end code of shopping cart

@@ -44,6 +44,8 @@ Route::get('/add-to-cart-gift/{id}','ProductController@getAddToCartGift');
 Route::post('/img-upload',['uses' =>'ProductController@getAddToCartPost', 'middleware' => 'auth']);
 
 Route::get('/product-add-to-cart/{id}','ProductController@getProductAddToCart');
+Route::post('/add-cart-notes','ProductController@addCartNotes');
+Route::post('/remove-cart-notes','ProductController@removeCartNotes');
 
 Route::get('/shopping-cart','ProductController@getCart');
 

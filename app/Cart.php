@@ -12,8 +12,9 @@ class Cart
     public $giftboxtotal = 0;
     public $dilverycharge= 0;
     public $coupon_name = array();
-    
-    
+    public $order_notes = "";
+    public $is_note_enable = false;
+
     // for sender details for send as gift
     public $senderfullname = 0;
     public $senderphone= 0;
@@ -23,8 +24,8 @@ class Cart
     public $shippingmark = 0;
 
     // protected $daynamic_attr = [];
-    
-    
+
+
     // public function __set($field,$value){
     //     $this->daynamic_attr[$field] = $value;
     // }
@@ -38,26 +39,27 @@ class Cart
 
     public function __construct($oldCart){
     	if($oldCart){
-    		$this->items = $oldCart->items;
-    		$this->totalQty = $oldCart->totalQty;
-    		$this->totalPrice = $oldCart->totalPrice;
-                $this->giftcart = $oldCart->giftcart;
-                $this->giftboxtotal = $oldCart->giftboxtotal;
-                $this->dilverycharge=$oldCart->dilverycharge;
-                
-                // for sender details for send as gift
-                $this->senderfullname = $oldCart->senderfullname;
-    		$this->senderphone = $oldCart->senderphone;
-                $this->senderemailid = $oldCart->senderemailid;
-                $this->sendergiftevent = $oldCart->sendergiftevent;
-                $this->senderaddress=$oldCart->senderaddress;
-                $this->shippingmark=$oldCart->shippingmark;
-                
-                
+            $this->items = $oldCart->items;
+            $this->totalQty = $oldCart->totalQty;
+            $this->totalPrice = $oldCart->totalPrice;
+            $this->giftcart = $oldCart->giftcart;
+            $this->giftboxtotal = $oldCart->giftboxtotal;
+            $this->dilverycharge=$oldCart->dilverycharge;
+
+            // for sender details for send as gift
+            $this->senderfullname = $oldCart->senderfullname;
+            $this->senderphone = $oldCart->senderphone;
+            $this->senderemailid = $oldCart->senderemailid;
+            $this->sendergiftevent = $oldCart->sendergiftevent;
+            $this->senderaddress=$oldCart->senderaddress;
+            $this->shippingmark=$oldCart->shippingmark;
+            $this->order_notes = $oldCart->order_notes;
+            $this->is_note_enable = $oldCart->is_note_enable;
+
     	}
         if( Session::has('locale') ){
             $this->language = Session::get('locale');
-        } 
+        }
     }
 
      public function add($item, $id){
@@ -80,20 +82,20 @@ class Cart
      	// $this->items[$id] = $storedItem;
      	// $this->totalQty++;
      	// $this->totalPrice += $item->price;
-        
+
         $pro_qty = DB::table('stocks')->where('product_id', $id )->latest()->first();
-        $r_qty = $pro_qty->remained_qty; 
-//        $s_qty = $pro_qty->sale_qty; 
-//        $p_id = $pro_qty->id; 
-//        
+        $r_qty = $pro_qty->remained_qty;
+//        $s_qty = $pro_qty->sale_qty;
+//        $p_id = $pro_qty->id;
+//
 //        $r_qty = $r_qty - 1;
 //        $s_qty = $s_qty + 1;
-//        
+//
 //        $status = DB::table('stocks')->where('id', $p_id)->update(['remained_qty' => $r_qty, 'sale_qty' => $s_qty]);
-                
+
         $storedItem = ['qty' => 0, 'product_name'=>$item->product_name,'price' => $item->product_price,'over_img' => $over_img,'item' => $item, 'send_gift' => $send_gift,'giftwraping'=>$giftwraping,'dilverycharges'=>$item->dilverycharges];
         $users = freedeilvery::where('status', '=', 1)->first();
-        
+
         if($this->items){
             if(array_key_exists($id, $this->items)){
                 $storedItem = $this->items[$id];
@@ -111,15 +113,15 @@ class Cart
             }else{
                 $this->dilverycharge += $item->dilverycharges;
             }
-            
+
             $storedItem['product_namef'] =  $storedItem['product_name'];
 //            $this->giftcart = 0;
-            
-            alert()->success('Item Name :- '.$storedItem['product_namef']['en']."\n".'Quantity :- '.$storedItem['qty']."\n".'Price :- $ '.$storedItem['price'],'Product Added to Cart ')->autoclose(3000);                
+
+            alert()->success('Item Name :- '.$storedItem['product_namef']['en']."\n".'Quantity :- '.$storedItem['qty']."\n".'Price :- $ '.$storedItem['price'],'Product Added to Cart ')->autoclose(3000);
         }
         else{
             alert()->warning('Not Available!');
-            // Session::flash('qty_message', 'Not Available!'); 
+            // Session::flash('qty_message', 'Not Available!');
         }
      }
      // for buy now same like add function different is removed alert rediret to shopping cart
@@ -143,17 +145,17 @@ class Cart
      	// $this->items[$id] = $storedItem;
      	// $this->totalQty++;
      	// $this->totalPrice += $item->price;
-        
+
         $pro_qty = DB::table('stocks')->where('product_id', $id )->latest()->first();
-        $r_qty = $pro_qty->remained_qty; 
-//        $s_qty = $pro_qty->sale_qty; 
-//        $p_id = $pro_qty->id; 
-//        
+        $r_qty = $pro_qty->remained_qty;
+//        $s_qty = $pro_qty->sale_qty;
+//        $p_id = $pro_qty->id;
+//
 //        $r_qty = $r_qty - 1;
 //        $s_qty = $s_qty + 1;
-//        
+//
 //        $status = DB::table('stocks')->where('id', $p_id)->update(['remained_qty' => $r_qty, 'sale_qty' => $s_qty]);
-                
+
         $storedItem = ['qty' => 0, 'product_name'=>$item->product_name,'price' => $item->product_price,'over_img' => $over_img,'item' => $item, 'send_gift' => $send_gift,'giftwraping'=>$giftwraping,'dilverycharges'=>$item->dilverycharges];
        $users = freedeilvery::where('status', '=', 1)->first();
         if($this->items){
@@ -167,7 +169,7 @@ class Cart
             $storedItem['price'] = $item->product_price * $storedItem['qty'];
             $this->items[$id] = $storedItem;
             $this->totalQty++;
-            $this->totalPrice += $item->product_price;  
+            $this->totalPrice += $item->product_price;
              if($this->totalPrice > $users->deilveriescharges){
                $this->dilverycharge = 0;
             }else{
@@ -175,15 +177,15 @@ class Cart
             }
             $storedItem['product_namef'] =  $storedItem['product_name'];
 //            $this->giftcart = 0;
-            
-            //alert()->success('Item Name :- '.$storedItem['product_namef']['en']."\n".'Quantity :- '.$storedItem['qty']."\n".'Price :- $ '.$storedItem['price'],'Product Added to Cart ')->autoclose(5000);                
+
+            //alert()->success('Item Name :- '.$storedItem['product_namef']['en']."\n".'Quantity :- '.$storedItem['qty']."\n".'Price :- $ '.$storedItem['price'],'Product Added to Cart ')->autoclose(5000);
         }
         else{
             alert()->warning('Not Available!');
-            // Session::flash('qty_message', 'Not Available!'); 
+            // Session::flash('qty_message', 'Not Available!');
         }
      }
-     
+
      public function addgift($item, $id){
         $over_img = Session::get('over_img');
         $send_gift = Session::get('send_as_gift');
@@ -204,17 +206,17 @@ class Cart
      	// $this->items[$id] = $storedItem;
      	// $this->totalQty++;
      	// $this->totalPrice += $item->price;
-        
+
         $pro_qty = DB::table('stocks')->where('product_id', $id )->latest()->first();
-        $r_qty = $pro_qty->remained_qty; 
-//        $s_qty = $pro_qty->sale_qty; 
-//        $p_id = $pro_qty->id; 
-//        
+        $r_qty = $pro_qty->remained_qty;
+//        $s_qty = $pro_qty->sale_qty;
+//        $p_id = $pro_qty->id;
+//
 //        $r_qty = $r_qty - 1;
 //        $s_qty = $s_qty + 1;
-//        
+//
 //        $status = DB::table('stocks')->where('id', $p_id)->update(['remained_qty' => $r_qty, 'sale_qty' => $s_qty]);
-                
+
         $storedItem = ['qty' => 0, 'product_name'=>$item->product_name,'price' => $item->product_price,'over_img' => $over_img,'item' => $item, 'send_gift' => $send_gift,'giftwraping'=>$giftwraping,'dilverycharges'=>$item->dilverycharges];
        $users = freedeilvery::where('status', '=', 1)->first();
         if($this->items){
@@ -228,7 +230,7 @@ class Cart
             $storedItem['price'] = $item->product_price * $storedItem['qty'];
             $this->items[$id] = $storedItem;
             $this->totalQty++;
-            $this->totalPrice += $item->product_price;  
+            $this->totalPrice += $item->product_price;
              if($this->totalPrice > $users->deilveriescharges){
                $this->dilverycharge = 0;
             }else{
@@ -236,24 +238,24 @@ class Cart
             }
             $storedItem['product_namef'] =  $storedItem['product_name'];
             $this->giftcart = 1;
-            
-            //alert()->success('Item Name :- '.$storedItem['product_namef']['en']."\n".'Quantity :- '.$storedItem['qty']."\n".'Price :- $ '.$storedItem['price'],'Product Added to Cart ')->autoclose(5000);                
+
+            //alert()->success('Item Name :- '.$storedItem['product_namef']['en']."\n".'Quantity :- '.$storedItem['qty']."\n".'Price :- $ '.$storedItem['price'],'Product Added to Cart ')->autoclose(5000);
         }
         else{
             alert()->warning('Not Available!');
-            // Session::flash('qty_message', 'Not Available!'); 
+            // Session::flash('qty_message', 'Not Available!');
         }
      }
      public function reduceByOne($id){
-         
+
 //        $pro_qty = DB::table('stocks')->where('product_id', $id )->latest()->first();
-//        $r_qty = $pro_qty->remained_qty; 
-//        $s_qty = $pro_qty->sale_qty; 
-//        $p_id = $pro_qty->id; 
-//        
+//        $r_qty = $pro_qty->remained_qty;
+//        $s_qty = $pro_qty->sale_qty;
+//        $p_id = $pro_qty->id;
+//
 //        $r_qty = $r_qty + 1;
 //        $s_qty = $s_qty - 1;
-//        
+//
 //        $status = DB::table('stocks')->where('id', $p_id)->update(['remained_qty' => $r_qty, 'sale_qty' => $s_qty]);
          $users = freedeilvery::where('status', '=', 1)->first();
          $this->items[$id]['qty']--;
@@ -270,21 +272,21 @@ class Cart
          }
          //alert()->success('Product Quantity Reduced By 1');
      }
-     
+
      public function increaseByOne($id){
-        
-         
+
+
         $pro_qty = DB::table('stocks')->where('product_id', $id )->latest()->first();
         $users = freedeilvery::where('status', '=', 1)->first();
-        $r_qty = $pro_qty->remained_qty; 
-//        $s_qty = $pro_qty->sale_qty; 
-//        $p_id = $pro_qty->id; 
-//        
+        $r_qty = $pro_qty->remained_qty;
+//        $s_qty = $pro_qty->sale_qty;
+//        $p_id = $pro_qty->id;
+//
 //        $r_qty = $r_qty - 1;
 //        $s_qty = $s_qty + 1;
-//        
+//
 //        $status = DB::table('stocks')->where('id', $p_id)->update(['remained_qty' => $r_qty, 'sale_qty' => $s_qty]);
-         
+
         if($r_qty > $this->totalQty)
         {
          $this->items[$id]['qty']++;
@@ -300,19 +302,19 @@ class Cart
         }
         else{
             alert()->warning('Not Available!');
-            // Session::flash('qty_message', 'Not Available!'); 
+            // Session::flash('qty_message', 'Not Available!');
         }
      }
-     
+
      public function removeItem($id){
 //        $pro_qty = DB::table('stocks')->where('product_id', $id )->latest()->first();
-//        $r_qty = $pro_qty->remained_qty; 
-//        $s_qty = $pro_qty->sale_qty; 
-//        $p_id = $pro_qty->id; 
-//        
+//        $r_qty = $pro_qty->remained_qty;
+//        $s_qty = $pro_qty->sale_qty;
+//        $p_id = $pro_qty->id;
+//
 //        $r_qty = $r_qty + $this->items[$id]['qty'];
 //        $s_qty = $s_qty - $this->items[$id]['qty'];
-//        
+//
 //        $status = DB::table('stocks')->where('id', $p_id)->update(['remained_qty' => $r_qty, 'sale_qty' => $s_qty]);
                $users = freedeilvery::where('status', '=', 1)->first();
          $this->totalQty -= $this->items[$id]['qty'];
@@ -329,13 +331,13 @@ class Cart
              $this->giftcart = 0;
              }
          unset($this->items[$id]);
-        
+
          alert()->success('Product Removed From Cart')->autoclose(3000);;
      }
        public function removeItemAll(){
-       
+
          unset($this->items);
-        
+
          //alert()->success('All Product Removed From Cart')->autoclose(3000);;
      }
         public function addgiftwraping($id){
@@ -347,35 +349,35 @@ class Cart
 //            }
 //         $this->items[$id]['giftcart'] = $sendasgiftvalue;
 //      alert()->success('Product updated');
-         
+
      }
         public function removegiftwraping($id){
          $this->items[$id]['giftwraping'] = 0;
          $datafoundcount=0;
          foreach ( $this->items as $dataarray){
-            
+
          if($dataarray['giftwraping'] == 1){
              $datafoundcount=1;
          }
            }
-           
+
      if($datafoundcount==1){
          $this->giftboxtotal = $this->items[$id]['item']['wraping_charage'];
      }else{
          $this->giftboxtotal = 0;
      }
-      
-                
+
+
 
 //      alert()->success('Product updated');
-         
+
      }
      // code for add send as gift
       public function addSendAsGift(){
          $this->giftcart = 1;
      }
        public function removeSendAsGift(){
-          
+
          $this->giftcart = 0;
      }
 }
