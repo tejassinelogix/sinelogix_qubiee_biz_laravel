@@ -3,9 +3,9 @@
  border: 16px solid #f3f3f3;
    border-radius: 50%;
    border-top: 16px solid blue;
-  
+
    border-bottom: 16px solid blue;
-   
+
    width: 90px;
    height: 90px;
   -webkit-animation: spin 2s linear infinite; /* Safari */
@@ -26,24 +26,17 @@
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
-.pagination {
-    margin-top: 31%;
-}
-.container.margin {
-    margin-top: 51%;
-}
 </style>
-<div id="loader"></div>         
+<div id="loader"></div>
 
-	  <?php 
-//         foreach (array_slice($getNewproduct, 0, 50)  as $newproduct) {
+	  <?php
          foreach ($getNewproduct  as $newproduct) {
-                  $urlnewname= $newproduct->product_name; 
+                  $urlnewname= $newproduct->product_name;
                   $newproductfullname=str_replace(' ', '-',$urlnewname);
-				
+
                   $pro_name = $newproduct->product_name;
-                  $shortdescription = $newproduct->short_description;			  
-				
+                  $shortdescription = $newproduct->short_description;
+
                 ?>
             <div class="col-sm-3 product-box-class">
               <div class="productBlock">
@@ -60,7 +53,7 @@
                  // echo ucwords( $newproduct->product_name); ?>
                   </h3>
                     <?php  $countofdate = number_format($newproduct->reviews()->avg('rating'), 2);
-                               ?>  
+                               ?>
                     <ul class="proRating">
                             @if ($newproduct->reviews()->count())
                             <?php
@@ -83,7 +76,7 @@
                             <li><i class="fa fa-star-o"></i></li>
                             @endif
                         </ul>
-                    
+
 <!--                  <ul class="proRating">
                     <li><i class="fa fa-star"></i></li>
                     <li><i class="fa fa-star"></i></li>
@@ -94,12 +87,12 @@
                   <h2 class="propricing">
                       $<?php echo $newproduct->product_price; ?>
                                         <?php
-                                        
+
                                         if (!empty($newproduct->discount || $newproduct->discount != 0 || $newproduct->product_price != $newproduct->original_price)) { ?>
                       <small><strike>$<?php echo $newproduct->original_price; ?></strike></small>
                                             <?php
                                         } else {
-                                            
+
                                         }
                                         ?>
                       <!--${{ $newproduct->product_price }}-->
@@ -108,7 +101,7 @@
                     <div class="productInfoMsgAlert addtowishmessage<?php echo $newproduct->id;?>" ></div>
                     <button  data-id="<?php echo $newproduct->id;?>" class="wishlist-btn addtowishlist"> {{ __('message.Add to Wishlist') }}  </button>
                     <!--<a href="{{ url("/add-to-wishlist/{$newproduct->id}") }}" class="wishlist-btn" title="{{ __('message.Add to Wishlist') }}"><i class="fa fa-heart"></i>{{ __('message.Add to Wishlist') }} </a>-->
-                 
+
                  <!--<p class="proinfo"><?php //echo $shortdescription[$language]; ?></p>-->
                 </div>
                 <div class="productBlockViewDtl">
@@ -117,18 +110,18 @@
                 </div>
               </div>
             </div>
-			
+
                    <?php } ?>
 				   <script>
-					function AddToCarts(){					
+					function AddToCarts(){
 					document.getElementById('loaders').style.display="block";
 					}
 					</script>
-					
+
 					<!--<div class="pagination">{{ $getNewproduct->links() }}</div>-->
-					
+                </div>
 					<div class="container margin">
-					<div class="row">					
+					<div class="row">
 					<div class="pagination">{{ $getNewproduct->links() }}</div>
 					</div>
-					</div>
+

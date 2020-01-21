@@ -42,7 +42,7 @@
                                                                     <li><a href="#">Order history</a></li>
                                                                     <li><a href="#">Wishlist</a></li>
                                                                     <li><a href="#">Vendor contact</a></li>-->
-                            </ul>                        
+                            </ul>
                         </div>
                     </div>
 
@@ -54,7 +54,7 @@
                                 foreach ($getMainCategory as $getMainCatego) {
                                     $cat_name = json_decode($getMainCatego->category_name, true);
                                     ?>
-                                    <li><a href="/<?php echo $getMainCatego->url; ?>"><?php echo $cat_name[$language]; ?></a>  </li>  
+                                    <li><a href="/<?php echo $getMainCatego->url; ?>"><?php echo $cat_name[$language]; ?></a>  </li>
                                     <!-- <li><a href="#">Cups / Mugs</a></li>
                                     <li><a href="#">Photo Gifts</a></li>
                                     <li><a href="#">Printed Clothing</a></li>
@@ -209,7 +209,7 @@
 
       <!-- Modal body -->
       <div class="modal-body-addtowish">
-        
+
       </div>
 
       <!-- Modal footer -->
@@ -225,7 +225,7 @@
 
 <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="{{ URL::to('public/assets/js/jquery.min.js') }}"></script>
-<script src="{{ URL::to('public/assets/js/bootstrap.min.js') }}"></script>    
+<script src="{{ URL::to('public/assets/js/bootstrap.min.js') }}"></script>
 
 <!-- jQuery -->
 <script type="text/javascript" src="{{ URL::to('public/assets/js/modernizr.custom.js') }}"></script>
@@ -467,7 +467,7 @@ type:'get',
     $(".chb").prop('checked', false);
     $(this).prop('checked', true);
     });
-    
+
     function f2(clicked_id){
         //alert(clicked_id);
         $('#send_gift').val(clicked_id);
@@ -477,24 +477,24 @@ type:'get',
         $(".chb").prop('checked', false);
         $(this).prop('checked', true);
     });
-    
+
     $("#nextreview").click(function() {
 //        alert("nextreview");
         $(".checkOutTablayout .checkOutTabs > ul > li > a").parent().removeClass("active");
         $(".checkOutTablayout .checkOutTabs > ul > li > a[aria-controls='ReviewOrder']").parent().addClass("active");
-    });  
+    });
       $("#nextreviewnogift").click(function() {
 //        alert("nextreview");
         $(".checkOutTablayout .checkOutTabs > ul > li > a").parent().removeClass("active");
         $(".checkOutTablayout .checkOutTabs > ul > li > a[aria-controls='ReviewOrder']").parent().addClass("active");
-    });  
-    
-    $("#backreview").click(function() { 
+    });
+
+    $("#backreview").click(function() {
 //        alert("backreview");
         $(".checkOutTablayout .checkOutTabs > ul > li > a").parent().removeClass("active");
         $(".checkOutTablayout .checkOutTabs > ul > li > a[aria-controls='ConfirmAddress']").parent().addClass("active");
     });
-    
+
     $("#nextpayment").click(function() {
 //        alert("nextpayment");
         $(".checkOutTablayout .checkOutTabs > ul > li > a").parent().removeClass("active");
@@ -505,18 +505,18 @@ type:'get',
         $(".checkOutTablayout .checkOutTabs > ul > li > a").parent().removeClass("active");
         $(".checkOutTablayout .checkOutTabs > ul > li > a[aria-controls='ConfirmAddress']").parent().addClass("active");
     });
-     $("#backsenderDetailsModal").click(function() { 
+     $("#backsenderDetailsModal").click(function() {
 //        alert("backreview");
         $(".checkOutTablayout .checkOutTabs > ul > li > a").parent().removeClass("active");
         $(".checkOutTablayout .checkOutTabs > ul > li > a[aria-controls='senderDetailsModal']").parent().addClass("active");
     });
-    
-    $("#backpayment").click(function() { 
+
+    $("#backpayment").click(function() {
 //        alert("backpayment");
         $(".checkOutTablayout .checkOutTabs > ul > li > a").parent().removeClass("active");
         $(".checkOutTablayout .checkOutTabs > ul > li > a[aria-controls='ReviewOrder']").parent().addClass("active");
     });
-    
+
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4y42DfJUNmx6YzlPWFdbhwj4m-6XEIg8&libraries=places&callback=initialize" async defer></script>
 <script type="text/javascript" src="{{ URL::to('public/js/mapInput.js') }}"></script>
@@ -542,53 +542,57 @@ $('.rdCheck').dblclick(function(){
    if($(this).is(':checked'))
     {
         $(this).removeAttr('checked');
-    }       
+    }
 });
 
 </script>
 <script type="text/javascript">
-	var page = 1;
-	$(window).scroll(function() {
-	    if($(window).scrollTop() + $(window).height() >= $(document).height()) {
-	        page++;
-	        loadMoreData(page);
-	    }
-	});
+    /*
+    * replace load data by Pagination no more need
+    */
+
+	// var page = 1;
+	// $(window).scroll(function() {
+	//     if($(window).scrollTop() + $(window).height() >= $(document).height()) {
+	//         page++;
+	//         loadMoreData(page);
+	//     }
+	// });
 
 
-	function loadMoreData(page){
-             var id = $('.proListViewBtnsActive').data('id');
-              
-	  $.ajax(
-	        {
-	            url: '?page=' + page,
-	            type: "get",
-	            beforeSend: function()
-	            {
-	                $('.ajax-load').show();
-	            }
-	        })
-	        .done(function(data)
-	        {
-	            if(data.html == " "){
-	                $('.ajax-load').html("No more records found");
-	                return;
-	            }
-	            $('.ajax-load').hide();
-	            $("#post-data").append(data.html);
-                    if(id==2){
-                   $(".innerproductCol .col-sm-3.product-box-class").addClass("rowCol1ProductBoxClass");
-                $(".categoryMainSection .col-sm-3.product-box-class").addClass("rowCol1ProductBoxClass");
-              }else{
-                  $(".innerproductCol .col-sm-3.product-box-class").removeClass("rowCol1ProductBoxClass");
-                $(".categoryMainSection .col-sm-3.product-box-class").removeClass("rowCol1ProductBoxClass");
-              }
-	        })
-	        .fail(function(jqXHR, ajaxOptions, thrownError)
-	        {
-	              alert('server not responding...');
-	        });
-	}
+	// function loadMoreData(page){
+    //          var id = $('.proListViewBtnsActive').data('id');
+
+	//   $.ajax(
+	//         {
+	//             url: '?page=' + page,
+	//             type: "get",
+	//             beforeSend: function()
+	//             {
+	//                 $('.ajax-load').show();
+	//             }
+	//         })
+	//         .done(function(data)
+	//         {
+	//             if(data.html == " "){
+	//                 $('.ajax-load').html("No more records found");
+	//                 return;
+	//             }
+	//             $('.ajax-load').hide();
+	//             $("#post-data").append(data.html);
+    //                 if(id==2){
+    //                $(".innerproductCol .col-sm-3.product-box-class").addClass("rowCol1ProductBoxClass");
+    //             $(".categoryMainSection .col-sm-3.product-box-class").addClass("rowCol1ProductBoxClass");
+    //           }else{
+    //               $(".innerproductCol .col-sm-3.product-box-class").removeClass("rowCol1ProductBoxClass");
+    //             $(".categoryMainSection .col-sm-3.product-box-class").removeClass("rowCol1ProductBoxClass");
+    //           }
+	//         })
+	//         .fail(function(jqXHR, ajaxOptions, thrownError)
+	//         {
+	//               alert('server not responding...');
+	//         });
+	// }
 </script>
 <!--End of Tawk.to Script-->
 </body>
