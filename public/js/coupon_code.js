@@ -413,12 +413,14 @@ $(document).ready(function(){
 			if(!value){
 				return onFailed();
 			}
-			
-			let text = $("#notes_input").val(); 
+
+			let text = $("#notes_input").val();
 			if(text.trim() == ""){
 				swal("","sorry !! you didn't enter any notes","error");
 				return onFailed();
 			}
+
+            document.getElementById('loaders').style.display="block";
 
 			$.ajax({
 				type: 'POST',
@@ -426,11 +428,14 @@ $(document).ready(function(){
 				data: {notes:text},
 				dataType: "json",
 				success: function(resp_data,status,xhr){
-					if(!resp_data.status){
+
+                    document.getElementById('loaders').style.display="none";
+
+                    if(!resp_data.status){
 						swal("","please try again","error");
 						return onFailed();
 					}
-					swal("","notes added successfully","success");					
+					swal("","notes added successfully","success");
 				}
 			});
         }
@@ -451,7 +456,9 @@ $(document).ready(function(){
 		var onFailed = function(){
 			$(checkbox).addAttr("checked");
 			return false;
-		}
+        }
+
+        document.getElementById('loaders').style.display="block";
 
 		$.ajax({
 			type: 'POST',
@@ -459,11 +466,13 @@ $(document).ready(function(){
 			data: {},
 			dataType: "json",
 			success: function(resp_data,status,xhr){
-				if(!resp_data.status){
+                document.getElementById('loaders').style.display="none";
+
+                if(!resp_data.status){
 					swal("","please try again","error");
 					return onFailed();
 				}
-				swal("","notes remove successfully","success");					
+				swal("","notes remove successfully","success");
 			}
 		});
 	}
@@ -475,7 +484,7 @@ $(document).ready(function(){
         if(!is_checked){
         	return removeNotes();
         }
-       
+
         return addNotes(checkbox);
     });
 })

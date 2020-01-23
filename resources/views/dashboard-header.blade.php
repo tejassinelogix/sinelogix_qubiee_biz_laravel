@@ -45,7 +45,7 @@
             ?>
             <link rel="canonical" href="<?php echo url('/'); ?>/home" />
         <?php }
-        ?>    
+        ?>
 
         <!-- Latest compiled and minified CSS -->
 
@@ -68,7 +68,7 @@
         <link rel="stylesheet" href="{{ URL::to('public/assets/font-awesome/css/font-awesome.min.css') }}">
 
         <!--Animate.css-->
-        <link rel="stylesheet" href="{{ URL::to('public/assets/animatecss/animate.css') }}">    
+        <link rel="stylesheet" href="{{ URL::to('public/assets/animatecss/animate.css') }}">
 
         <!-- Flexslider CSS -->
         <link href="{{ URL::to('public/assets/flexslider/flexslider.css') }}" rel="stylesheet" />
@@ -76,7 +76,7 @@
         <!-- Owl Carousel Assets -->
         <link href="{{ URL::to('public/assets/owl/owl.carousel.css') }}" rel="stylesheet">
         <link href="{{ URL::to('public/assets/owl/owl.theme.css') }}" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="{{ URL::to('public/assets/owl/owl.transitions.css') }}"> 
+        <link rel="stylesheet" type="text/css" href="{{ URL::to('public/assets/owl/owl.transitions.css') }}">
         <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,800|Fahkwang:400,600|Tajawal:400,700" rel="stylesheet">
         <!-- range-slider -->
         <link rel="stylesheet" type="text/css" href="{{ URL::to('public/assets/range-slider/ion.rangeSlider.css') }}">
@@ -114,6 +114,9 @@
                 padding: 10px 0px;
                 width: 100%;
             }
+            .swal-footer{
+                text-align: center;
+            }
         </style>
 
         <!--google fonts-->
@@ -135,7 +138,10 @@
     }
     ?>
     <body class="<?php echo $language . 'language'; ?>  <?php echo $layoutclass_name ?>" style="background-color: <?php echo $background_color; ?>">
-        @include('sweet::alert')
+        <div id="loaders" class="overlay">
+            <span id="loaders-c"></span>
+        </div>
+        @include('sweet_alert.alert')
 
         <!-- @if(Session::has('qty_message')) -->
             <!--<p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('qty_message') }}</p>-->
@@ -207,9 +213,9 @@
                         <div class="col-sm-5 mycartCol">
                             <div class="mycartContainer">
                                 <div class="myAccount">
-                                    <ul class="nav navbar-nav navbar-right">                                        
+                                    <ul class="nav navbar-nav navbar-right">
                                         <?php
-                                        //$language = app()->getLocale(); 
+                                        //$language = app()->getLocale();
                                         // echo $lang;
                                         ?>
                                         <li>
@@ -259,8 +265,8 @@
                                             </ul>
                                         </li>
                                         @endguest
-                                        <?php if (Auth::user()) { ?>  
-                                            <li><a href="{{ url('/user-wishlist') }}"><i class="fa fa-heart"></i> 
+                                        <?php if (Auth::user()) { ?>
+                                            <li><a href="{{ url('/user-wishlist') }}"><i class="fa fa-heart"></i>
                                                     {{ __('message.Wishlist') }}
                                                 </a></li>
                                         <?php } else { ?>
@@ -270,7 +276,7 @@
                                     </ul>
                                 </div>
                                 <div class="mycartbox">
-                                    <div class="mycarthead"><i class="fa fa-shopping-cart"></i>{{ __('message.shopping cart') }}<i class="fa fa-angle-down"></i> 
+                                    <div class="mycarthead"><i class="fa fa-shopping-cart"></i>{{ __('message.shopping cart') }}<i class="fa fa-angle-down"></i>
                                         @if(Session::has('cart'))
                                         <span>
                                             {{ Session::has('cart') ? Session::get('cart')->totalQty :'' }}
@@ -288,7 +294,7 @@
                                                             <th>Quantity</th>
                                                             <th>Price ($)</th>
                                                         </tr>
-                                                    </thead>                                                    
+                                                    </thead>
                                                     <?php
 //print_r($product['item']['product_name']);
 //  $pro_name = json_decode($product['item']['product_name'], true);
@@ -297,7 +303,7 @@
                                                         <?php if ($cart->items) { ?>
                                                             @foreach($cart->items as $product)
                                                             <tr>
-                                                                <td><strong><a href="<?php echo url('/productdetails'); ?>/{{$product['item']['url'] }}"><?php echo $product['item']['product_name'][$language]; ?></a></strong></span>       
+                                                                <td><strong><a href="<?php echo url('/productdetails'); ?>/{{$product['item']['url'] }}"><?php echo $product['item']['product_name'][$language]; ?></a></strong></span>
                                                                 <td><span class="badge">{{ $product['qty'] }}</span></td>
                                                                 <td><span class="label label-success">$ {{ $product['item']['product_price'] }}</span></td>
                                                             </tr>
@@ -341,7 +347,7 @@
                         </div>
                         <div id="navbarCollapse" class="collapse navbar-collapse">
                             <ul class="nav navbar-nav">
-                                <li> 
+                                <li>
                                     <!--<a href="/<?php //echo "allcategories"   ?>">-->
                                     <a>
                                         <i class="fa fa-bars"></i>
@@ -360,7 +366,7 @@
                                                     <!--<i class="fa fa-angle-down"></i>-->
                                                 </a>
                                                 <ul>
-												
+
                                                     <?php
                                                     foreach ($getSubCategory as $maincat) {
                                                         $lang_typea = explode(',', $getMainCatego->category_id);
@@ -371,7 +377,7 @@
                                                             ?>
                                                             <li>
                                                                 <a href="<?php echo url('/categoryproduct'); ?>/{{ $urlcat_name[$language] }}/{{ $maincat->category_id }}"><?php echo $sub_cat_name[$language]; ?></a>
-                                                                
+
 																<ul>
                                                                     <?php
                                                                     foreach ($getSubCategory as $key => $mainsubsumenu) {
@@ -383,7 +389,7 @@
                                                                                 $subSubCatName = json_decode($mainsubsumenu->category_name, true);
                                                                                 ?>
                                                                                 <li>
-                                                                                    <a href="<?php echo url('/categoryproduct'); ?>/{{ $mainsubsumenu->url }}/{{ $mainsubsumenu->category_id }}"><?php echo strtoupper($subSubCatName[$language]); ?></a>                          
+                                                                                    <a href="<?php echo url('/categoryproduct'); ?>/{{ $mainsubsumenu->url }}/{{ $mainsubsumenu->category_id }}"><?php echo strtoupper($subSubCatName[$language]); ?></a>
                                                                                 </li>
                                                                                 <?php
                                                                             }
@@ -394,7 +400,7 @@
                                                                     }
                                                                     ?>
                                                                 </ul>
-																
+
                                                             </li>
                                                             <?php
                                                         }
@@ -403,7 +409,7 @@
                                             </li>
                                         <?php } ?>
                                     </ul>
-									
+
                                 </li>
                                 <?php
 //echo "<pre>";
@@ -442,7 +448,7 @@
                                                                         $subSubCatName = json_decode($mainsubsumenu->category_name, true);
                                                                         ?>
                                                                         <li>
-                                                                            <a href="<?php echo url('/categoryproduct'); ?>/{{ $mainsubsumenu->url }}/{{ $mainsubsumenu->category_id }}"><?php echo strtoupper($subSubCatName[$language]); ?></a>                          
+                                                                            <a href="<?php echo url('/categoryproduct'); ?>/{{ $mainsubsumenu->url }}/{{ $mainsubsumenu->category_id }}"><?php echo strtoupper($subSubCatName[$language]); ?></a>
                                                                         </li>
                                                                         <?php
                                                                     }

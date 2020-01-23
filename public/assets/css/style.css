@@ -125,7 +125,7 @@ button:target {
         width: auto;
         padding-left: 100px;
         padding-right: 100px;
-    }    
+    }
 }
 
 .logo {
@@ -906,7 +906,7 @@ button:target {
     width: 60px;
     height: 60px;
     line-height: 60px;
-    margin: 0 auto;    
+    margin: 0 auto;
     z-index: 2;
     border-radius: 100%;
 }
@@ -1879,7 +1879,7 @@ button:target {
     height: 35px !important;
     line-height: 35px;
     border: none;
-    background: #FFEA3A; 
+    background: #FFEA3A;
     font-size: 30px !important;
     font-weight: 400;
     position: relative;
@@ -2156,7 +2156,7 @@ button:target {
     text-indent: 10px;
 }
 .customerReviewRow input {
-    height: 40px;    
+    height: 40px;
 }
 .customerReviewRow textarea {
     height: auto;
@@ -2867,9 +2867,9 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active){
     display: none;
 }
 .radio input[type="radio"], .radio-inline input[type="radio"], .checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"] {
-    margin-top:10px   
+    margin-top:10px
 }
-.sbi{   
+.sbi{
     height: 34px;
     overflow: hidden;
 }
@@ -2881,14 +2881,14 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active){
     margin-top: -64px;
 }
 .icici{
-    overflow: hidden; 
+    overflow: hidden;
     height: 34px;
 }
 .icici img{
     margin-top: -96px;
 }
 .citibank{
-    overflow: hidden; 
+    overflow: hidden;
     height: 34px;
 }
 .citibank img{
@@ -2899,10 +2899,10 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active){
     height: 34px;
 }
 .axis img{
-    margin-top: -125px; 
+    margin-top: -125px;
 }
 .kotak{
-    overflow: hidden; 
+    overflow: hidden;
     height: 43px;
 }
 .kotak img{
@@ -3188,7 +3188,7 @@ h5.headingFull {
     padding: 6px;
     font-family: 'Poppins', sans-serif;
     font-size: 18px;
-    font-weight: 400;    
+    font-weight: 400;
     text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.5);
     box-shadow: 10px 0px 5px rgba(0, 0, 0, 0.1);
 }
@@ -3895,7 +3895,7 @@ body.backgroundimage {
     padding: 0 0 20px 25%;
     visibility: visible;
     opacity: 1;
-    text-align: left;    
+    text-align: left;
 }
 .rowCol1ProductBoxClass .productBlock .productBlockViewDtl a {
     top: 0;
@@ -3935,7 +3935,7 @@ body.backgroundimage {
     margin: 0 auto;
     height: 70%;
     width: 60%;
-    box-shadow: 0 10px 50px rgba(0,0,0,0.5);    
+    box-shadow: 0 10px 50px rgba(0,0,0,0.5);
 }
 .thanksVideoBlock > div.thanksVideoBlockInner {
     display: block;
@@ -4140,7 +4140,7 @@ body.backgroundimage {
     bottom: 90px;
     right: 20px;
     z-index: 1000;
-    display:none;           
+    display:none;
     background: #2e3192;
     color: #fff;
     text-align: center;
@@ -4173,7 +4173,7 @@ body.backgroundimage {
     max-height: 300px;
     overflow: auto;
     padding: 10px 0px 0px 30px;
-    border-radius: 10px; 
+    border-radius: 10px;
     position: absolute;
     width: 100%;
 }
@@ -4302,7 +4302,7 @@ body.backgroundimage {
     }
 }
 
-@media (max-width: 1280px) {    
+@media (max-width: 1280px) {
     .navigation-box ul li a {
         /*font-size: 13px;*/
     }
@@ -4599,7 +4599,7 @@ body.backgroundimage {
 }
 
 .error_red{
-    color: red;   
+    color: red;
 }
 ul.nav.navbar-nav {
     padding-left: 65px!important;
@@ -4607,4 +4607,43 @@ ul.nav.navbar-nav {
 
 
 /**********New*********/
+.overlay{
+  position: fixed; /* Sit on top of the page content */
+  display: none; /* Hidden by default */
+  width: 100%; /* Full width (cover the whole page) */
+  height: 100%; /* Full height (cover the whole page) */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+  z-index: 99; /* Specify a stack order in case you're using a different order for other elements */
+  cursor: pointer; /* Add a pointer on hover */
+}
 
+#loaders {
+    display: none;
+}
+
+#loaders-c{
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid blue;
+    border-bottom: 16px solid blue;
+    width: 90px;
+    height: 90px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+    position: absolute;
+    z-index: 99;
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 35%;
+    z-index: 1000;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

@@ -11,7 +11,7 @@
 
 
 <h1 class="text-center">Laravel Sweet Alert Notification</h1>
-@include('sweet::alert')
+@include('sweet_alert.alert')
 
 
 </body>
