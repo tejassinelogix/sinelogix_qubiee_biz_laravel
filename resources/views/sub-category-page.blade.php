@@ -1,21 +1,4 @@
 <style>
-#loaderss{
- border: 16px solid #f3f3f3;
-   border-radius: 50%;
-   border-top: 16px solid blue;
-  
-   border-bottom: 16px solid blue;
-   
-   width: 90px;
-   height: 90px;
-  -webkit-animation: spin 2s linear infinite; /* Safari */
-  animation: spin 2s linear infinite;
-  position: absolute;
-  z-index: 99;
-  display: none;
-  margin-left: 40%;
-}
-
 /* Safari */
 @-webkit-keyframes spin {
   0% { -webkit-transform: rotate(0deg); }
@@ -33,7 +16,6 @@
 <!-- End of navigationBar -->
 <!-- category page section -->
 <?php //dd($countProduct);?>
-<div id="loaderss"></div>         
 <div class="categoryInner">
     <div class="innerBannerSection productSubPageBanner">
 
@@ -64,14 +46,14 @@
 			<div class="rightView">
 				<p>Change view:</p>
 				<ul>
-				    <li><a class="proListViewBtns gridColViewBtn" href="#"><i class="fa fa-th-large"></i></a></li>	
+				    <li><a class="proListViewBtns gridColViewBtn" href="#"><i class="fa fa-th-large"></i></a></li>
                                     <li><a class="proListViewBtns rowColViewBtn" href="#"><i class="fa fa-list"></i></a></li>
-					
+
 				</ul>
 			</div>
 		</div>
     </div>
-    
+
     <div class="space10"></div>
     <div class="categoryMainSection">
         <div class="container">
@@ -93,7 +75,7 @@
                         </div>
                     </div>-->
                      <div class="inner-sidebar-list sidebarNew">
-                        <h3>{{ __('message.Filter By') }}:</h3> 
+                        <h3>{{ __('message.Filter By') }}:</h3>
                         <div class="sidebar-filter-box">
                                     <h4 class="sidebar-heading"><i class="fa fa-plus"></i>{{ __('message.Sort Price By') }}</h4>
                                      <div class="price-ranger">
@@ -118,8 +100,8 @@
                                         <div class="extra-controls">
                                             <button class="js-get-values pricesidebarbtn">{{ __('message.Price Search') }}</button>
                                         </div>
-                                        
-                                        
+
+
 <!--                                        <div class="price-ranger">
                                             <p><strong>Price</strong></p>
                                             <input type="text" id="pricerange1" name="example_name" value="" />
@@ -130,78 +112,78 @@
                                     <h4 class="sidebar-heading"><i class="fa fa-plus"></i>{{ __('message.Most Selling') }}</h4>
                                     <div>
                                         <!--<form action="#" class="checkbox-radio-style1 active-sidebar-box">-->
-                                            <?php 
-                                           
+                                            <?php
+
                                         //foreach (array_slice($getParentSubCategorycate,0,1) as $parentmaincat) {
-                                           
+
                                        // $mcat_Name = json_decode($maincat->category_name, true);
-                                        
+
                                         ?>
                                             <p>
                                                 <input type="checkbox" value="<?php echo $id; ?>" name="chechkmostselling" class="common_subseleing_selector brandseling" />
                                                 <label>
                                                     <span class="checkmark"></span>
-                                                         </label> 
+                                                         </label>
                                             </p>
                                         <?php //} ?>
 
                                     </div>
                                 </div>
 
-                            
+
                             <div class="sidebar-filter-box">
                                 <h4 class="sidebar-heading"><i class="fa fa-plus"></i>{{ __('message.Brand') }}</h4>
                                 <div>
                                     <!--<form action="#" class="checkbox-radio-style1 active-sidebar-box">-->
-                                        <?php 
-                                        
+                                        <?php
+
                                     //foreach (array_slice($getParentSubCategorycate,0,1) as $parentmaincat) {
-                                        
+
                                     // $mcat_Name = json_decode($maincat->category_name, true);
-                                    
+
                                     ?>
                                         <p>
                                             <input type="radio" checked value="<?php echo $id; ?>" name="chechkbrandfilter" class="common_subseleing_selector brandseling" />&nbsp;&nbsp;<?php echo ucwords($name) ?> - <?php echo ucwords($pro_name[$language]) ?>
                                             <label>
                                                 <span class="checkmark"></span>
-                                                        </label> 
+                                                        </label>
                                         </p>
                                     <?php //} ?>
 
                                 </div>
                             </div>
-                                
+
                     </div>
                 </div>
                 <div class="col-md-9 col-sm-12">
 						<?php
-				    $total_pagination = $poductdata->lastPage();					
-					$current_page = app('request')->input('page');						
-					$default_page = 1;					
+				    $total_pagination = $poductdata->lastPage();
+					$current_page = app('request')->input('page');
+					$default_page = 1;
 					$product_count_right = $poductdata->count();
-					
+
 					$product_count_last = $product_count_right + 1;
 					$product_count_last_right = $product_count_last + $product_count_right;
-				
+
 					if($default_page != $current_page){
 						$default_page = $product_count_last;
 					}
-					
+
 					if($default_page != $current_page){
 						$product_count_right = $product_count_last_right;
 					}
-					
+
 					if($default_page != $current_page && $current_page == $total_pagination){
 						$temp_tot = $poductdata1->count() - $poductdata->count();
 						$default_page = $temp_tot + 1;
 						$product_count_right = $poductdata1->count();
 					}
-									
+
 					?>
-                   
-                   
+
+
                     <div class="item-list-tophead"><h4><?php echo ucwords($name) ?> - <?php echo ucwords($pro_name[$language]) ?> <span>(<?php echo $default_page; ?> - <?php echo $product_count_right; ?> of <?php echo $poductdata1->count();?> {{ __('message.Items') }})</span></h4></div>
-                    <div class="row rightBlock" id="post-data">                        
+                    <div class="row rightBlock" id="post-data">
                       <?php foreach ($poductdata as $catproduct) { ?>
                             <div class="col-sm-3 product-box-class">
                                 <div class="productBlock productBlockCat">
@@ -217,7 +199,7 @@
                                         </span>
                                             <?php
                                         } else {
-                                            
+
                                         }
                                         ?>
                                         <div style="background: url('/public/images/{{ $catproduct->product_image }}') top no-repeat;"></div>
@@ -225,7 +207,7 @@
                                     <div class="productBlockInfo">
                                         <a href="<?php echo url('/productdetails'); ?>/{{$catproduct->url }}" class="titlelink"><?php echo ucwords($catproduct->product_name[$language]); ?></a>
                                     <?php  $countofdate = number_format($catproduct->reviews()->avg('rating'), 2);
-                                       ?>  
+                                       ?>
                                     <ul class="ratings">
                                         @if ($catproduct->reviews()->count())
                                         <?php
@@ -234,7 +216,7 @@
                                         $var = (int)$countofdate;
                                         $remiangstar = 5-$var;
                                         for ($i = 1; $i <= $countofdate; $i++) {
-                                             
+
                                             ?>
                                          <li><i class="fa fa-star"></i></li>
                                         <?php }   for ($k = 1; $k <= $remiangstar; $k++) {?>
@@ -259,46 +241,39 @@
                                          <div class="loaderWrapperAjax loader-wrapper<?php echo $catproduct->id;?>" style="display: none;"><img src="{{ URL::to('public/assets/images/ajax-loader.gif') }}"></div>
                                         <div class="productInfoMsgAlert addtowishmessage<?php echo $catproduct->id;?>" ></div>
                                         <button  data-id="<?php echo $catproduct->id;?>" class="wishlist-btn addtowishlist"> {{ __('message.Add to Wishlist') }}  </button>
-                                        
+
                                         <h2 class="propricing">
                                             ${{ $catproduct->product_price }}
                                            <?php
-                                        
+
                                         if (!empty($catproduct->discount || $catproduct->discount != 0 || $catproduct->product_price != $catproduct->original_price)) { ?>
-                                        <small style="text-decoration: line-through;">${{ $catproduct->original_price }}</small> 
+                                        <small style="text-decoration: line-through;">${{ $catproduct->original_price }}</small>
                                       <?php
                                         } else {
-                                            
+
                                         }
                                         ?>
-                                        
-                                        </h2>                                        
+
+                                        </h2>
                                     </div>
                                     <div class="productBlockViewDtl">
                                         <a href="<?php echo url('/productdetails'); ?>/{{$catproduct->url }}" class="btn1">{{ __('message.view details') }} <i class="fa fa-arrow-circle-right"></i></a>
-                                        <a href="{{ url("/add-to-cart/{$catproduct->id}") }}" class="btn2" onClick="cart()">{{ __('message.Add To Cart') }} <i class="fa fa-shopping-cart"></i></a>
+                                        <a href="{{ url("/add-to-cart/{$catproduct->id}") }}" class="btn2" onClick="AddToCarts()">{{ __('message.Add To Cart') }} <i class="fa fa-shopping-cart"></i></a>
                                     </div>
                                 </div>
                             </div>
                         <?php } ?>
-						
-						<script>
-						
-						
-						function cart(){
-							document.getElementById('loaderss').style.display="block";
-						}
-						</script>
-						
+
+
 					<div class="container margin">
-					<div class="row">						
+					<div class="row">
 					<div class="pagination">{{ $poductdata->links() }}</div>
 					</div>
 					</div>
 
                     </div>
                     <div class="clear row innerproductCol" id="postfilterdata">
-              
+
                 </div>
 
                 </div>

@@ -107,6 +107,10 @@
             reader.readAsDataURL(input.files[0]);
             }
             }
+            function AddToCarts(){
+                document.getElementById('loaders').style.display="block";
+            }
+                    
         </script>
         <style type="text/css">
             .ajax-load{

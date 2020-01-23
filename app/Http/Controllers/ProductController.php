@@ -828,13 +828,14 @@ class ProductController extends Controller
 
     public function postCheckout(Request $request)
     {
-//    echo "HIII";
-        //    die;
         if (Session::has('locale')) {
             $language = Session::get('locale');
         } else {
             $language = app()->getLocale();
         }
+
+      //  $email = Auth::user()->email;
+
         $getHome = Category::getHome();
         $getSubCategorycate = Category::getSubCategorycate();
         $getSubCategoryWordpress = Category::getSubCategoryWordpress();
@@ -852,6 +853,28 @@ class ProductController extends Controller
         }
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
+        /*
+        $data['email'] = "parth.chavada@sinelogix.com";
+        $data['order_id'] = "O2dfed56";
+        $data['enable_order_notes'] = $cart->is_note_enable;
+        $data['order_notes'] = $cart->order_notes;
+
+        Mail::send(['html' => 'template.email.order'], [], function ($message) use ($data) {
+            $message->to($data['email'])->subject('Your order #'.$data['order_id'].'has been placed successfully');
+             // $message->from('ganeshjag007@gmail.com', 'Qubiee');
+             $message->from('parthmy007@gmail.com', 'Qubiee');
+
+            if($data['enable_order_notes']){
+
+            }
+        })
+        ->attachData($data['order_notes'], 'order_notes.txt', [
+            'mime' => 'text/plain',
+        ]);
+
+
+        */
+
 //    $over_img = Session::get('over_img');
 
 //        Stripe::setApiKey('sk_test_4eC39HqLyjWDarjtT1zdp7dc');

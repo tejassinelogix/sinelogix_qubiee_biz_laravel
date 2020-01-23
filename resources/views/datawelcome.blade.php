@@ -91,13 +91,7 @@
               </div>
             </div>
 
-                   <?php } ?>
-				   <script>
-					function AddToCarts(){
-					document.getElementById('loaders').style.display="block";
-					}
-					</script>
-
+                   <?php } ?>				  
 					<!--<div class="pagination">{{ $getNewproduct->links() }}</div>-->
                 </div>
 					<div class="container margin">
