@@ -359,6 +359,9 @@
                                     <ul>
                                         <?php
                                         foreach ($getMainCategory as $getMainCatego) {
+                                            if(!$getMainCatego->is_visible)
+                                            continue;
+
                                             $cat_name = json_decode($getMainCatego->category_name, true);
                                             ?>
                                             <li>
@@ -420,6 +423,8 @@
 //print_r($getMainCategory);
 //echo $getMainCategory[0]->category_name[$language];
                                 foreach ($getMainCategory as $getMainCatego) {
+                                    if(!$getMainCatego->is_visible)
+                                        continue;
                                     $cat_name = json_decode($getMainCatego->category_name, true);
                                     ?>
                                     <li>

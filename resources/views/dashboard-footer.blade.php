@@ -52,6 +52,8 @@
                             <ul>
                                 <?php
                                 foreach ($getMainCategory as $getMainCatego) {
+                                    if(!$getMainCatego->is_visible)
+                                        continue;
                                     $cat_name = json_decode($getMainCatego->category_name, true);
                                     ?>
                                     <li><a href="/<?php echo $getMainCatego->url; ?>"><?php echo $cat_name[$language]; ?></a>  </li>
