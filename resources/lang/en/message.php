@@ -427,7 +427,7 @@ return [
         'Brand'=>'Brand',  
         'Enter Minimum Amount'=>'Enter Minimum Amount',
         'Enter Discount'=>'Enter Discount',
-        'Enter Coupan Code'=>'Enter Coupan Code',   
+        'Enter Coupan Code'=>'Enter Coupon Code',   
         'One time use'=>'One time use',
         'Fixed Code'=>'Fixed Code',        
     ];      
