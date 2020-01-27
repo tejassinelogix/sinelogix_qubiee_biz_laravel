@@ -172,19 +172,28 @@ $abc;
 					$product_count_right = $poductdata1->count();
 					}
 					
-					if($default_page != $current_page){
+					if($default_page != $current_page){                        
 						$product_count_right = $product_count_last_right;
 					}
 					
-					if($default_page != $current_page && $current_page == $total_pagination){
+					if($default_page != $current_page && $current_page == $total_pagination){                        
 						$temp_tot = $poductdata1->count() - $details->count();
 						$default_page = $temp_tot + 1;
 						$product_count_right = $poductdata1->count();
-                    			}
+                    }
+                                
+                        
+                    if($default_page == 0){
+                        $temp_tot = $poductdata1->count() - $details->count();
+                        $default_page = 1;
+                        $product_count_right = $details->count();
+                    }                    
                     
-					    if($default_page == 0){
-						$default_page = 1;
-					    }
+                    if ($default_page < 0)
+                    {
+                        $default_page = -$default_page;
+                    }
+
                     ?>
                     <div class="item-list-tophead"><h4> <span><?php echo $default_page; ?> - <?php echo $product_count_right; ?> of <?php echo $poductdata1->count();?> {{ __('message.Items') }}</span></h4></div>
                     <?php 
