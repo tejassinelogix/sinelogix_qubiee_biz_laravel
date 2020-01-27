@@ -264,7 +264,8 @@
                             </div>
                         <?php } ?>
 
-
+                    <div class="clear row innerproductCol" id="postfilterdata">
+                    </div>
 					<div class="container margin">
 					<div class="row">
 					<div class="pagination">{{ $poductdata->links() }}</div>
@@ -272,9 +273,7 @@
 					</div>
 
                     </div>
-                    <div class="clear row innerproductCol" id="postfilterdata">
-
-                </div>
+                    
 
                 </div>
             </div>
