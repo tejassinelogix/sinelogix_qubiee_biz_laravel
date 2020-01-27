@@ -248,12 +248,12 @@ $abc;
                                                     </ul>
                                                 </div>-->
                 </div>
+                <div class="clear row innerproductCol" id="postfilterdata">              
+                </div>
                 <div class="clear row innerproductCol" id="post-data">
                @include('dataproduct')
                 </div>
-                <div class="clear row innerproductCol" id="postfilterdata">
-              
-                </div>
+             
             </div>
         </div>
     </div>
