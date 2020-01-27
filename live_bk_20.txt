@@ -1,0 +1,7 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+    # Route any request begining with 'admin/' to laravel
+	RewriteRule ^admin/(.*)$ public/$1 [L]
+    RewriteRule    ^$    public/    [L]
+    RewriteRule    (.*) public/$1    [L]
+</IfModule>

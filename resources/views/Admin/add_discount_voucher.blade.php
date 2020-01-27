@@ -167,8 +167,8 @@
                                     <div class="form-group">
                                       <button type="submit" class="btn btn-primary">{{ __('message.Submit') }}</button>
                                       <!-- TDS :: Server Changes requires  -->
-                                      <!-- <a href='{{ URL('admin/discountvoucheradd' )}}' class="btn btn-warning">{{ __('message.Back') }}</a> -->
-                                      <a href='{{ URL('admin_2/discountvoucheradd' )}}' class="btn btn-warning">{{ __('message.Back') }}</a>
+                                      <a href='{{ URL('admin/discountvoucheradd' )}}' class="btn btn-warning">{{ __('message.Back') }}</a>
+                                      <!-- <a href='{{ URL('admin_2/discountvoucheradd' )}}' class="btn btn-warning">{{ __('message.Back') }}</a> -->
                                     </div>
 
                                     </div> <!-- col-e ends -->
@@ -184,7 +184,7 @@
 
 </div><!-- /#right-panel -->
  <!-- TDS :: Server Changes requires  -->
-<!-- <script type="text/javascript" src="{{ URL::asset('public/js/add_discount_service.js') }}"></script> -->
-<script type="text/javascript" src="{{ URL::asset('/js/add_discount_service.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('public/js/add_discount_service.js') }}"></script>
+<!-- <script type="text/javascript" src="{{ URL::asset('/js/add_discount_service.js') }}"></script> -->
 @endsection
 

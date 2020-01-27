@@ -20,8 +20,8 @@
             <div class="page-title">
                 <ol class="breadcrumb text-right">
                     <!-- TDS :: Server Changes requires  -->
-                   <!--  <li><a href="<?php echo url('/admin/dashboard') ?>">{{ __('message.Dashboard') }}</a></li> -->
-                    <li><a href="<?php echo url('/admin_2/dashboard') ?>">{{ __('message.Dashboard') }}</a></li>
+                    <li><a href="<?php echo url('/admin/dashboard') ?>">{{ __('message.Dashboard') }}</a></li>
+                    <!-- <li><a href="<?php echo url('/admin_2/dashboard') ?>">{{ __('message.Dashboard') }}</a></li> -->
                     <!--<li><a href="<?php //echo url('/admin/createproduct')  ?>">Add User</a></li>-->
                     <li class="active">{{ __('message.Edit Discount') }}</li>
                 </ol>
@@ -46,8 +46,8 @@
 
                    @foreach($discount_voucher as $discount)
                          <!-- TDS :: Server Changes requires  -->
-                         <!--  <form role="form" action="{{ url('admin/'.$discount->discount_id.'/update_discount/') }}" method="post"> -->
-                          <form role="form" action="{{ url('admin_2/'.$discount->discount_id.'/update_discount/') }}" method="post">
+                          <form role="form" action="{{ url('admin/'.$discount->discount_id.'/update_discount/') }}" method="post">
+                          <!-- <form role="form" action="{{ url('admin_2/'.$discount->discount_id.'/update_discount/') }}" method="post"> -->
 
                             {{ csrf_field() }}
                             <div class="box-body">
