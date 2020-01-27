@@ -180,17 +180,16 @@ $abc;
 						$temp_tot = $poductdata1->count() - $details->count();
 						$default_page = $temp_tot + 1;
 						$product_count_right = $poductdata1->count();
-					}
+                    			}
+                    
+					    if($default_page == 0){
+						$default_page = 1;
+					    }
                     ?>
                     <div class="item-list-tophead"><h4> <span><?php echo $default_page; ?> - <?php echo $product_count_right; ?> of <?php echo $poductdata1->count();?> {{ __('message.Items') }}</span></h4></div>
                     <?php 
                         
-                    foreach ( $details as $catproduct) {
-//                        echo '<pre>';
-//                        print_r($catproduct);
-//                        die;
-                        //$pro_name = json_decode($catproduct->product_name, true);
-                        
+                    foreach ( $details as $catproduct) {                       
                          
                         ?>
                         <div class="col-sm-3 product-box-class">
@@ -294,8 +293,9 @@ $abc;
 
 <div class="container margin">
 					<div class="row">	
-					
-					<div class="pagination">{{ $details->links() }}</div>
+                    <?php if(isset($details) && !empty( $details)) { ?>
+                        <div class="pagination">{{ $details->links() }}</div>
+                    <?php } ?>
 					</div>
 					</div>
 					<script>

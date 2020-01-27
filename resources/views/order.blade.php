@@ -27,7 +27,7 @@
                 <h3 class="headingFull"><span>{{ __('message.My Orders') }}</span></h3>
                 <div class="buyerOrderPage">
                      <!--cartBlockRowHead--> 
-                    <div class="cartBlockRowHead">
+                    <!-- <div class="cartBlockRowHead">
                         <div class="cartBlockDesc">
                             <h3>{{ __('message.Item Description') }}</h3>
                         </div>
@@ -40,7 +40,7 @@
                         <div class="cartBlockTotal">
                             <h3>{{ __('message.Total') }}</h3>
                         </div>
-                    </div>
+                    </div> -->
 
                     
                      <!--cartBlockRow--> 
