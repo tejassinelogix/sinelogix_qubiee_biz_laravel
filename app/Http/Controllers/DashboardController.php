@@ -182,7 +182,6 @@ class DashboardController extends Controller {
     }
 
     public function getIndex(Request $request) {
-
         // echo $language;
 //         if (Auth::check())
 //         {
@@ -198,6 +197,10 @@ class DashboardController extends Controller {
 
         $getMainCategory = Category::getMainCategory();
         $getSubCategoryWordpress = Category::getSubCategoryWordpress();
+
+        $getFeatureproduct = product::with('reviews')->where('section','Like','Feature')
+        ->where('status',1)
+        ->orderBy('id', 'desc')->get();
         
        
         $getSubCategorycate = Category::getSubCategorycate();
@@ -238,7 +241,6 @@ class DashboardController extends Controller {
 //        echo"<pre>";
 
         /* -------Code added by pooja--------- */
-        $getFetureproduct = Category::getFetureproduct();
         $getPagesdetails = Category::getPagesdetails();
         $homedata = json_decode(json_encode($getHome), true);
        //$layoutid=1;
@@ -262,7 +264,7 @@ class DashboardController extends Controller {
 //         $meta_keyword = $homedata[0]['meta_keyword'];
         echo View::make('dashboard-header', ['backgroundStatus'=>$backgroundStatus,'background_color' => $background_color,'layoutbackground_image' => $layoutbackground_image,'layoutclass_name' => $layoutclass_name,'getSubCategory' => $getSubCategory, 'getMainCategory' => $getMainCategory, 'getSubCategorycate' => $getSubCategorycate, 'getSubBlogs' => $getSubBlogs, 'homedata' => $homedata, 'language' => $this->language])->render();
         //echo View::make('dashboard-header')->render();
-        echo View::make('welcome', ['getBannersectionProduct'=>$getBannersectionProduct,'getAddsectionProduct'=>$getAddsectionProduct,'getBannerslider' => $getBannerslider, 'getNewproduct' => $getNewproduct, 'getFetureproduct' => $getFetureproduct, 'getProductoffers' => $getProductoffers, 'language' => $this->language])->render();
+        echo View::make('welcome', ['getBannersectionProduct'=>$getBannersectionProduct,'getAddsectionProduct'=>$getAddsectionProduct,'getBannerslider' => $getBannerslider, 'getNewproduct' => $getNewproduct,'getProductoffers' => $getProductoffers, 'language' => $this->language,'getFeatureproduct' => $getFeatureproduct])->render();
 
         echo View::make('dashboard-footer', ['getPagesdetails' => $getPagesdetails, 'getMainCategory' => $getMainCategory, 'language' => $this->language])->render();
     }

@@ -148,7 +148,7 @@ public static function getBannerslider() {
     }
     //get the featured section poroduct details
      public static function getFetureproduct() {
-         $users = DB::select('select * from products  where section= "Feature" and  status= 1');
+         $users = DB::select('select * from products  where section like "Feature" and  status= 1');
         return $users;
     }
     //new offer section

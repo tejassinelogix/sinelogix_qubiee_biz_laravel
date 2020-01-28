@@ -280,7 +280,7 @@
                                     </ul>
                                 </div>
                                 <div class="mycartbox">
-                                    <div class="mycarthead"><i class="fa fa-shopping-cart"></i>{{ __('message.shopping cart') }}<i class="fa fa-angle-down"></i>
+                                    <div class="mycarthead"><a href="{{ url('/shopping-cart') }}" class="color_white"><i class="fa fa-shopping-cart"></i>{{ __('message.shopping cart') }}<i class="fa fa-angle-down"></i></a>
                                         @if(Session::has('cart'))
                                         <span>
                                             {{ Session::has('cart') ? Session::get('cart')->totalQty :'' }}
@@ -322,7 +322,7 @@
                                                     <strong style="margin-right: 10px; ">
                                                         {{ __('message.Total') }} : $ {{ $cart->totalPrice+$dilverychargeitem }}
                                                     </strong>
-                                                    <a href="{{ url('/shopping-cart') }}">{{ __('message.shopping cart') }}</a>
+                                                    <!-- <a href="{{ url('/shopping-cart') }}">{{ __('message.shopping cart') }}</a> -->
                                                 </p>
                                             </div>
                                             @else
