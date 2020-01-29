@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    
+
     //container replace
     /*$(".containerWrapper").addClass("container");
      $(".containerWrapper.container").removeClass("containerWrapper");*/
@@ -7,7 +7,7 @@ $(document).ready(function () {
     //zoom slider
     //    $('#etalage').etalage({
     //
-    //      
+    //
     //        show_hint: true,
     //        click_callback: function (image_anchor, instance_id) {
     //            alert('Callback example:\nYou clicked on an image with the anchor: "' + image_anchor + '"\n(in Etalage instance: "' + instance_id + '")');
@@ -106,9 +106,9 @@ $(document).ready(function () {
             type: 'GET', // Default GET
             url: APP_URL + 'get_session',
             dataType: 'json', // text , XML, HTML
-            beforeSend: function () { // Before ajax send operation 
+            beforeSend: function () { // Before ajax send operation
             },
-            success: function (data_resp, textStatus, jqXHR) { 
+            success: function (data_resp, textStatus, jqXHR) {
                 if (!data_resp.status) {
                     $('.thanksVideoBlock').show();
                 }
@@ -116,15 +116,15 @@ $(document).ready(function () {
                     $(".thanksVideoBlock").css("display", "none");
                     $('.thanksVideoBlock').remove();
                 }
-            }, error: function (jqXHR, textStatus, errorThrown) { // On ajax error operation                 
-            }, complete: function () { // On ajax complete operation                    
+            }, error: function (jqXHR, textStatus, errorThrown) { // On ajax error operation
+            }, complete: function () { // On ajax complete operation
             }
         });
     }
-    
+
     //popularProductsSlider
     $("#newproductslider").owlCarousel({
-        autoPlay: 1000000, //Set AutoPlay to 3 seconds         
+        autoPlay: 1000000, //Set AutoPlay to 3 seconds
         items: 4,
         itemsDesktop: [1199, 3],
         itemsDesktopSmall: [979, 2],
@@ -138,7 +138,7 @@ $(document).ready(function () {
 
     //Offer Slider
     $("#offerslider").owlCarousel({
-        autoPlay: 4000, //Set AutoPlay to 3 seconds         
+        autoPlay: 4000, //Set AutoPlay to 3 seconds
         items: 4,
         itemsDesktop: [1199, 3],
         itemsDesktopSmall: [979, 2],
@@ -153,7 +153,7 @@ $(document).ready(function () {
 
     //brandsSlider
     $("#brandsSlider").owlCarousel({
-        autoPlay: 7500, //Set AutoPlay to 3 seconds         
+        autoPlay: 7500, //Set AutoPlay to 3 seconds
         items: 6,
         itemsDesktop: [1199, 5],
         itemsDesktopSmall: [979, 4],
@@ -218,15 +218,17 @@ $(document).ready(function () {
     //scrollUp
 
     $(window).scroll(function () {
-        if ($(this).scrollTop() > 100) {
+        if ($(this).scrollTop() > 162) {
             $('.scrollup').fadeIn();
         } else {
             $('.scrollup').fadeOut();
         }
-        if ($(this).scrollTop() > 100 && $(window).width() > 768) {
+        if ($(this).scrollTop() > 162 && $(window).width() > 768) {            
             $(".navigationBar").addClass("navigationBarFixed");
-        } else {
-            $(".navigationBar").removeClass("navigationBarFixed");
+            //$(".bannerSection").css("margin-top","240px");
+        } else {            
+           $(".navigationBar").removeClass("navigationBarFixed");
+           //$(".bannerSection").css("margin-top","190px");
         }
     });
 
@@ -384,7 +386,7 @@ $(document).ready(function () {
                         //                            '</span>';
                         //                    if(value.discount != null){
                         //                           text +='<span class="discountoffer">'+value.discount+'% Off</span>';
-                        //                   
+                        //
                         //                         }else{
                         //                            text +='<span class=""></span>';
                         //                         }
@@ -396,7 +398,7 @@ $(document).ready(function () {
                         //                            '<a href="/productdetails/'+value.url+'" class="titlelink">'+value.name+'</a>'+
                         //                            '<strong class="ServiceCost">'+
                         //                            '<strike>$'+value.original_price+'</strike></strong>'+
-                        //                            '<h3>$'+value.price+'</h3>'+  
+                        //                            '<h3>$'+value.price+'</h3>'+
                         //                            '<span class="services-btns">'+
                         //                            '<a href="/productdetails/'+value.url+'" class="addtocart-btn"><ion-icon name="eye"></ion-icon>View Details</a>'+
                         //                            '<a class="addtocart-btn" href="/add-to-cart/'+value.id+'"><ion-icon name="cart"></ion-icon>Add To Cart</a>'+
@@ -424,7 +426,7 @@ $(document).ready(function () {
     }
 });
 
-//Read More 
+//Read More
 $(document).ready(function () {
     // Configure/customize these variables.
     var showChar = 100;  // How many characters are shown by default
@@ -483,7 +485,7 @@ $(document).ready(function () {
                 console.log('data')
                 console.log(data)
                 //                 data = JSON.parse(data);
-                //                
+                //
                 //            var text = "";
                 //                 if (data.success == "1") {
                 //                      alert("call now function if");
@@ -555,7 +557,7 @@ $(document).ready(function () {
                         //                            '</span>';
                         //                    //if(value.discount=='null'){
                         //                    if (value.discount != null){
-                        //                      
+                        //
                         //                             //alert("cal not emapty");
                         //                           text +='<span class="discountoffer">'+value.discount+'% Off</span>';
                         //                         }else{
@@ -568,7 +570,7 @@ $(document).ready(function () {
                         //                            '<a href="/productdetails/'+value.url+'" class="titlelink">'+value.name+'</a>'+
                         //                            '<strong class="ServiceCost">'+
                         //                            '<strike>$'+value.original_price+'</strike></strong>'+
-                        //                            '<h3>$'+value.price+'</h3>'+  
+                        //                            '<h3>$'+value.price+'</h3>'+
                         //                            '<span class="services-btns">'+
                         //                            '<a href="/productdetails/'+value.url+'" class="addtocart-btn"><ion-icon name="eye"></ion-icon>View Details</a>'+
                         //                            '<a class="addtocart-btn" href="/add-to-cart/'+value.id+'"><ion-icon name="cart"></ion-icon>Add To Cart</a>'+
@@ -783,10 +785,10 @@ $(document).ready(function () {
                         //                            '</span>';
                         //                    if(value.discount != null){
                         //                                text +='<span class="discountoffer">'+value.discount+'% Off</span>';
-                        //                   
+                        //
                         //                         }else{
                         //                              text +='<span class=""></span>';
-                        //                 
+                        //
                         //                         }
                         //                            //'<span class="discountoffer">'+value.discount+'% Off</span>'+
                         //                    text +='<div class="productImg" style="background: url('+"'/public/images/"+value.product_image+"') top no-repeat;"+'>'+
@@ -796,7 +798,7 @@ $(document).ready(function () {
                         //                            '<a href="/productdetails/'+value.url+'" class="titlelink">'+value.name+'</a>'+
                         //                            '<strong class="ServiceCost">'+
                         //                            '<strike>$'+value.original_price+'</strike></strong>'+
-                        //                            '<h3>$'+value.price+'</h3>'+  
+                        //                            '<h3>$'+value.price+'</h3>'+
                         //                            '<span class="services-btns">'+
                         //                            '<a href="/productdetails/'+value.url+'" class="addtocart-btn"><ion-icon name="eye"></ion-icon>View Details</a>'+
                         //                            '<a class="addtocart-btn" href="/add-to-cart/'+value.id+'"><ion-icon name="cart"></ion-icon>Add To Cart</a>'+
@@ -823,11 +825,11 @@ $(document).ready(function () {
                     $('#btn-more').prop("disabled", true);
                     $('#btn-more').hide();
                 }
-                //              if(data != '') 
+                //              if(data != '')
                 //              {
                 //                  $('#remove-row').remove();
                 //                  $('#filter_data').append(data);
-                //                  
+                //
                 //              }
                 //              else
                 //              {
@@ -861,7 +863,7 @@ $(document).ready(function () {
         jQuery.noConflict();
         $("#senderDetailsModalOpen").modal("show");
         //       if(shippingmark !=1){
-        //           
+        //
         //       }
         $(".ConfirmAddress").attr("href", "#");
     } else if (sendergiftmark == 1 && shippingmark == 1) {
@@ -874,7 +876,7 @@ $(document).ready(function () {
 
         $(".ConfirmAddress").attr("href", "#");
     }
-    //    $('.chb').click(function() { 
+    //    $('.chb').click(function() {
     $(".chb").click(function (e) {
         $('#nextreviewnogift').attr("enabled", "enabled");
         $("#nextreviewnogift").removeAttr("disabled");
@@ -1574,7 +1576,7 @@ $(document).ready(function () {
                                     $('#ajaxdeliverycharge').html(pricesing + dilverychargevalue);
                                     $('#ajaxtotalpay').html('$' + totalpay);
                                     //                    $.each(data.data, function (index, value) {
-                                    //                     
+                                    //
                                     //                    });
 
                                 } else {
@@ -1653,7 +1655,7 @@ $(document).ready(function () {
                                     $('#ajaxdeliverycharge').html(pricesing + dilverychargevalue);
                                     $('#ajaxtotalpay').html('$' + totalpay);
                                     //                    $.each(data.data, function (index, value) {
-                                    //                     
+                                    //
                                     //                    });
 
                                 } else {
@@ -1745,7 +1747,7 @@ $(document).ready(function () {
                                             $('#ajaxdeliverycharge').html(pricesing + dilverychargevalue);
                                             $('#ajaxtotalpay').html('$' + totalpay);
                                             //                    $.each(data.data, function (index, value) {
-                                            //                     
+                                            //
                                             //                    });
 
                                         } else {
@@ -1784,7 +1786,7 @@ $(document).ready(function () {
                     //                var valueofcheck= this.value;
                     //                 var giftwrapvaluecheck= $("#qtyinc"+valueofcheck).val();
                     //               var balanccheck = parseInt(checkvalue) + parseInt(giftwrapvaluecheck);
-                    //                
+                    //
                     //                if(balanccheck==3){
                     //                      $('label .giftwrappingcheck').not('#giftWrap'+valueofcheck).attr("disabled", "disabled");
                     //                      $('label .giftwrappingcheck').not('#giftWrap'+valueofcheck).attr("data-toggle","tooltip");
@@ -1819,8 +1821,8 @@ $(document).ready(function () {
                 $('#incermentitem' + giftwrapvaluecheck).removeClass("incermentitemclick");
                 $('#incermentitem' + giftwrapvaluecheck).addClass('incermentitem');
 
-                //                 if(eachval == 3){ 
-                //                    
+                //                 if(eachval == 3){
+                //
                 //                                 $('#incermentitem'+giftwrapvaluecheck).removeClass("incermentitem");
                 //                          $('#incermentitem'+giftwrapvaluecheck).addClass('incermentitemclick');
                 //                          $('label .giftwrappingcheck').not('#giftWrap'+giftwrapvaluecheck).attr("disabled", "disabled");
@@ -2347,7 +2349,7 @@ $(document).ready(function () {
         }
 
     });
-    // start code for send as gift 
+    // start code for send as gift
     $('.sendasgiftitem').change(function () {
 
         var categorycheck = $(this).is(':checked')
@@ -2433,11 +2435,11 @@ $(document).ready(function () {
     //$(".thanksVideoBlockTOBEHIDDEN iframe").attr('src', 'youtube.com');
 
     /* document.getElementById("thanksVideoBlock").onclick = function () {
-        
+
          //document.getElementById('player').src = "https://www.youtube.com/embed/bo2KQer1KNM";
          document.getElementById('player').src = "https://www.youtube.com";
-         
-         
+
+
      }; */
 
     $("#thanksVideoBlock").click(function () {
@@ -2450,3 +2452,113 @@ $(document).ready(function () {
 
 
 });
+
+
+
+/*
+Smoth Scrolling
+*/
+
+$(document).ready(function(){
+    // $fn.scrollSpeed(step, speed, easing);
+    //jQuery.scrollSpeed(50,120,'easeOutCubic');
+    jQuery.scrollSpeed(100, 120, 'easeOutCubic');
+});
+
+// Custom scrolling speed with jQuery
+// Source: github.com/ByNathan/jQuery.scrollSpeed
+// Version: 1.0.2
+
+(function($) {
+
+jQuery.scrollSpeed = function(step, speed, easing) {
+
+var $document = $(document),
+    $window = $(window),
+    $body = $('html, body'),
+    option = easing || 'default',
+    root = 0,
+    scroll = false,
+    scrollY,
+    scrollX,
+    view;
+
+if (window.navigator.msPointerEnabled)
+
+    return false;
+
+$window.on('mousewheel DOMMouseScroll', function(e) {
+
+    var deltaY = e.originalEvent.wheelDeltaY,
+        detail = e.originalEvent.detail;
+        scrollY = $document.height() > $window.height();
+        scrollX = $document.width() > $window.width();
+        scroll = true;
+
+    if (scrollY) {
+
+        view = $window.height();
+
+        if (deltaY < 0 || detail > 0)
+
+            root = (root + view) >= $document.height() ? root : root += step;
+
+        if (deltaY > 0 || detail < 0)
+
+            root = root <= 0 ? 0 : root -= step;
+
+        $body.stop().animate({
+
+            scrollTop: root
+
+        }, speed, option, function() {
+
+            scroll = false;
+
+        });
+    }
+
+    if (scrollX) {
+
+        view = $window.width();
+
+        if (deltaY < 0 || detail > 0)
+
+            root = (root + view) >= $document.width() ? root : root += step;
+
+        if (deltaY > 0 || detail < 0)
+
+            root = root <= 0 ? 0 : root -= step;
+
+        $body.stop().animate({
+
+            scrollLeft: root
+
+        }, speed, option, function() {
+
+            scroll = false;
+
+        });
+    }
+
+    return false;
+
+}).on('scroll', function() {
+
+    if (scrollY && !scroll) root = $window.scrollTop();
+    if (scrollX && !scroll) root = $window.scrollLeft();
+
+}).on('resize', function() {
+
+    if (scrollY && !scroll) view = $window.height();
+    if (scrollX && !scroll) view = $window.width();
+
+});
+};
+
+jQuery.easing.default = function (x,t,b,c,d) {
+
+return -c * ((t=t/d-1)*t*t*t - 1) + b;
+};
+
+})(jQuery);

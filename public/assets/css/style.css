@@ -106,7 +106,7 @@ button:target {
 .navigationBar {
     display: block;
     width: auto;
-    position: relative;
+    position: absolute;
     top: 0;
     left: 0;
     right: 0;
@@ -114,6 +114,11 @@ button:target {
     padding: 0;
     height: auto;
     background: url('../images/bg2.png') repeat;
+       -webkit-transition: all 1.2s ease-in-out;
+    -moz-transition: all 1.2s ease-in-out;
+    -o-transition: all 1.2s ease-in-out;
+    transition: all 1.2s ease-in-out;
+}
 }
 
 @media (min-width: 768px) {
@@ -808,6 +813,11 @@ button:target {
     overflow: hidden;
     position: relative;
     background: transparent;
+    margin-top: 190px;
+     -webkit-transition: all 1.2s ease-in-out;
+    -moz-transition: all 1.2s ease-in-out;
+    -o-transition: all 1.2s ease-in-out;
+    transition: all 1.2s ease-in-out;
 }
 .bannerContainer {
     display: block;
@@ -4646,4 +4656,8 @@ ul.nav.navbar-nav {
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+html {
+    scroll-behavior: smooth;
 }
