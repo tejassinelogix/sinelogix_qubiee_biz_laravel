@@ -84,7 +84,7 @@
                                 </div>
                                 <div class="productBlockViewDtl">
                                     <a href="<?php echo url('/productdetails'); ?>/{{$newproduct->url }}" class="btn1">{{ __('message.view details') }} <i class="fa fa-arrow-circle-right"></i></a>
-                                    <a href="{{ url("/add-to-cart/{$newproduct->id}") }}" class="btn2">{{ __('message.Buy Now') }}<i class="fa fa-shopping-cart"></i></a>
+                                    <a href="{{ url("/add-to-cart/{$newproduct->id}") }}" class="btn2" onClick="AddToCarts()">{{ __('message.Add To Cart') }} &nbsp;<i class="fa fa-shopping-cart"></i></a>
                                 </div>
                             </div>
                         </div>
