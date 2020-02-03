@@ -36,6 +36,44 @@
     </div>
 </div><!-- End of bannerSection -->
 
+<!-- productColSection -->
+<div class="productColSection" id="intro">
+    <div class="containerWrapper">
+        <div class="row featColRow">
+            <?php
+            foreach ($getAddsectionProduct as $addvertise) {
+                $urladdname = $addvertise->name;
+                $newaddfullname = str_replace(' ', '-', $urladdname);
+
+                $pro_name = $addvertise->name;
+                $shortdescription = $addvertise->short_description;
+                ?>
+                <div class="col-md-6 col-sm-6 featCol">
+                    <div class="featProductBlock">
+                        <div class="featProductBlockInner">
+                            <!--<h3>{{ __('message.Gift Items') }}</h3>-->
+                            <h3><?php echo $addvertise->name[$language]; ?></h3>
+                                <!--<p>{{ __('message.dummy_short_txt') }}</p>-->
+                            <p> </p>
+                            <a href="{{$addvertise->url }}" class="btn btn-primary btn-lg btn-rounded">{{ __('message.view details') }} <i class="fa fa-shopping-cart"></i></a>
+                        </div>
+                        <img src="{{ asset('/') }}public/images/{{ $addvertise->image }}" alt="">
+                    </div>
+                </div>
+            <?php } ?>
+            <!--                <div class="col-md-6 col-sm-6 featCol">
+                                <div class="featProductBlock">
+                                    <div class="featProductBlockInner">
+                                        <h3>{{ __('message.Featuring Polos') }}</h3>
+                                        <p>{{ __('message.dummy_short_txt') }}</p>
+                                        <a href="#" class="btn btn-primary btn-lg btn-rounded">{{ __('message.Buy Now') }}! <i class="fa fa-shopping-cart"></i></a>
+                                    </div>
+                                    <img src="public/assets/images/featProduct2.jpg" alt="">
+                                </div>
+                            </div>-->
+        </div>
+    </div>
+</div>
 @include('carousel-products')
 
 <!-- parallaxSection1 -->
